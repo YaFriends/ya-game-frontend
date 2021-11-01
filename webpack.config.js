@@ -7,6 +7,10 @@ module.exports = {
         path: path.join(__dirname, "/dist"),
         filename: "bundle.js"
     },
+    devServer: {
+        hot: true,
+        open: true
+    },
     resolve: {
         extensions: [".tsx", ".ts", ".js"]
     },
