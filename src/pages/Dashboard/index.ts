@@ -1,3 +1,6 @@
 import Dashboard from './Dashboard';
 
-export default { Dashboard };
+import { Route } from '../types';
+
+const routes: Route[] = [{ path: '/', component: Dashboard, name: 'Главная', exact: true }];
+export default routes;
