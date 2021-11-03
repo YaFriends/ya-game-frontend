@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
 
-export const Forum: FC<{}> = () => {
-  return <section>Forum</section>
-}
+export const Forum: FC<Record<string, never>> = () => {
+  return <section>Forum</section>;
+};
