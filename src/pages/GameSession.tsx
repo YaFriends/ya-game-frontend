@@ -1,7 +1,5 @@
 import React, { FC } from 'react';
 
-const GameSession: FC<{}> = () => {
+export const GameSession: FC<{}> = () => {
   return <section>GameSession</section>
 }
-
-export default GameSession;

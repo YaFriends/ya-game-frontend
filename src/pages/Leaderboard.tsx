@@ -1,7 +1,5 @@
 import React, { FC } from 'react';
 
-const Leaderboard: FC<{}> = () => {
+export const Leaderboard: FC<{}> = () => {
   return <section>Leaderboard</section>
 }
-
-export default Leaderboard;

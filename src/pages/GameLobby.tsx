@@ -1,7 +1,5 @@
 import React, { FC } from 'react';
 
-const GameLobby: FC<{}> = () => {
+export const GameLobby: FC<{}> = () => {
   return <section>GameLobby</section>
 }
-
-export default GameLobby;
