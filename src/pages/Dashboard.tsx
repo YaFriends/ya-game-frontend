@@ -1,7 +1,5 @@
 import React, { FC } from 'react';
 
-const Dashboard: FC<{}> = () => {
+export const Dashboard: FC<{}> = () => {
   return <section>Dashboard</section>
 }
-
-export default Dashboard;
