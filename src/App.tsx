@@ -4,7 +4,7 @@ import {
   Switch,
   Route,
   Link,
-} from "react-router-dom";
+} from 'react-router-dom';
 
 import pages from './pages';
 
@@ -30,5 +30,6 @@ const App: React.FC = () => {
       </main>
     </Router>
   );
-}
+};
+
 export default App;
