@@ -9,8 +9,8 @@ class Controller {
 
   async signUp(data: SignUpData) {
     try {
-      await this.api.signUp(data).then(async () => {
-        return await this.fetchUser();
+      await this.api.signUp(data).then(() => {
+        return this.fetchUser();
       });
     } catch (e) {
       console.error(e);
@@ -19,8 +19,8 @@ class Controller {
 
   async login(data: LoginData) {
     try {
-      await this.api.login(data).then(async () => {
-        return await this.fetchUser();
+      await this.api.login(data).then(() => {
+        return this.fetchUser();
       });
     } catch (e) {
       console.error(e);
@@ -29,7 +29,7 @@ class Controller {
 
   async logout() {
     try {
-      return await this.api.logout();
+      return this.api.logout();
     } catch (e) {
       console.error(e);
     }
@@ -37,7 +37,7 @@ class Controller {
 
   async fetchUser() {
     try {
-      return await this.api.read();
+      return this.api.read();
     } catch (e) {
       console.error(e);
     }
