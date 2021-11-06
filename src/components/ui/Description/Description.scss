@@ -1,0 +1,15 @@
+.ui-description {
+  //TODO: Вынести переменные ниже в файл с дефолтными переменными;
+  --white: #FFFFFF;
+  --black: #1E2023;
+
+  font-size: 12px;
+
+  &--light {
+    color: var(--black);
+  }
+
+  &--dark {
+    color: var(--white);
+  }
+}
