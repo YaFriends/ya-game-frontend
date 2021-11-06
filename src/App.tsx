@@ -3,7 +3,8 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-} from "react-router-dom";
+  Link,
+} from 'react-router-dom';
 
 import { Dashboard } from './pages/Dashboard';
 import { Error404 } from './pages/Error404';
@@ -39,6 +40,6 @@ const App: React.FC = () => {
       </main>
     </Router>
   );
-}
+};
 
 export default App;
