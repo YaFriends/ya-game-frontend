@@ -1,7 +1,33 @@
-#YA friends
+# Проект игра "YaFriends"
+Командный проект по разработке игры в рамках курса Яндекс Практикум.
 
-## Команды npm
-1. npm build - сборка продакшн версии;
-2. npm start - запуск сборки для разработки;
+## Наша команда
+- Юрий aka YurikEz
+    - **Роль** ```[Frontend, Task moving master, Designer]```
+    - [**GitHub @YurikEz**](https://github.com/YurikEz)
+- Роман aka Tenutes
+    - **Роль** ```[Frontend, Backend, DevOps]```
+    - [**GitHub @Tenutes**](https://github.com/Tenutes)
+- Виген aka Venmovs
+    - **Роль** ```[Frontend, Manager]```
+    - [**GitHub @Venmovs**](https://github.com/Venmovs)
 
-## Версия Node - 12.16.0
+[**GitHub команды**](https://github.com/YaFriends)
+
+## Макет проекта в [FIGMA](https://www.figma.com/file/wur0C1PNOUSAhQozhLP7Tp/)
+## Технологии
+- **Client** ```[React, Redux, React-Router, TypeScript, SCSS, Tailwind, Jest, Eslint, Prettier, Editorconfig, Webpack]```
+- **Server** ```[Node, Express, PostgreSQL]```
+- **Other** ```[Docker, Yandex Cloud]``` 
+
+## Установка
+Установить зависимости ```yarn```
+    
+## Команды для запуска
+- Dev Сборка ```yarn start```
+- Build проекта ```yarn build```
+
+## Тесты
+## Лицензия
+[MIT](https://choosealicense.com/licenses/mit/)
+

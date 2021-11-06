@@ -1,15 +1,19 @@
 {
   "name": "ya-friends",
   "version": "1.0.3",
-  "description": "",
+  "description": "Simple multi games app",
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --mode development",
     "build": "webpack --mode production"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "yandex",
+    "praktikum",
+    "minigames"
+  ],
+  "author": "YaFriends Team",
+  "license": "MIT",
   "devDependencies": {
     "css-loader": "6.5.0",
     "html-webpack-plugin": "5.5.0",

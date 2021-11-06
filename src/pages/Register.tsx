@@ -1,7 +1,5 @@
 import React, { FC } from 'react';
 
-const Register: FC<{}> = () => {
+export const Register: FC<{}> = () => {
   return <section>Register</section>
 }
-
-export default Register;
