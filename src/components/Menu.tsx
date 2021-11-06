@@ -40,4 +40,4 @@ export const Menu: FC<{}> = () => {
       </li>
     </ul>
   </nav>
-}
+};
