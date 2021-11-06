@@ -8,9 +8,9 @@ interface TitleProps {
 }
 
 export const Title: FC<TitleProps> = ({
-                                              extendClass = '',
-                                              text,
-                                              theme = 'light' }: TitleProps) => {
+                                        extendClass = '',
+                                        text,
+                                        theme = 'light' }: TitleProps) => {
   return (
     <h1
       className={
