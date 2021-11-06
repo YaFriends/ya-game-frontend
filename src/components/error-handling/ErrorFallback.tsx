@@ -1,13 +1,14 @@
 import React, { FC } from 'react';
 import { FallbackProps } from './ErrorBoundary';
+import { TRANSLATION } from '../../lang/ru/translation';
 
 const ErrorFallback: FC<FallbackProps> = ({error, resetErrorBoundary}) => {
     return (
         <div role="alert">
-            <p>Упс, что-то пошло не так</p>
+            <p>{ TRANSLATION.SomethingWentWrong }</p>
             <pre>{error.message}</pre>
             <button type='button' onClick={resetErrorBoundary}>
-                Попробовать снова
+                { TRANSLATION.TryAgain }
             </button>
         </div>
     )

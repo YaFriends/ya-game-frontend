@@ -26,8 +26,6 @@ interface ErrorBoundaryPropsWithComponent {
 
 type ErrorBoundaryState = { error: Error | null };
 
-const initialState: ErrorBoundaryState = {error: null};
-
 class ErrorBoundary extends Component<PropsWithChildren<ErrorBoundaryPropsWithComponent>,
     ErrorBoundaryState>
 {
@@ -35,7 +33,9 @@ class ErrorBoundary extends Component<PropsWithChildren<ErrorBoundaryPropsWithCo
         return { error }
     }
 
-    state = initialState;
+    state: ErrorBoundaryState = {
+        error: null
+    };
 
     resetErrorBoundary = (...args: Array<unknown>) => {
         this.props.onReset?.(...args);
@@ -43,11 +43,14 @@ class ErrorBoundary extends Component<PropsWithChildren<ErrorBoundaryPropsWithCo
     };
 
     reset() {
-        this.setState(initialState)
+        this.setState(() => {
+            return {
+                error: null
+            }
+        })
     }
 
     componentDidCatch(error: Error, info: ErrorInfo) {
-        console.log(error.message);
         this.props.onError?.(error, info)
     }
 
@@ -89,10 +92,8 @@ class ErrorBoundary extends Component<PropsWithChildren<ErrorBoundaryPropsWithCo
     }
 }
 
-export type {
-    FallbackProps,
-    ErrorBoundaryPropsWithComponent,
-}
+export type { FallbackProps };
 
-export { ErrorBoundary }
+export { ErrorBoundary };
+
 

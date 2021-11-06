@@ -9,4 +9,6 @@ export const TRANSLATION: Record<string, string> = {
   Profile: 'Профиль',
   ProfileHistory: 'Профиль: История',
   Forum: 'Форум',
+  TryAgain: 'Попробовать сново',
+  SomethingWentWrong: 'Что-то пошло не так',
 };
