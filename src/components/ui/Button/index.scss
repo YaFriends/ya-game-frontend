@@ -1,20 +1,47 @@
 .ui-button {
+  //TODO: Вынести переменные ниже в файл с дефолтными переменными;
+  --blue: #58A6FF;
+  --white: #FFFFFF;
+  --green: #3FB950;
+  --red: #FF4757;
+  --transparent: transparent;
+  --default-opacity-transition: 0.3s opacity ease-in-out;
 
-  &__text {
-    color: white;
+  font-size: 16px;
+  background-color: var(--blue);
+  height: 34px;
+  //margin-top: 70px;
+  border-color: var(--blue);
+  transition: var(--default-opacity-transition);
+  will-change: opacity;
+
+  & > span {
+    color: var(--white);
   }
 
-  &--basic {
-    background-color: #58A6FF;
-  }
   &--success {
-    background-color: #3FB950;
+    background-color: var(--green);
+    border-color: var(--green);
   }
-  &--error {
-    background-color: #FF4757;
 
-    &__text {
-      color: #FF4757;
+  &--error {
+    background-color: var(--transparent);
+    border-color: var(--red);
+
+    & > span {
+      color: var(--red);
+    }
+  }
+
+  &[disabled] {
+    cursor: not-allowed;
+    opacity: 0.7;
+  }
+
+  &:not(&[disabled]) {
+    &:hover,
+    &:focus-within {
+      opacity: 0.7;
     }
   }
 }

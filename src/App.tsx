@@ -17,7 +17,6 @@ import { Profile } from './pages/Profile';
 import { ProfileHistory } from './pages/ProfileHistory';
 import { Register } from './pages/Register';
 import { Menu } from './components/Menu';
-import { Button } from './components/ui/Button';
 
 const App: FC<{}> = () => {
   return (
@@ -38,8 +37,6 @@ const App: FC<{}> = () => {
           <Route path="*" component={ Error404 }/>
         </Switch>
       </main>
-
-      <Button type="submit" text="Button" action={ () => console.log('button') } />
     </Router>
   );
 };
