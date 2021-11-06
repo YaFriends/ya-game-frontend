@@ -1,6 +1,6 @@
 {
   "name": "ya-friends",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Simple multi games app",
   "main": "index.js",
   "scripts": {
