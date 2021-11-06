@@ -1,9 +1,8 @@
-import React from 'react';
+import React, { FC } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link,
 } from 'react-router-dom';
 
 import { Dashboard } from './pages/Dashboard';
@@ -19,7 +18,7 @@ import { ProfileHistory } from './pages/ProfileHistory';
 import { Register } from './pages/Register';
 import { Menu } from './components/Menu';
 
-const App: React.FC = () => {
+const App: FC<{}> = () => {
   return (
     <Router>
       <Menu/>
