@@ -15,7 +15,7 @@ export const Title: FC<TitleProps> = ({
     <h1
       className={
         'ui-title text-center'
-        + `ui-title--${theme}`
+        + ` ui-title--${theme}`
         + `${extendClass ? ` ${extendClass}` : ''}`
       }
     >

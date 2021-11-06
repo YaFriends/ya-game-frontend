@@ -15,7 +15,7 @@ export const Subtitle: FC<SubtitleProps> = ({
     <h2
       className={
         'ui-subtitle text-center'
-        + `ui-subtitle--${theme}`
+        + ` ui-subtitle--${theme}`
         + `${extendClass ? ` ${extendClass}` : ''}`
       }
     >
