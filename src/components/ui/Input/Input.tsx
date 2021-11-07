@@ -35,5 +35,5 @@ export const Input: FC<InputProps> = props => {
       />
       { error && <p className="absolute top-full left-0 text-red text-sm">{ error }</p> }
     </div>
-  )
-}
+  );
+};

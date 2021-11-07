@@ -36,6 +36,7 @@ export const Button: FC<ButtonProps> = ({
     'duration-300',
     'ease-in-out',
   ];
+
   return (
     <button
       type={ type }
@@ -48,7 +49,7 @@ export const Button: FC<ButtonProps> = ({
       disabled={ disabled }
       onClick={ click }
     >
-      <span className={ 'container' }>{ text }</span>
+      <span className="container">{ text }</span>
     </button>
   );
 };
