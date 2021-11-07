@@ -10,8 +10,8 @@ export const Login: FC<{}> = () => {
   };
 
   return (
-    <section className={ 'h-screen w-[354px] mx-auto flex items-center justify-center flex-col' }>
-      <div className={ 'w-full flex items-center justify-between mb-6' }>
+    <section className="h-screen w-[354px] mx-auto flex items-center justify-center flex-col">
+      <div className="w-full flex items-center justify-between mb-6">
         <Title text="Авторизация" />
         <MainLink text="Регистрация" href="/register"/>
       </div>
