@@ -2,7 +2,7 @@ import React, { FC, ButtonHTMLAttributes, MouseEvent } from 'react';
 import './Button.scss';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  type: 'submit' | 'button' | 'reset',
+  type?: 'submit' | 'button' | 'reset',
   name?: string,
   extendClass?: string,
   typeAction?: 'success' | 'error' | undefined,
@@ -12,7 +12,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 export const Button: FC<ButtonProps> = ({
-                                          type,
+                                          type = 'button',
                                           name,
                                           extendClass = '',
                                           typeAction,
@@ -22,6 +22,7 @@ export const Button: FC<ButtonProps> = ({
                                         }: ButtonProps) => {
   const defaultClassNames = [
     'ui-button',
+    'container',
     'flex',
     'items-center',
     'justify-center',
