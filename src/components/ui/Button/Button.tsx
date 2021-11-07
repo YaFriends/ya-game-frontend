@@ -11,6 +11,24 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   click: (e: MouseEvent) => void;
 }
 
+const defaultClassNames = [
+  'ui-button',
+  'flex',
+  'items-center',
+  'justify-center',
+  'mx-auto',
+  'rounded-xl',
+  'border-2',
+  'text-base',
+  'bg-blue',
+  'text-white',
+  'h-[34px]',
+  'w-full',
+  'border-blue',
+  'duration-300',
+  'ease-in-out',
+];
+
 export const Button: FC<ButtonProps> = ({
                                           type,
                                           name,
@@ -20,22 +38,6 @@ export const Button: FC<ButtonProps> = ({
                                           text,
                                           click,
                                         }: ButtonProps) => {
-  const defaultClassNames = [
-    'ui-button',
-    'flex',
-    'items-center',
-    'justify-center',
-    'mx-auto',
-    'rounded-xl',
-    'border-2',
-    'text-base',
-    'bg-blue',
-    'text-white',
-    'h-[34px]',
-    'border-blue',
-    'duration-300',
-    'ease-in-out',
-  ];
 
   return (
     <button
@@ -49,7 +51,7 @@ export const Button: FC<ButtonProps> = ({
       disabled={disabled}
       onClick={click}
     >
-      <span className="container">{text}</span>
+      <span className="w-full">{text}</span>
     </button>
   );
 };
