@@ -1,4 +1,4 @@
-import React, { FC,  } from 'react';
+import React, { FC } from 'react';
 import './Description.scss';
 
 interface DescriptionProps {
@@ -14,7 +14,7 @@ export const Description: FC<DescriptionProps> = ({
   return (
     <p
       className={
-        'ui-description'
+        'text-xs'
         + ` ui-description--${theme}`
         + `${extendClass ? ` ${extendClass}` : ''}`
       }

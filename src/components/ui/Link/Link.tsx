@@ -16,7 +16,7 @@ export const MainLink: FC<LinkProps> = ({
   return (
     <a
       className={
-        'ui-link underline'
+        'ui-link underline text-base duration-300 ease-in-out'
         + ` ui-link--${theme}`
         + `${extendClass ? ` ${extendClass}` : ''}`
       }

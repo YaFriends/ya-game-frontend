@@ -1,15 +1,9 @@
 .ui-text {
-  //TODO: Вынести переменные ниже в файл с дефолтными переменными;
-  --white: #FFFFFF;
-  --black: #1E2023;
-
-  font-size: 16px;
-
   &--light {
-    color: var(--black);
+    @apply text-black;
   }
 
   &--dark {
-    color: var(--white);
+    @apply text-white;
   }
 }

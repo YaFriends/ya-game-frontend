@@ -1,17 +1,11 @@
 .ui-title {
-  //TODO: Вынести переменные ниже в файл с дефолтными переменными;
-  --white: #FFFFFF;
-  --black: #1E2023;
-
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 30px;
+  @apply text-2xl font-bold mb-6;
 
   &--light {
-    color: var(--black);
+    @apply text-black;
   }
 
   &--dark {
-    color: var(--white);
+    @apply text-white;
   }
 }

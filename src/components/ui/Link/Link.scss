@@ -1,24 +1,14 @@
 .ui-link {
-  //TODO: Вынести переменные ниже в файл с дефолтными переменными;
-  --white: #FFFFFF;
-  --black: #1E2023;
-  --default-opacity-transition: 0.3s opacity ease-in-out;
-
-  font-size: 16px;
-  transition: var(--default-opacity-transition);
-  will-change: opacity;
-
   &--light {
-    color: var(--black);
+    @apply text-black;
   }
 
   &--dark {
-    color: var(--white);
+    @apply text-white;
   }
 
   &:hover,
   &:focus-within {
-    opacity: 0.7;
-    cursor: pointer;
+    @apply opacity-70 cursor-pointer;
   }
 }

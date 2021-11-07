@@ -18,15 +18,32 @@ export const Button: FC<ButtonProps> = ({
                                           typeAction,
                                           disabled,
                                           text,
-                                          click }: ButtonProps) => {
+                                          click,
+                                        }: ButtonProps) => {
+  const defaultClassNames = [
+    'ui-button',
+    'flex',
+    'items-center',
+    'justify-center',
+    'mx-auto',
+    'rounded-xl',
+    'border-2',
+    'text-base',
+    'bg-blue',
+    'text-white',
+    'h-[34px]',
+    'border-blue',
+    'duration-300',
+    'ease-in-out',
+  ];
   return (
     <button
       type={ type }
       name={ name }
       className={
-        'ui-button container flex items-center justify-items-center mx-auto rounded-xl border-2'
-        + `${typeAction ? ` ui-button--${typeAction}` : ''}`
-        + `${extendClass ? `${extendClass}` : ''}`
+        defaultClassNames.join(' ')
+        + `${ typeAction ? ` ui-button--${ typeAction }` : '' }`
+        + `${ extendClass ? `${ extendClass }` : '' }`
       }
       disabled={ disabled }
       onClick={ click }

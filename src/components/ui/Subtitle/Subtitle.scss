@@ -1,16 +1,10 @@
 .ui-subtitle {
-  //TODO: Вынести переменные ниже в файл с дефолтными переменными;
-  --white: #FFFFFF;
-  --black: #1E2023;
-
-  font-size: 18px;
-  font-weight: bold;
 
   &--light {
-    color: var(--black);
+    @apply text-black;
   }
 
   &--dark {
-    color: var(--white);
+    @apply text-white;
   }
 }

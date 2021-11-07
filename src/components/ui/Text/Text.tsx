@@ -14,7 +14,7 @@ export const Text: FC<TextProps> = ({
   return (
     <p
       className={
-        'ui-text'
+        'ui-text text-base'
         + ` ui-text--${theme}`
         + `${extendClass ? ` ${extendClass}` : ''}`
       }
