@@ -1,4 +1,5 @@
-import React, { FC,  } from 'react';
+import React, { FC } from 'react';
+import { Link } from 'react-router-dom';
 import './Link.scss';
 
 interface LinkProps {
@@ -14,15 +15,15 @@ export const MainLink: FC<LinkProps> = ({
                                           href = '#',
                                           theme = 'light' }: LinkProps) => {
   return (
-    <a
+    <Link
       className={
         'ui-link underline text-base duration-300 ease-in-out'
         + ` ui-link--${theme}`
         + `${extendClass ? ` ${extendClass}` : ''}`
       }
-      href={ href }
+      to={ href }
     >
       { text }
-    </a>
+    </Link>
   );
 };
