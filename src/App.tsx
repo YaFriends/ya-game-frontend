@@ -5,6 +5,7 @@ import {
   Route,
 } from 'react-router-dom';
 
+import { Menu } from './components/Menu';
 import { Dashboard } from './pages/Dashboard';
 import { Error404 } from './pages/Error404';
 import { Forum } from './pages/Forum';
@@ -16,7 +17,6 @@ import { Login } from './pages/Login';
 import { Profile } from './pages/Profile';
 import { ProfileHistory } from './pages/ProfileHistory';
 import { Register } from './pages/Register';
-import { Menu } from './components/Menu';
 
 const App: FC<{}> = () => {
   return (
