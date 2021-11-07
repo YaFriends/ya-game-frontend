@@ -1,16 +1,17 @@
-import React, { FC } from 'react';
+import React, {FC} from 'react';
 import './Subtitle.scss';
 
 interface SubtitleProps {
-  extendClass?: string,
-  text: string,
-  theme?: 'dark' | 'light',
+  extendClass?: string;
+  text: string;
+  theme?: 'dark' | 'light';
 }
 
 export const Subtitle: FC<SubtitleProps> = ({
                                               extendClass = '',
                                               text,
-                                              theme = 'light' }: SubtitleProps) => {
+                                              theme = 'light',
+                                            }: SubtitleProps) => {
   return (
     <h2
       className={
@@ -19,7 +20,7 @@ export const Subtitle: FC<SubtitleProps> = ({
         + `${extendClass ? ` ${extendClass}` : ''}`
       }
     >
-      { text }
+      {text}
     </h2>
   );
 };

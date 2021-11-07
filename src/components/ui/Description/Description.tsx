@@ -1,16 +1,17 @@
-import React, { FC } from 'react';
+import React, {FC} from 'react';
 import './Description.scss';
 
 interface DescriptionProps {
-  extendClass?: string,
-  text: string,
-  theme?: 'dark' | 'light',
+  extendClass?: string;
+  text: string;
+  theme?: 'dark' | 'light';
 }
 
 export const Description: FC<DescriptionProps> = ({
                                                     extendClass = '',
                                                     text,
-                                                    theme = 'light' }: DescriptionProps) => {
+                                                    theme = 'light',
+                                                  }: DescriptionProps) => {
   return (
     <p
       className={
@@ -19,7 +20,7 @@ export const Description: FC<DescriptionProps> = ({
         + `${extendClass ? ` ${extendClass}` : ''}`
       }
     >
-      { text }
+      {text}
     </p>
   );
 };

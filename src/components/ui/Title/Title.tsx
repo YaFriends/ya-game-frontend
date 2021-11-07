@@ -1,16 +1,17 @@
-import React, { FC,  } from 'react';
+import React, {FC} from 'react';
 import './Title.scss';
 
 interface TitleProps {
-  extendClass?: string,
-  text: string,
-  theme?: 'dark' | 'light',
+  extendClass?: string;
+  text: string;
+  theme?: 'dark' | 'light';
 }
 
 export const Title: FC<TitleProps> = ({
                                         extendClass = '',
                                         text,
-                                        theme = 'light' }: TitleProps) => {
+                                        theme = 'light',
+                                      }: TitleProps) => {
   return (
     <h1
       className={
@@ -19,7 +20,7 @@ export const Title: FC<TitleProps> = ({
         + `${extendClass ? ` ${extendClass}` : ''}`
       }
     >
-      { text }
+      {text}
     </h1>
   );
 };

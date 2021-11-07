@@ -1,18 +1,19 @@
-import React, { FC,  } from 'react';
+import React, {FC} from 'react';
 import './Link.scss';
 
 interface LinkProps {
-  extendClass?: string,
-  text: string,
-  href?: string,
-  theme?: 'dark' | 'light',
+  extendClass?: string;
+  text: string;
+  href?: string;
+  theme?: 'dark' | 'light';
 }
 
 export const MainLink: FC<LinkProps> = ({
                                           extendClass = '',
                                           text,
                                           href = '#',
-                                          theme = 'light' }: LinkProps) => {
+                                          theme = 'light',
+                                        }: LinkProps) => {
   return (
     <a
       className={
@@ -20,9 +21,9 @@ export const MainLink: FC<LinkProps> = ({
         + ` ui-link--${theme}`
         + `${extendClass ? ` ${extendClass}` : ''}`
       }
-      href={ href }
+      href={href}
     >
-      { text }
+      {text}
     </a>
   );
 };
