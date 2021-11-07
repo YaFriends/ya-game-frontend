@@ -1,11 +1,13 @@
 import { useState } from 'react';
 
+const definite = (error: unknown): boolean => {
+    return (typeof(error) !== 'undefined') && (error !== null);
+};
+
 function useErrorHandler(givenError?: unknown): (error: unknown) => void {
     const [error, setError] = useState<unknown>(null);
-    if (givenError !== null
-        && typeof givenError === 'string') throw new Error(givenError);
-    if (givenError != null) throw givenError;
-    if (error != null) throw error;
+    if (definite(givenError)) throw givenError;
+    if (definite(error)) throw error;
     return setError;
 }
 

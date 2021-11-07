@@ -5,22 +5,22 @@ import React, {
     PropsWithChildren
 } from 'react';
 
-const changedArray = (a: Array<unknown> = [], b: Array<unknown> = []) =>
+const changedArray = (a: unknown[] = [], b: unknown[] = []) =>
     a.length !== b.length || a.some((item, index) => !Object.is(item, b[index]));
 
 interface FallbackProps {
     error: Error;
-    resetErrorBoundary: (...args: Array<unknown>) => void;
+    resetErrorBoundary: (...args: unknown[]) => void;
 }
 
 interface ErrorBoundaryPropsWithComponent {
     onResetKeysChange?: (
-        prevResetKeys: Array<unknown> | undefined,
-        resetKeys: Array<unknown> | undefined,
+        prevResetKeys: unknown[] | undefined,
+        resetKeys: unknown[] | undefined,
     ) => void;
-    onReset?: (...args: Array<unknown>) => void;
+    onReset?: (...args: unknown[]) => void;
     onError?: (error: Error, info: { componentStack: string }) => void;
-    resetKeys?: Array<unknown>;
+    resetKeys?: unknown[];
     FallbackComponent: ComponentType<FallbackProps>;
 }
 
@@ -37,9 +37,9 @@ class ErrorBoundary extends Component<PropsWithChildren<ErrorBoundaryPropsWithCo
         error: null
     };
 
-    resetErrorBoundary = (...args: Array<unknown>) => {
+    resetErrorBoundary = (...args: unknown[]) => {
         this.props.onReset?.(...args);
-        this.reset()
+        this.reset();
     };
 
     reset() {
@@ -47,11 +47,11 @@ class ErrorBoundary extends Component<PropsWithChildren<ErrorBoundaryPropsWithCo
             return {
                 error: null
             }
-        })
+        });
     }
 
     componentDidCatch(error: Error, info: ErrorInfo) {
-        this.props.onError?.(error, info)
+        this.props.onError?.(error, info);
     }
 
     componentDidUpdate(
@@ -67,7 +67,7 @@ class ErrorBoundary extends Component<PropsWithChildren<ErrorBoundaryPropsWithCo
             changedArray(prevProps.resetKeys, resetKeys)
         ) {
             this.props.onResetKeysChange?.(prevProps.resetKeys, resetKeys);
-            this.reset()
+            this.reset();
         }
     }
 
@@ -84,11 +84,11 @@ class ErrorBoundary extends Component<PropsWithChildren<ErrorBoundaryPropsWithCo
             if (FallbackComponent) {
                 return <FallbackComponent {...props} />
             } else {
-                throw new Error('Requires a FallbackComponent prop')
+                throw new Error('Requires a FallbackComponent prop');
             }
         }
 
-        return this.props.children
+        return this.props.children;
     }
 }
 

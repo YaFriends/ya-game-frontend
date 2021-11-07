@@ -6,7 +6,7 @@ const ErrorFallback: FC<FallbackProps> = ({error, resetErrorBoundary}) => {
     return (
         <div role="alert">
             <p>{ TRANSLATION.SomethingWentWrong }</p>
-            <pre>{error.message}</pre>
+            <pre>{error.message || error}</pre>
             <button type='button' onClick={resetErrorBoundary}>
                 { TRANSLATION.TryAgain }
             </button>
