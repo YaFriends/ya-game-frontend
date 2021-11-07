@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
 
-export const Error404: FC<{}> = () => {
-  return <section>404</section>
-}
+export const Error404: FC<Record<string, never>> = () => {
+  return <section>404</section>;
+};

@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
 
-export const Profile: FC<{}> = () => {
-  return <section>Profile</section>
-}
+export const Profile: FC<Record<string, never>> = () => {
+  return <section>Profile</section>;
+};
