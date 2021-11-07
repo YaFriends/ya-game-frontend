@@ -13,7 +13,8 @@ type InputProps = {
 
 export const Input: FC<InputProps> = props => {
   const { name, id, required, label, error, placeholder, disabled, success } = props;
-  const defaultClasses = 'block h-[38px] rounded-12px border-2 border-opacity-40 border-white text-white placeholder-white px-3 py-2 focus:outline-none focus:border-blue';
+  const defaultClasses = 'block w-full h-[38px] rounded-12px border-2 border-opacity-40 border-white text-white' +
+    ' placeholder-white px-3 py-2 focus:outline-none focus:border-blue';
   const labelClasses = 'font-bold text-lg text-black mb-1';
   const disabledClasses = disabled
                           ? 'bg-grey bg-opacity-40 cursor-not-allowed'
