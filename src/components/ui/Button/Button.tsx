@@ -5,7 +5,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   type: 'submit' | 'button' | 'reset';
   name?: string;
   extendClass?: string;
-  typeAction?: 'success' | 'error' | undefined;
+  typeAction?: 'success' | 'error';
   disabled?: boolean;
   text: string;
   click: (e: MouseEvent) => void;
@@ -28,10 +28,7 @@ const DEFAULT_CLASSES: string[] = [
   'duration-300',
   'ease-in-out',
 ];
-const classes = (
-  typeAction: 'success' | 'error' | undefined,
-  extendClass: string | undefined
-): string[] => {
+const classes = (typeAction?: 'success' | 'error', extendClass?: string): string[] => {
   const result = [...DEFAULT_CLASSES];
 
   if (typeAction) {
@@ -62,8 +59,7 @@ export const Button: FC<ButtonProps> = ({
       name={name}
       className={classesMemo.join(' ')}
       disabled={disabled}
-      onClick={click}
-    >
+      onClick={click}>
       <span className="w-full">{text}</span>
     </button>
   );

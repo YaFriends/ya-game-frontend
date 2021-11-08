@@ -30,11 +30,7 @@ const DEFAULT_CLASSES: string[] = [
   'focus:outline-none',
   'focus:border-blue',
 ];
-const classes = (
-  error: string | undefined,
-  success: boolean | undefined,
-  disabled: boolean | undefined
-): string[] => {
+const classes = (error?: string, success?: boolean, disabled?: boolean): string[] => {
   const result = [...DEFAULT_CLASSES];
 
   if (error) {
