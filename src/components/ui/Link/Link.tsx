@@ -1,5 +1,5 @@
-import React, {FC, useMemo} from 'react';
-import {Link} from 'react-router-dom';
+import React, { FC, useMemo } from 'react';
+import { Link } from 'react-router-dom';
 import './Link.scss';
 
 interface LinkProps {
@@ -17,10 +17,7 @@ const DEFAULT_CLASSES: string[] = [
   'ease-in-out',
 ];
 
-const classes = (
-  theme: 'dark' | 'light',
-  extendClass: string | undefined,
-): string[] => {
+const classes = (theme: 'dark' | 'light', extendClass: string | undefined): string[] => {
   const result = [...DEFAULT_CLASSES, `ui-link--${theme}`];
 
   if (extendClass) {
@@ -31,12 +28,11 @@ const classes = (
 };
 
 export const MainLink: FC<LinkProps> = ({
-                                          extendClass = '',
-                                          text,
-                                          href = '#',
-                                          theme = 'light',
-                                        }: LinkProps) => {
-
+  extendClass = '',
+  text,
+  href = '#',
+  theme = 'light',
+}: LinkProps) => {
   const classesMemo = useMemo(() => classes(theme, extendClass), [theme, extendClass]);
 
   return (
