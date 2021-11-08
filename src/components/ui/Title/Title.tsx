@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, {FC, useMemo} from 'react';
 import './Title.scss';
 
 interface TitleProps {
@@ -7,19 +7,37 @@ interface TitleProps {
   theme?: 'dark' | 'light';
 }
 
+const DEFAULT_CLASSES: string[] = [
+  'ui-title',
+  'text-center',
+  'text-2xl',
+  'font-bold',
+  'mb-6',
+];
+
+const classes = (
+  theme: 'dark' | 'light',
+  extendClass: string | undefined,
+): string[] => {
+  const result = [...DEFAULT_CLASSES, `ui-title--${theme}`];
+
+  if (extendClass) {
+    result.push(extendClass);
+  }
+
+  return result;
+};
+
 export const Title: FC<TitleProps> = ({
                                         extendClass = '',
                                         text,
                                         theme = 'light',
                                       }: TitleProps) => {
+
+  const classesMemo = useMemo(() => classes(theme, extendClass), [theme, extendClass]);
+
   return (
-    <h1
-      className={
-        'ui-title text-center'
-        + ` ui-title--${theme}`
-        + `${extendClass ? ` ${extendClass}` : ''}`
-      }
-    >
+    <h1 className={classesMemo.join(' ')}>
       {text}
     </h1>
   );

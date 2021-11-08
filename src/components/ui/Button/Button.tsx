@@ -1,4 +1,4 @@
-import React, {FC, ButtonHTMLAttributes, MouseEvent} from 'react';
+import React, {FC, ButtonHTMLAttributes, MouseEvent, useMemo} from 'react';
 import './Button.scss';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -11,7 +11,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   click: (e: MouseEvent) => void;
 }
 
-const defaultClassNames = [
+const DEFAULT_CLASSES: string[] = [
   'ui-button',
   'flex',
   'items-center',
@@ -28,6 +28,22 @@ const defaultClassNames = [
   'duration-300',
   'ease-in-out',
 ];
+const classes = (
+  typeAction: 'success' | 'error' | undefined,
+  extendClass: string | undefined,
+): string[] => {
+  const result = [...DEFAULT_CLASSES];
+
+  if (typeAction) {
+    result.push(`ui-button--${typeAction}`);
+  }
+
+  if (extendClass) {
+    result.push(extendClass);
+  }
+
+  return result;
+};
 
 export const Button: FC<ButtonProps> = ({
                                           type,
@@ -38,16 +54,13 @@ export const Button: FC<ButtonProps> = ({
                                           text,
                                           click,
                                         }: ButtonProps) => {
+  const classesMemo = useMemo(() => classes(typeAction, extendClass), [typeAction, extendClass]);
 
   return (
     <button
       type={type}
       name={name}
-      className={
-        defaultClassNames.join(' ')
-        + `${typeAction ? ` ui-button--${typeAction}` : ''}`
-        + `${extendClass ? `${extendClass}` : ''}`
-      }
+      className={classesMemo.join(' ')}
       disabled={disabled}
       onClick={click}
     >
