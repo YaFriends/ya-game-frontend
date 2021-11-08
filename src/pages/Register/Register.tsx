@@ -18,7 +18,7 @@ export const Register: FC<Record<string, never>> = () => {
         <MainLink text="Назад" href="/login" />
         <Title text="Регистрация" />
       </div>
-      <form className="register__form" name="authForm">
+      <form className="register__form" name="registerForm">
         <div className="register__form-input-wrapper">
           <Input name="first_name" label="Имя" placeholder="Введите имя" required />
         </div>
