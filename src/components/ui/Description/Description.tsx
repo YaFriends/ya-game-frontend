@@ -1,4 +1,4 @@
-import React, {FC, useMemo} from 'react';
+import React, { FC, useMemo } from 'react';
 import './Description.scss';
 
 interface DescriptionProps {
@@ -7,15 +7,9 @@ interface DescriptionProps {
   theme?: 'dark' | 'light';
 }
 
-const DEFAULT_CLASSES: string[] = [
-  'ui-description',
-  'text-xs',
-];
+const DEFAULT_CLASSES: string[] = ['ui-description', 'text-xs'];
 
-const classes = (
-  theme: 'dark' | 'light',
-  extendClass: string | undefined,
-): string[] => {
+const classes = (theme: 'dark' | 'light', extendClass: string | undefined): string[] => {
   const result = [...DEFAULT_CLASSES, `ui-description--${theme}`];
 
   if (extendClass) {
@@ -26,16 +20,11 @@ const classes = (
 };
 
 export const Description: FC<DescriptionProps> = ({
-                                                    extendClass = '',
-                                                    text,
-                                                    theme = 'light',
-                                                  }: DescriptionProps) => {
-
+  extendClass = '',
+  text,
+  theme = 'light',
+}: DescriptionProps) => {
   const classesMemo = useMemo(() => classes(theme, extendClass), [theme, extendClass]);
 
-  return (
-    <p className={classesMemo.join(' ')}>
-      {text}
-    </p>
-  );
+  return <p className={classesMemo.join(' ')}>{text}</p>;
 };

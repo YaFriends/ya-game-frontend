@@ -1,4 +1,4 @@
-import {AuthAPI, LoginData, SignUpData} from '../api/AuthAPI';
+import { AuthAPI, LoginData, SignUpData } from '../api/AuthAPI';
 
 class Controller {
   private api: AuthAPI;

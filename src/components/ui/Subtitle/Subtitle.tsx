@@ -1,4 +1,4 @@
-import React, {FC, useMemo} from 'react';
+import React, { FC, useMemo } from 'react';
 import './Subtitle.scss';
 
 interface SubtitleProps {
@@ -7,17 +7,9 @@ interface SubtitleProps {
   theme?: 'dark' | 'light';
 }
 
-const DEFAULT_CLASSES: string[] = [
-  'ui-subtitle',
-  'text-center',
-  'text-lg',
-  'font-bold',
-];
+const DEFAULT_CLASSES: string[] = ['ui-subtitle', 'text-center', 'text-lg', 'font-bold'];
 
-const classes = (
-  theme: 'dark' | 'light',
-  extendClass: string | undefined,
-): string[] => {
+const classes = (theme: 'dark' | 'light', extendClass: string | undefined): string[] => {
   const result = [...DEFAULT_CLASSES, `ui-subtitle--${theme}`];
 
   if (extendClass) {
@@ -28,16 +20,11 @@ const classes = (
 };
 
 export const Subtitle: FC<SubtitleProps> = ({
-                                              extendClass = '',
-                                              text,
-                                              theme = 'light',
-                                            }: SubtitleProps) => {
-
+  extendClass = '',
+  text,
+  theme = 'light',
+}: SubtitleProps) => {
   const classesMemo = useMemo(() => classes(theme, extendClass), [theme, extendClass]);
 
-  return (
-    <h2 className={classesMemo.join(' ')}>
-      {text}
-    </h2>
-  );
+  return <h2 className={classesMemo.join(' ')}>{text}</h2>;
 };

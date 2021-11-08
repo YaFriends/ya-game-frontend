@@ -1,7 +1,7 @@
-import React, {FC, useMemo} from 'react';
+import React, { FC, useMemo } from 'react';
 
-import {Error} from './ElementError';
-import {Label} from './ElementLabel';
+import { Error } from './ElementError';
+import { Label } from './ElementLabel';
 // TODO: Добавить hint к input
 type InputProps = {
   name: string;
@@ -33,7 +33,7 @@ const DEFAULT_CLASSES: string[] = [
 const classes = (
   error: string | undefined,
   success: boolean | undefined,
-  disabled: boolean | undefined,
+  disabled: boolean | undefined
 ): string[] => {
   const result = [...DEFAULT_CLASSES];
 
@@ -51,20 +51,20 @@ const classes = (
 };
 
 export const Input: FC<InputProps> = ({
-                                        name,
-                                        id,
-                                        required,
-                                        label,
-                                        error,
-                                        placeholder,
-                                        disabled,
-                                        success,
-                                      }: InputProps) => {
+  name,
+  id,
+  required,
+  label,
+  error,
+  placeholder,
+  disabled,
+  success,
+}: InputProps) => {
   const classesMemo = useMemo(() => classes(error, success, disabled), [error, success, disabled]);
 
   return (
     <div className="block relative">
-      {label && <Label name={name} id={id} label={label}/>}
+      {label && <Label name={name} id={id} label={label} />}
       <input
         className={classesMemo.join(' ')}
         name={name}
@@ -73,7 +73,7 @@ export const Input: FC<InputProps> = ({
         placeholder={placeholder}
         disabled={disabled}
       />
-      {error && <Error error={error}/>}
+      {error && <Error error={error} />}
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import React, {FC, ButtonHTMLAttributes, MouseEvent, useMemo} from 'react';
+import React, { FC, ButtonHTMLAttributes, MouseEvent, useMemo } from 'react';
 import './Button.scss';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -30,7 +30,7 @@ const DEFAULT_CLASSES: string[] = [
 ];
 const classes = (
   typeAction: 'success' | 'error' | undefined,
-  extendClass: string | undefined,
+  extendClass: string | undefined
 ): string[] => {
   const result = [...DEFAULT_CLASSES];
 
@@ -46,14 +46,14 @@ const classes = (
 };
 
 export const Button: FC<ButtonProps> = ({
-                                          type,
-                                          name,
-                                          extendClass = '',
-                                          typeAction,
-                                          disabled,
-                                          text,
-                                          click,
-                                        }: ButtonProps) => {
+  type,
+  name,
+  extendClass = '',
+  typeAction,
+  disabled,
+  text,
+  click,
+}: ButtonProps) => {
   const classesMemo = useMemo(() => classes(typeAction, extendClass), [typeAction, extendClass]);
 
   return (
@@ -62,8 +62,7 @@ export const Button: FC<ButtonProps> = ({
       name={name}
       className={classesMemo.join(' ')}
       disabled={disabled}
-      onClick={click}
-    >
+      onClick={click}>
       <span className="w-full">{text}</span>
     </button>
   );

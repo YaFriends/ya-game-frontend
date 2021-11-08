@@ -1,7 +1,7 @@
-import React, {FC} from 'react';
-import {Link} from 'react-router-dom';
+import React, { FC } from 'react';
+import { Link } from 'react-router-dom';
 
-import {TRANSLATION} from '../lang/ru/translation';
+import { TRANSLATION } from '../lang/ru/translation';
 
 export const Menu: FC<Record<string, never>> = () => {
   return (
