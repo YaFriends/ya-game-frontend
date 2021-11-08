@@ -6,7 +6,7 @@ export const Dashboard: FC<Record<string, never>> = () => {
   return (
     <section>
       <Menu />
-      Dashboard
+      Dashboard1
     </section>
   );
 };
