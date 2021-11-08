@@ -1,0 +1,9 @@
+.ui-text {
+  &--light {
+    @apply text-black;
+  }
+
+  &--dark {
+    @apply text-white;
+  }
+}

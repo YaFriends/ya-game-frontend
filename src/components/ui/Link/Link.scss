@@ -1,0 +1,14 @@
+.ui-link {
+  &--light {
+    @apply text-black;
+  }
+
+  &--dark {
+    @apply text-white;
+  }
+
+  &:hover,
+  &:focus-within {
+    @apply opacity-70 cursor-pointer;
+  }
+}

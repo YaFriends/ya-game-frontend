@@ -1,0 +1,20 @@
+.ui-button {
+  &--success {
+    @apply bg-green border-green;
+  }
+
+  &--error {
+    @apply bg-transparent border-red text-red;
+  }
+
+  &[disabled] {
+    @apply opacity-70 cursor-not-allowed;
+  }
+
+  &:not(&[disabled]) {
+    &:hover,
+    &:focus-within {
+      @apply opacity-70;
+    }
+  }
+}

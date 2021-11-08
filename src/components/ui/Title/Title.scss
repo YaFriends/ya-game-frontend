@@ -1,0 +1,9 @@
+.ui-title {
+  &--light {
+    @apply text-black;
+  }
+
+  &--dark {
+    @apply text-white;
+  }
+}

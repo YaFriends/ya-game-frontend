@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
-import { Menu } from './components/Menu';
 import { Dashboard } from './pages/Dashboard';
 import { Error404 } from './pages/Error404';
 import { Forum } from './pages/Forum';
@@ -14,11 +13,10 @@ import { Profile } from './pages/Profile';
 import { ProfileHistory } from './pages/ProfileHistory';
 import { Register } from './pages/Register';
 
-const App: React.FC = () => {
+const App: FC<Record<string, never>> = () => {
   return (
     <Router>
-      <Menu />
-      <main>
+      <main className="font-body">
         <Switch>
           <Route path="/" exact component={Dashboard} />
           <Route path="/forum" component={Forum} />
