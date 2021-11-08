@@ -1,7 +1,8 @@
-import React, { FC } from 'react';
-import { Menu } from '../components/Menu';
+import React, {FC} from 'react';
 
-export const Dashboard: FC<{}> = () => {
+import {Menu} from '../components/Menu';
+
+export const Dashboard: FC<Record<string, never>> = () => {
   return (
     <section>
       <Menu/>

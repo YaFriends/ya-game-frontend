@@ -1,18 +1,52 @@
-import React, { FC, ButtonHTMLAttributes, MouseEvent } from 'react';
+import React, {FC, ButtonHTMLAttributes, MouseEvent, useMemo} from 'react';
 import './Button.scss';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  type?: 'submit' | 'button' | 'reset',
-  name?: string,
-  extendClass?: string,
-  typeAction?: 'success' | 'error' | undefined,
-  disabled?: boolean,
-  text: string,
-  click: (e: MouseEvent) => void,
+  type: 'submit' | 'button' | 'reset';
+  name?: string;
+  extendClass?: string;
+  typeAction?: 'success' | 'error' | undefined;
+  disabled?: boolean;
+  text: string;
+  click: (e: MouseEvent) => void;
 }
 
+const DEFAULT_CLASSES: string[] = [
+  'ui-button',
+  'flex',
+  'items-center',
+  'justify-center',
+  'mx-auto',
+  'rounded-xl',
+  'border-2',
+  'text-base',
+  'bg-blue',
+  'text-white',
+  'h-[34px]',
+  'w-full',
+  'border-blue',
+  'duration-300',
+  'ease-in-out',
+];
+const classes = (
+  typeAction: 'success' | 'error' | undefined,
+  extendClass: string | undefined,
+): string[] => {
+  const result = [...DEFAULT_CLASSES];
+
+  if (typeAction) {
+    result.push(`ui-button--${typeAction}`);
+  }
+
+  if (extendClass) {
+    result.push(extendClass);
+  }
+
+  return result;
+};
+
 export const Button: FC<ButtonProps> = ({
-                                          type = 'button',
+                                          type,
                                           name,
                                           extendClass = '',
                                           typeAction,
@@ -20,37 +54,17 @@ export const Button: FC<ButtonProps> = ({
                                           text,
                                           click,
                                         }: ButtonProps) => {
-  const defaultClassNames = [
-    'ui-button',
-    'container',
-    'flex',
-    'items-center',
-    'justify-center',
-    'mx-auto',
-    'rounded-xl',
-    'border-2',
-    'text-base',
-    'bg-blue',
-    'text-white',
-    'h-[34px]',
-    'border-blue',
-    'duration-300',
-    'ease-in-out',
-  ];
+  const classesMemo = useMemo(() => classes(typeAction, extendClass), [typeAction, extendClass]);
 
   return (
     <button
-      type={ type }
-      name={ name }
-      className={
-        defaultClassNames.join(' ')
-        + `${ typeAction ? ` ui-button--${ typeAction }` : '' }`
-        + `${ extendClass ? `${ extendClass }` : '' }`
-      }
-      disabled={ disabled }
-      onClick={ click }
+      type={type}
+      name={name}
+      className={classesMemo.join(' ')}
+      disabled={disabled}
+      onClick={click}
     >
-      <span className="container">{ text }</span>
+      <span className="w-full">{text}</span>
     </button>
   );
 };

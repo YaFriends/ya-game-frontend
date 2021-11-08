@@ -1,4 +1,4 @@
-import { http } from './http';
+import {http} from './http';
 
 export interface UserData {
   id: number;
@@ -36,6 +36,7 @@ export class UserAPI {
   updateAvatar(data: FormData): Promise<UserData> {
     return http.put(`${this.endpoint}/profile/avatar`, data);
   }
+
   updatePassword(data: UserUpdatePasswordProps): Promise<void> {
     return http.put(`${this.endpoint}/password`, data);
   }

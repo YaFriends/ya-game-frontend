@@ -4,7 +4,7 @@ import { Input } from '../components/ui/Input/Input';
 import { Button } from '../components/ui/Button/Button';
 import { MainLink } from '../components/ui/Link/Link';
 
-export const Login: FC<{}> = () => {
+export const Login: FC<Record<string, never>> = () => {
   const handleClick = (e: MouseEvent) => {
     console.log('handleClick', e);
   };

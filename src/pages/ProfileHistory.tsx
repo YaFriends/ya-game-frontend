@@ -1,5 +1,7 @@
-import React, { FC } from 'react';
+import React, {FC} from 'react';
 
-export const ProfileHistory: FC<{}> = () => {
-  return <section>ProfileHistory</section>
-}
+export const ProfileHistory: FC<Record<string, never>> = () => {
+  return (
+    <section>ProfileHistory</section>
+  );
+};
