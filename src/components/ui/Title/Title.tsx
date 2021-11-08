@@ -9,7 +9,7 @@ interface TitleProps {
 
 const DEFAULT_CLASSES: string[] = ['ui-title', 'text-center', 'text-2xl', 'font-bold'];
 
-const classes = (theme: 'dark' | 'light', extendClass: string | undefined): string[] => {
+const classes = (theme: 'dark' | 'light', extendClass?: string): string[] => {
   const result = [...DEFAULT_CLASSES, `ui-title--${theme}`];
 
   if (extendClass) {

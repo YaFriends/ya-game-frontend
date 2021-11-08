@@ -13,7 +13,7 @@ import { Profile } from './pages/Profile';
 import { ProfileHistory } from './pages/ProfileHistory';
 import { Register } from './pages/Register';
 
-const App: FC = () => {
+const App: FC<Record<string, never>> = () => {
   return (
     <Router>
       <main className="font-body">

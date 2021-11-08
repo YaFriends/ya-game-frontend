@@ -9,7 +9,7 @@ interface SubtitleProps {
 
 const DEFAULT_CLASSES: string[] = ['ui-subtitle', 'text-center', 'text-lg', 'font-bold'];
 
-const classes = (theme: 'dark' | 'light', extendClass: string | undefined): string[] => {
+const classes = (theme: 'dark' | 'light', extendClass?: string): string[] => {
   const result = [...DEFAULT_CLASSES, `ui-subtitle--${theme}`];
 
   if (extendClass) {

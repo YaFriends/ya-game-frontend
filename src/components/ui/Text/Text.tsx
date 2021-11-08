@@ -9,7 +9,7 @@ interface TextProps {
 
 const DEFAULT_CLASSES: string[] = ['ui-text', 'text-base'];
 
-const classes = (theme: 'dark' | 'light', extendClass: string | undefined): string[] => {
+const classes = (theme: 'dark' | 'light', extendClass?: string): string[] => {
   const result = [...DEFAULT_CLASSES, `ui-text--${theme}`];
 
   if (extendClass) {
