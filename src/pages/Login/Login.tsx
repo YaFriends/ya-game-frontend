@@ -18,14 +18,14 @@ export const Login: FC<Record<string, never>> = () => {
         <Title text="Авторизация" />
         <MainLink text="Регистрация" href="/register" />
       </div>
-      <form className="login__form" name="authForm">
+      <form className="login__form" name="loginForm">
         <div className="login__form-input-wrapper">
           <Input name="login" label="Логин" placeholder="Введите логин" required />
         </div>
         <Input name="password" label="Пароль" placeholder="Введите пароль" required />
 
         <div className="login__form-button-wrapper">
-          <Button name="auth" type="submit" text="Войти" click={handleClick} />
+          <Button name="login" type="submit" text="Войти" click={handleClick} />
         </div>
       </form>
       <div className="login__link-wrapper">
