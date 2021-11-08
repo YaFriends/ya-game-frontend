@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import { Option } from './Option';
 import { SelectProps } from './SelectTypes';
+import './Select.scss';
 
 const Select: FC<SelectProps> = (
     {
@@ -8,7 +9,10 @@ const Select: FC<SelectProps> = (
         id,
         options,
         change,
-        defaultValue
+        defaultValue,
+        label,
+        require = false,
+        disabled = false
     }) => {
 
     const addDefaultOption = () => {
@@ -29,14 +33,19 @@ const Select: FC<SelectProps> = (
     });
 
     return (
-        <select
-            name={ name }
-            id={ id }
-            onChange={ change }
-            defaultValue={ defaultValue }
-        >
-            { createOptions }
-        </select>
+        <div className='flex flex-col'>
+            <label>{ label }</label>
+            <select
+                required={ require }
+                name={ name }
+                id={ id }
+                onChange={ change }
+                defaultValue={ defaultValue }
+                disabled={ disabled }
+            >
+                { createOptions }
+            </select>
+        </div>
     )
 };
 
