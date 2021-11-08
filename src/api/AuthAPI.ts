@@ -1,5 +1,5 @@
-import { http } from './http';
 import { UserData } from './UserAPI';
+import { http } from './http';
 
 export interface LoginData {
   login: string;
