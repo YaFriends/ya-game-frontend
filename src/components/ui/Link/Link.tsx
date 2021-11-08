@@ -17,7 +17,7 @@ const DEFAULT_CLASSES: string[] = [
   'ease-in-out',
 ];
 
-const classes = (theme: 'dark' | 'light', extendClass: string | undefined): string[] => {
+const classes = (theme: 'dark' | 'light', extendClass?: string): string[] => {
   const result = [...DEFAULT_CLASSES, `ui-link--${theme}`];
 
   if (extendClass) {

@@ -9,7 +9,7 @@ interface DescriptionProps {
 
 const DEFAULT_CLASSES: string[] = ['ui-description', 'text-xs'];
 
-const classes = (theme: 'dark' | 'light', extendClass: string | undefined): string[] => {
+const classes = (theme: 'dark' | 'light', extendClass?: string): string[] => {
   const result = [...DEFAULT_CLASSES, `ui-description--${theme}`];
 
   if (extendClass) {
