@@ -9,9 +9,12 @@ interface OptionsProps {
 interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
     name: string;
     id: string;
+    label: string;
     options: OptionsProps[],
     change: (event: ChangeEvent<HTMLSelectElement>) => void;
     defaultValue?: string;
+    require?: boolean;
+    disabled?: boolean;
 }
 
 export type {
