@@ -1,0 +1,19 @@
+.register {
+  @apply h-screen w-[354px] mx-auto flex items-center justify-center flex-col;
+
+  &__header {
+    @apply w-full flex items-center justify-between mb-6;
+  }
+
+  &__form {
+    @apply w-full;
+  }
+
+  &__form-input-wrapper {
+    @apply mb-6;
+  }
+
+  &__form-button-wrapper {
+    @apply mt-14;
+  }
+}

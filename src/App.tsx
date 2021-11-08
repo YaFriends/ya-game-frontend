@@ -11,7 +11,7 @@ import { Leaderboard } from './pages/Leaderboard';
 import { Login } from './pages/Login/Login';
 import { Profile } from './pages/Profile';
 import { ProfileHistory } from './pages/ProfileHistory';
-import { Register } from './pages/Register';
+import { Register } from './pages/Register/Register';
 
 const App: FC<Record<string, never>> = () => {
   return (
