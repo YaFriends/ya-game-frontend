@@ -12,7 +12,6 @@ const DEFAULT_CLASSES: string[] = [
   'text-center',
   'text-2xl',
   'font-bold',
-  'mb-6',
 ];
 
 const classes = (

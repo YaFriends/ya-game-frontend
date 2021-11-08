@@ -1,7 +1,5 @@
-import React, {FC} from 'react';
+import React, { FC } from 'react';
 
 export const Login: FC<Record<string, never>> = () => {
-  return (
-    <section>Login</section>
-  );
+  return <section>Login</section>;
 };
