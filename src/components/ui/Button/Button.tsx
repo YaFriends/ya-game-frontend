@@ -1,7 +1,7 @@
 import React, { FC, ButtonHTMLAttributes, MouseEvent, useMemo } from 'react';
 import './Button.scss';
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   type: 'submit' | 'button' | 'reset';
   name?: string;
   extendClass?: string;
