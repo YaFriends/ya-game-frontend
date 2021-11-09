@@ -5,6 +5,10 @@
     @apply w-full flex items-center justify-between mb-6;
   }
 
+  &__button {
+    @apply mt-14;
+  }
+
   &__link {
     @apply w-full flex items-center justify-center mt-4;
   }

@@ -8,7 +8,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   typeAction?: 'success' | 'error';
   disabled?: boolean;
   text: string;
-  click: (e: MouseEvent) => void;
+  click?: (e: MouseEvent) => void;
 }
 
 const DEFAULT_CLASSES: string[] = [
