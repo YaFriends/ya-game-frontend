@@ -12,6 +12,7 @@ interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
     options: OptionsProps[];
     selected: OptionsProps;
     onSelectedChange: SelectedChangeType;
+    placeholder?: string;
 }
 
 export type {

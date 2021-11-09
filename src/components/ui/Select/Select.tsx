@@ -6,30 +6,31 @@ import { Label } from '../Input/ElementLabel';
 import { Option } from './Option';
 import { SelectProps } from './SelectTypes';
 
+//TODO add placeholder
 const Select: FC<SelectProps> = ({ label, options, selected, onSelectedChange }) => {
   const [open, setOpen] = useState(false);
 
   const dropDownRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    function onBodyClick(event: Event): void {
-      if (dropDownRef.current === null) {
-        return;
-      }
-
-      const target = event.target as HTMLElement;
-      if (dropDownRef.current && dropDownRef.current.contains(target)) {
-        return;
-      }
-      setOpen(false);
-    }
-
     window.addEventListener('click', onBodyClick);
 
     return () => {
       window.removeEventListener('click', onBodyClick);
     };
   }, []);
+
+  function onBodyClick(event: Event): void {
+    if (dropDownRef.current === null) {
+      return;
+    }
+
+    const target = event.target as HTMLElement;
+    if (dropDownRef.current && dropDownRef.current.contains(target)) {
+      return;
+    }
+    setOpen(false);
+  }
 
   const toggleOpen = () => {
     setOpen(prevState => !prevState);
@@ -52,7 +53,7 @@ const Select: FC<SelectProps> = ({ label, options, selected, onSelectedChange })
     'bg-black',
     'h-[38px]',
     'flex',
-    'align-center',
+    'items-center',
     'justify-between',
     'w-full',
     'rounded-12px',
@@ -78,7 +79,7 @@ const Select: FC<SelectProps> = ({ label, options, selected, onSelectedChange })
       <Label name={label} label={label} />
       <div onClick={toggleOpen}>
         <div className={open ? SELECT_CLASSES_OPEN : SELECT_CLASSES_CLOSE}>
-          <span>{selected.label}</span>
+          <div className="font-normal text-white mb-1 leading-none">{selected.label}</div>
           <Arrow degree={open ? '180' : '0'} />
         </div>
         <div onClick={toggleOpen} className={open ? 'block' : 'hidden'}>

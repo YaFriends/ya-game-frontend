@@ -12,9 +12,13 @@ const Option: FC<
     'bg-black',
     'text-white',
     'px-3',
+    'font-light',
+    'p-1',
+    'hover:font-normal',
     'hover:cursor-pointer',
     'hover:text-blue',
     'last:rounded-b-12px',
+    'last:h-[50px]',
   ];
   return (
     <div className={DEFAULT_CLASSES.join(' ')} onClick={() => onSelectedChange(option)}>
