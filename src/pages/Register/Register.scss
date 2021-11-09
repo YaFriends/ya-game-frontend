@@ -4,16 +4,4 @@
   &__header {
     @apply w-full flex items-center justify-between mb-6;
   }
-
-  &__form {
-    @apply w-full;
-  }
-
-  &__form-input-wrapper {
-    @apply mb-6;
-  }
-
-  &__form-button-wrapper {
-    @apply mt-14;
-  }
 }

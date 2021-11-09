@@ -1,15 +1,60 @@
 import React, { FC, MouseEvent } from 'react';
 
-import { Button } from '../../components/ui/Button/Button';
-import { Input } from '../../components/ui/Input/Input';
+import { ButtonProps } from '../../components/ui/Button/Button';
+import { Form } from '../../components/ui/Form/Form';
+import { InputProps } from '../../components/ui/Input/Input';
 import { MainLink } from '../../components/ui/Link/Link';
 import { Title } from '../../components/ui/Title/Title';
-
 import './Register.scss';
+import { TRANSLATION } from '../../lang/ru/translation';
 
 export const Register: FC<Record<string, never>> = () => {
-  const handleClick = (e: MouseEvent) => {
-    console.log('handleClick', e);
+  const handleRegister = (e: MouseEvent) => {
+    console.log('handleRegister', e);
+  };
+  const inputs: InputProps[] = [
+    {
+      name: 'input-first-name',
+      label: TRANSLATION.Register.inputFirstNameLabel,
+      placeholder: TRANSLATION.Register.inputFirstNamePlaceholder,
+      required: true,
+    },
+    {
+      name: 'input-second-name',
+      label: TRANSLATION.Register.inputSecondNameLabel,
+      placeholder: TRANSLATION.Register.inputSecondNamePlaceholder,
+      required: true,
+    },
+    {
+      name: 'input-login',
+      label: TRANSLATION.Register.inputLoginLabel,
+      placeholder: TRANSLATION.Register.inputLoginPlaceholder,
+      required: true,
+    },
+    {
+      name: 'input-email',
+      label: TRANSLATION.Register.inputEmailLabel,
+      placeholder: TRANSLATION.Register.inputEmailPlaceholder,
+      required: true,
+    },
+    {
+      name: 'input-phone',
+      label: TRANSLATION.Register.inputPhoneLabel,
+      placeholder: TRANSLATION.Register.inputPhonePlaceholder,
+      required: true,
+    },
+    {
+      name: 'input-password',
+      label: TRANSLATION.Register.inputPasswordLabel,
+      placeholder: TRANSLATION.Register.inputPasswordPlaceholder,
+      required: true,
+    },
+  ];
+  const button: ButtonProps = {
+    type: 'submit',
+    name: 'button-register',
+    text: TRANSLATION.Register.submitButtonText,
+    click: handleRegister,
   };
 
   return (
@@ -18,28 +63,7 @@ export const Register: FC<Record<string, never>> = () => {
         <MainLink text="Назад" href="/login" />
         <Title text="Регистрация" />
       </div>
-      <form className="register__form" name="registerForm">
-        <div className="register__form-input-wrapper">
-          <Input name="first_name" label="Имя" placeholder="Введите имя" required />
-        </div>
-        <div className="register__form-input-wrapper">
-          <Input name="second_name" label="Фамилия" placeholder="Введите фамилию" required />
-        </div>
-        <div className="register__form-input-wrapper">
-          <Input name="login" label="Логин" placeholder="Введите логин" required />
-        </div>
-        <div className="register__form-input-wrapper">
-          <Input name="email" label="Email" placeholder="Введите email" required />
-        </div>
-        <div className="register__form-input-wrapper">
-          <Input name="phone" label="Телефон" placeholder="Введите телефон" required />
-        </div>
-        <Input name="password" label="Пароль" placeholder="Введите пароль" required />
-
-        <div className="register__form-button-wrapper">
-          <Button name="register" type="submit" text="Зарегистрироваться" click={handleClick} />
-        </div>
-      </form>
+      <Form name="registerForm" inputs={inputs} button={button} />
     </section>
   );
 };
