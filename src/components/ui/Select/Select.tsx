@@ -1,73 +1,92 @@
-import React, { FC } from 'react';
+import React, { useState, useEffect, useRef, FC } from 'react';
+
+import { Arrow } from '../../../images/icons/Arrow';
+import { Label } from '../Input/ElementLabel';
+
 import { Option } from './Option';
 import { SelectProps } from './SelectTypes';
-import './Select.scss';
 
-const Select: FC<SelectProps> = (
-    {
-        name,
-        id,
-        options,
-        change,
-        defaultValue,
-        label,
-        require = false,
-        disabled = false
-    }) => {
+const Select: FC<SelectProps> = ({ label, options, selected, onSelectedChange }) => {
+  const [open, setOpen] = useState(false);
 
-    const addDefaultOption = () => {
-        return options.unshift({
-            value: defaultValue as string,
-            children: defaultValue as string,
-            disabled: true
-        });
-    };
+  const dropDownRef = useRef<HTMLDivElement | null>(null);
 
-    if (typeof defaultValue === 'string') {
-        addDefaultOption();
+  useEffect(() => {
+    function onBodyClick(event: Event): void {
+      if (dropDownRef.current === null) {
+        return;
+      }
+
+      const target = event.target as HTMLElement;
+      if (dropDownRef.current && dropDownRef.current.contains(target)) {
+        return;
+      }
+      setOpen(false);
     }
 
-    const createOptions = options.map((option) => {
-        const { children ,...props } = option;
-        return <Option { ...props } children={ children } key={ option.value }/>;
-    });
+    window.addEventListener('click', onBodyClick);
 
-    const labelClasses = 'font-bold text-lg text-black mb-1'; //TODO импортировать эти стили, так как в инпуте схожие
-    const selectClasses = [
-        'bg-black',
-        'text-white',
-        'h-[38px]',
-        'rounded-12px',
-        'border-2',
-        'border-opacity-40',
-        'border-white',
-        'text-white',
-        'placeholder-white px-3',
-        'px-2',
-        'focus:outline-none',
-        'focus:border-blue',
-        'focus:rounded-b-none',
-        'hover:cursor-pointer'
-    ].join(' ');
+    return () => {
+      window.removeEventListener('click', onBodyClick);
+    };
+  }, []);
 
+  const toggleOpen = () => {
+    setOpen(prevState => !prevState);
+  };
+
+  const renderedOptions = options.map(option => {
+    if (option.value === selected.value) {
+      return null;
+    }
+
+    const { value, label } = option;
     return (
-        <div className='flex flex-col'>
-            <label className={ labelClasses } htmlFor={ id }>
-                { label }
-            </label>
-            <select
-                className={ selectClasses }
-                required={ require }
-                name={ name }
-                id={ id }
-                onChange={ change }
-                defaultValue={ defaultValue }
-                disabled={ disabled }
-            >
-                { createOptions }
-            </select>
+      <Option key={value} option={option} onSelectedChange={onSelectedChange}>
+        {label}
+      </Option>
+    );
+  });
+
+  const SELECT_CLASSES: string[] = [
+    'bg-black',
+    'h-[38px]',
+    'flex',
+    'align-center',
+    'justify-between',
+    'w-full',
+    'rounded-12px',
+    'border-2',
+    'text-white',
+    'placeholder-white',
+    'px-3',
+    'py-2',
+    'hover:cursor-pointer',
+  ];
+
+  const SELECT_CLASSES_OPEN = [
+    ...SELECT_CLASSES,
+    'outline-none',
+    'border-blue',
+    'rounded-b-none',
+  ].join(' ');
+
+  const SELECT_CLASSES_CLOSE = [...SELECT_CLASSES, 'border-white', 'border-opacity-40'].join(' ');
+
+  return (
+    <div ref={dropDownRef}>
+      <Label name={label} label={label} />
+      <div onClick={toggleOpen}>
+        <div className={open ? SELECT_CLASSES_OPEN : SELECT_CLASSES_CLOSE}>
+          <span>{selected.label}</span>
+          <Arrow degree={open ? '180' : '0'} />
         </div>
-    )
+        <div onClick={toggleOpen} className={open ? 'block' : 'hidden'}>
+          {renderedOptions}
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export { Select };

@@ -1,23 +1,21 @@
-import { ChangeEvent, SelectHTMLAttributes } from 'react';
+import { SelectHTMLAttributes, SetStateAction } from 'react';
+
+type SelectedChangeType = (option: SetStateAction<OptionsProps>) => void;
 
 interface OptionsProps {
-    value: string | number;
-    children: string;
-    disabled?: boolean;
+    label: string;
+    value: string;
 }
 
 interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
-    name: string;
-    id: string;
-    label: string;
-    options: OptionsProps[],
-    change: (event: ChangeEvent<HTMLSelectElement>) => void;
-    defaultValue?: string;
-    require?: boolean;
-    disabled?: boolean;
+    label: string,
+    options: OptionsProps[];
+    selected: OptionsProps;
+    onSelectedChange: SelectedChangeType;
 }
 
 export type {
     OptionsProps,
-    SelectProps
+    SelectProps,
+    SelectedChangeType
 };
