@@ -8,8 +8,8 @@ import { Title } from '../../components/ui/Title/Title';
 import './Login.scss';
 
 export const Login: FC<Record<string, never>> = () => {
-  const handleClick = (e: MouseEvent) => {
-    console.log('handleClick', e);
+  const handleLogin = (e: MouseEvent) => {
+    console.log('handleLogin', e);
   };
 
   return (
@@ -25,7 +25,7 @@ export const Login: FC<Record<string, never>> = () => {
         <Input name="password" label="Пароль" placeholder="Введите пароль" required />
 
         <div className="login__form-button-wrapper">
-          <Button name="login" type="submit" text="Войти" click={handleClick} />
+          <Button name="login" type="submit" text="Войти" click={handleLogin} />
         </div>
       </form>
       <div className="login__link-wrapper">
