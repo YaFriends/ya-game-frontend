@@ -59,7 +59,7 @@ export const Input: FC<InputProps> = ({
   const classesMemo = useMemo(() => classes(error, success, disabled), [error, success, disabled]);
 
   return (
-    <div className="block relative">
+    <div className="block relative mb-6 last:mb-0">
       {label && <Label name={name} id={id} label={label} />}
       <input
         className={classesMemo.join(' ')}
