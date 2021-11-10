@@ -1,7 +1,11 @@
 .leaderboard {
-  @apply h-screen mx-auto flex items-center justify-center flex-col px-10;
+  @apply max-w-max h-screen mx-auto flex items-center justify-center flex-col px-10;
+
+  &__header {
+    @apply w-full flex items-center justify-between mb-6;
+  }
 
   &__table-wrapper {
-    @apply w-half h-[300px] flex items-center justify-center flex-col bg-grey mt-6;
+    @apply h-[300px] flex items-center justify-center flex-col bg-grey mt-6;
   }
 }
