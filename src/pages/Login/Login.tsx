@@ -1,35 +1,46 @@
-import React, { FC, MouseEvent } from 'react';
+import React, { FC, FormEvent } from 'react';
 
 import { Button } from '../../components/ui/Button/Button';
+import { Form } from '../../components/ui/Form/Form';
 import { Input } from '../../components/ui/Input/Input';
 import { MainLink } from '../../components/ui/Link/Link';
 import { Title } from '../../components/ui/Title/Title';
-
 import './Login.scss';
+import { TRANSLATION } from '../../lang/ru/translation';
 
 export const Login: FC<Record<string, never>> = () => {
-  const handleClick = (e: MouseEvent) => {
-    console.log('handleClick', e);
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    console.log('handleSubmit', e);
   };
 
   return (
     <section className="login">
       <div className="login__header">
-        <Title text="Авторизация" />
-        <MainLink text="Регистрация" href="/register" />
+        <Title text={TRANSLATION.Login.title} />
+        <MainLink text={TRANSLATION.Login.linkToRegisterText} href="/register" />
       </div>
-      <form className="login__form" name="loginForm">
-        <div className="login__form-input-wrapper">
-          <Input name="login" label="Логин" placeholder="Введите логин" required />
+      <Form name="loginForm" submit={handleSubmit}>
+        <div>
+          <Input
+            name="input-login"
+            label={TRANSLATION.Login.inputLoginLabel}
+            placeholder={TRANSLATION.Login.inputLoginPlaceholder}
+            required
+          />
+          <Input
+            name="input-password"
+            label={TRANSLATION.Login.inputPasswordLabel}
+            placeholder={TRANSLATION.Login.inputPasswordPlaceholder}
+            required
+          />
         </div>
-        <Input name="password" label="Пароль" placeholder="Введите пароль" required />
-
-        <div className="login__form-button-wrapper">
-          <Button name="login" type="submit" text="Войти" click={handleClick} />
+        <div className="login__button">
+          <Button name="button-login" type="submit" text={TRANSLATION.Login.submitButtonText} />
         </div>
-      </form>
-      <div className="login__link-wrapper">
-        <MainLink text="Вернуться на главную" href="/" />
+      </Form>
+      <div className="login__link">
+        <MainLink text={TRANSLATION.Login.linkToDashboardText} href="/" />
       </div>
     </section>
   );

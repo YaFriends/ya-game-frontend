@@ -1,14 +1,14 @@
 import React, { FC, ButtonHTMLAttributes, MouseEvent, useMemo } from 'react';
 import './Button.scss';
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   type: 'submit' | 'button' | 'reset';
   name?: string;
   extendClass?: string;
   typeAction?: 'success' | 'error';
   disabled?: boolean;
   text: string;
-  click: (e: MouseEvent) => void;
+  click?: (e: MouseEvent) => void;
 }
 
 const DEFAULT_CLASSES: string[] = [
