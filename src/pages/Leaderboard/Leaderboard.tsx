@@ -2,6 +2,7 @@ import React, { FC, useState, useEffect } from 'react';
 
 import { LeaderboardData } from '../../api/LeaderboardAPI';
 import { Subtitle } from '../../components/ui/Subtitle/Subtitle';
+import { Table } from '../../components/ui/Table/Table';
 import { Title } from '../../components/ui/Title/Title';
 import { LeaderboardController } from '../../controllers/LeaderboardController';
 
@@ -10,13 +11,14 @@ import './Leaderboard.scss';
 type PositionLeaderboard = number | null;
 type PositionLeaderboardText = string;
 
+const HEADERS = [
+  ['Позиция #', 'border w-[150px] bg-grey40'],
+  ['Имя', 'border w-[420px] bg-grey40'],
+  ['Победы', 'border w-[150px] bg-grey40'],
+];
+
 export const Leaderboard: FC<Record<string, never>> = () => {
-  const [leaderboards, setLeaderboard] = useState<LeaderboardData>({
-    data: {
-      teamName: '',
-      yaFriendsScore: 0,
-    },
-  });
+  const [leaderboards, setLeaderboard] = useState<LeaderboardData[]>([]);
   const [positionOnLeaderboard, setPositionOnLeaderboard] = useState<PositionLeaderboard>(null);
   const [positionOnLeaderboardText, setPositionOnLeaderboardText] =
     useState<PositionLeaderboardText>('Тебя нет в таблице');
@@ -27,11 +29,15 @@ export const Leaderboard: FC<Record<string, never>> = () => {
   };
 
   useEffect(() => {
-    LeaderboardController.getAllLeaderboards(mockGetAll).then(data => {
-      setLeaderboard(data as LeaderboardData);
+    LeaderboardController.getAllLeaderboards(mockGetAll).then(response => {
+      const result: LeaderboardData[] = [
+        ...leaderboards,
+        (response as unknown as LeaderboardData[])[0],
+      ];
+      setLeaderboard(result);
       getPositionForCurrentUserOnLeaderboard();
     });
-  }, [leaderboards.data.teamName]);
+  }, []);
 
   const getPositionForCurrentUserOnLeaderboard = (): void => {
     // TODO: написать метод, которая получает из leaderboards.data позицию авторизованного пользователя(currentUser)
@@ -45,7 +51,10 @@ export const Leaderboard: FC<Record<string, never>> = () => {
     }
   };
 
-  console.log('leaderboards', leaderboards.data);
+  const body = leaderboards.map(({ data }) => Object.values(data));
+
+  // TODO: после добавления функции sort в utils, отсортировать массив и потом добавить индекс элементов
+  body.forEach((item, index) => item.unshift(index + 1));
 
   return (
     <section className="leaderboard">
@@ -54,10 +63,7 @@ export const Leaderboard: FC<Record<string, never>> = () => {
         <Title text="Таблица лидеров" />
       </div>
 
-      <div className="leaderboard__table-wrapper">
-        <Title text="Тут будет таблица с результатами" theme="dark" />
-        <pre>{JSON.stringify(leaderboards.data)}</pre>
-      </div>
+      <Table headers={HEADERS} body={body} />
     </section>
   );
 };

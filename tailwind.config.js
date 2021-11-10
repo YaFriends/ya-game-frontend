@@ -14,6 +14,9 @@ module.exports = {
       grey: {
         DEFAULT: '#8B949E',
       },
+      grey40: {
+        DEFAULT: '#8b949e66',
+      },
       blue: {
         DEFAULT: '#58A6FF',
       },

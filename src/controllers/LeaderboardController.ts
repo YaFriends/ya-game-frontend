@@ -17,7 +17,7 @@ class Controller {
 
   async getAllLeaderboards(data: GetAllLeaderboards) {
     try {
-      return this.api.getAllLeaderboards(data);
+      return this.api.getAllLeaderboards(data).then(({ data }) => data);
     } catch (e) {
       console.error(e);
       return e;
