@@ -1,0 +1,13 @@
+.dashboard {
+  &__top {
+    @apply mb-10;
+  }
+
+  &__body {
+    @apply flex justify-between;
+  }
+
+  &__body-games {
+    @apply w-full max-w-[650px] ml-20;
+  }
+}

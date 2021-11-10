@@ -13,6 +13,7 @@ module.exports = {
       },
       grey: {
         DEFAULT: '#8B949E',
+        light: '#C4C4C4',
       },
       blue: {
         DEFAULT: '#58A6FF',
@@ -26,6 +27,9 @@ module.exports = {
     },
     fontFamily: {
       body: 'Ubuntu, Arial, sans-serif',
+    },
+    container: {
+      center: true,
     },
     extend: {
       spacing: {
