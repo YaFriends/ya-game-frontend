@@ -14,7 +14,7 @@ const Option: FC<
     'px-3',
     'font-light',
     'p-1',
-    'hover:font-normal',
+    'hover:font-bold',
     'hover:cursor-pointer',
     'hover:text-blue',
     'last:rounded-b-12px',
