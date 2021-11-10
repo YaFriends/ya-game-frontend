@@ -3,7 +3,7 @@ import React, { FC, useMemo } from 'react';
 import { Error } from './ElementError';
 import { Label } from './ElementLabel';
 // TODO: Добавить hint к input
-type InputProps = {
+export interface InputProps {
   name: string;
   placeholder?: string;
   required?: boolean;
@@ -12,7 +12,7 @@ type InputProps = {
   id?: string;
   label?: string;
   error?: string;
-};
+}
 
 const DEFAULT_CLASSES: string[] = [
   'ui-input',
@@ -59,7 +59,7 @@ export const Input: FC<InputProps> = ({
   const classesMemo = useMemo(() => classes(error, success, disabled), [error, success, disabled]);
 
   return (
-    <div className="block relative">
+    <div className="block relative mb-6 last:mb-0">
       {label && <Label name={name} id={id} label={label} />}
       <input
         className={classesMemo.join(' ')}

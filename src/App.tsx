@@ -8,10 +8,10 @@ import { GameCreation } from './pages/GameCreation';
 import { GameLobby } from './pages/GameLobby';
 import { GameSession } from './pages/GameSession';
 import { Leaderboard } from './pages/Leaderboard';
-import { Login } from './pages/Login';
+import { Login } from './pages/Login/Login';
 import { Profile } from './pages/Profile';
 import { ProfileHistory } from './pages/ProfileHistory/ProfileHistory';
-import { Register } from './pages/Register';
+import { Register } from './pages/Register/Register';
 
 const App: FC<Record<string, never>> = () => {
   return (
