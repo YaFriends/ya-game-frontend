@@ -1,12 +1,39 @@
-import React, { useState, useEffect, useRef, FC } from 'react';
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  FC,
+  SetStateAction,
+  SelectHTMLAttributes,
+} from 'react';
 
 import { Arrow } from '../../../images/icons/Arrow';
 import { Label } from '../Input/ElementLabel';
 
 import { Option } from './Option';
-import { SelectProps } from './SelectTypes';
 
-const Select: FC<SelectProps> = ({ label, options, selected, onSelectedChange, placeholder }) => {
+export type SelectedChangeType = (option: SetStateAction<OptionsProps>) => void;
+
+export interface OptionsProps {
+  label: string;
+  value: string;
+}
+
+export interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
+  label: string;
+  options: OptionsProps[];
+  selected: OptionsProps;
+  onSelectedChange: SelectedChangeType;
+  placeholder?: string;
+}
+
+export const Select: FC<SelectProps> = ({
+  label,
+  options,
+  selected,
+  onSelectedChange,
+  placeholder,
+}) => {
   const [open, setOpen] = useState(false);
   const [localHolder, setLocalHolder] = useState<string | null | undefined>(placeholder);
 
@@ -38,13 +65,12 @@ const Select: FC<SelectProps> = ({ label, options, selected, onSelectedChange, p
     setOpen(prevState => !prevState);
   };
 
-  const renderedOptions = options.map(option => {
-    if (option.value === selected.value) {
+  const renderedOptions = options.map(({ value, label }) => {
+    if (value === selected.value) {
       return null;
     }
-    const { value, label } = option;
     return (
-      <Option key={value} option={option} onSelectedChange={onSelectedChange}>
+      <Option key={value} option={{ value, label }} onSelectedChange={onSelectedChange}>
         {label}
       </Option>
     );
@@ -92,5 +118,3 @@ const Select: FC<SelectProps> = ({ label, options, selected, onSelectedChange, p
     </div>
   );
 };
-
-export { Select };

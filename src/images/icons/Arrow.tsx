@@ -4,7 +4,7 @@ interface ArrowProps {
   degree?: string;
 }
 
-const Arrow: FC<ArrowProps> = ({ degree = '0' }) => {
+export const Arrow: FC<ArrowProps> = ({ degree = '0' }) => {
   return (
     <svg
       width="12"
@@ -32,5 +32,3 @@ const Arrow: FC<ArrowProps> = ({ degree = '0' }) => {
     </svg>
   );
 };
-
-export { Arrow };

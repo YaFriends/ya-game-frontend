@@ -1,8 +1,8 @@
 import React, { FC, PropsWithChildren } from 'react';
 
-import { OptionsProps, SelectedChangeType } from './SelectTypes';
+import { OptionsProps, SelectedChangeType } from './Select';
 
-const Option: FC<
+export const Option: FC<
   PropsWithChildren<{
     option: OptionsProps;
     onSelectedChange: SelectedChangeType;
@@ -26,5 +26,3 @@ const Option: FC<
     </div>
   );
 };
-
-export { Option };
