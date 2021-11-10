@@ -2,8 +2,6 @@
   @apply h-screen mx-auto flex items-center justify-center flex-col px-10;
 
   &__table-wrapper {
-    width: 50%;
-    height: 300px;
-    @apply flex items-center justify-center flex-col bg-grey mt-6;
+    @apply w-half h-[300px] flex items-center justify-center flex-col bg-grey mt-6;
   }
 }
