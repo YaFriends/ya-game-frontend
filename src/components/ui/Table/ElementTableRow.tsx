@@ -1,6 +1,6 @@
 import React, { FC, ReactNode } from 'react';
 
-import { BodyItem } from './ElementTableBody';
+import { BodyItem } from './Table';
 
 export interface TableRowProps {
   row: BodyItem[];
@@ -14,6 +14,6 @@ export const TableRow: FC<TableRowProps> = ({ row }: TableRowProps) => {
       {text}
     </td>
   );
-  const getRow = (): ReactNode => row.map((text, index) => createCell(text, index));
-  return <tr className={DEFAULT_CLASSES.join(' ')}>{getRow()}</tr>;
+  const getRow = row.map((text, index) => createCell(text, index));
+  return <tr className={DEFAULT_CLASSES.join(' ')}>{getRow}</tr>;
 };

@@ -1,6 +1,6 @@
 export const TRANSLATION: Record<string, Record<string, string>> = {
   Register: {
-    menuLabel: 'Регистрация',
+    label: 'Регистрация',
     title: 'Регистрация',
     linkToLogin: 'Назад',
     inputFirstNameLabel: 'Имя',
@@ -18,7 +18,7 @@ export const TRANSLATION: Record<string, Record<string, string>> = {
     submitButtonText: 'Зарегистрироваться',
   },
   Login: {
-    menuLabel: 'Логин',
+    label: 'Логин',
     title: 'Авторизация',
     linkToRegisterText: 'Регистрация',
     inputLoginLabel: 'Логин',
@@ -29,27 +29,33 @@ export const TRANSLATION: Record<string, Record<string, string>> = {
     linkToDashboardText: 'Вернуться на главную',
   },
   Dashboard: {
-    menuLabel: 'Главная',
+    label: 'Главная',
   },
   GameSession: {
-    menuLabel: 'Игра',
+    label: 'Игра',
   },
   GameCreation: {
-    menuLabel: 'Игра: создать',
+    label: 'Игра: создать',
   },
   GameLobby: {
-    menuLabel: 'Игра: лобби',
+    label: 'Игра: лобби',
   },
   Leaderboard: {
-    menuLabel: 'Таблица лидеров',
+    label: 'Таблица лидеров',
+    title: 'Таблица лидеров',
+    tableColumnPosition: 'Позиция #',
+    tableColumnName: 'Имя',
+    tableColumnWins: 'Победы',
+    subtitleNotTable: 'Тебя нет в таблице',
+    subtitleHaveTable: 'Твое место в таблице #',
   },
   Profile: {
-    menuLabel: 'Профиль',
+    label: 'Профиль',
   },
   ProfileHistory: {
-    menuLabel: 'Профиль: История',
+    label: 'Профиль: История',
   },
   Forum: {
-    menuLabel: 'Форум',
+    label: 'Форум',
   },
 };

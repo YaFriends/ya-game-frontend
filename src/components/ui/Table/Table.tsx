@@ -1,8 +1,20 @@
 import React, { FC } from 'react';
 
-import { TableBody, TableBodyProps } from './ElementTableBody';
-import { TableHead, TableHeadProps } from './ElementTableHead';
+import { TableBody } from './ElementTableBody';
+import { TableHead } from './ElementTableHead';
 import './Table.scss';
+
+export type HeadItem = [string, string];
+export type BodyItem = string | number | null;
+type BodyItems = BodyItem[];
+
+export interface TableBodyProps {
+  body?: BodyItems[];
+}
+
+export interface TableHeadProps {
+  headers: HeadItem[];
+}
 
 interface TableProps extends TableHeadProps, TableBodyProps {}
 

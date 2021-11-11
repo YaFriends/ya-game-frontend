@@ -2,28 +2,28 @@ import React, { FC, useState, useEffect } from 'react';
 
 import { LeaderboardData } from '../../api/LeaderboardAPI';
 import { Subtitle } from '../../components/ui/Subtitle/Subtitle';
-import { Table } from '../../components/ui/Table/Table';
+import { Table, HeadItem } from '../../components/ui/Table/Table';
 import { Title } from '../../components/ui/Title/Title';
 import { LeaderboardController } from '../../controllers/LeaderboardController';
-
 import './Leaderboard.scss';
+import { TRANSLATION } from '../../lang/ru/translation';
 
 type PositionLeaderboard = number | null;
 type PositionLeaderboardText = string;
 
-const HEADERS = [
-  ['Позиция #', 'border w-[150px] bg-grey40'],
-  ['Имя', 'border w-[420px] bg-grey40'],
-  ['Победы', 'border w-[150px] bg-grey40'],
+const HEADERS: HeadItem[] = [
+  [TRANSLATION.Leaderboard.tableColumnPosition, 'border w-[150px] bg-grey40'],
+  [TRANSLATION.Leaderboard.tableColumnName, 'border w-[420px] bg-grey40'],
+  [TRANSLATION.Leaderboard.tableColumnWins, 'border w-[150px] bg-grey40'],
 ];
 
 export const Leaderboard: FC<Record<string, never>> = () => {
   const [leaderboards, setLeaderboard] = useState<LeaderboardData[]>([]);
   const [positionOnLeaderboard, setPositionOnLeaderboard] = useState<PositionLeaderboard>(null);
   const [positionOnLeaderboardText, setPositionOnLeaderboardText] =
-    useState<PositionLeaderboardText>('Тебя нет в таблице');
+    useState<PositionLeaderboardText>(TRANSLATION.Leaderboard.subtitleNotTable);
   const mockGetAll = {
-    ratingFieldName: 'yaFriendsScore',
+    ratingFieldName: 'yaFriendsScore', //  Поле по которому мы сортируем выдачу с бэка
     cursor: 0,
     limit: 50,
   };
@@ -45,9 +45,11 @@ export const Leaderboard: FC<Record<string, never>> = () => {
     // Если нет - отобазить "Тебя нет в таблице"
     setPositionOnLeaderboard(null); // Временная заглушка, чтобы не ругался на unused-var
     if (positionOnLeaderboard) {
-      setPositionOnLeaderboardText(`Твое место в таблице: ${positionOnLeaderboard}`);
+      setPositionOnLeaderboardText(
+        `${TRANSLATION.Leaderboard.subtitleHaveTable} ${positionOnLeaderboard}`
+      );
     } else {
-      setPositionOnLeaderboardText('Тебя нет в таблице');
+      setPositionOnLeaderboardText(TRANSLATION.Leaderboard.subtitleNotTable);
     }
   };
 
@@ -60,7 +62,7 @@ export const Leaderboard: FC<Record<string, never>> = () => {
     <section className="leaderboard">
       <div className="leaderboard__header">
         <Subtitle text={positionOnLeaderboardText} />
-        <Title text="Таблица лидеров" />
+        <Title text={TRANSLATION.Leaderboard.title} />
       </div>
 
       <Table headers={HEADERS} body={body} />

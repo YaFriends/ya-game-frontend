@@ -1,9 +1,6 @@
 import React, { FC, ReactNode } from 'react';
 
-type HeadItem = string[];
-export interface TableHeadProps {
-  headers: HeadItem[];
-}
+import { TableHeadProps, HeadItem } from './Table';
 
 const DEFAULT_CLASSES: string[] = ['ui-table__head'];
 
@@ -13,10 +10,10 @@ export const TableHead: FC<TableHeadProps> = ({ headers }: TableHeadProps) => {
       {item[0]}
     </th>
   );
-  const getHeaders = (): ReactNode => headers.map((item, index) => createHead(item, index));
+  const getHeaders = headers.map((item, index) => createHead(item, index));
   return (
     <thead className={DEFAULT_CLASSES.join(' ')}>
-      <tr className="h-[50px]">{getHeaders()}</tr>
+      <tr className="h-[50px]">{getHeaders}</tr>
     </thead>
   );
 };
