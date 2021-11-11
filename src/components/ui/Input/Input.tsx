@@ -47,29 +47,29 @@ const classes = (error?: string, success?: boolean, disabled?: boolean): string[
 };
 
 export const Input: FC<InputProps> = ({
-      name,
-      id,
-      required,
-      label,
-      error,
-      placeholder,
-      disabled,
-      success,
-    }: InputProps) => {
+  name,
+  id,
+  required,
+  label,
+  error,
+  placeholder,
+  disabled,
+  success,
+}: InputProps) => {
   const classesMemo = useMemo(() => classes(error, success, disabled), [error, success, disabled]);
 
   return (
-      <div className="block relative mb-6 last:mb-0">
-        {label && <Label name={name} id={id} label={label} />}
-        <input
-            className={classesMemo.join(' ')}
-            name={name}
-            id={id || name}
-            required={required}
-            placeholder={placeholder}
-            disabled={disabled}
-        />
-        {error && <Error error={error} />}
-      </div>
+    <div className="block relative mb-6 last:mb-0">
+      {label && <Label name={name} id={id} label={label} />}
+      <input
+        className={classesMemo.join(' ')}
+        name={name}
+        id={id || name}
+        required={required}
+        placeholder={placeholder}
+        disabled={disabled}
+      />
+      {error && <Error error={error} />}
+    </div>
   );
 };

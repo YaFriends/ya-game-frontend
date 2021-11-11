@@ -43,24 +43,24 @@ const classes = (typeAction?: 'success' | 'error', extendClass?: string): string
 };
 
 export const Button: FC<ButtonProps> = ({
-                                          type,
-                                          name,
-                                          extendClass = '',
-                                          typeAction,
-                                          disabled,
-                                          text,
-                                          click,
-                                        }: ButtonProps) => {
+  type,
+  name,
+  extendClass = '',
+  typeAction,
+  disabled,
+  text,
+  click,
+}: ButtonProps) => {
   const classesMemo = useMemo(() => classes(typeAction, extendClass), [typeAction, extendClass]);
 
   return (
-      <button
-          type={type}
-          name={name}
-          className={classesMemo.join(' ')}
-          disabled={disabled}
-          onClick={click}>
-        <span className="w-full">{text}</span>
-      </button>
+    <button
+      type={type}
+      name={name}
+      className={classesMemo.join(' ')}
+      disabled={disabled}
+      onClick={click}>
+      <span className="w-full">{text}</span>
+    </button>
   );
 };
