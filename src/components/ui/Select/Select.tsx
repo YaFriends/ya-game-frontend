@@ -12,17 +12,17 @@ import { Label } from '../Label/Label';
 
 import { Option } from './Option';
 
-export type SelectedChangeType = (option: SetStateAction<OptionsProps>) => void;
+export type SelectedChangeType = (option: SetStateAction<OptionProps>) => void;
 
-export interface OptionsProps {
+export interface OptionProps {
   label: string;
   value: string;
 }
 
 export interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
   label: string;
-  options: OptionsProps[];
-  selected: OptionsProps;
+  options: OptionProps[];
+  selected: OptionProps;
   onSelectedChange: SelectedChangeType;
   placeholder?: string;
 }
@@ -52,7 +52,7 @@ export const Select: FC<SelectProps> = ({
       return;
     }
     const target = event.target as HTMLElement;
-    if (dropDownRef.current && dropDownRef.current.contains(target)) {
+    if (dropDownRef.current && dropDownRef.current?.contains(target)) {
       return;
     }
     setOpen(false);

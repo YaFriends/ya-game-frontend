@@ -1,10 +1,10 @@
 import React, { FC, PropsWithChildren } from 'react';
 
-import { OptionsProps, SelectedChangeType } from './Select';
+import { OptionProps, SelectedChangeType } from './Select';
 
 export const Option: FC<
   PropsWithChildren<{
-    option: OptionsProps;
+    option: OptionProps;
     onSelectedChange: SelectedChangeType;
   }>
 > = ({ option, onSelectedChange }) => {
