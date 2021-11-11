@@ -52,7 +52,7 @@ export const Select: FC<SelectProps> = ({
       return;
     }
     const target = event.target as HTMLElement;
-    if (dropDownRef.current && dropDownRef.current?.contains(target)) {
+    if (dropDownRef.current?.contains(target)) {
       return;
     }
     setOpen(false);
