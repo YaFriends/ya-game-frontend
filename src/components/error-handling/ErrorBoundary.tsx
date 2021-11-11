@@ -5,7 +5,7 @@ import React, {
     PropsWithChildren
 } from 'react';
 
-const changedArray = (a: unknown[] = [], b: unknown[] = []) =>
+const isArrayChange = (a: unknown[] = [], b: unknown[] = []) =>
     a.length !== b.length || a.some((item, index) => !Object.is(item, b[index]));
 
 interface FallbackProps {
@@ -64,7 +64,7 @@ class ErrorBoundary extends Component<PropsWithChildren<ErrorBoundaryPropsWithCo
         if (
             error !== null &&
             prevState.error !== null &&
-            changedArray(prevProps.resetKeys, resetKeys)
+            isArrayChange(prevProps.resetKeys, resetKeys)
         ) {
             this.props.onResetKeysChange?.(prevProps.resetKeys, resetKeys);
             this.reset();
