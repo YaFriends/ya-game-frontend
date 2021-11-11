@@ -1,0 +1,7 @@
+.game-history-list {
+  @apply w-full;
+
+  &__head {
+    @apply flex justify-between items-center mb-14;
+  }
+}

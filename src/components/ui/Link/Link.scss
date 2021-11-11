@@ -7,6 +7,18 @@
     @apply text-white;
   }
 
+  &--button {
+    @apply w-full inline-block px-5 py-1 rounded-12px no-underline text-center text-white bg-blue !important;
+  }
+
+  &--button-success {
+    @apply w-full inline-block px-5 py-1 rounded-12px no-underline text-center text-white bg-green !important;
+  }
+
+  &--warning {
+    @apply w-full inline-block px-5 py-1 rounded-12px no-underline text-center text-red bg-transparent border border-red !important;
+  }
+
   &:hover,
   &:focus-within {
     @apply opacity-70 cursor-pointer;

@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
-import { Dashboard } from './pages/Dashboard';
+import { Dashboard } from './pages/Dashboard/Dashboard';
 import { Error404 } from './pages/Error404';
 import { Forum } from './pages/Forum';
 import { GameCreation } from './pages/GameCreation';
@@ -10,13 +10,13 @@ import { GameSession } from './pages/GameSession';
 import { Leaderboard } from './pages/Leaderboard';
 import { Login } from './pages/Login/Login';
 import { Profile } from './pages/Profile';
-import { ProfileHistory } from './pages/ProfileHistory';
+import { ProfileHistory } from './pages/ProfileHistory/ProfileHistory';
 import { Register } from './pages/Register/Register';
 
 const App: FC<Record<string, never>> = () => {
   return (
     <Router>
-      <main className="font-body">
+      <main className="font-body text-black container game-container">
         <Switch>
           <Route path="/" exact component={Dashboard} />
           <Route path="/forum" component={Forum} />

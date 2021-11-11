@@ -1,0 +1,29 @@
+.profile-history {
+  @apply max-w-[650px] w-full mx-auto flex-grow flex items-center;
+
+  .game-history-list {
+    &__body {
+      @apply h-[401px] overflow-hidden;
+    }
+
+    &__body-inner {
+      @apply max-h-full overflow-y-auto pr-13;
+
+      &::-webkit-scrollbar {
+        @apply w-2;
+      }
+
+      &::-webkit-scrollbar-track {
+        @apply w-2 bg-white;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        @apply w-2 h-2 bg-black;
+      }
+
+      &::-webkit-scrollbar-thumb:hover {
+        @apply bg-black;
+      }
+    }
+  }
+}
