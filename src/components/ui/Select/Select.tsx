@@ -8,7 +8,7 @@ import React, {
 } from 'react';
 
 import { Arrow } from '../../../images/icons/Arrow';
-import { Label } from '../Input/ElementLabel';
+import { Label } from '../Label/Label';
 
 import { Option } from './Option';
 
@@ -105,7 +105,7 @@ export const Select: FC<SelectProps> = ({
 
   return (
     <div ref={dropDownRef}>
-      <Label name={label} label={label} />
+      <Label name={label}>{label}</Label>
       <div onClick={toggleOpen}>
         <div className={open ? SELECT_CLASSES_OPEN : SELECT_CLASSES_CLOSE}>
           <div className={SELECTED_LABEL.join(' ')}>{localHolder || selected.label}</div>
