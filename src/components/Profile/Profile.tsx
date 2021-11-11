@@ -3,6 +3,7 @@ import React, { FC } from 'react';
 import { UserData } from '../../api/UserAPI';
 import { TRANSLATION } from '../../lang/ru/translation';
 import { DEFAULT_PROFILE_IMAGE_PATH } from '../constants';
+import { Text } from '../ui/Text/Text';
 
 import './profile.scss';
 
@@ -24,10 +25,8 @@ export const Profile: FC<ProfileProps> = ({ user, stats, reversed }) => {
           </div>
         </div>
         <div className="profile__line-item">
-          <p className="profile__login">{user.login}</p>
-          <p className="profile__win-stat">
-            {TRANSLATION.Game.Wins}: {stats.wins}
-          </p>
+          <Text extendClass="profile__login" text={user.login} />
+          <Text extendClass="profile__win-stat" text={`${TRANSLATION.Game.Wins}: ${stats.wins}`} />
         </div>
       </div>
     </div>

@@ -1,5 +1,5 @@
 .game-history-item {
-  @apply mb-3 pb-3 border-b border-grey border-opacity-40 last:mb-0 last:border-0 last:pb-0;
+  @apply mb-3 pb-3 border-b border-grey-40 last:mb-0 last:border-0 last:pb-0;
 
   &__info {
     @apply flex mb-1;

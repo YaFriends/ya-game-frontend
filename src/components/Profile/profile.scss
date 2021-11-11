@@ -18,7 +18,7 @@
   }
 
   &__avatar {
-    @apply w-15 h-15 rounded-full bg-grey-light overflow-hidden;
+    @apply w-15 h-15 rounded-full bg-grey-40 overflow-hidden;
 
     img {
       @apply w-full h-full block object-cover;

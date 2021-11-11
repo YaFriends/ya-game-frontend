@@ -48,9 +48,10 @@ export const GameHistoryItem: FC<GameHistoryProps> = ({ games, date, teams, resu
           <Text text={versus} />
         </div>
       </div>
-      <p className={`game-history-item__result game-history-item__result--${result.type}`}>
-        {TRANSLATION.GameResult[result.type]}
-      </p>
+      <Text
+        extendClass={`game-history-item__result game-history-item__result--${result.type}`}
+        text={TRANSLATION.GameResult[result.type]}
+      />
     </div>
   );
 };

@@ -13,7 +13,7 @@ module.exports = {
       },
       grey: {
         DEFAULT: '#8B949E',
-        light: '#C4C4C4',
+        40: '#8B949E66',
       },
       blue: {
         DEFAULT: '#58A6FF',
