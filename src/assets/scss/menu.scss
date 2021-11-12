@@ -1,0 +1,11 @@
+.menu {
+  @apply w-[250px] flex-shrink-0;
+
+  &__title {
+    @apply mb-14;
+  }
+
+  &__link {
+    @apply mb-10 last:mb-0;
+  }
+}
