@@ -17,7 +17,7 @@ export type Team = {
 
 export type ResultType = 'win' | 'lose';
 
-export type GameSetHistoryProps = {
+export type GameSetHistoryItemProps = {
   id: number;
   miniGames: MiniGame[];
   date: string;
@@ -33,7 +33,7 @@ export const GameSetHistoryItem = memo(function GameSetHistoryItem({
   date,
   teams,
   result,
-}: GameSetHistoryProps) {
+}: GameSetHistoryItemProps) {
   const miniGameGroup = miniGames.map(({ id, name, icon }) => (
     <div key={id} className="game-set-history-item__info-round">
       <img src={icon} alt={name} />
