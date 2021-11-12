@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Dashboard } from './pages/Dashboard/Dashboard';
 import { Error404 } from './pages/Error404';
 import { Forum } from './pages/Forum';
-import { GameCreation } from './pages/GameCreation';
+import { GameCreation } from './pages/GameCreation/GameCreation';
 import { GameLobby } from './pages/GameLobby';
 import { GameSession } from './pages/GameSession';
 import { Leaderboard } from './pages/Leaderboard';

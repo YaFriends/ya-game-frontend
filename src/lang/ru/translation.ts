@@ -42,6 +42,10 @@ export const TRANSLATION: Record<string, Record<string, string>> = {
   },
   GameCreation: {
     label: 'Игра: создать',
+    CreateSession: 'Создание сессии',
+    SelectLabel: 'Количество игр',
+    SelectPlaceholder: 'Выбрать количество игр',
+    ButtonText: 'Создать сессию',
   },
   GameLobby: {
     label: 'Игра: лобби',

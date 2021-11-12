@@ -7,6 +7,8 @@ import React, {
   SelectHTMLAttributes,
 } from 'react';
 
+import './Select.scss';
+
 import { Arrow } from '../../../images/icons/Arrow';
 import { Label } from '../Label/Label';
 
@@ -17,6 +19,7 @@ export type SelectedChangeType = (option: SetStateAction<OptionProps>) => void;
 export interface OptionProps {
   label: string;
   value: string;
+  disabled?: boolean;
 }
 
 export interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
@@ -65,12 +68,16 @@ export const Select: FC<SelectProps> = ({
     setOpen(prevState => !prevState);
   };
 
-  const renderedOptions = options.map(({ value, label }) => {
+  const renderedOptions = options?.map(({ value, label, disabled }) => {
     if (value === selected.value) {
       return null;
     }
     return (
-      <Option key={value} option={{ value, label }} onSelectedChange={onSelectedChange}>
+      <Option
+        key={value}
+        option={{ value, label }}
+        disabled={disabled}
+        onSelectedChange={onSelectedChange}>
         {label}
       </Option>
     );
@@ -98,20 +105,18 @@ export const Select: FC<SelectProps> = ({
     'rounded-b-none',
   ].join(' ');
   const SELECT_CLASSES_CLOSE = [...SELECT_CLASSES, 'border-white', 'border-opacity-40'].join(' ');
-  const SELECTED_LABEL = ['font-normal', 'text-white mb-1', 'leading-none'];
-  if (holderIsActive) {
-    SELECTED_LABEL.push('opacity-40');
-  }
 
   return (
-    <div ref={dropDownRef}>
-      <Label name={label}>{label}</Label>
+    <div ref={dropDownRef} className="select">
+      <Label name={label} label={label} />
       <div onClick={toggleOpen}>
         <div className={open ? SELECT_CLASSES_OPEN : SELECT_CLASSES_CLOSE}>
-          <div className={SELECTED_LABEL.join(' ')}>{localHolder || selected.label}</div>
+          <div className={holderIsActive ? 'select__label_active' : 'select__label'}>
+            {localHolder || selected.label}
+          </div>
           <Arrow degree={open ? '180' : '0'} />
         </div>
-        <div onClick={toggleOpen} className={open ? 'block' : 'hidden'}>
+        <div onClick={toggleOpen} className={open ? 'select__options' : 'hidden'}>
           {renderedOptions}
         </div>
       </div>
