@@ -1,4 +1,4 @@
-import React, { FC, useMemo } from 'react';
+import React, { memo } from 'react';
 
 import { TRANSLATION } from '../../lang/ru/translation';
 import { Text } from '../ui/Text/Text';
@@ -28,21 +28,19 @@ export type GameHistoryProps = {
   };
 };
 
-export const GameHistoryItem: FC<GameHistoryProps> = ({ games, date, teams, result }) => {
-  const gameGroup = useMemo(
-    () =>
-      games.map(({ id, name, icon }) => (
-        <div key={id} className="game-history-item__info-round">
-          <img src={icon} alt={name} />
-        </div>
-      )),
-    [games]
-  );
+export const GameHistoryItem = memo(function GameHistoryItem({
+  games,
+  date,
+  teams,
+  result,
+}: GameHistoryProps) {
+  const gameGroup = games.map(({ id, name, icon }) => (
+    <div key={id} className="game-history-item__info-round">
+      <img src={icon} alt={name} />
+    </div>
+  ));
 
-  const versus = useMemo(
-    () => teams.map(({ players }) => players.join(', ')).join(' vs '),
-    [teams]
-  );
+  const versus = teams.map(({ players }) => players.join(', ')).join(' vs ');
 
   return (
     <div className="game-history-item">
@@ -61,4 +59,4 @@ export const GameHistoryItem: FC<GameHistoryProps> = ({ games, date, teams, resu
       />
     </div>
   );
-};
+});
