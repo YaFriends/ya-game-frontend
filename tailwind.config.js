@@ -13,6 +13,7 @@ module.exports = {
       },
       grey: {
         DEFAULT: '#8B949E',
+        40: '#8B949E66',
       },
       grey40: {
         DEFAULT: '#8b949e66',
@@ -29,6 +30,9 @@ module.exports = {
     },
     fontFamily: {
       body: 'Ubuntu, Arial, sans-serif',
+    },
+    container: {
+      center: true,
     },
     extend: {
       spacing: {

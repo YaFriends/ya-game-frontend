@@ -1,3 +1,5 @@
+import { AxiosPromise } from 'axios';
+
 import { UserData } from './UserAPI';
 import { http } from './http';
 
@@ -15,19 +17,19 @@ export class AuthAPI {
     this.endpoint = '/auth';
   }
 
-  signUp(data: SignUpData): Promise<{ id: number }> {
+  signUp(data: SignUpData): AxiosPromise {
     return http.post(`${this.endpoint}/signup`, data);
   }
 
-  login(data: LoginData): Promise<void> {
+  login(data: LoginData): AxiosPromise {
     return http.post(`${this.endpoint}/signin`, data);
   }
 
-  logout(): Promise<void> {
+  logout(): AxiosPromise {
     return http.post(`${this.endpoint}/logout`);
   }
 
-  read(): Promise<UserData> {
+  read(): AxiosPromise {
     return http.get(`${this.endpoint}/user`);
   }
 }

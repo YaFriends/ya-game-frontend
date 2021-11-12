@@ -28,8 +28,14 @@ export const TRANSLATION: Record<string, Record<string, string>> = {
     submitButtonText: 'Войти',
     linkToDashboardText: 'Вернуться на главную',
   },
+  Logout: {
+    label: 'Выйти',
+  },
   Dashboard: {
     label: 'Главная',
+    LastGames: 'Последние игры',
+    GameHistory: 'История всех игр',
+    WatchAllGames: 'Посмотреть все игры',
   },
   GameSession: {
     label: 'Игра',
@@ -52,10 +58,17 @@ export const TRANSLATION: Record<string, Record<string, string>> = {
   Profile: {
     label: 'Профиль',
   },
-  ProfileHistory: {
-    label: 'Профиль: История',
-  },
+  ProfileHistory: { label: 'Профиль: История', ReturnToMain: 'Вернуться на главную' },
   Forum: {
     label: 'Форум',
+  },
+  Game: {
+    Wins: 'Побед',
+    Win: 'Победа',
+    Date: 'Дата',
+  },
+  GameResult: {
+    win: 'Победа',
+    lose: 'Поражение',
   },
 };

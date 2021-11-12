@@ -1,4 +1,5 @@
 import { AuthAPI, LoginData, SignUpData } from '../api/AuthAPI';
+import { getData } from '../utils/getData';
 
 class Controller {
   private api: AuthAPI;
@@ -9,21 +10,21 @@ class Controller {
 
   async signUp(data: SignUpData) {
     try {
-      await this.api.signUp(data).then(() => {
-        return this.fetchUser();
-      });
+      await this.api.signUp(data);
+      return await this.fetchUser();
     } catch (e) {
       console.error(e);
+      return e;
     }
   }
 
   async login(data: LoginData) {
     try {
-      await this.api.login(data).then(() => {
-        return this.fetchUser();
-      });
+      await this.api.login(data);
+      return await this.fetchUser();
     } catch (e) {
       console.error(e);
+      return e;
     }
   }
 
@@ -32,14 +33,19 @@ class Controller {
       return this.api.logout();
     } catch (e) {
       console.error(e);
+      return e;
     }
   }
 
   async fetchUser() {
     try {
-      return this.api.read();
+      return this.api
+        .read()
+        .then(getData)
+        .then(data => data);
     } catch (e) {
       console.error(e);
+      return e;
     }
   }
 }

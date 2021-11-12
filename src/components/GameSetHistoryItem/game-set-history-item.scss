@@ -1,0 +1,39 @@
+.game-set-history-item {
+  @apply mb-3 pb-3 border-b border-grey-40 last:mb-0 last:border-0 last:pb-0;
+
+  &__info {
+    @apply flex mb-1;
+  }
+
+  &__info-item {
+    @apply mr-4 last:mr-0 w-[calc(50%-10px)];
+
+    &--flexed {
+      @apply flex justify-center;
+    }
+
+    p {
+      @apply mb-1 last:mb-0 leading-5;
+    }
+  }
+
+  &__info-round {
+    @apply w-1/5 bg-grey bg-opacity-60 mx-auto first:ml-0 last:mr-0 w-10 h-10;
+
+    img {
+      @apply block w-full h-full object-contain;
+    }
+  }
+
+  &__result {
+    @apply text-center text-white leading-none text-lg font-bold py-[2px];
+
+    &--win {
+      @apply bg-green;
+    }
+
+    &--lose {
+      @apply bg-red;
+    }
+  }
+}

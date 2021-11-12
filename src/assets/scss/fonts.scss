@@ -1,11 +1,10 @@
 @font-face {
   font-family: 'Ubuntu';
-  src: url('../fonts/Ubuntu-MediumItalic.eot');
-  src: url('../fonts/Ubuntu-MediumItalic.eot?#iefix') format('embedded-opentype'),
-  url('../fonts/Ubuntu-MediumItalic.woff2') format('woff2'),
-  url('../fonts/Ubuntu-MediumItalic.woff') format('woff'),
-  url('../fonts/Ubuntu-MediumItalic.ttf') format('truetype'),
-  url('../fonts/Ubuntu-MediumItalic.svg#Ubuntu-MediumItalic') format('svg');
+  src: url('/static/fonts/Ubuntu-MediumItalic.eot');
+  src: url('/static/fonts/Ubuntu-MediumItalic.eot?#iefix') format('embedded-opentype'),
+  url('/static/fonts/Ubuntu-MediumItalic.woff2') format('woff2'),
+  url('/static/fonts/Ubuntu-MediumItalic.woff') format('woff'),
+  url('/static/fonts/Ubuntu-MediumItalic.ttf') format('truetype');
   font-weight: 500;
   font-style: italic;
   font-display: swap;
@@ -13,12 +12,11 @@
 
 @font-face {
   font-family: 'Ubuntu';
-  src: url('../fonts/Ubuntu-BoldItalic.eot');
-  src: url('../fonts/Ubuntu-BoldItalic.eot?#iefix') format('embedded-opentype'),
-  url('../fonts/Ubuntu-BoldItalic.woff2') format('woff2'),
-  url('../fonts/Ubuntu-BoldItalic.woff') format('woff'),
-  url('../fonts/Ubuntu-BoldItalic.ttf') format('truetype'),
-  url('../fonts/Ubuntu-BoldItalic.svg#Ubuntu-BoldItalic') format('svg');
+  src: url('/static/fonts/Ubuntu-BoldItalic.eot');
+  src: url('/static/fonts/Ubuntu-BoldItalic.eot?#iefix') format('embedded-opentype'),
+  url('/static/fonts/Ubuntu-BoldItalic.woff2') format('woff2'),
+  url('/static/fonts/Ubuntu-BoldItalic.woff') format('woff'),
+  url('/static/fonts/Ubuntu-BoldItalic.ttf') format('truetype');
   font-weight: bold;
   font-style: italic;
   font-display: swap;
@@ -26,12 +24,11 @@
 
 @font-face {
   font-family: 'Ubuntu';
-  src: url('../fonts/Ubuntu-Medium.eot');
-  src: url('../fonts/Ubuntu-Medium.eot?#iefix') format('embedded-opentype'),
-  url('../fonts/Ubuntu-Medium.woff2') format('woff2'),
-  url('../fonts/Ubuntu-Medium.woff') format('woff'),
-  url('../fonts/Ubuntu-Medium.ttf') format('truetype'),
-  url('../fonts/Ubuntu-Medium.svg#Ubuntu-Medium') format('svg');
+  src: url('/static/fonts/Ubuntu-Medium.eot');
+  src: url('/static/fonts/Ubuntu-Medium.eot?#iefix') format('embedded-opentype'),
+  url('/static/fonts/Ubuntu-Medium.woff2') format('woff2'),
+  url('/static/fonts/Ubuntu-Medium.woff') format('woff'),
+  url('/static/fonts/Ubuntu-Medium.ttf') format('truetype');
   font-weight: 500;
   font-style: normal;
   font-display: swap;
@@ -39,12 +36,11 @@
 
 @font-face {
   font-family: 'Ubuntu';
-  src: url('../fonts/Ubuntu-Light.eot');
-  src: url('../fonts/Ubuntu-Light.eot?#iefix') format('embedded-opentype'),
-  url('../fonts/Ubuntu-Light.woff2') format('woff2'),
-  url('../fonts/Ubuntu-Light.woff') format('woff'),
-  url('../fonts/Ubuntu-Light.ttf') format('truetype'),
-  url('../fonts/Ubuntu-Light.svg#Ubuntu-Light') format('svg');
+  src: url('/static/fonts/Ubuntu-Light.eot');
+  src: url('/static/fonts/Ubuntu-Light.eot?#iefix') format('embedded-opentype'),
+  url('/static/fonts/Ubuntu-Light.woff2') format('woff2'),
+  url('/static/fonts/Ubuntu-Light.woff') format('woff'),
+  url('/static/fonts/Ubuntu-Light.ttf') format('truetype');
   font-weight: 300;
   font-style: normal;
   font-display: swap;
@@ -52,12 +48,11 @@
 
 @font-face {
   font-family: 'Ubuntu';
-  src: url('../fonts/Ubuntu-Bold.eot');
-  src: url('../fonts/Ubuntu-Bold.eot?#iefix') format('embedded-opentype'),
-  url('../fonts/Ubuntu-Bold.woff2') format('woff2'),
-  url('../fonts/Ubuntu-Bold.woff') format('woff'),
-  url('../fonts/Ubuntu-Bold.ttf') format('truetype'),
-  url('../fonts/Ubuntu-Bold.svg#Ubuntu-Bold') format('svg');
+  src: url('/static/fonts/Ubuntu-Bold.eot');
+  src: url('/static/fonts/Ubuntu-Bold.eot?#iefix') format('embedded-opentype'),
+  url('/static/fonts/Ubuntu-Bold.woff2') format('woff2'),
+  url('/static/fonts/Ubuntu-Bold.woff') format('woff'),
+  url('/static/fonts/Ubuntu-Bold.ttf') format('truetype');
   font-weight: bold;
   font-style: normal;
   font-display: swap;
@@ -65,12 +60,11 @@
 
 @font-face {
   font-family: 'Ubuntu';
-  src: url('../fonts/Ubuntu-Italic.eot');
-  src: url('../fonts/Ubuntu-Italic.eot?#iefix') format('embedded-opentype'),
-  url('../fonts/Ubuntu-Italic.woff2') format('woff2'),
-  url('../fonts/Ubuntu-Italic.woff') format('woff'),
-  url('../fonts/Ubuntu-Italic.ttf') format('truetype'),
-  url('../fonts/Ubuntu-Italic.svg#Ubuntu-Italic') format('svg');
+  src: url('/static/fonts/Ubuntu-Italic.eot');
+  src: url('/static/fonts/Ubuntu-Italic.eot?#iefix') format('embedded-opentype'),
+  url('/static/fonts/Ubuntu-Italic.woff2') format('woff2'),
+  url('/static/fonts/Ubuntu-Italic.woff') format('woff'),
+  url('/static/fonts/Ubuntu-Italic.ttf') format('truetype');
   font-weight: normal;
   font-style: italic;
   font-display: swap;
@@ -78,12 +72,11 @@
 
 @font-face {
   font-family: 'Ubuntu';
-  src: url('../fonts/Ubuntu-LightItalic.eot');
-  src: url('../fonts/Ubuntu-LightItalic.eot?#iefix') format('embedded-opentype'),
-  url('../fonts/Ubuntu-LightItalic.woff2') format('woff2'),
-  url('../fonts/Ubuntu-LightItalic.woff') format('woff'),
-  url('../fonts/Ubuntu-LightItalic.ttf') format('truetype'),
-  url('../fonts/Ubuntu-LightItalic.svg#Ubuntu-LightItalic') format('svg');
+  src: url('/static/fonts/Ubuntu-LightItalic.eot');
+  src: url('/static/fonts/Ubuntu-LightItalic.eot?#iefix') format('embedded-opentype'),
+  url('/static/fonts/Ubuntu-LightItalic.woff2') format('woff2'),
+  url('/static/fonts/Ubuntu-LightItalic.woff') format('woff'),
+  url('/static/fonts/Ubuntu-LightItalic.ttf') format('truetype');
   font-weight: 300;
   font-style: italic;
   font-display: swap;
@@ -91,12 +84,11 @@
 
 @font-face {
   font-family: 'Ubuntu';
-  src: url('../fonts/Ubuntu-Regular.eot');
-  src: url('../fonts/Ubuntu-Regular.eot?#iefix') format('embedded-opentype'),
-  url('../fonts/Ubuntu-Regular.woff2') format('woff2'),
-  url('../fonts/Ubuntu-Regular.woff') format('woff'),
-  url('../fonts/Ubuntu-Regular.ttf') format('truetype'),
-  url('../fonts/Ubuntu-Regular.svg#Ubuntu-Regular') format('svg');
+  src: url('/static/fonts/Ubuntu-Regular.eot');
+  src: url('/static/fonts/Ubuntu-Regular.eot?#iefix') format('embedded-opentype'),
+  url('/static/fonts/Ubuntu-Regular.woff2') format('woff2'),
+  url('/static/fonts/Ubuntu-Regular.woff') format('woff'),
+  url('/static/fonts/Ubuntu-Regular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
