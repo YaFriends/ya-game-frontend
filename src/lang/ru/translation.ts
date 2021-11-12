@@ -70,4 +70,19 @@ export const TRANSLATION: Record<string, Record<string, string>> = {
     ChosenGame: 'Выбранная игра',
     label: 'Загрузка...',
   },
+  TicTacToe: {
+    label: 'Крестики-нолики',
+  },
+  ClickMore: {
+    label: 'Нажми больше',
+  },
+  CircleTriangleSquare: {
+    label: 'Круг-треугольник-квадрат',
+  },
+  FieldBattle: {
+    label: 'Битва за поле',
+  },
+  Bombermans: {
+    label: 'Взорви не себя',
+  },
 };

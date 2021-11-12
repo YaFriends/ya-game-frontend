@@ -1,14 +1,11 @@
 import React, { memo } from 'react';
 
+import { Team } from '../../core/MiniGame';
 import { TRANSLATION } from '../../lang/ru/translation';
 import { MiniGamePreview, MiniGamePreviewProps } from '../MiniGamePreview/MiniGamePreview';
 import { Text } from '../ui/Text/Text';
 
 import './game-set-history-item.scss';
-
-export type Team = {
-  players: string[];
-};
 
 export type ResultType = 'win' | 'lose';
 
