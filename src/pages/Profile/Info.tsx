@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC } from 'react';
 
 import { Form } from '../../components/ui/Form/Form';
 import { Input } from '../../components/ui/Input/Input';
@@ -23,10 +23,6 @@ const userData: inputs[] = [
 ];
 
 export const Info: FC<ProfileInfoProps> = ({ disabled }) => {
-  useEffect(() => {
-    console.log(disabled);
-  }, [disabled]);
-
   const renderInputs = userData.map(input => {
     return <Input key={input.name} {...input} disabled={disabled ?? false} />;
   });

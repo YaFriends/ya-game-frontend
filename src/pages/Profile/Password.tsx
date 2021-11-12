@@ -21,7 +21,10 @@ export const Password: FC = () => {
   });
 
   return (
-    <Form name="profile-password" submit={() => console.log('password is change')}>
+    <Form
+      name="profile-password"
+      id="profile-password"
+      submit={() => console.log('password is change')}>
       {renderPasswordInputs}
     </Form>
   );
