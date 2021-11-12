@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from 'react';
+import React, { FC, ReactNode, useMemo } from 'react';
 
 import { BodyItem } from './Table';
 
@@ -14,6 +14,6 @@ export const TableRow: FC<TableRowProps> = ({ row }: TableRowProps) => {
       {text}
     </td>
   );
-  const getRow = row.map((text, index) => createCell(text, index));
+  const getRow = row.map((text, index) => useMemo(() => createCell(text, index), [text, index]));
   return <tr className={DEFAULT_CLASSES.join(' ')}>{getRow}</tr>;
 };

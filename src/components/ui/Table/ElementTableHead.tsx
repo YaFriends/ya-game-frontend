@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from 'react';
+import React, { FC, ReactNode, useMemo } from 'react';
 
 import { TableHeadProps, HeadItem } from './Table';
 
@@ -10,7 +10,8 @@ export const TableHead: FC<TableHeadProps> = ({ headers }: TableHeadProps) => {
       {item[0]}
     </th>
   );
-  const getHeaders = headers.map((item, index) => createHead(item, index));
+
+  const getHeaders = headers.map((item, index) => useMemo(() => createHead(item, index), [item, index]));
   return (
     <thead className={DEFAULT_CLASSES.join(' ')}>
       <tr className="h-[50px]">{getHeaders}</tr>
