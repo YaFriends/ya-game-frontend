@@ -48,6 +48,12 @@ export const TRANSLATION: Record<string, Record<string, string>> = {
   },
   Leaderboard: {
     label: 'Таблица лидеров',
+    title: 'Таблица лидеров',
+    tableColumnPosition: 'Позиция #',
+    tableColumnName: 'Имя',
+    tableColumnWins: 'Победы',
+    subtitleNotTable: 'Тебя нет в таблице',
+    subtitleHaveTable: 'Твое место в таблице #',
   },
   Profile: {
     label: 'Профиль',

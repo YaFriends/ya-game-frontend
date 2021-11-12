@@ -8,7 +8,7 @@ import { Forum } from './pages/Forum';
 import { GameCreation } from './pages/GameCreation';
 import { GameLobby } from './pages/GameLobby';
 import { GameSession } from './pages/GameSession';
-import { Leaderboard } from './pages/Leaderboard';
+import { Leaderboard } from './pages/Leaderboard/Leaderboard';
 import { Login } from './pages/Login/Login';
 import { Profile } from './pages/Profile';
 import { ProfileHistory } from './pages/ProfileHistory/ProfileHistory';
