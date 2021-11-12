@@ -1,17 +1,15 @@
-import React, { FC, ReactNode, useMemo } from 'react';
+import React, { FC, useMemo } from 'react';
 
-import { TableHeadProps, HeadItem } from './Table';
+import { TableHeadCell } from './ElementTableHeadCell';
+import { TableHeadProps } from './Table';
 
 const DEFAULT_CLASSES: string[] = ['ui-table__head'];
 
 export const TableHead: FC<TableHeadProps> = ({ headers }: TableHeadProps) => {
-  const createHead = (item: HeadItem, index: number): ReactNode => (
-    <th key={index} className={item[1]}>
-      {item[0]}
-    </th>
-  );
+  const getHeaders = useMemo(() => {
+    return headers.map((item, index) => <TableHeadCell key={index} item={item} />);
+  }, [headers]);
 
-  const getHeaders = headers.map((item, index) => useMemo(() => createHead(item, index), [item, index]));
   return (
     <thead className={DEFAULT_CLASSES.join(' ')}>
       <tr className="h-[50px]">{getHeaders}</tr>

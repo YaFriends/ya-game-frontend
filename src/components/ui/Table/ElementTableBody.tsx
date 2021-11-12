@@ -1,11 +1,14 @@
-import React, { FC } from 'react';
+import React, { FC, useMemo } from 'react';
 
-import { TableRow } from './ElementTableRow';
+import { TableBodyRow } from './ElementTableBodyRow';
 import { TableBodyProps } from './Table';
 
 const DEFAULT_CLASSES: string[] = ['ui-table__body'];
 
 export const TableBody: FC<TableBodyProps> = ({ body }: TableBodyProps) => {
-  const getBody = body?.map((row, index) => <TableRow key={index} row={row} />);
+  const getBody = useMemo(() => {
+    return body?.map((row, index) => <TableBodyRow key={index} row={row} />);
+  }, [body]);
+
   return <tbody className={DEFAULT_CLASSES.join(' ')}>{getBody}</tbody>;
 };
