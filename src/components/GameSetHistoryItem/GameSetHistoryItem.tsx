@@ -28,7 +28,7 @@ export type GameSetHistoryProps = {
   };
 };
 
-export const GameSetHistoryItem = memo(function GameHistoryItem({
+export const GameSetHistoryItem = memo(function GameSetHistoryItem({
   miniGames,
   date,
   teams,
