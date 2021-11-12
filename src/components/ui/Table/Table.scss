@@ -1,5 +1,5 @@
 .ui-table {
-  &__row:last-child > td {
+  &__body-row:last-child > td {
     @apply border-b-0;
   }
 }

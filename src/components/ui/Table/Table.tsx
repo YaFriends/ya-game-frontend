@@ -5,15 +5,28 @@ import { TableHead } from './ElementTableHead';
 import './Table.scss';
 
 export type HeadItem = [string, string];
-export type BodyItem = string | number | null;
+type HeadItems = HeadItem[];
+type BodyItem = string | number | null;
 type BodyItems = BodyItem[];
+
+export interface TableHeadProps {
+  headers: HeadItems;
+}
+
+export interface TableHeadCellProps {
+  item: HeadItem;
+}
 
 export interface TableBodyProps {
   body?: BodyItems[];
 }
 
-export interface TableHeadProps {
-  headers: HeadItem[];
+export interface TableBodyRowProps {
+  row: BodyItems;
+}
+
+export interface TableBodyCellProps {
+  text: BodyItem;
 }
 
 interface TableProps extends TableHeadProps, TableBodyProps {}
