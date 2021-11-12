@@ -20,7 +20,7 @@ export const Option: FC<
   ].join(' ');
 
   const ACTIVE = ['hover:font-bold', 'hover:cursor-pointer', 'hover:text-blue'].join(' ');
-  const DISABLED = ['text-opacity-40'].join(' ');
+  const DISABLED = ['text-opacity-40', 'cursor-not-allowed'].join(' ');
   const OPTION_CLASSES = disabled ? [DEFAULT_CLASSES, DISABLED] : [DEFAULT_CLASSES, ACTIVE];
 
   return (
