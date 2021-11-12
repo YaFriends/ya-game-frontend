@@ -1,5 +1,5 @@
 import { UserData } from '../../api/UserAPI';
-import { GameSetHistoryProps } from '../../components/GameSetHistoryItem/GameSetHistoryItem';
+import { GameSetHistoryItemProps } from '../../components/GameSetHistoryItem/GameSetHistoryItem';
 
 export const DUMMY_USER: UserData = {
   id: 1,
@@ -16,7 +16,7 @@ export const DUMMY_STATS = {
   wins: 0,
 };
 
-export const DUMMY_GAME_LIST: GameSetHistoryProps[] = [
+export const DUMMY_GAME_LIST: GameSetHistoryItemProps[] = [
   {
     id: 1,
     miniGames: [{ id: 1, name: 'Test', icon: '/static/img/games/click_more/icon.jpg' }],
