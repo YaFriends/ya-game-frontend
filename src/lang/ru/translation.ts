@@ -65,4 +65,9 @@ export const TRANSLATION: Record<string, Record<string, string>> = {
     win: 'Победа',
     lose: 'Поражение',
   },
+  Loading: {
+    ChosenGames: 'Выбранные игры',
+    ChosenGame: 'Выбранная игра',
+    label: 'Загрузка...',
+  },
 };

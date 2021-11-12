@@ -1,15 +1,10 @@
 import React, { memo } from 'react';
 
 import { TRANSLATION } from '../../lang/ru/translation';
+import { MiniGamePreview, MiniGamePreviewProps } from '../MiniGamePreview/MiniGamePreview';
 import { Text } from '../ui/Text/Text';
 
 import './game-set-history-item.scss';
-
-export type MiniGame = {
-  id: number;
-  name: string;
-  icon: string;
-};
 
 export type Team = {
   players: string[];
@@ -19,7 +14,7 @@ export type ResultType = 'win' | 'lose';
 
 export type GameSetHistoryItemProps = {
   id: number;
-  miniGames: MiniGame[];
+  miniGames: MiniGamePreviewProps[];
   date: string;
   teams: Team[];
   result: {
@@ -35,9 +30,13 @@ export const GameSetHistoryItem = memo(function GameSetHistoryItem({
   result,
 }: GameSetHistoryItemProps) {
   const miniGameGroup = miniGames.map(({ id, name, icon }) => (
-    <div key={id} className="game-set-history-item__info-round">
-      <img src={icon} alt={name} />
-    </div>
+    <MiniGamePreview
+      key={id}
+      id={id}
+      name={name}
+      icon={icon}
+      classes="game-set-history-item__info-round"
+    />
   ));
 
   const versus = teams.map(({ players }) => players.join(', ')).join(' vs ');
