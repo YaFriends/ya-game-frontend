@@ -3,9 +3,9 @@ import React, { memo } from 'react';
 import { TRANSLATION } from '../../lang/ru/translation';
 import { Text } from '../ui/Text/Text';
 
-import './game-history-item.scss';
+import './game-set-history-item.scss';
 
-export type Game = {
+export type MiniGame = {
   id: number;
   name: string;
   icon: string;
@@ -17,9 +17,9 @@ export type Team = {
 
 export type ResultType = 'win' | 'lose';
 
-export type GameHistoryProps = {
+export type GameSetHistoryProps = {
   id: number;
-  games: Game[];
+  miniGames: MiniGame[];
   date: string;
   teams: Team[];
   result: {
@@ -28,14 +28,14 @@ export type GameHistoryProps = {
   };
 };
 
-export const GameHistoryItem = memo(function GameHistoryItem({
-  games,
+export const GameSetHistoryItem = memo(function GameHistoryItem({
+  miniGames,
   date,
   teams,
   result,
-}: GameHistoryProps) {
-  const gameGroup = games.map(({ id, name, icon }) => (
-    <div key={id} className="game-history-item__info-round">
+}: GameSetHistoryProps) {
+  const miniGameGroup = miniGames.map(({ id, name, icon }) => (
+    <div key={id} className="game-set-history-item__info-round">
       <img src={icon} alt={name} />
     </div>
   ));
@@ -43,18 +43,18 @@ export const GameHistoryItem = memo(function GameHistoryItem({
   const versus = teams.map(({ players }) => players.join(', ')).join(' vs ');
 
   return (
-    <div className="game-history-item">
-      <div className="game-history-item__info">
-        <div className="game-history-item__info-item game-history-item__info-item--flexed">
-          {gameGroup}
+    <div className="game-set-history-item">
+      <div className="game-set-history-item__info">
+        <div className="game-set-history-item__info-item game-set-history-item__info-item--flexed">
+          {miniGameGroup}
         </div>
-        <div className="game-history-item__info-item">
+        <div className="game-set-history-item__info-item">
           <Text text={`${TRANSLATION.Game.Date}: ${date}`} />
           <Text text={versus} />
         </div>
       </div>
       <Text
-        extendClass={`game-history-item__result game-history-item__result--${result.type}`}
+        extendClass={`game-set-history-item__result game-set-history-item__result--${result.type}`}
         text={TRANSLATION.GameResult[result.type]}
       />
     </div>

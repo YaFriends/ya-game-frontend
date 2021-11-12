@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 
-import { GameHistoryList } from '../../components/GameHistoryList/GameHistoryList';
+import { GameSetHistoryList } from '../../components/GameSetHistoryList/GameSetHistoryList';
 import { Menu } from '../../components/Menu';
 import { Profile } from '../../components/Profile/Profile';
 import { MainLink } from '../../components/ui/Link/Link';
@@ -19,7 +19,7 @@ export const Dashboard: FC<Record<string, never>> = () => {
       <div className="dashboard__body">
         <Menu />
         <div className="dashboard__body-games">
-          <GameHistoryList items={DUMMY_GAME_LIST} link={link} />
+          <GameSetHistoryList items={DUMMY_GAME_LIST} link={link} />
         </div>
       </div>
     </section>
