@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 
 import { Form } from '../../components/ui/Form/Form';
 import { Input } from '../../components/ui/Input/Input';
+import { DUMMY_USER } from '../MOCKS/Dashboard';
 
 export interface ProfileInfoProps {
   disabled?: boolean;
@@ -23,8 +24,19 @@ const userData: inputs[] = [
 ];
 
 export const Info: FC<ProfileInfoProps> = ({ disabled }) => {
-  const renderInputs = userData.map(input => {
-    return <Input key={input.name} {...input} disabled={disabled ?? false} />;
+  const { avatar, ...dummy } = DUMMY_USER;
+  console.log(dummy, avatar);
+  const renderInputs = userData.map(({ name, label, placeholder }) => {
+    return (
+      <Input
+        key={name}
+        name={name}
+        label={label}
+        placeholder={placeholder}
+        value={dummy.hasOwnProperty(name) ? dummy[name] : placeholder}
+        disabled={disabled ?? false}
+      />
+    );
   });
 
   return (

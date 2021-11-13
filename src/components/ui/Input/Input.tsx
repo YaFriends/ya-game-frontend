@@ -5,6 +5,7 @@ import { Label } from './ElementLabel';
 // TODO: Добавить hint к input
 export interface InputProps {
   name: string;
+  value?: string | number;
   placeholder?: string;
   required?: boolean;
   disabled?: boolean;
@@ -48,6 +49,7 @@ const classes = (error?: string, success?: boolean, disabled?: boolean): string[
 
 export const Input: FC<InputProps> = ({
   name,
+  value,
   id,
   required,
   label,
@@ -64,6 +66,7 @@ export const Input: FC<InputProps> = ({
       <input
         className={classesMemo.join(' ')}
         name={name}
+        value={value}
         id={id || name}
         required={required}
         placeholder={placeholder}
