@@ -1,5 +1,5 @@
 import { UserData } from '../../api/UserAPI';
-import { GameHistoryProps } from '../../components/GameHistoryItem/GameHistoryItem';
+import { GameSetHistoryItemProps } from '../../components/GameSetHistoryItem/GameSetHistoryItem';
 
 export const DUMMY_USER: UserData = {
   id: 1,
@@ -16,10 +16,10 @@ export const DUMMY_STATS = {
   wins: 0,
 };
 
-export const DUMMY_GAME_LIST: GameHistoryProps[] = [
+export const DUMMY_GAME_LIST: GameSetHistoryItemProps[] = [
   {
     id: 1,
-    games: [{ id: 1, name: 'Test', icon: '/static/img/games/click_more/icon.jpg' }],
+    miniGames: [{ id: 1, name: 'Test', icon: '/static/img/games/click_more/icon.jpg' }],
     date: '2021-04-11',
     teams: [{ players: ['Player 1'] }, { players: ['Player 2'] }],
     result: {
@@ -29,7 +29,7 @@ export const DUMMY_GAME_LIST: GameHistoryProps[] = [
   },
   {
     id: 2,
-    games: [
+    miniGames: [
       { id: 1, name: 'Test', icon: '/static/img/games/click_more/icon.jpg' },
       { id: 2, name: 'Test', icon: '/static/img/games/click_more/icon.jpg' },
       { id: 3, name: 'Test', icon: '/static/img/games/click_more/icon.jpg' },
@@ -43,7 +43,7 @@ export const DUMMY_GAME_LIST: GameHistoryProps[] = [
   },
   {
     id: 3,
-    games: [
+    miniGames: [
       { id: 1, name: 'Test', icon: '/static/img/games/click_more/icon.jpg' },
       { id: 2, name: 'Test', icon: '/static/img/games/click_more/icon.jpg' },
       { id: 3, name: 'Test', icon: '/static/img/games/click_more/icon.jpg' },
@@ -59,7 +59,7 @@ export const DUMMY_GAME_LIST: GameHistoryProps[] = [
   },
   {
     id: 4,
-    games: [{ id: 1, name: 'Test', icon: '/static/img/games/click_more/icon.jpg' }],
+    miniGames: [{ id: 1, name: 'Test', icon: '/static/img/games/click_more/icon.jpg' }],
     date: '2021-04-11',
     teams: [{ players: ['Player 1'] }, { players: ['Player 2'] }],
     result: {
