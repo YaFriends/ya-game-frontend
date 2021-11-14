@@ -1,4 +1,4 @@
-import React, { FC, useMemo } from 'react';
+import React, { ChangeEvent, FC, useMemo } from 'react';
 
 import { Error } from './ElementError';
 import { Label } from './ElementLabel';
@@ -13,6 +13,7 @@ export interface InputProps {
   id?: string;
   label?: string;
   error?: string;
+  onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
 const DEFAULT_CLASSES: string[] = [
@@ -57,6 +58,7 @@ export const Input: FC<InputProps> = ({
   placeholder,
   disabled,
   success,
+  onChange,
 }: InputProps) => {
   const classesMemo = useMemo(() => classes(error, success, disabled), [error, success, disabled]);
 
@@ -71,6 +73,7 @@ export const Input: FC<InputProps> = ({
         required={required}
         placeholder={placeholder}
         disabled={disabled}
+        onChange={onChange}
       />
       {error && <Error error={error} />}
     </div>
