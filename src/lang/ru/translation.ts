@@ -46,6 +46,11 @@ export const TRANSLATION: Record<string, Record<string, string>> = {
     SelectLabel: 'Количество игр',
     SelectPlaceholder: 'Выбрать количество игр',
     ButtonText: 'Создать сессию',
+    BackLink: 'Назад',
+  },
+  InvitationLink: {
+    label: 'Ссылка для приглашения',
+    ButtonText: 'Скопировать',
   },
   GameLobby: {
     label: 'Игра: лобби',
