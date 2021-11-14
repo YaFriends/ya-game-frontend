@@ -1,4 +1,5 @@
 import { LeaderboardAPI, AddUserToLeaderboard, GetAllLeaderboards } from '../api/LeaderboardAPI';
+import { getData } from '../utils/getData';
 
 class Controller {
   private api: LeaderboardAPI;
@@ -8,29 +9,30 @@ class Controller {
   }
 
   addUserToLeaderboard(data: AddUserToLeaderboard) {
-    try {
-      this.api.addUserToLeaderboard(data);
-    } catch (e) {
-      console.error(e);
-    }
+    return this.api
+      .addUserToLeaderboard(data)
+      .then(response => getData(response))
+      .catch(e => {
+        throw Error(e);
+      });
   }
 
   async getAllLeaderboards(data: GetAllLeaderboards) {
-    try {
-      return this.api.getAllLeaderboards(data).then(({ data }) => data);
-    } catch (e) {
-      console.error(e);
-      return e;
-    }
+    return this.api
+      .getAllLeaderboards(data)
+      .then(response => getData(response))
+      .catch(e => {
+        throw Error(e);
+      });
   }
 
   async getTeamLeaderboard(teamName: string, data: GetAllLeaderboards) {
-    try {
-      return this.api.getTeamLeaderboard(teamName, data);
-    } catch (e) {
-      console.error(e);
-      return e;
-    }
+    return this.api
+      .getTeamLeaderboard(teamName, data)
+      .then(response => getData(response))
+      .catch(e => {
+        throw Error(e);
+      });
   }
 }
 

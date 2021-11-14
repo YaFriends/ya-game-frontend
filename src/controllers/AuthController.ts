@@ -1,5 +1,5 @@
-import { AuthAPI, LoginData, SignUpData } from '../api/AuthAPI';
 import { getData } from '../utils/getData';
+import { AuthAPI, LoginData, SignUpData } from '../api/AuthAPI';
 
 class Controller {
   private api: AuthAPI;
@@ -9,44 +9,38 @@ class Controller {
   }
 
   async signUp(data: SignUpData) {
-    try {
-      await this.api.signUp(data);
-      return await this.fetchUser();
-    } catch (e) {
-      console.error(e);
-      return e;
-    }
+    return this.api
+      .signUp(data)
+      .then(() => this.fetchUser())
+      .catch(e => {
+        throw Error(e);
+      });
   }
 
   async login(data: LoginData) {
-    try {
-      await this.api.login(data);
-      return await this.fetchUser();
-    } catch (e) {
-      console.error(e);
-      return e;
-    }
+    return this.api
+      .login(data)
+      .then(() => this.fetchUser())
+      .catch(e => {
+        throw Error(e);
+      });
   }
 
   async logout() {
-    try {
-      return this.api.logout();
-    } catch (e) {
-      console.error(e);
-      return e;
-    }
+    return this.api
+      .logout()
+      .catch(e => {
+        throw Error(e);
+      });
   }
 
   async fetchUser() {
-    try {
-      return this.api
-        .read()
-        .then(getData)
-        .then(data => data);
-    } catch (e) {
-      console.error(e);
-      return e;
-    }
+    return this.api
+      .read()
+      .then(response => getData(response))
+      .catch(e => {
+        throw Error(e);
+      });
   }
 }
 
