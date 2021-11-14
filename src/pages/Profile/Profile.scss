@@ -1,0 +1,27 @@
+.profile {
+  @apply flex justify-center space-x-16;
+
+  &__menu {
+    @apply w-1/6 flex flex-col items-center justify-center;
+  }
+
+  &__inputs {
+    @apply w-1/3;
+  }
+}
+
+.user-thumbnail {
+  @apply flex flex-col items-center mb-14;
+
+  &__avatar{
+    @apply w-30 h-30 rounded-full bg-grey-40 overflow-hidden mb-4;
+  }
+
+  &__image {
+    @apply w-full h-full block object-cover;
+  }
+
+  &__login {
+    @apply font-bold text-lg;
+  }
+}
