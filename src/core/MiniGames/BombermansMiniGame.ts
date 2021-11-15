@@ -15,6 +15,21 @@ export class BombermansMiniGame extends MiniGame {
   makeTurn() {}
 
   finish() {
-    return { winner: { players: [{ login: 'TeViYu' }] } };
+    return {
+      winner: {
+        players: [
+          {
+            login: 'TeViYu',
+            id: 1,
+            first_name: 'Test',
+            second_name: 'test 1',
+            display_name: 'Testovich',
+            email: 'string',
+            phone: 'string',
+            avatar: '',
+          },
+        ],
+      },
+    };
   }
 }

@@ -1,10 +1,12 @@
 import React, { FC, useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 
+import { MiniGame } from '../../components/MiniGame/MiniGame';
 import { MiniGamePreview } from '../../components/MiniGamePreview/MiniGamePreview';
 import { Subtitle } from '../../components/ui/Subtitle/Subtitle';
 import { Title } from '../../components/ui/Title/Title';
 import { GameSetController } from '../../controllers/GameSetController';
+import GameSetCoordinator from '../../core/GameSetCoordinator';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { setGameSet } from '../../store/slices/GameSetSlice';
 
@@ -19,31 +21,41 @@ export const GameSet: FC<Record<string, never>> = () => {
   const [sessionLoading, setSessionLoading] = useState(true);
 
   const dispatch = useAppDispatch();
-  const { gameSet } = useAppSelector(state => state.gameSet);
+  const { gameSet } = useAppSelector(({ gameSet }) => gameSet);
   useEffect(() => {
-    GameSetController.loadSession(Number(setId)).then(session => {
-      dispatch(setGameSet(session));
-      setSessionLoading(false);
+    GameSetController.loadSession(Number(setId)).then(gameSetResponse => {
+      dispatch(setGameSet(gameSetResponse));
     });
   }, [setId]);
 
-  if (sessionLoading) {
-    return (
-      <section className="game-set">
-        <Title text={`Идет загрузка сессии: ${setId}`} />
-      </section>
-    );
-  }
+  const [gameCoordinator, setGameCoordinator] = useState<GameSetCoordinator | null>(null);
+
+  useEffect(() => {
+    if (gameSet) {
+      setTimeout(() => {
+        setGameCoordinator(new GameSetCoordinator(gameSet.miniGames));
+        setSessionLoading(false);
+      }, 3000);
+    }
+  }, [gameSet]);
 
   const miniGamePreviews = gameSet?.miniGames.map(({ id, name, icon }) => (
     <MiniGamePreview key={id} id={id} name={name} icon={icon} classes="game-set__mini-game" />
   ));
 
+  if (sessionLoading) {
+    return (
+      <section className="game-set">
+        <Title text="Выбранные игры" extendClass="mb-6" />
+        <div className="game-set__mini-games">{miniGamePreviews}</div>
+        <Subtitle text="Загрузка..." />
+      </section>
+    );
+  }
+
   return (
     <section className="game-set">
-      <Title text="Выбранные игры" extendClass="mb-6" />
-      <div className="game-set__mini-games">{miniGamePreviews}</div>
-      <Subtitle text="Загрузка..." />
+      <MiniGame GameSetCoordinator={gameCoordinator as GameSetCoordinator} />
     </section>
   );
 };

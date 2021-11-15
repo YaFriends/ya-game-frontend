@@ -7,7 +7,7 @@ type MiniGameConfig = {
 };
 
 export type Team = {
-  players: Partial<UserData>[];
+  players: UserData[];
 };
 
 type MiniGameFinishResponse = {

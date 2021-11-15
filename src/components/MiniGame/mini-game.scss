@@ -1,0 +1,19 @@
+.mini-game {
+  @apply flex flex-col flex-grow w-full max-w-[870px];
+
+  &__top {
+    @apply flex justify-between items-center mb-6 w-full;
+  }
+
+  &__top-previews {
+    @apply flex justify-center -mx-3;
+  }
+
+  &__top-preview {
+    @apply mx-3 w-10 h-10;
+  }
+
+  &__canvas {
+    @apply w-full h-[500px] bg-grey;
+  }
+}

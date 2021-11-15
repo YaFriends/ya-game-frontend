@@ -1,6 +1,8 @@
 import { rest } from 'msw';
 
+import { MiniGame } from '../@types/GameSet';
 import { INTERNAL_API_URL } from '../config';
+import { Team } from '../core/MiniGame';
 
 export const handlers = [
   rest.get(`${INTERNAL_API_URL}/test/:data`, (req, res, ctx) => {
@@ -12,17 +14,46 @@ export const handlers = [
     return res(ctx.json(body), ctx.status(200));
   }),
   rest.get('/session/:id', (req, res, ctx) => {
-    const body = {
+    const body: { id: number; miniGames: MiniGame[]; date: string; teams: Team[] } = {
       id: 1,
       miniGames: [
         {
           id: 1,
-          name: 'tic tac toe',
-          icon: '/static/img/games/tic_tac_toe/icon.jpg',
+          name: 'Круг треугольник квадрат',
+          icon: '/static/img/games/circle_triangle_square/icon.jpg',
         },
       ],
       date: '2020-02-02',
-      teams: [{ players: ['Player 1'] }, { players: ['Player 2'] }],
+      teams: [
+        {
+          players: [
+            {
+              login: 'Player 1',
+              id: 1,
+              first_name: 'Test',
+              second_name: 'test 1',
+              display_name: 'Testovich',
+              email: 'string',
+              phone: 'string',
+              avatar: '',
+            },
+          ],
+        },
+        {
+          players: [
+            {
+              login: 'Player 2',
+              id: 2,
+              first_name: 'Test',
+              second_name: 'test 1',
+              display_name: 'Testovich',
+              email: 'string',
+              phone: 'string',
+              avatar: '',
+            },
+          ],
+        },
+      ],
     };
     return res(ctx.json(body), ctx.status(200));
   }),

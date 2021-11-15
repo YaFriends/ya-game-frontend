@@ -21,7 +21,36 @@ export const DUMMY_GAME_LIST: GameSetHistory[] = [
     id: 1,
     miniGames: [{ id: 1, name: 'Test', icon: '/static/img/games/click_more/icon.jpg' }],
     date: '2021-04-11',
-    teams: [{ players: [{ login: 'Player 1' }] }, { players: [{ login: 'Player 2' }] }],
+    teams: [
+      {
+        players: [
+          {
+            login: 'Player 1',
+            id: 1,
+            first_name: 'Test',
+            second_name: 'test 1',
+            display_name: 'Testovich',
+            email: 'string',
+            phone: 'string',
+            avatar: '',
+          },
+        ],
+      },
+      {
+        players: [
+          {
+            login: 'Player 2',
+            id: 1,
+            first_name: 'Test',
+            second_name: 'test 1',
+            display_name: 'Testovich',
+            email: 'string',
+            phone: 'string',
+            avatar: '',
+          },
+        ],
+      },
+    ],
     result: {
       id: 1,
       type: 'win',
@@ -35,7 +64,36 @@ export const DUMMY_GAME_LIST: GameSetHistory[] = [
       { id: 3, name: 'Test', icon: '/static/img/games/click_more/icon.jpg' },
     ],
     date: '2021-04-11',
-    teams: [{ players: [{ login: 'Player 2' }] }, { players: [{ login: 'Player 3' }] }],
+    teams: [
+      {
+        players: [
+          {
+            login: 'Player 2',
+            id: 1,
+            first_name: 'Test',
+            second_name: 'test 1',
+            display_name: 'Testovich',
+            email: 'string',
+            phone: 'string',
+            avatar: '',
+          },
+        ],
+      },
+      {
+        players: [
+          {
+            login: 'Player 3',
+            id: 1,
+            first_name: 'Test',
+            second_name: 'test 1',
+            display_name: 'Testovich',
+            email: 'string',
+            phone: 'string',
+            avatar: '',
+          },
+        ],
+      },
+    ],
     result: {
       id: 1,
       type: 'win',
@@ -51,7 +109,36 @@ export const DUMMY_GAME_LIST: GameSetHistory[] = [
       { id: 5, name: 'Test', icon: '/static/img/games/click_more/icon.jpg' },
     ],
     date: '2021-04-11',
-    teams: [{ players: [{ login: 'Player 5' }] }, { players: [{ login: 'Player 6' }] }],
+    teams: [
+      {
+        players: [
+          {
+            login: 'Player 5',
+            id: 1,
+            first_name: 'Test',
+            second_name: 'test 1',
+            display_name: 'Testovich',
+            email: 'string',
+            phone: 'string',
+            avatar: '',
+          },
+        ],
+      },
+      {
+        players: [
+          {
+            login: 'Player 6',
+            id: 1,
+            first_name: 'Test',
+            second_name: 'test 1',
+            display_name: 'Testovich',
+            email: 'string',
+            phone: 'string',
+            avatar: '',
+          },
+        ],
+      },
+    ],
     result: {
       id: 2,
       type: 'lose',
@@ -61,7 +148,36 @@ export const DUMMY_GAME_LIST: GameSetHistory[] = [
     id: 4,
     miniGames: [{ id: 1, name: 'Test', icon: '/static/img/games/click_more/icon.jpg' }],
     date: '2021-04-11',
-    teams: [{ players: [{ login: 'Player 1' }] }, { players: [{ login: 'Player 2' }] }],
+    teams: [
+      {
+        players: [
+          {
+            login: 'Player 1',
+            id: 1,
+            first_name: 'Test',
+            second_name: 'test 1',
+            display_name: 'Testovich',
+            email: 'string',
+            phone: 'string',
+            avatar: '',
+          },
+        ],
+      },
+      {
+        players: [
+          {
+            login: 'Player 2',
+            id: 1,
+            first_name: 'Test',
+            second_name: 'test 1',
+            display_name: 'Testovich',
+            email: 'string',
+            phone: 'string',
+            avatar: '',
+          },
+        ],
+      },
+    ],
     result: {
       id: 1,
       type: 'win',

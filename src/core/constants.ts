@@ -1,7 +1,7 @@
-import { TicTacToeMiniGame } from './MiniGames/TicTacToeMiniGame';
+import { CircleTriangleSquareMiniGame } from './MiniGames/CircleTriangleSquareMiniGame';
 
-export const TIC_TAC_TOE_ID = 1;
+export const CIRCLE_TRIANGLE_SQUARE_ID = 1;
 
 export const MINI_GAME_CONTROLLER_BY_ID = {
-  [TIC_TAC_TOE_ID]: TicTacToeMiniGame,
+  [CIRCLE_TRIANGLE_SQUARE_ID]: CircleTriangleSquareMiniGame,
 };
