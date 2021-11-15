@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 
 import { Subtitle } from '../../components/ui/Subtitle/Subtitle';
 import { Title } from '../../components/ui/Title/Title';
-import './Main.scss';
+import './Forum.scss';
 import { TRANSLATION } from '../../lang/ru/translation';
 
 export const Forum: FC<Record<string, never>> = () => {
