@@ -1,5 +1,5 @@
 .profile {
-  @apply flex justify-center space-x-16;
+  @apply flex justify-center space-x-16 w-full;
 
   &__menu {
     @apply w-1/6 flex flex-col items-center justify-center;

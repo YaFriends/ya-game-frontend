@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC, FormEvent, useState } from 'react';
+import React, { FC, FormEvent, useState } from 'react';
 
 import { Form } from '../../components/ui/Form/Form';
 import { Input } from '../../components/ui/Input/Input';
@@ -16,9 +16,9 @@ const {
   PasswordTitle,
 } = TRANSLATION.Profile;
 
-import { Inputs } from './Info';
+import { Inputs } from './InformationForm';
 
-export const Password: FC = () => {
+export const PasswordForm: FC = () => {
   const [inputAttributes, setInputAttributes] = useState<Inputs[]>([
     {
       name: 'oldPassword',
@@ -40,8 +40,8 @@ export const Password: FC = () => {
     },
   ]);
 
-  const handleChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
+  const handleChangePassword = (event: FormEvent<HTMLInputElement>) => {
+    const { name, value } = event.currentTarget;
     const changedIndex = inputAttributes.findIndex(attribute => attribute.name === name);
 
     setInputAttributes(prevState => {
@@ -52,7 +52,7 @@ export const Password: FC = () => {
   };
 
   const renderPasswordInputs = inputAttributes.map(attribute => {
-    return <Input key={attribute.name} {...attribute} required onChange={handleChangePassword} />;
+    return <Input key={attribute.name} {...attribute} required change={handleChangePassword} />;
   });
 
   const findIndexByName = (name: string): number => {
@@ -74,7 +74,7 @@ export const Password: FC = () => {
   };
 
   return (
-    <Form name="profile-password" id="profile-password" submit={submit}>
+    <Form name="profile-password" submit={submit}>
       <Title text={PasswordTitle} extendClass="text-right mb-6" />
       {renderPasswordInputs}
     </Form>

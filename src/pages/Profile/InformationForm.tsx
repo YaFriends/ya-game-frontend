@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC, FormEvent, useEffect, useState } from 'react';
+import React, { FC, FormEvent, useEffect, useState } from 'react';
 
 import { UserData } from '../../api/UserAPI';
 import { Form } from '../../components/ui/Form/Form';
@@ -20,7 +20,7 @@ const {
 
 export interface ProfileInfoProps {
   disabled?: boolean;
-  userInfo: Omit<UserData, 'avatar'>;
+  userInfo: Omit<UserData, 'avatar' | 'id'>;
 }
 
 export interface Inputs {
@@ -28,12 +28,11 @@ export interface Inputs {
   label: string;
   placeholder: string;
   disabled?: boolean;
-  value?: string;
+  value?: string | number;
   error?: string;
-  [key: string]: string | boolean | undefined;
 }
 
-export const Info: FC<ProfileInfoProps> = ({ disabled, userInfo }) => {
+export const InformationForm: FC<ProfileInfoProps> = ({ disabled, userInfo }) => {
   const [inputsAttributes, setInputsAttributes] = useState<Inputs[]>([
     { name: 'first_name', label: AttributeName, placeholder: AttributeNamePlaceholder, value: '' },
     {
@@ -50,13 +49,13 @@ export const Info: FC<ProfileInfoProps> = ({ disabled, userInfo }) => {
   useEffect(() => {
     const copyState = [...inputsAttributes];
     copyState.map(info => {
-      info.value = userInfo[info.name] as string;
+      info.value = userInfo[info.name];
     });
     setInputsAttributes(copyState);
   }, []);
 
-  const handleChangeInfo = (event: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
+  const handleChangeInfo = (event: FormEvent<HTMLInputElement>) => {
+    const { name, value } = event.currentTarget;
     const changedIndex = inputsAttributes.findIndex(attribute => attribute.name === name);
 
     setInputsAttributes(prevState => {
@@ -72,7 +71,7 @@ export const Info: FC<ProfileInfoProps> = ({ disabled, userInfo }) => {
         key={attribute.name}
         {...attribute}
         disabled={disabled ?? false}
-        onChange={handleChangeInfo}
+        change={handleChangeInfo}
       />
     );
   });
@@ -86,7 +85,7 @@ export const Info: FC<ProfileInfoProps> = ({ disabled, userInfo }) => {
   };
 
   return (
-    <Form submit={submit} name="profile-edit" id="profile-edit">
+    <Form submit={submit} name="profile-edit">
       <Title text={disabled ? EditDisabledTitle : EditTitle} extendClass="text-right mb-6" />
       {renderInputs}
     </Form>

@@ -9,7 +9,7 @@ export interface UserData {
   email: string;
   phone: string;
   avatar: string;
-  [key: string]: string | number;
+  [key: string]: number | string;
 }
 
 export interface UserUpdatePasswordProps {
