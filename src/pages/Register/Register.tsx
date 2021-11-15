@@ -1,17 +1,39 @@
-import React, { FC, FormEvent } from 'react';
+import React, { FC, FormEvent, useState } from 'react';
 
+import { SignUpData } from '../../api/AuthAPI';
 import { Button } from '../../components/ui/Button/Button';
 import { Form } from '../../components/ui/Form/Form';
 import { Input } from '../../components/ui/Input/Input';
 import { MainLink } from '../../components/ui/Link/Link';
 import { Title } from '../../components/ui/Title/Title';
 import './Register.scss';
+import { AuthController } from '../../controllers/AuthController';
 import { TRANSLATION } from '../../lang/ru/translation';
+import { useAppDispatch } from '../../store/hooks';
+import { authActions } from '../../store/slices/authSlice';
 
 export const Register: FC<Record<string, never>> = () => {
+  const dispatch = useAppDispatch();
+  const initSignUpData = {
+    first_name: '',
+    second_name: '',
+    login: '',
+    email: '',
+    phone: '',
+    password: '',
+  };
+  const [form, setForm] = useState<SignUpData>(initSignUpData);
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    console.log('handleSubmit', e);
+    AuthController.signUp(form).then(response => dispatch(authActions.setCurrentUser(response)));
+  };
+
+  const handleChange = (e: FormEvent) => {
+    const input = e.target as HTMLInputElement;
+    const name = input.name;
+    const value = input.value;
+
+    setForm({ ...form, [name]: value });
   };
 
   return (
@@ -23,40 +45,47 @@ export const Register: FC<Record<string, never>> = () => {
       <Form name="registerForm" submit={handleSubmit}>
         <div>
           <Input
-            name="input-first-name"
+            name="first_name"
             label={TRANSLATION.Register.inputFirstNameLabel}
             placeholder={TRANSLATION.Register.inputFirstNamePlaceholder}
             required
+            change={handleChange}
           />
           <Input
-            name="input-second-name"
+            name="second_name"
             label={TRANSLATION.Register.inputSecondNameLabel}
             placeholder={TRANSLATION.Register.inputSecondNamePlaceholder}
             required
+            change={handleChange}
           />
           <Input
-            name="input-login"
+            name="login"
             label={TRANSLATION.Register.inputLoginLabel}
             placeholder={TRANSLATION.Register.inputLoginPlaceholder}
             required
+            change={handleChange}
           />
           <Input
-            name="input-email"
+            name="email"
             label={TRANSLATION.Register.inputEmailLabel}
             placeholder={TRANSLATION.Register.inputEmailPlaceholder}
             required
+            change={handleChange}
           />
           <Input
-            name="input-phone"
+            name="phone"
             label={TRANSLATION.Register.inputPhoneLabel}
             placeholder={TRANSLATION.Register.inputPhonePlaceholder}
             required
+            change={handleChange}
           />
           <Input
-            name="input-password"
+            name="password"
+            type="password"
             label={TRANSLATION.Register.inputPasswordLabel}
             placeholder={TRANSLATION.Register.inputPasswordPlaceholder}
             required
+            change={handleChange}
           />
         </div>
         <div className="register__button">
