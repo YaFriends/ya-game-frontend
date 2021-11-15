@@ -15,6 +15,6 @@ export class ClickMoreMiniGame extends MiniGame {
   makeTurn() {}
 
   finish() {
-    return { winner: { players: ['TeViYu'] } };
+    return { winner: { players: [{ login: 'TeViYu' }] } };
   }
 }

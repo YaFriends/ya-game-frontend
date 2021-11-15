@@ -9,9 +9,12 @@ export class FieldBattleMiniGame extends MiniGame {
       teams,
     });
   }
+
   draw() {}
+
   makeTurn() {}
+
   finish() {
-    return { winner: { players: ['TeViYu'] } };
+    return { winner: { players: [{ login: 'TeViYu' }] } };
   }
 }

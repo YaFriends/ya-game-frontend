@@ -1,4 +1,4 @@
-import { http } from './http';
+import { httpExternal } from './http';
 
 export interface UserData {
   id: number;
@@ -30,18 +30,18 @@ export class UserAPI {
   }
 
   updateProfile(data: UserUpdateProfileProps): Promise<UserData> {
-    return http.put(`${this.endpoint}/profile`, data);
+    return httpExternal.put(`${this.endpoint}/profile`, data);
   }
 
   updateAvatar(data: FormData): Promise<UserData> {
-    return http.put(`${this.endpoint}/profile/avatar`, data);
+    return httpExternal.put(`${this.endpoint}/profile/avatar`, data);
   }
 
   updatePassword(data: UserUpdatePasswordProps): Promise<void> {
-    return http.put(`${this.endpoint}/password`, data);
+    return httpExternal.put(`${this.endpoint}/password`, data);
   }
 
   searchUsers(data: SearchUsersProps): Promise<[UserData]> {
-    return http.post(`${this.endpoint}/search`, data);
+    return httpExternal.post(`${this.endpoint}/search`, data);
   }
 }

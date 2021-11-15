@@ -26,6 +26,7 @@ parserOptions:
   allowImportExportEverywhere: true
   project: ./tsconfig.json
 rules:
+  '@typescript-eslint/explicit-module-boundary-types': off
   no-dupe-args: error
   no-dupe-keys: error
   no-empty: error

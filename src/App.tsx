@@ -7,7 +7,7 @@ import { Error404 } from './pages/Error404';
 import { Forum } from './pages/Forum';
 import { GameCreation } from './pages/GameCreation';
 import { GameLobby } from './pages/GameLobby';
-import { GameSession } from './pages/GameSession';
+import { GameSet } from './pages/GameSet/GameSet';
 import { Leaderboard } from './pages/Leaderboard';
 import { Login } from './pages/Login/Login';
 import { Profile } from './pages/Profile';
@@ -25,7 +25,7 @@ const App: FC<Record<string, never>> = () => {
             <Route path="/forum" component={Forum} />
             <Route path="/game/create" component={GameCreation} />
             <Route path="/game/lobby" component={GameLobby} />
-            <Route path="/game/:id" component={GameSession} />
+            <Route path="/game/:id" component={GameSet} />
             <Route path="/leaderboard" component={Leaderboard} />
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />

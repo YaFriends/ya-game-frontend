@@ -1,3 +1,5 @@
+import { UserData } from '../api/UserAPI';
+
 type MiniGameConfig = {
   icon: string;
   name: string;
@@ -5,7 +7,7 @@ type MiniGameConfig = {
 };
 
 export type Team = {
-  players: string[];
+  players: Partial<UserData>[];
 };
 
 type MiniGameFinishResponse = {

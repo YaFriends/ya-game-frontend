@@ -1,7 +1,7 @@
 import { AxiosPromise } from 'axios';
 
 import { UserData } from './UserAPI';
-import { http } from './http';
+import { httpExternal } from './http';
 
 export interface LoginData {
   login: string;
@@ -18,18 +18,18 @@ export class AuthAPI {
   }
 
   signUp(data: SignUpData): AxiosPromise {
-    return http.post(`${this.endpoint}/signup`, data);
+    return httpExternal.post(`${this.endpoint}/signup`, data);
   }
 
   login(data: LoginData): AxiosPromise {
-    return http.post(`${this.endpoint}/signin`, data);
+    return httpExternal.post(`${this.endpoint}/signin`, data);
   }
 
   logout(): AxiosPromise {
-    return http.post(`${this.endpoint}/logout`);
+    return httpExternal.post(`${this.endpoint}/logout`);
   }
 
   read(): AxiosPromise {
-    return http.get(`${this.endpoint}/user`);
+    return httpExternal.get(`${this.endpoint}/user`);
   }
 }
