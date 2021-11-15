@@ -61,6 +61,7 @@ export const TRANSLATION: Record<string, Record<string, string>> = {
   ProfileHistory: { label: 'Профиль: История', ReturnToMain: 'Вернуться на главную' },
   Forum: {
     label: 'Форум',
+    subtitle: 'Скоро тут будет форум :)',
   },
   Game: {
     Wins: 'Побед',

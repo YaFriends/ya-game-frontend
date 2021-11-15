@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-d
 import { AuthController } from './controllers/AuthController';
 import { Dashboard } from './pages/Dashboard/Dashboard';
 import { Error404 } from './pages/Error404/Error404';
-import { Forum } from './pages/Forum';
+import { Forum } from './pages/Forum/Forum';
 import { GameCreation } from './pages/GameCreation';
 import { GameLobby } from './pages/GameLobby';
 import { GameSession } from './pages/GameSession';
