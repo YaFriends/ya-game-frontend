@@ -71,4 +71,15 @@ export const TRANSLATION: Record<string, Record<string, string>> = {
     win: 'Победа',
     lose: 'Поражение',
   },
+  Error404: {
+    label: '404',
+    subtitle: 'Что-то произошло, но вы держитесь!',
+    link: 'В главное меню',
+  },
+  Main: {
+    label: 'Скоро тут будет лендинг',
+    linkToLogin: 'Авторизоваться',
+    linkToDashboard: 'Пройти в главное меню',
+    linkToRegister: 'Зарегистрироваться',
+  },
 };
