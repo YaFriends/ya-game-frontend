@@ -1,17 +1,35 @@
-import React, { FC, FormEvent } from 'react';
+import React, { FC, FormEvent, useState } from 'react';
 
+import { LoginData } from '../../api/AuthAPI';
 import { Button } from '../../components/ui/Button/Button';
 import { Form } from '../../components/ui/Form/Form';
 import { Input } from '../../components/ui/Input/Input';
 import { MainLink } from '../../components/ui/Link/Link';
 import { Title } from '../../components/ui/Title/Title';
 import './Login.scss';
+import { AuthController } from '../../controllers/AuthController';
 import { TRANSLATION } from '../../lang/ru/translation';
+import { useAppDispatch } from '../../store/hooks';
+import { authActions } from '../../store/slices/authSlice';
 
 export const Login: FC<Record<string, never>> = () => {
+  const dispatch = useAppDispatch();
+  const initLoginData = {
+    login: '',
+    password: '',
+  };
+  const [form, setForm] = useState<LoginData>(initLoginData);
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    console.log('handleSubmit', e);
+    AuthController.login(form).then(response => dispatch(authActions.setCurrentUser(response)));
+  };
+
+  const handleChange = (e: FormEvent) => {
+    const input = e.target as HTMLInputElement;
+    const name = input.name;
+    const value = input.value;
+
+    setForm({ ...form, [name]: value });
   };
 
   return (
@@ -23,16 +41,19 @@ export const Login: FC<Record<string, never>> = () => {
       <Form name="loginForm" submit={handleSubmit}>
         <div>
           <Input
-            name="input-login"
+            name="login"
             label={TRANSLATION.Login.inputLoginLabel}
             placeholder={TRANSLATION.Login.inputLoginPlaceholder}
             required
+            change={handleChange}
           />
           <Input
-            name="input-password"
+            name="password"
+            type="password"
             label={TRANSLATION.Login.inputPasswordLabel}
             placeholder={TRANSLATION.Login.inputPasswordPlaceholder}
             required
+            change={handleChange}
           />
         </div>
         <div className="login__button">
@@ -40,7 +61,7 @@ export const Login: FC<Record<string, never>> = () => {
         </div>
       </Form>
       <div className="login__link">
-        <MainLink text={TRANSLATION.Login.linkToDashboardText} href="/" />
+        <MainLink text={TRANSLATION.Login.linkToDashboardText} href="/main" />
       </div>
     </section>
   );
