@@ -1,0 +1,9 @@
+.ui-subtitle {
+  &--light {
+    @apply text-black;
+  }
+
+  &--dark {
+    @apply text-white;
+  }
+}

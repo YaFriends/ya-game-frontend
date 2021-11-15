@@ -1,43 +1,51 @@
 import React, { FC } from 'react';
-import { Link } from 'react-router-dom';
+
 import { TRANSLATION } from '../lang/ru/translation';
 
-export const Menu: FC<{}> = () => {
-  return <nav>
-    <ul>
-      <li>
-        <Link to="/">{ TRANSLATION.Dashboard }</Link>
-      </li>
-      <li>
-        <Link to="/forum">{ TRANSLATION.Forum }</Link>
-      </li>
-      <li>
-        <Link to="/game/create">{ TRANSLATION.GameCreation }</Link>
-      </li>
-      <li>
-        <Link to="/game/lobby">{ TRANSLATION.GameLobby }</Link>
-      </li>
-      <li>
-        <Link to="/game/1234">{ TRANSLATION.GameSession }</Link>
-      </li>
-      <li>
-        <Link to="/leaderboard">{ TRANSLATION.Leaderboard }</Link>
-      </li>
-      <li>
-        <Link to="/login">{ TRANSLATION.Login }</Link>
-      </li>
-      <li>
-        <Link to="/register">{ TRANSLATION.Register }</Link>
-      </li>
-      <li>
-        <Link to="/profile">{ TRANSLATION.Profile }</Link>
-      </li>
-      <li>
-        <Link to="/profile/history">{ TRANSLATION.ProfileHistory }</Link>
-      </li>
-      <li>
-        <Link to="/abrakadabra">404</Link>
-      </li>
-    </ul>
-  </nav>
-}
+import { MainLink } from './ui/Link/Link';
+import { Title } from './ui/Title/Title';
+
+export const Menu: FC<Record<string, never>> = () => {
+  return (
+    <div className="menu">
+      <div className="menu__title">
+        <Title text="YaFriends" />
+      </div>
+      <nav className="menu__nav">
+        <ul>
+          <li className="menu__link">
+            <MainLink
+              extendClass="ui-link--button-success"
+              href="/game/create"
+              text={TRANSLATION.GameCreation.label}
+            />
+          </li>
+          <li className="menu__link">
+            <MainLink
+              extendClass="ui-link--button"
+              href="/profile"
+              text={TRANSLATION.Profile.label}
+            />
+          </li>
+          <li className="menu__link">
+            <MainLink extendClass="ui-link--button" href="/forum" text={TRANSLATION.Forum.label} />
+          </li>
+          <li className="menu__link">
+            <MainLink
+              extendClass="ui-link--button"
+              href="/leaderboard"
+              text={TRANSLATION.Leaderboard.label}
+            />
+          </li>
+          <li className="menu__link">
+            <MainLink
+              extendClass="ui-link--warning"
+              href="/logout"
+              text={TRANSLATION.Logout.label}
+            />
+          </li>
+        </ul>
+      </nav>
+    </div>
+  );
+};

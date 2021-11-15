@@ -1,0 +1,15 @@
+.login {
+  @apply flex-grow w-[354px] mx-auto flex items-center justify-center flex-col;
+
+  &__header {
+    @apply w-full flex items-center justify-between mb-6;
+  }
+
+  &__button {
+    @apply mt-14;
+  }
+
+  &__link {
+    @apply w-full flex items-center justify-center mt-4;
+  }
+}

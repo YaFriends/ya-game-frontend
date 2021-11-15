@@ -1,0 +1,35 @@
+.profile {
+  &__line {
+    @apply flex items-center;
+
+    &--reversed {
+      @apply flex-row-reverse;
+
+      .profile {
+        &__line-item {
+          @apply ml-2 last:ml-0 first:mr-0;
+        }
+      }
+    }
+  }
+
+  &__line-item {
+    @apply mr-2 last:mr-0;
+  }
+
+  &__avatar {
+    @apply w-15 h-15 rounded-full bg-grey-40 overflow-hidden;
+
+    img {
+      @apply w-full h-full block object-cover;
+    }
+  }
+
+  &__login {
+    @apply font-bold text-lg;
+  }
+
+  &__win-stat {
+    @apply text-xs;
+  }
+}
