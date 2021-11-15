@@ -1,10 +1,11 @@
-import React, { FC, useMemo } from 'react';
+import React, { FC, FormEvent, useMemo } from 'react';
 
 import { Error } from './ElementError';
 import { Label } from './ElementLabel';
 // TODO: Добавить hint к input
 export interface InputProps {
   name: string;
+  type?: string;
   placeholder?: string;
   required?: boolean;
   disabled?: boolean;
@@ -12,6 +13,7 @@ export interface InputProps {
   id?: string;
   label?: string;
   error?: string;
+  change?: (e: FormEvent) => void;
 }
 
 const DEFAULT_CLASSES: string[] = [
@@ -48,6 +50,7 @@ const classes = (error?: string, success?: boolean, disabled?: boolean): string[
 
 export const Input: FC<InputProps> = ({
   name,
+  type = 'text',
   id,
   required,
   label,
@@ -55,6 +58,7 @@ export const Input: FC<InputProps> = ({
   placeholder,
   disabled,
   success,
+  change,
 }: InputProps) => {
   const classesMemo = useMemo(() => classes(error, success, disabled), [error, success, disabled]);
 
@@ -64,10 +68,12 @@ export const Input: FC<InputProps> = ({
       <input
         className={classesMemo.join(' ')}
         name={name}
+        type={type}
         id={id || name}
         required={required}
         placeholder={placeholder}
         disabled={disabled}
+        onChange={change}
       />
       {error && <Error error={error} />}
     </div>
