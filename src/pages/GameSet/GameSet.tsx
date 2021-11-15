@@ -16,18 +16,18 @@ type PageParams = {
 
 export const GameSet: FC<Record<string, never>> = () => {
   const { id: setId }: PageParams = useParams();
-  const [loading, setLoading] = useState(true);
+  const [sessionLoading, setSessionLoading] = useState(true);
 
   const dispatch = useAppDispatch();
   const { gameSet } = useAppSelector(state => state.gameSet);
   useEffect(() => {
     GameSetController.loadSession(Number(setId)).then(session => {
       dispatch(setGameSet(session));
-      setLoading(false);
+      setSessionLoading(false);
     });
   }, [setId]);
 
-  if (loading) {
+  if (sessionLoading) {
     return (
       <section className="game-set">
         <Title text={`Идет загрузка сессии: ${setId}`} />

@@ -1,15 +1,20 @@
-import axios from 'axios';
+import axios, { AxiosRequestConfig } from 'axios';
 
 import { EXTERNAL_API_URL, INTERNAL_API_URL } from '../config';
 
-export const httpExternal = axios.create({
-  baseURL: EXTERNAL_API_URL,
+const setup: AxiosRequestConfig = {
   responseType: 'json',
   withCredentials: true,
+};
+
+const internalSetup = { ...setup };
+if (INTERNAL_API_URL) {
+  internalSetup.baseURL = INTERNAL_API_URL;
+}
+
+export const httpExternal = axios.create({
+  ...setup,
+  baseURL: EXTERNAL_API_URL,
 });
 
-export const httpInternal = axios.create({
-  baseURL: INTERNAL_API_URL,
-  responseType: 'json',
-  withCredentials: true,
-});
+export const httpInternal = axios.create(internalSetup);
