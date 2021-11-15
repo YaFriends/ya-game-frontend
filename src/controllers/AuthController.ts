@@ -1,5 +1,5 @@
-import { getData } from '../utils/getData';
 import { AuthAPI, LoginData, SignUpData } from '../api/AuthAPI';
+import { getData } from '../utils/getData';
 
 class Controller {
   private api: AuthAPI;
@@ -27,11 +27,9 @@ class Controller {
   }
 
   async logout() {
-    return this.api
-      .logout()
-      .catch(e => {
-        throw Error(e);
-      });
+    return this.api.logout().catch(e => {
+      throw Error(e);
+    });
   }
 
   async fetchUser() {
