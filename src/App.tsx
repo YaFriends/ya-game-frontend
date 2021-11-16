@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
-import { ErrorBoundary } from './components/error-handling/ErrorBoundary';
+import { ErrorBoundary } from './components/ErrorBoundary/ErrorBoundary';
 import { Button } from './components/ui/Button/Button';
 import { Title } from './components/ui/Title/Title';
 import { TRANSLATION } from './lang/ru/translation';
