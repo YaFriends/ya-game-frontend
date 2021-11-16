@@ -72,6 +72,7 @@ export const InformationForm: FC<ProfileInfoProps> = ({ disabled, userInfo }) =>
         {...attribute}
         disabled={disabled ?? false}
         change={handleChangeInfo}
+        required
       />
     );
   });
