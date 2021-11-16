@@ -31,13 +31,13 @@ export const sort: Sort = <T>(array: T[], comparator = defaultComparator): T[] =
 
     const pivot: T = sortedArray[end];
     let splitIndex = start;
-    for (let i = start; i < end; i += 1) {
+    for (let i = start; i < end; i++) {
       const lessThanThePivot = comparator(sortedArray[i], pivot) === -1;
       if (lessThanThePivot) {
         if (splitIndex !== i) {
           swap(sortedArray, splitIndex, i);
         }
-        splitIndex += 1;
+        splitIndex++;
       }
     }
 
