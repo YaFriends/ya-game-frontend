@@ -7,12 +7,12 @@ import { Form } from '../../components/ui/Form/Form';
 import { Input } from '../../components/ui/Input/Input';
 import { MainLink } from '../../components/ui/Link/Link';
 import { Title } from '../../components/ui/Title/Title';
-import './Register.scss';
 import { AuthController } from '../../controllers/AuthController';
 import { useAppDispatch } from '../../hooks/redux-hooks';
 import { useAuth } from '../../hooks/use-auth';
 import { TRANSLATION } from '../../lang/ru/translation';
 import { authActions } from '../../store/slices/authSlice';
+import './Register.scss';
 
 export const Register: FC<Record<string, never>> = () => {
   const dispatch = useAppDispatch();

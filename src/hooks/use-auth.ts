@@ -9,7 +9,7 @@ interface UseAuth {
 
 export const useAuth = (): UseAuth => {
   const currentUser: UserData | null = useAppSelector(state => state.auth.currentUser);
-  const isAuth = !!currentUser?.id || localStorage.getItem('isAuth') === 'true';
+  const isAuth = Boolean(currentUser) || localStorage.getItem('isAuth') === 'true';
 
   localStorage.setItem('isAuth', String(isAuth));
 
