@@ -21,9 +21,11 @@ const DEFAULT_CLASSES: string[] = [
   'rounded-xl',
   'border-2',
   'text-base',
+  'bg-blue',
   'text-white',
   'h-[34px]',
   'w-full',
+  'border-blue',
   'duration-300',
   'ease-in-out',
 ];
@@ -32,9 +34,6 @@ const classes = (typeAction?: 'success' | 'error', extendClass?: string): string
 
   if (typeAction) {
     result.push(`ui-button--${typeAction}`);
-  } else {
-    const blue = ['border-blue', 'bg-blue'];
-    result.push(...blue);
   }
 
   if (extendClass) {
