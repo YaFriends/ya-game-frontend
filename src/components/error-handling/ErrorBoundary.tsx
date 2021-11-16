@@ -1,6 +1,6 @@
-import React, { Component, ComponentType, ErrorInfo, PropsWithChildren } from 'react';
+import React, { Component, ComponentType, ErrorInfo, PropsWithChildren, ReactNode } from 'react';
 
-const isArrayChange = (a: unknown[] = [], b: unknown[] = []) =>
+const isArrayChange = (a: unknown[] = [], b: unknown[] = []): boolean =>
   a.length !== b.length || a.some((item, index) => !Object.is(item, b[index]));
 
 export interface FallbackProps {
@@ -25,7 +25,7 @@ export class ErrorBoundary extends Component<
   PropsWithChildren<ErrorBoundaryPropsWithComponent>,
   ErrorBoundaryState
 > {
-  static getDerivedStateFromError(error: Error) {
+  static getDerivedStateFromError(error: Error): { error: Error } {
     return { error };
   }
 
@@ -33,12 +33,12 @@ export class ErrorBoundary extends Component<
     error: null,
   };
 
-  resetErrorBoundary = (...args: unknown[]) => {
+  resetErrorBoundary = (...args: unknown[]): void => {
     this.props.onReset?.(...args);
     this.reset();
   };
 
-  reset() {
+  reset(): void {
     this.setState(() => {
       return {
         error: null,
@@ -46,11 +46,14 @@ export class ErrorBoundary extends Component<
     });
   }
 
-  componentDidCatch(error: Error, info: ErrorInfo) {
+  componentDidCatch(error: Error, info: ErrorInfo): void {
     this.props.onError?.(error, info);
   }
 
-  componentDidUpdate(prevProps: ErrorBoundaryPropsWithComponent, prevState: ErrorBoundaryState) {
+  componentDidUpdate(
+    prevProps: ErrorBoundaryPropsWithComponent,
+    prevState: ErrorBoundaryState
+  ): void {
     const { error } = this.state;
     const { resetKeys } = this.props;
 
@@ -64,9 +67,8 @@ export class ErrorBoundary extends Component<
     }
   }
 
-  render() {
+  render(): ReactNode {
     const { error } = this.state;
-
     const { FallbackComponent } = this.props;
 
     if (error !== null) {

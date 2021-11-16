@@ -71,4 +71,8 @@ export const TRANSLATION: Record<string, Record<string, string>> = {
     win: 'Победа',
     lose: 'Поражение',
   },
+  ErrorMessage: {
+    message: 'Упс, что-то пошло не так',
+    buttonText: 'попробовать снова',
+  },
 };
