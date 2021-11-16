@@ -1,8 +1,9 @@
 import React, { FC } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import { AuthController } from '../controllers/AuthController';
+import { useAppDispatch } from '../hooks/redux-hooks';
 import { TRANSLATION } from '../lang/ru/translation';
-import { useAppDispatch } from '../store/hooks';
 import { authActions } from '../store/slices/authSlice';
 
 import { Button } from './ui/Button/Button';
@@ -11,8 +12,13 @@ import { Title } from './ui/Title/Title';
 
 export const Menu: FC<Record<string, never>> = () => {
   const dispatch = useAppDispatch();
+  const history = useHistory();
   const handleLogout = () =>
-    AuthController.logout().then(() => dispatch(authActions.resetCurrentUser()));
+    AuthController.logout().then(() => {
+      localStorage.setItem('isAuth', 'false');
+      dispatch(authActions.resetCurrentUser());
+      history.push('/login');
+    });
 
   return (
     <div className="menu">
