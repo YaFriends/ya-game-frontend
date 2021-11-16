@@ -5,8 +5,8 @@ import './Profile.scss';
 import { DUMMY_USER } from '../MOCKS/Dashboard';
 
 import { ChangePassword } from './settings/ChangePassword';
-import { Main } from './settings/Main';
-import { ModifyData } from './settings/ModifyData';
+import { EditInfo } from './settings/EditInfo';
+import { Settings } from './settings/Settings';
 
 export const Profile: FC<Record<string, never>> = () => {
   const { path, url } = useRouteMatch();
@@ -15,10 +15,10 @@ export const Profile: FC<Record<string, never>> = () => {
     <section className="profile">
       <Switch>
         <Route path={path} exact>
-          <Main url={url} userInfo={DUMMY_USER} />
+          <Settings url={url} userInfo={DUMMY_USER} />
         </Route>
         <Route path={`${path}/edit`}>
-          <ModifyData userInfo={DUMMY_USER} url={url} />
+          <EditInfo userInfo={DUMMY_USER} url={url} />
         </Route>
         <Route path={`${path}/password`}>
           <ChangePassword url={url} userInfo={DUMMY_USER} />
