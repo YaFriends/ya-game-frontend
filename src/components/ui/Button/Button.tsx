@@ -21,11 +21,8 @@ const DEFAULT_CLASSES: string[] = [
   'rounded-xl',
   'border-2',
   'text-base',
-  'bg-blue',
-  'text-white',
   'h-[34px]',
   'w-full',
-  'border-blue',
   'duration-300',
   'ease-in-out',
 ];
