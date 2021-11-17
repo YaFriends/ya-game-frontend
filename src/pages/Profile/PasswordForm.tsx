@@ -40,8 +40,8 @@ export const PasswordForm: FC = () => {
     },
   ]);
 
-  const handleChangePassword = (event: FormEvent<HTMLInputElement>) => {
-    const { name, value } = event.currentTarget;
+  const handleChangePassword = (event: FormEvent) => {
+    const { name, value } = event.target as HTMLInputElement;
     const changedIndex = inputAttributes.findIndex(attribute => attribute.name === name);
 
     setInputAttributes(prevState => {

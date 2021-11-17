@@ -20,7 +20,7 @@ const {
 
 export interface ProfileInfoProps {
   disabled?: boolean;
-  userInfo: Omit<UserData, 'avatar' | 'id'>;
+  userInfo: UserData;
 }
 
 export interface Inputs {
@@ -49,13 +49,13 @@ export const InformationForm: FC<ProfileInfoProps> = ({ disabled, userInfo }) =>
   useEffect(() => {
     const copyState = [...inputsAttributes];
     copyState.map(info => {
-      info.value = userInfo[info.name];
+      info.value = userInfo[info.name as keyof UserData];
     });
     setInputsAttributes(copyState);
   }, []);
 
-  const handleChangeInfo = (event: FormEvent<HTMLInputElement>) => {
-    const { name, value } = event.currentTarget;
+  const handleChangeInfo = (event: FormEvent) => {
+    const { name, value } = event.currentTarget as HTMLInputElement;
     const changedIndex = inputsAttributes.findIndex(attribute => attribute.name === name);
 
     setInputsAttributes(prevState => {

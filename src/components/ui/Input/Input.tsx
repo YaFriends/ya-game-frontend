@@ -13,7 +13,7 @@ export interface InputProps {
   id?: string;
   label?: string;
   error?: string;
-  change?: (event: FormEvent<HTMLInputElement>) => void;
+  change?: (event: FormEvent) => void;
 }
 
 const DEFAULT_CLASSES: string[] = [
