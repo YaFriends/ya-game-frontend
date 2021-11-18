@@ -1,19 +1,18 @@
-import React, { FC, FormEvent, useMemo } from 'react';
+import React, { FC, useMemo } from 'react';
+import { UseFormRegister, FieldError } from 'react-hook-form';
 
-import { Error } from './ElementError';
-import { Label } from './ElementLabel';
-// TODO: Добавить hint к input
+import { Label } from '../Label/Label';
+
+import './Input.scss';
+
 export interface InputProps {
-  name: string;
-  type?: string;
-  placeholder?: string;
-  required?: boolean;
-  disabled?: boolean;
-  success?: boolean;
-  id?: string;
+  register: UseFormRegister<Record<string, unknown>>;
+  error?: FieldError;
   label?: string;
-  error?: string;
-  change?: (e: FormEvent) => void;
+  type?: string;
+  id?: string;
+  name: string;
+  placeholder?: string;
 }
 
 const DEFAULT_CLASSES: string[] = [
@@ -24,58 +23,48 @@ const DEFAULT_CLASSES: string[] = [
   'rounded-12px',
   'border-2',
   'border-opacity-40',
-  'border-white',
-  'text-white',
   'placeholder-white',
   'px-3',
   'py-2',
   'focus:outline-none',
-  'focus:border-blue',
 ];
-const classes = (error?: string, success?: boolean, disabled?: boolean): string[] => {
+
+const classes = (error?: string): string[] => {
   const result = [...DEFAULT_CLASSES];
 
   if (error) {
-    result.push('bg-red');
-  } else if (success) {
-    result.push('bg-green');
-  } else if (disabled) {
-    result.push('bg-grey bg-opacity-40 cursor-not-allowed');
-  } else {
-    result.push('bg-black placeholder-opacity-40');
+    result.push('ui-input--error');
   }
 
   return result;
 };
 
+const Error: FC<{ text: string | undefined }> = ({ text }) => {
+  return <p className="text-red text-sm">{text}</p>;
+};
+
 export const Input: FC<InputProps> = ({
-  name,
+  register,
+  error,
+  label,
   type = 'text',
   id,
-  required,
-  label,
-  error,
+  name,
   placeholder,
-  disabled,
-  success,
-  change,
-}: InputProps) => {
-  const classesMemo = useMemo(() => classes(error, success, disabled), [error, success, disabled]);
-
+}) => {
+  const classesMemo = useMemo(() => classes(error?.message), [error?.message]);
   return (
     <div className="block relative mb-6 last:mb-0">
-      {label && <Label name={name} id={id} label={label} />}
+      {label && <Label name={name} id={id || name} label={label} />}
       <input
+        {...register(name)}
         className={classesMemo.join(' ')}
         name={name}
         type={type}
         id={id || name}
-        required={required}
         placeholder={placeholder}
-        disabled={disabled}
-        onChange={change}
       />
-      {error && <Error error={error} />}
+      {error && <Error text={error?.message} />}
     </div>
   );
 };

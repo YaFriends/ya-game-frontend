@@ -12,7 +12,7 @@ export const TRANSLATION: Record<string, Record<string, string>> = {
     inputEmailLabel: 'Email',
     inputEmailPlaceholder: 'Введите email',
     inputPhoneLabel: 'Телефон',
-    inputPhonePlaceholder: 'Введите телефон',
+    inputPhonePlaceholder: 'Введите телефон +7 999 999 99 99',
     inputPasswordLabel: 'Пароль',
     inputPasswordPlaceholder: 'Введите пароль',
     submitButtonText: 'Зарегистрироваться',

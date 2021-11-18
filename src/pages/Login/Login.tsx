@@ -1,4 +1,6 @@
-import React, { FC, FormEvent, useState } from 'react';
+import { yupResolver } from '@hookform/resolvers/yup';
+import React, { FC } from 'react';
+import { useForm, SubmitHandler } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 
 import { LoginData } from '../../api/AuthAPI';
@@ -12,6 +14,7 @@ import { useAppDispatch } from '../../hooks/redux-hooks';
 import { useAuth } from '../../hooks/use-auth';
 import { TRANSLATION } from '../../lang/ru/translation';
 import { authActions } from '../../store/slices/authSlice';
+import { LoginSchema } from '../../utils/ValidateSchema';
 import './Login.scss';
 
 export const Login: FC<Record<string, never>> = () => {
@@ -23,23 +26,17 @@ export const Login: FC<Record<string, never>> = () => {
     history.push('/');
   }
 
-  const initLoginData = {
-    login: '',
-    password: '',
-  };
-  const [form, setForm] = useState<LoginData>(initLoginData);
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    AuthController.login(form).then(response => dispatch(authActions.setCurrentUser(response)));
-  };
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm<LoginData>({
+    criteriaMode: 'all',
+    resolver: yupResolver(LoginSchema),
+  });
 
-  const handleChange = (e: FormEvent) => {
-    const input = e.target as HTMLInputElement;
-    const name = input.name;
-    const value = input.value;
-
-    setForm({ ...form, [name]: value });
-  };
+  const onSubmit: SubmitHandler<LoginData> = data =>
+    AuthController.login(data).then(response => dispatch(authActions.setCurrentUser(response)));
 
   return (
     <section className="login">
@@ -47,22 +44,22 @@ export const Login: FC<Record<string, never>> = () => {
         <Title text={TRANSLATION.Login.title} />
         <MainLink text={TRANSLATION.Login.linkToRegisterText} href="/register" />
       </div>
-      <Form name="loginForm" submit={handleSubmit}>
+      <Form name="loginForm" submit={handleSubmit(onSubmit)}>
         <div>
           <Input
-            name="login"
+            register={register}
+            error={errors.login}
             label={TRANSLATION.Login.inputLoginLabel}
+            name="login"
             placeholder={TRANSLATION.Login.inputLoginPlaceholder}
-            required
-            change={handleChange}
           />
           <Input
-            name="password"
-            type="password"
+            register={register}
+            error={errors.password}
             label={TRANSLATION.Login.inputPasswordLabel}
+            type="password"
+            name="password"
             placeholder={TRANSLATION.Login.inputPasswordPlaceholder}
-            required
-            change={handleChange}
           />
         </div>
         <div className="login__button">

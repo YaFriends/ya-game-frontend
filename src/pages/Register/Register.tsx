@@ -1,4 +1,6 @@
-import React, { FC, FormEvent, useState } from 'react';
+import { yupResolver } from '@hookform/resolvers/yup';
+import React, { FC } from 'react';
+import { useForm, SubmitHandler } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 
 import { SignUpData } from '../../api/AuthAPI';
@@ -12,6 +14,7 @@ import { useAppDispatch } from '../../hooks/redux-hooks';
 import { useAuth } from '../../hooks/use-auth';
 import { TRANSLATION } from '../../lang/ru/translation';
 import { authActions } from '../../store/slices/authSlice';
+import { SignUpSchema } from '../../utils/ValidateSchema';
 import './Register.scss';
 
 export const Register: FC<Record<string, never>> = () => {
@@ -23,27 +26,17 @@ export const Register: FC<Record<string, never>> = () => {
     history.push('/');
   }
 
-  const initSignUpData = {
-    first_name: '',
-    second_name: '',
-    login: '',
-    email: '',
-    phone: '',
-    password: '',
-  };
-  const [form, setForm] = useState<SignUpData>(initSignUpData);
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    AuthController.signUp(form).then(response => dispatch(authActions.setCurrentUser(response)));
-  };
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm<SignUpData>({
+    criteriaMode: 'all',
+    resolver: yupResolver(SignUpSchema),
+  });
 
-  const handleChange = (e: FormEvent) => {
-    const input = e.target as HTMLInputElement;
-    const name = input.name;
-    const value = input.value;
-
-    setForm({ ...form, [name]: value });
-  };
+  const onSubmit: SubmitHandler<SignUpData> = data =>
+    AuthController.signUp(data).then(response => dispatch(authActions.setCurrentUser(response)));
 
   return (
     <section className="register">
@@ -51,50 +44,51 @@ export const Register: FC<Record<string, never>> = () => {
         <MainLink text="Назад" href="/login" />
         <Title text="Регистрация" />
       </div>
-      <Form name="registerForm" submit={handleSubmit}>
+      <Form name="registerForm" submit={handleSubmit(onSubmit)}>
         <div>
           <Input
-            name="first_name"
+            register={register}
+            error={errors.first_name}
             label={TRANSLATION.Register.inputFirstNameLabel}
+            name="first_name"
             placeholder={TRANSLATION.Register.inputFirstNamePlaceholder}
-            required
-            change={handleChange}
           />
           <Input
-            name="second_name"
+            register={register}
+            error={errors.second_name}
             label={TRANSLATION.Register.inputSecondNameLabel}
+            name="second_name"
             placeholder={TRANSLATION.Register.inputSecondNamePlaceholder}
-            required
-            change={handleChange}
           />
           <Input
-            name="login"
+            register={register}
+            error={errors.login}
             label={TRANSLATION.Register.inputLoginLabel}
+            name="login"
             placeholder={TRANSLATION.Register.inputLoginPlaceholder}
-            required
-            change={handleChange}
           />
           <Input
-            name="email"
+            register={register}
+            error={errors.email}
             label={TRANSLATION.Register.inputEmailLabel}
+            name="email"
+            type="email"
             placeholder={TRANSLATION.Register.inputEmailPlaceholder}
-            required
-            change={handleChange}
           />
           <Input
-            name="phone"
+            register={register}
+            error={errors.phone}
             label={TRANSLATION.Register.inputPhoneLabel}
+            name="phone"
             placeholder={TRANSLATION.Register.inputPhonePlaceholder}
-            required
-            change={handleChange}
           />
           <Input
+            register={register}
+            error={errors.password}
             name="password"
-            type="password"
             label={TRANSLATION.Register.inputPasswordLabel}
+            type="password"
             placeholder={TRANSLATION.Register.inputPasswordPlaceholder}
-            required
-            change={handleChange}
           />
         </div>
         <div className="register__button">
