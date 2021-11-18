@@ -17,19 +17,19 @@ export class AuthAPI {
     this.endpoint = '/auth';
   }
 
-  signUp(data: SignUpData): AxiosPromise {
+  signUp(data: SignUpData): AxiosPromise<{ id: number }> {
     return http.post(`${this.endpoint}/signup`, data);
   }
 
-  login(data: LoginData): AxiosPromise {
+  login(data: LoginData): AxiosPromise<void> {
     return http.post(`${this.endpoint}/signin`, data);
   }
 
-  logout(): AxiosPromise {
+  logout(): AxiosPromise<void> {
     return http.post(`${this.endpoint}/logout`);
   }
 
-  read(): AxiosPromise {
+  read(): AxiosPromise<UserData> {
     return http.get(`${this.endpoint}/user`);
   }
 }

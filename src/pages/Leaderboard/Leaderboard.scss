@@ -1,5 +1,5 @@
 .leaderboard {
-  @apply max-w-max h-screen mx-auto flex items-center justify-center flex-col px-10;
+  @apply max-w-max flex-grow mx-auto flex items-center justify-center flex-col px-10;
 
   &__header {
     @apply w-full flex items-center justify-between mb-6;

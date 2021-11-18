@@ -1,4 +1,6 @@
 .ui-title {
+  @apply text-2xl;
+
   &--light {
     @apply text-black;
   }
