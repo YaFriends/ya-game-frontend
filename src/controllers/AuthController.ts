@@ -11,7 +11,7 @@ class Controller {
   async signUp(data: SignUpData) {
     return this.api
       .signUp(data)
-      .then(await this.fetchUser())
+      .then(() => this.fetchUser())
       .catch(e => {
         throw Error(e);
       });
@@ -20,7 +20,7 @@ class Controller {
   async login(data: LoginData) {
     return this.api
       .login(data)
-      .then(await this.fetchUser())
+      .then(() => this.fetchUser())
       .catch(e => {
         throw Error(e);
       });
