@@ -15,7 +15,7 @@ interface MainProps {
 
 export const Settings: FC<MainProps> = ({ url, userInfo }) => {
   return (
-    <>
+    <div className="profile">
       <div className="profile__menu">
         <UserThumbnail avatar={userInfo.avatar} login={userInfo.login} />
         <MainLink text={LinkToChangeInfo} href={`${url}/edit`} extendClass="ui-link--button mb-6" />
@@ -29,6 +29,6 @@ export const Settings: FC<MainProps> = ({ url, userInfo }) => {
       <div className="profile__inputs">
         <InformationForm disabled={true} userInfo={userInfo} />
       </div>
-    </>
+    </div>
   );
 };

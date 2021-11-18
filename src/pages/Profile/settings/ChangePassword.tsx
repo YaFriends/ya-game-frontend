@@ -16,7 +16,7 @@ interface PasswordPageProps {
 
 export const ChangePassword: FC<PasswordPageProps> = ({ url, userInfo }) => {
   return (
-    <>
+    <div className="profile">
       <div className="profile__menu">
         <UserThumbnail avatar={userInfo.avatar} login={userInfo.login} />
         <Button
@@ -31,6 +31,6 @@ export const ChangePassword: FC<PasswordPageProps> = ({ url, userInfo }) => {
       <div className="profile__inputs">
         <PasswordForm />
       </div>
-    </>
+    </div>
   );
 };

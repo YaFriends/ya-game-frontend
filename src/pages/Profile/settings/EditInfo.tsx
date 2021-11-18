@@ -16,7 +16,7 @@ interface EditProps {
 
 export const EditInfo: FC<EditProps> = ({ url, userInfo }) => {
   return (
-    <>
+    <div className="profile">
       <div className="profile__menu">
         <UserThumbnail avatar={userInfo.avatar} login={userInfo.login} />
         <Button
@@ -31,6 +31,6 @@ export const EditInfo: FC<EditProps> = ({ url, userInfo }) => {
       <div className="profile__inputs">
         <InformationForm disabled={false} userInfo={userInfo} />
       </div>
-    </>
+    </div>
   );
 };

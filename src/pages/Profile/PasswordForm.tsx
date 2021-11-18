@@ -24,18 +24,21 @@ export const PasswordForm: FC = () => {
       name: 'oldPassword',
       label: OldPasswordLabel,
       placeholder: OldPasswordPlaceholder,
+      error: '',
       value: '',
     },
     {
       name: 'newPassword',
       label: NewPasswordLabel,
       placeholder: NewPasswordPlaceholder,
+      error: '',
       value: '',
     },
     {
       name: 'confirmNewPassword',
       label: ConfirmPasswordLabel,
       placeholder: ConfirmPasswordPlaceholder,
+      error: '',
       value: '',
     },
   ]);
@@ -43,15 +46,15 @@ export const PasswordForm: FC = () => {
   const handleChangePassword = (event: FormEvent) => {
     const { name, value } = event.target as HTMLInputElement;
     const changedIndex = inputAttributes.findIndex(attribute => attribute.name === name);
-
-    setInputAttributes(prevState => {
-      const copyState = [...prevState];
-      copyState[changedIndex].value = value;
-      return copyState;
-    });
+    const copyState = [...inputAttributes];
+    copyState[changedIndex] = {
+      ...copyState[changedIndex],
+      value: value,
+    };
+    setInputAttributes(copyState);
   };
 
-  const renderPasswordInputs = inputAttributes.map(attribute => {
+  const inputsList = inputAttributes.map(attribute => {
     return <Input key={attribute.name} {...attribute} required change={handleChangePassword} />;
   });
 
@@ -59,24 +62,40 @@ export const PasswordForm: FC = () => {
     return inputAttributes.findIndex(attribute => attribute.name === name);
   };
 
-  const submit = (event: FormEvent) => {
+  const setError = (index: number) => {
+    const copyState = [...inputAttributes];
+    copyState[index] = {
+      ...copyState[index],
+      error: ConfirmPasswordError,
+    };
+    return copyState;
+  };
+
+  const removeErrors = () => {
+    const copyState = [...inputAttributes];
+    return copyState.map(input => {
+      return { ...input, error: '' };
+    });
+  };
+
+  const changePassword = (event: FormEvent) => {
     event.preventDefault();
     const newPasswordIdx = findIndexByName('newPassword');
     const confirmPasswordIdx = findIndexByName('confirmNewPassword');
 
     if (inputAttributes[newPasswordIdx].value !== inputAttributes[confirmPasswordIdx].value) {
-      setInputAttributes(prevState => {
-        const copyState = [...prevState];
-        copyState[confirmPasswordIdx].error = ConfirmPasswordError;
-        return copyState;
-      });
+      const newState = setError(confirmPasswordIdx);
+      setInputAttributes(newState);
+    } else {
+      const newState = removeErrors();
+      setInputAttributes(newState);
     }
   };
 
   return (
-    <Form name="profile-password" submit={submit}>
+    <Form name="profile-password" submit={changePassword}>
       <Title text={PasswordTitle} extendClass="text-right mb-6" />
-      {renderPasswordInputs}
+      {inputsList}
     </Form>
   );
 };

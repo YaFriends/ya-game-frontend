@@ -49,7 +49,7 @@ export const InformationForm: FC<ProfileInfoProps> = ({ disabled, userInfo }) =>
   useEffect(() => {
     const copyState = [...inputsAttributes];
     copyState.map(info => {
-      info.value = userInfo[info.name as keyof UserData];
+      return { ...info, value: userInfo[info.name as keyof UserData] };
     });
     setInputsAttributes(copyState);
   }, []);
@@ -57,15 +57,15 @@ export const InformationForm: FC<ProfileInfoProps> = ({ disabled, userInfo }) =>
   const handleChangeInfo = (event: FormEvent) => {
     const { name, value } = event.currentTarget as HTMLInputElement;
     const changedIndex = inputsAttributes.findIndex(attribute => attribute.name === name);
-
-    setInputsAttributes(prevState => {
-      const copyState = [...prevState];
-      copyState[changedIndex].value = value;
-      return copyState;
-    });
+    const copyState = [...inputsAttributes];
+    copyState[changedIndex] = {
+      ...copyState[changedIndex],
+      value: value,
+    };
+    setInputsAttributes(copyState);
   };
 
-  const renderInputs = inputsAttributes.map(attribute => {
+  const inputList = inputsAttributes.map(attribute => {
     return (
       <Input
         key={attribute.name}
@@ -77,18 +77,17 @@ export const InformationForm: FC<ProfileInfoProps> = ({ disabled, userInfo }) =>
     );
   });
 
-  const submit = (event: FormEvent) => {
+  const changeProfileInformation = (event: FormEvent) => {
     event.preventDefault();
-    setInputsAttributes(prevState => prevState);
     inputsAttributes.forEach(attribute => {
       console.log({ name: attribute.name, value: attribute.value });
     });
   };
 
   return (
-    <Form submit={submit} name="profile-edit">
+    <Form submit={changeProfileInformation} name="profile-edit">
       <Title text={disabled ? EditDisabledTitle : EditTitle} extendClass="text-right mb-6" />
-      {renderInputs}
+      {inputList}
     </Form>
   );
 };
