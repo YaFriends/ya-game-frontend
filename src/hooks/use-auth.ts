@@ -11,7 +11,9 @@ export const useAuth = (): UseAuth => {
   const currentUser: UserData | null = useAppSelector(state => state.auth.currentUser);
   const isAuth = Boolean(currentUser) || localStorage.getItem('isAuth') === 'true';
 
-  localStorage.setItem('isAuth', String(isAuth));
+  if (typeof window !== 'undefined') {
+    localStorage.setItem('isAuth', String(isAuth));
+  }
 
   return {
     isAuth,

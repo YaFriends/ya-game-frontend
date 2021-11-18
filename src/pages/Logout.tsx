@@ -10,7 +10,10 @@ export const Logout: FC<Record<string, never>> = () => {
   const history = useHistory();
 
   AuthController.logout().then(() => {
-    localStorage.setItem('isAuth', 'false');
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('isAuth', 'false');
+    }
+
     dispatch(authActions.setCurrentUser(null));
     history.push('/login');
   });
