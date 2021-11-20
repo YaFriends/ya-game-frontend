@@ -1,5 +1,7 @@
 import React, { FC, FormEvent, useMemo } from 'react';
 
+// TODO: Переписать форму на Formik
+
 interface FormProps {
   name: string;
   extendClass?: string;

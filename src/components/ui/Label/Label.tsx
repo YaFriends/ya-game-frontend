@@ -1,7 +1,5 @@
 import React, { FC } from 'react';
 
-//TODO поменять в Input локальный Label на этот
-
 type LabelProps = {
   name: string;
   id?: string;

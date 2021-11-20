@@ -1,3 +1,5 @@
+import { AxiosPromise } from 'axios';
+
 import { http } from './http';
 
 export interface AddUserToLeaderboard {
@@ -29,15 +31,15 @@ export class LeaderboardAPI {
     this.endpoint = '/leaderboard';
   }
 
-  addUserToLeaderboard(data: AddUserToLeaderboard): Promise<void> {
+  addUserToLeaderboard(data: AddUserToLeaderboard): AxiosPromise<void> {
     return http.post(this.endpoint, data);
   }
 
-  getAllLeaderboards(data: GetAllLeaderboards): Promise<LeaderboardData> {
+  getAllLeaderboards(data: GetAllLeaderboards): AxiosPromise<LeaderboardData[]> {
     return http.post(`${this.endpoint}/all`, data);
   }
 
-  getTeamLeaderboard(teamName: string, data: GetAllLeaderboards): Promise<LeaderboardData> {
+  getTeamLeaderboard(teamName: string, data: GetAllLeaderboards): AxiosPromise<LeaderboardData> {
     return http.post(`${this.endpoint}/${teamName}`, data);
   }
 }

@@ -1,10 +1,13 @@
-import React, { FC, FormEvent, useEffect, useState } from 'react';
+import { yupResolver } from '@hookform/resolvers/yup';
+import React, { FC } from 'react';
+import { useForm, SubmitHandler } from 'react-hook-form';
 
-import { UserData } from '../../api/UserAPI';
 import { Form } from '../../components/ui/Form/Form';
 import { Input } from '../../components/ui/Input/Input';
 import { Title } from '../../components/ui/Title/Title';
 import { TRANSLATION } from '../../lang/ru/translation';
+import { ProfileInfoSchema } from 'utils/ValidateSchema';
+import { UserData } from 'api/UserAPI';
 
 const {
   EditDisabledTitle,
@@ -20,20 +23,24 @@ const {
 
 export interface ProfileInfoProps {
   disabled?: boolean;
-  userInfo: UserData;
 }
 
-export interface Inputs {
-  name: string;
-  label: string;
-  placeholder: string;
-  disabled?: boolean;
-  value?: string | number;
-  error?: string;
-}
+type ProfileInfo = Omit<UserData, 'avatar' | 'id'>
 
-export const InformationForm: FC<ProfileInfoProps> = ({ disabled, userInfo }) => {
-  const [inputsAttributes, setInputsAttributes] = useState<Inputs[]>([
+const {
+  handleSubmit,
+  register,
+  formState: { errors },
+} = useForm<ProfileInfo>({
+  criteriaMode: 'all',
+  resolver: yupResolver(ProfileInfoSchema),
+});
+
+const onSubmit: SubmitHandler<ProfileInfo> = data => console.log(data);
+
+
+export const InformationForm: FC<ProfileInfoProps> = ({ disabled }) => {
+  /*const [inputsAttributes, setInputsAttributes] = useState<Inputs[]>([
     { name: 'first_name', label: AttributeName, placeholder: AttributeNamePlaceholder, value: '' },
     {
       name: 'second_name',
@@ -44,50 +51,24 @@ export const InformationForm: FC<ProfileInfoProps> = ({ disabled, userInfo }) =>
     { name: 'email', label: AttributeEmail, placeholder: AttributeEmail, value: '' },
     { name: 'phone', label: AttributePhone, placeholder: AttributePhone, value: '' },
     { name: 'display_name', label: AttributeNickname, placeholder: AttributeNickname, value: '' },
-  ]);
+  ]);*/
 
-  useEffect(() => {
-    const copyState = [...inputsAttributes];
-    copyState.map(info => {
-      return { ...info, value: userInfo[info.name as keyof UserData] };
-    });
-    setInputsAttributes(copyState);
-  }, []);
 
-  const handleChangeInfo = (event: FormEvent) => {
-    const { name, value } = event.currentTarget as HTMLInputElement;
-    const changedIndex = inputsAttributes.findIndex(attribute => attribute.name === name);
-    const copyState = [...inputsAttributes];
-    copyState[changedIndex] = {
-      ...copyState[changedIndex],
-      value: value,
-    };
-    setInputsAttributes(copyState);
-  };
 
-  const inputList = inputsAttributes.map(attribute => {
-    return (
-      <Input
-        key={attribute.name}
-        {...attribute}
-        disabled={disabled ?? false}
-        change={handleChangeInfo}
-        required
-      />
-    );
-  });
 
-  const changeProfileInformation = (event: FormEvent) => {
-    event.preventDefault();
-    inputsAttributes.forEach(attribute => {
-      console.log({ name: attribute.name, value: attribute.value });
-    });
-  };
+
 
   return (
-    <Form submit={changeProfileInformation} name="profile-edit">
+    <Form submit={handleSubmit(onSubmit)} name="profile-edit">
       <Title text={disabled ? EditDisabledTitle : EditTitle} extendClass="text-right mb-6" />
-      {inputList}
+      <Input
+        register={register}
+        error={errors.first_name}
+        label={AttributeName}
+        name="first_name"
+        placeholder={AttributeNamePlaceholder}
+      />
+
     </Form>
   );
 };

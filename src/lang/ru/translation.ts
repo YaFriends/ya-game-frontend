@@ -12,7 +12,7 @@ export const TRANSLATION: Record<string, Record<string, string>> = {
     inputEmailLabel: 'Email',
     inputEmailPlaceholder: 'Введите email',
     inputPhoneLabel: 'Телефон',
-    inputPhonePlaceholder: 'Введите телефон',
+    inputPhonePlaceholder: 'Введите телефон +7 999 999 99 99',
     inputPasswordLabel: 'Пароль',
     inputPasswordPlaceholder: 'Введите пароль',
     submitButtonText: 'Зарегистрироваться',
@@ -92,6 +92,7 @@ export const TRANSLATION: Record<string, Record<string, string>> = {
   ProfileHistory: { label: 'Профиль: История', ReturnToMain: 'Вернуться на главную' },
   Forum: {
     label: 'Форум',
+    subtitle: 'Скоро тут будет форум :)',
   },
   Game: {
     Wins: 'Побед',
@@ -101,5 +102,16 @@ export const TRANSLATION: Record<string, Record<string, string>> = {
   GameResult: {
     win: 'Победа',
     lose: 'Поражение',
+  },
+  Error404: {
+    label: '404',
+    subtitle: 'Что-то произошло, но вы держитесь!',
+    link: 'В главное меню',
+  },
+  Main: {
+    label: 'Скоро тут будет лендинг',
+    linkToLogin: 'Авторизоваться',
+    linkToDashboard: 'Пройти в главное меню',
+    linkToRegister: 'Зарегистрироваться',
   },
 };
