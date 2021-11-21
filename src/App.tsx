@@ -40,7 +40,7 @@ const App: FC<Record<string, never>> = () => {
         <PrivateRoute path="/game/:id" component={GameSession} />
         <PrivateRoute path="/leaderboard" exact component={Leaderboard} />
         <PrivateRoute path="/profile/history" exact component={ProfileHistory} />
-        <PrivateRoute path="/profile" exact component={Profile} />
+        <PrivateRoute path="/profile" component={Profile} />
         <PrivateRoute path="/logout" exact component={Logout} />
         <Route path="/main" component={Main} />
         <Route path="*" component={Error404} />

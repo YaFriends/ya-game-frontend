@@ -19,12 +19,16 @@ const {
   PasswordTitle,
 } = TRANSLATION.Profile;
 
+interface ProfilePassword extends UserUpdatePasswordProps {
+  confirmPassword: string;
+}
+
 export const PasswordForm: FC = () => {
   const {
     handleSubmit,
     register,
     formState: { errors },
-  } = useForm<UserUpdatePasswordProps>({
+  } = useForm<ProfilePassword>({
     criteriaMode: 'all',
     resolver: yupResolver(ProfilePasswordSchema),
   });
@@ -38,6 +42,7 @@ export const PasswordForm: FC = () => {
         error={errors.oldPassword}
         label={OldPasswordLabel}
         name="oldPassword"
+        type="password"
         placeholder={OldPasswordPlaceholder}
       />
       <Input
@@ -45,13 +50,15 @@ export const PasswordForm: FC = () => {
         error={errors.newPassword}
         label={NewPasswordLabel}
         name="newPassword"
+        type="password"
         placeholder={NewPasswordPlaceholder}
       />
       <Input
         register={register}
-        error={errors.newPassword}
+        error={errors.confirmPassword}
         label={ConfirmPasswordLabel}
         name="confirmPassword"
+        type="password"
         placeholder={ConfirmPasswordPlaceholder}
       />
     </Form>

@@ -46,6 +46,7 @@ export const InformationForm: FC<ProfileInfoProps> = ({ disabled }) => {
         error={errors.first_name}
         label={AttributeName}
         name="first_name"
+        disabled={disabled}
         placeholder={AttributeNamePlaceholder}
       />
       <Input
@@ -53,13 +54,16 @@ export const InformationForm: FC<ProfileInfoProps> = ({ disabled }) => {
         error={errors.second_name}
         label={AttributeSecondName}
         name="second_name"
+        disabled={disabled}
         placeholder={AttributeSecondNamePlaceholder}
       />
       <Input
         register={register}
         error={errors.email}
         label={AttributeEmail}
+        type="email"
         name="email"
+        disabled={disabled}
         placeholder={AttributeEmail}
       />
       <Input
@@ -67,6 +71,7 @@ export const InformationForm: FC<ProfileInfoProps> = ({ disabled }) => {
         error={errors.phone}
         label={AttributePhone}
         name="phone"
+        disabled={disabled}
         placeholder={AttributePhone}
       />
       <Input
@@ -74,6 +79,7 @@ export const InformationForm: FC<ProfileInfoProps> = ({ disabled }) => {
         error={errors.display_name}
         label={AttributeNickname}
         name="display_name"
+        disabled={disabled}
         placeholder={AttributeNickname}
       />
     </Form>
