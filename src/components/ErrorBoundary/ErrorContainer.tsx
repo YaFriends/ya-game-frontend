@@ -9,9 +9,9 @@ const { message, buttonText } = TRANSLATION.ErrorMessage;
 
 export const ErrorContainer: FC<FallbackProps> = ({ error, resetErrorBoundary }) => {
   return (
-    <div className="container" role="alert">
-      <Title text={message} />
-      <pre>{error.message}</pre>
+    <div className="container p-20" role="alert">
+      <Title text={message} extendClass="mb-10" />
+      <pre className="w-full whitespace-normal mb-10">{error.message}</pre>
       <Button type="button" click={resetErrorBoundary} text={buttonText} />
     </div>
   );
