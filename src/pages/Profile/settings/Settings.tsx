@@ -27,7 +27,7 @@ export const Settings: FC<MainProps> = ({ url, userInfo }) => {
         <MainLink text={LinkToBack} href="/" />
       </div>
       <div className="profile__inputs">
-        <InformationForm disabled={true} userInfo={userInfo} />
+        <InformationForm disabled={true} />
       </div>
     </div>
   );

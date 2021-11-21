@@ -70,7 +70,6 @@ export const TRANSLATION: Record<string, Record<string, string>> = {
     LinkToChangeInfo: 'Изменить данные',
     LinkToChangePassword: 'Изменить пароль',
     LinkToBack: 'Назад',
-    ConfirmPasswordError: 'Пароль не совпадает',
     PasswordTitle: 'Настройки - Изменить пароль',
     OldPasswordLabel: 'Старый пароль',
     OldPasswordPlaceholder: 'Введите старый пароль',
