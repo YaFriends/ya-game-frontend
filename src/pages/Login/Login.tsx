@@ -1,18 +1,42 @@
-import React, { FC, FormEvent } from 'react';
+import { yupResolver } from '@hookform/resolvers/yup';
+import React, { FC } from 'react';
+import { useForm, SubmitHandler } from 'react-hook-form';
+import { useHistory } from 'react-router-dom';
 
+import { LoginData } from '../../api/AuthAPI';
 import { Button } from '../../components/ui/Button/Button';
 import { Form } from '../../components/ui/Form/Form';
 import { Input } from '../../components/ui/Input/Input';
 import { MainLink } from '../../components/ui/Link/Link';
 import { Title } from '../../components/ui/Title/Title';
-import './Login.scss';
+import { AuthController } from '../../controllers/AuthController';
+import { useAppDispatch } from '../../hooks/redux-hooks';
+import { useAuth } from '../../hooks/use-auth';
 import { TRANSLATION } from '../../lang/ru/translation';
+import { authActions } from '../../store/slices/authSlice';
+import { LoginSchema } from '../../utils/ValidateSchema';
+import './Login.scss';
 
 export const Login: FC<Record<string, never>> = () => {
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    console.log('handleSubmit', e);
-  };
+  const dispatch = useAppDispatch();
+  const history = useHistory();
+  const { isAuth } = useAuth();
+
+  if (isAuth) {
+    history.push('/');
+  }
+
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm<LoginData>({
+    criteriaMode: 'all',
+    resolver: yupResolver(LoginSchema),
+  });
+
+  const onSubmit: SubmitHandler<LoginData> = data =>
+    AuthController.login(data).then(response => dispatch(authActions.setCurrentUser(response)));
 
   return (
     <section className="login">
@@ -20,19 +44,22 @@ export const Login: FC<Record<string, never>> = () => {
         <Title text={TRANSLATION.Login.title} />
         <MainLink text={TRANSLATION.Login.linkToRegisterText} href="/register" />
       </div>
-      <Form name="loginForm" submit={handleSubmit}>
+      <Form name="loginForm" submit={handleSubmit(onSubmit)}>
         <div>
           <Input
-            name="input-login"
+            register={register}
+            error={errors.login}
             label={TRANSLATION.Login.inputLoginLabel}
+            name="login"
             placeholder={TRANSLATION.Login.inputLoginPlaceholder}
-            required
           />
           <Input
-            name="input-password"
+            register={register}
+            error={errors.password}
             label={TRANSLATION.Login.inputPasswordLabel}
+            type="password"
+            name="password"
             placeholder={TRANSLATION.Login.inputPasswordPlaceholder}
-            required
           />
         </div>
         <div className="login__button">
@@ -40,7 +67,7 @@ export const Login: FC<Record<string, never>> = () => {
         </div>
       </Form>
       <div className="login__link">
-        <MainLink text={TRANSLATION.Login.linkToDashboardText} href="/" />
+        <MainLink text={TRANSLATION.Login.linkToDashboardText} href="/main" />
       </div>
     </section>
   );

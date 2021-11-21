@@ -1,4 +1,6 @@
 .ui-subtitle {
+  @apply text-lg;
+
   &--light {
     @apply text-black;
   }

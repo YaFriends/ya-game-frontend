@@ -1,55 +1,51 @@
 import React, { FC } from 'react';
-import { Provider } from 'react-redux';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 
-import { ErrorBoundary } from './components/ErrorBoundary/ErrorBoundary';
-import { Button } from './components/ui/Button/Button';
-import { Title } from './components/ui/Title/Title';
-import { TRANSLATION } from './lang/ru/translation';
+import { PrivateRoute } from './components/PrivateRoute';
+import { AuthController } from './controllers/AuthController';
+import { useAppDispatch } from './hooks/redux-hooks';
+import { useAuth } from './hooks/use-auth';
 import { Dashboard } from './pages/Dashboard/Dashboard';
-import { Error404 } from './pages/Error404';
-import { Forum } from './pages/Forum';
+import { Error404 } from './pages/Error404/Error404';
+import { Forum } from './pages/Forum/Forum';
 import { GameCreation } from './pages/GameCreation';
 import { GameLobby } from './pages/GameLobby';
 import { GameSession } from './pages/GameSession';
 import { Leaderboard } from './pages/Leaderboard/Leaderboard';
 import { Login } from './pages/Login/Login';
+import { Logout } from './pages/Logout';
+import { Main } from './pages/Main/Main';
 import { Profile } from './pages/Profile';
 import { ProfileHistory } from './pages/ProfileHistory/ProfileHistory';
 import { Register } from './pages/Register/Register';
-import { store } from './store';
+import { authActions } from './store/slices/authSlice';
 
 const App: FC<Record<string, never>> = () => {
-  const { message, buttonText } = TRANSLATION.ErrorMessage;
+  const dispatch = useAppDispatch();
+  const { currentUser } = useAuth();
+
+  if (!currentUser) {
+    AuthController.fetchUser().then(response => dispatch(authActions.setCurrentUser(response)));
+  }
+
   return (
-    <ErrorBoundary
-      fallbackRender={({ error, resetErrorBoundary }) => (
-        <div className="container" role="alert">
-          <Title text={message} />
-          <pre>{error.message}</pre>
-          <Button type="button" click={resetErrorBoundary} text={buttonText} />
-        </div>
-      )}>
-      <Provider store={store}>
-        <Router>
-          <main className="font-body text-black container game-container">
-            <Switch>
-              <Route path="/" exact component={Dashboard} />
-              <Route path="/forum" component={Forum} />
-              <Route path="/game/create" component={GameCreation} />
-              <Route path="/game/lobby" component={GameLobby} />
-              <Route path="/game/:id" component={GameSession} />
-              <Route path="/leaderboard" component={Leaderboard} />
-              <Route path="/login" component={Login} />
-              <Route path="/register" component={Register} />
-              <Route path="/profile/history" component={ProfileHistory} />
-              <Route path="/profile" component={Profile} />
-              <Route path="*" component={Error404} />
-            </Switch>
-          </main>
-        </Router>
-      </Provider>
-    </ErrorBoundary>
+    <main className="font-body text-black container game-container">
+      <Switch>
+        <Route path="/login" exact component={Login} />
+        <Route path="/register" exact component={Register} />
+        <PrivateRoute path="/" exact component={Dashboard} />
+        <PrivateRoute path="/forum" exact component={Forum} />
+        <PrivateRoute path="/game/create" exact component={GameCreation} />
+        <PrivateRoute path="/game/lobby" exact component={GameLobby} />
+        <PrivateRoute path="/game/:id" component={GameSession} />
+        <PrivateRoute path="/leaderboard" exact component={Leaderboard} />
+        <PrivateRoute path="/profile/history" exact component={ProfileHistory} />
+        <PrivateRoute path="/profile" exact component={Profile} />
+        <PrivateRoute path="/logout" exact component={Logout} />
+        <Route path="/main" component={Main} />
+        <Route path="*" component={Error404} />
+      </Switch>
+    </main>
   );
 };
 

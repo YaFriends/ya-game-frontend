@@ -30,11 +30,7 @@ export const Leaderboard: FC<Record<string, never>> = () => {
 
   useEffect(() => {
     LeaderboardController.getAllLeaderboards(mockGetAll).then(response => {
-      const result: LeaderboardData[] = [
-        ...leaderboards,
-        (response as unknown as LeaderboardData[])[0],
-      ];
-      setLeaderboard(result);
+      setLeaderboard([...leaderboards, ...response]);
       getPositionForCurrentUserOnLeaderboard();
     });
   }, []);
