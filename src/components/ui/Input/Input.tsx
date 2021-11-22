@@ -13,6 +13,7 @@ export interface InputProps {
   id?: string;
   name: string;
   placeholder?: string;
+  disabled?: boolean;
 }
 
 const DEFAULT_CLASSES: string[] = [
@@ -29,13 +30,16 @@ const DEFAULT_CLASSES: string[] = [
   'focus:outline-none',
 ];
 
-const classes = (error?: string): string[] => {
+const classes = (error?: string, disabled?: boolean): string[] => {
   const result = [...DEFAULT_CLASSES];
 
   if (error) {
     result.push('ui-input--error');
   }
 
+  if (disabled) {
+    result.push('bg-grey bg-opacity-40 cursor-not-allowed');
+  }
   return result;
 };
 
@@ -51,8 +55,9 @@ export const Input: FC<InputProps> = ({
   id,
   name,
   placeholder,
+  disabled = false,
 }) => {
-  const classesMemo = useMemo(() => classes(error?.message), [error?.message]);
+  const classesMemo = useMemo(() => classes(error?.message, disabled), [error?.message]);
   return (
     <div className="block relative mb-6 last:mb-0">
       {label && <Label name={name} id={id || name} label={label} />}
@@ -63,6 +68,7 @@ export const Input: FC<InputProps> = ({
         type={type}
         id={id || name}
         placeholder={placeholder}
+        disabled={disabled}
       />
       {error && <Error text={error?.message} />}
     </div>

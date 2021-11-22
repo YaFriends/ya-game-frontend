@@ -30,6 +30,15 @@ const login = yup
   .min(3, ({ min }) => `Длина логина должна быть больше ${min} символов`)
   .max(20, ({ max }) => `Длина логина должна быть меньше ${max} символов`)
   .required('Это поле обязательное');
+const display_name = yup
+  .string()
+  .matches(/^[A-Za-z0-9_-]*$/g, {
+    message:
+      'Логин только из латиницы, может содержать цифры, но не состоять из них, без пробелов, без спецсимволов (допустимы дефис и нижнее подчёркивание)',
+  })
+  .min(3, ({ min }) => `Длина логина должна быть больше ${min} символов`)
+  .max(20, ({ max }) => `Длина логина должна быть меньше ${max} символов`)
+  .required('Это поле обязательное');
 const email = yup.string().email('Введен некорректный email').required('Это поле обязательное');
 const phone = yup
   .string()
@@ -60,4 +69,20 @@ export const SignUpSchema = yup.object({
   email,
   phone,
   password,
+});
+
+export const ProfileInfoSchema = yup.object({
+  first_name,
+  second_name,
+  login,
+  email,
+  phone,
+  password,
+  display_name,
+});
+
+export const ProfilePasswordSchema = yup.object({
+  newPassword: password,
+  oldPassword: password,
+  confirmPassword: password,
 });

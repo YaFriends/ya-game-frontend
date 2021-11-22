@@ -22,7 +22,7 @@ const classes = (extendClass?: string): string[] => {
 export const Form: FC<FormProps> = ({ name, extendClass = '', submit, children }) => {
   const classesMemo = useMemo(() => classes(extendClass), [extendClass]);
   return (
-    <form name={name} className={classesMemo.join(' ')} onSubmit={submit}>
+    <form name={name} className={classesMemo.join(' ')} id={name} onSubmit={submit}>
       {React.Children.map(children, child => child)}
     </form>
   );

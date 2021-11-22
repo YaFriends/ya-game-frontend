@@ -8,14 +8,14 @@ import { useAuth } from './hooks/use-auth';
 import { Dashboard } from './pages/Dashboard/Dashboard';
 import { Error404 } from './pages/Error404/Error404';
 import { Forum } from './pages/Forum/Forum';
-import { GameCreation } from './pages/GameCreation';
+import { GameCreation } from './pages/GameCreation/GameCreation';
 import { GameLobby } from './pages/GameLobby';
 import { GameSession } from './pages/GameSession';
 import { Leaderboard } from './pages/Leaderboard/Leaderboard';
 import { Login } from './pages/Login/Login';
 import { Logout } from './pages/Logout';
 import { Main } from './pages/Main/Main';
-import { Profile } from './pages/Profile';
+import { Profile } from './pages/Profile/Profile';
 import { ProfileHistory } from './pages/ProfileHistory/ProfileHistory';
 import { Register } from './pages/Register/Register';
 import { authActions } from './store/slices/authSlice';
@@ -40,7 +40,7 @@ const App: FC<Record<string, never>> = () => {
         <PrivateRoute path="/game/:id" component={GameSession} />
         <PrivateRoute path="/leaderboard" exact component={Leaderboard} />
         <PrivateRoute path="/profile/history" exact component={ProfileHistory} />
-        <PrivateRoute path="/profile" exact component={Profile} />
+        <PrivateRoute path="/profile" component={Profile} />
         <PrivateRoute path="/logout" exact component={Logout} />
         <Route path="/main" component={Main} />
         <Route path="*" component={Error404} />

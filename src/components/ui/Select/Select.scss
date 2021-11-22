@@ -1,0 +1,14 @@
+.select {
+   @apply w-full relative inline-block;
+
+  &__label {
+    @apply font-normal text-white leading-none;
+    &_active {
+      @apply opacity-40;
+    }
+  }
+
+  &__options {
+    @apply block absolute w-full;
+  }
+}
