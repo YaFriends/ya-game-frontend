@@ -27,7 +27,7 @@ export type UserUpdateProfileProps = Omit<UserData, 'avatar' | 'id'>;
 export class UserAPI {
   protected endpoint: string;
 
-  protected constructor() {
+  constructor() {
     this.endpoint = '/user';
   }
 
