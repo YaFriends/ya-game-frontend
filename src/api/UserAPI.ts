@@ -1,5 +1,6 @@
-import { http } from './http';
 import { AxiosPromise } from 'axios';
+
+import { http } from './http';
 
 export interface UserData {
   id: number;

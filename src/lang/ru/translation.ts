@@ -83,4 +83,8 @@ export const TRANSLATION: Record<string, Record<string, string>> = {
     linkToDashboard: 'Пройти в главное меню',
     linkToRegister: 'Зарегистрироваться',
   },
+  ErrorMessage: {
+    message: 'Упс, что-то пошло не так',
+    buttonText: 'попробовать снова',
+  },
 };
