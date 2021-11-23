@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 
-import { UserData } from '../../../api/UserAPI';
+import { UserData } from '../../../@types/UserTypes';
 import { DEFAULT_PROFILE_IMAGE_PATH } from '../../../components/constants';
 import { Button } from '../../../components/ui/Button/Button';
 import { MainLink } from '../../../components/ui/Link/Link';
@@ -11,8 +11,8 @@ import { UserThumbnail } from '../UserThumbnail';
 const { LinkToBack, SaveButton } = TRANSLATION.Profile;
 
 interface EditProps {
-  userInfo: UserData;
   url: string;
+  userInfo: UserData;
 }
 
 export const EditInfo: FC<EditProps> = ({ url, userInfo }) => {

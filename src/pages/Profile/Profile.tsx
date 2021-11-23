@@ -1,13 +1,13 @@
 import React, { FC } from 'react';
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
 
-import './Profile.scss';
-import { UserData } from '../../api/UserAPI';
+import { UserData } from '../../@types/UserTypes';
 import { useAuth } from '../../hooks/use-auth';
 
 import { ChangePassword } from './settings/ChangePassword';
 import { EditInfo } from './settings/EditInfo';
 import { Settings } from './settings/Settings';
+import './Profile.scss';
 
 export const Profile: FC<Record<string, never>> = () => {
   const { path, url } = useRouteMatch();

@@ -1,22 +1,26 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import { useHistory } from 'react-router';
 
-import { AuthController } from '../controllers/AuthController';
-import { useAppDispatch } from '../hooks/redux-hooks';
+import { useLogoutMutation } from '../hooks/api';
+import { useAppDispatch } from '../hooks/redux';
 import { authActions } from '../store/slices/authSlice';
 
 export const Logout: FC<Record<string, never>> = () => {
+  const [attemptLogout] = useLogoutMutation();
   const dispatch = useAppDispatch();
   const history = useHistory();
 
-  AuthController.logout().then(() => {
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('isAuth', 'false');
-    }
+  useEffect(() => {
+    attemptLogout('').then(() => {
+      dispatch(authActions.setCurrentUser(null));
 
-    dispatch(authActions.setCurrentUser(null));
-    history.push('/login');
-  });
+      if (typeof window !== 'undefined') {
+        localStorage.removeItem('isAuth');
+      }
+
+      history.push('/login');
+    });
+  }, []);
 
   return <section className="logout">Logout...</section>;
 };

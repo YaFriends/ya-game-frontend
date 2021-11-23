@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 
-import { UserData } from '../../api/UserAPI';
+import { UserData } from '../../@types/UserTypes';
 import { TRANSLATION } from '../../lang/ru/translation';
 import { DEFAULT_PROFILE_IMAGE_PATH } from '../constants';
 import { Text } from '../ui/Text/Text';
