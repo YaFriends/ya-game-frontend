@@ -3,7 +3,7 @@ import React, { FC } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 
-import { LoginData } from '../../api/AuthAPI';
+import { LoginData } from '../../@types/AuthTypes';
 import { Button } from '../../components/ui/Button/Button';
 import { Form } from '../../components/ui/Form/Form';
 import { Input } from '../../components/ui/Input/Input';

@@ -2,7 +2,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import React, { FC } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
-import { UserUpdatePasswordProps } from '../../api/UserAPI';
+import { UserUpdatePasswordProps } from '../../@types/UserTypes';
 import { Form } from '../../components/ui/Form/Form';
 import { Input } from '../../components/ui/Input/Input';
 import { Title } from '../../components/ui/Title/Title';

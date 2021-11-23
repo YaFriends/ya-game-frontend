@@ -1,6 +1,6 @@
 import React, { FC, useState, useEffect } from 'react';
 
-import { LeaderboardData } from '../../api/LeaderboardAPI';
+import { LeaderboardData } from '../../@types/LeaderboardTypes';
 import { Spinner } from '../../components/ui/Spinner/Spinner';
 import { Subtitle } from '../../components/ui/Subtitle/Subtitle';
 import { Table, HeadItem } from '../../components/ui/Table/Table';

@@ -1,4 +1,4 @@
-import { UserData } from '../../api/UserAPI';
+import { UserData } from '../../@types/UserTypes';
 import { GameSetHistoryItemProps } from '../../components/GameSetHistoryItem/GameSetHistoryItem';
 
 export const DUMMY_USER: UserData = {
