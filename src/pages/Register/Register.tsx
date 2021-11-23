@@ -8,17 +8,17 @@ import { Button } from '../../components/ui/Button/Button';
 import { Form } from '../../components/ui/Form/Form';
 import { Input } from '../../components/ui/Input/Input';
 import { MainLink } from '../../components/ui/Link/Link';
+import { Spinner } from '../../components/ui/Spinner/Spinner';
 import { Title } from '../../components/ui/Title/Title';
-import { AuthController } from '../../controllers/AuthController';
-import { useAppDispatch } from '../../hooks/redux-hooks';
 import { useAuth } from '../../hooks/use-auth';
 import { TRANSLATION } from '../../lang/ru/translation';
-import { authActions } from '../../store/slices/authSlice';
+import { useSignUpMutation } from '../../services/AuthAPI';
 import { SignUpSchema } from '../../utils/ValidateSchema';
+
 import './Register.scss';
 
 export const Register: FC<Record<string, never>> = () => {
-  const dispatch = useAppDispatch();
+  const [attemptSignUp, { isLoading }] = useSignUpMutation();
   const history = useHistory();
   const { isAuth } = useAuth();
 
@@ -35,11 +35,11 @@ export const Register: FC<Record<string, never>> = () => {
     resolver: yupResolver(SignUpSchema),
   });
 
-  const onSubmit: SubmitHandler<SignUpData> = data =>
-    AuthController.signUp(data).then(response => dispatch(authActions.setCurrentUser(response)));
+  const onSubmit: SubmitHandler<SignUpData> = data => attemptSignUp(data);
 
   return (
     <section className="register">
+      {isLoading && <Spinner />}
       <div className="register__header">
         <MainLink text="Назад" href="/login" />
         <Title text="Регистрация" />
