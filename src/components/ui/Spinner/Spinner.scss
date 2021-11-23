@@ -1,5 +1,5 @@
 .ui-spinner {
-  @apply absolute w-full h-screen flex-grow mx-auto flex items-center justify-center flex-col z-10 bg-black-40;
+  @apply absolute w-screen top-0 left-0 h-screen flex-grow mx-auto flex items-center justify-center flex-col z-10 bg-black-40;
 
   .loading {
     @apply relative w-[4rem] h-[4rem];
