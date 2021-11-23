@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 
 import { UserData } from '../../../api/UserAPI';
+import { DEFAULT_PROFILE_IMAGE_PATH } from '../../../components/constants';
 import { Button } from '../../../components/ui/Button/Button';
 import { MainLink } from '../../../components/ui/Link/Link';
 import { TRANSLATION } from '../../../lang/ru/translation';
@@ -18,7 +19,10 @@ export const ChangePassword: FC<PasswordPageProps> = ({ url, userInfo }) => {
   return (
     <div className="profile">
       <div className="profile__menu">
-        <UserThumbnail avatar={userInfo.avatar} login={userInfo.login} />
+        <UserThumbnail
+          avatar={userInfo?.avatar || DEFAULT_PROFILE_IMAGE_PATH}
+          login={userInfo?.login}
+        />
         <Button
           form="profilePassword"
           type="submit"
