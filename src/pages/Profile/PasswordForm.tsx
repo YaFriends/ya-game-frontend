@@ -6,6 +6,7 @@ import { UserUpdatePasswordProps } from '../../api/UserAPI';
 import { Form } from '../../components/ui/Form/Form';
 import { Input } from '../../components/ui/Input/Input';
 import { Title } from '../../components/ui/Title/Title';
+import { UserController } from '../../controllers/UserController';
 import { TRANSLATION } from '../../lang/ru/translation';
 import { ProfilePasswordSchema } from '../../utils/ValidateSchema';
 
@@ -33,9 +34,10 @@ export const PasswordForm: FC = () => {
     resolver: yupResolver(ProfilePasswordSchema),
   });
 
-  const onSubmit: SubmitHandler<UserUpdatePasswordProps> = data => console.log(data);
+  const onSubmit: SubmitHandler<UserUpdatePasswordProps> = data =>
+    UserController.updatePassword(data);
   return (
-    <Form name="profile-password" submit={handleSubmit(onSubmit)}>
+    <Form name="profilePassword" submit={handleSubmit(onSubmit)}>
       <Title text={PasswordTitle} extendClass="text-right mb-6" />
       <Input
         register={register}

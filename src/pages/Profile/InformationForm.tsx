@@ -1,11 +1,12 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import React, { FC } from 'react';
-import { useForm, SubmitHandler } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 
 import { UserData } from '../../api/UserAPI';
 import { Form } from '../../components/ui/Form/Form';
 import { Input } from '../../components/ui/Input/Input';
 import { Title } from '../../components/ui/Title/Title';
+import { UserController } from '../../controllers/UserController';
 import { TRANSLATION } from '../../lang/ru/translation';
 import { ProfileInfoSchema } from '../../utils/ValidateSchema';
 
@@ -16,6 +17,8 @@ const {
   AttributeNamePlaceholder,
   AttributeSecondName,
   AttributeSecondNamePlaceholder,
+  AttributeLogin,
+  AttributeLoginPlaceholder,
   AttributeEmail,
   AttributePhone,
   AttributeNickname,
@@ -37,9 +40,9 @@ export const InformationForm: FC<ProfileInfoProps> = ({ disabled }) => {
     resolver: yupResolver(ProfileInfoSchema),
   });
 
-  const onSubmit: SubmitHandler<ProfileInfo> = data => console.log(data);
+  const onSubmit: SubmitHandler<ProfileInfo> = data => UserController.updateProfile(data);
   return (
-    <Form submit={handleSubmit(onSubmit)} name="profile-edit">
+    <Form name="profileEdit" submit={handleSubmit(onSubmit)}>
       <Title text={disabled ? EditDisabledTitle : EditTitle} extendClass="text-right mb-6" />
       <Input
         register={register}
@@ -56,6 +59,15 @@ export const InformationForm: FC<ProfileInfoProps> = ({ disabled }) => {
         name="second_name"
         disabled={disabled}
         placeholder={AttributeSecondNamePlaceholder}
+      />
+      <Input
+        register={register}
+        error={errors.login}
+        label={AttributeLogin}
+        type="login"
+        name="login"
+        disabled={disabled}
+        placeholder={AttributeLoginPlaceholder}
       />
       <Input
         register={register}

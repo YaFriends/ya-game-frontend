@@ -20,7 +20,7 @@ export const ChangePassword: FC<PasswordPageProps> = ({ url, userInfo }) => {
       <div className="profile__menu">
         <UserThumbnail avatar={userInfo.avatar} login={userInfo.login} />
         <Button
-          form="profile-password"
+          form="profilePassword"
           type="submit"
           text={SaveButton}
           typeAction="success"

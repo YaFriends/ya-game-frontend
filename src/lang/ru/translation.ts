@@ -83,6 +83,8 @@ export const TRANSLATION: Record<string, Record<string, string>> = {
     AttributeNamePlaceholder: 'Тут могло быть твое имя',
     AttributeSecondName: 'Фамилия',
     AttributeSecondNamePlaceholder: 'А тут фамилия',
+    AttributeLogin: 'Логин',
+    AttributeLoginPlaceholder: 'Тут твой логин',
     AttributeEmail: 'Почта',
     AttributePhone: 'Телефон',
     AttributeNickname: 'Никнейм',

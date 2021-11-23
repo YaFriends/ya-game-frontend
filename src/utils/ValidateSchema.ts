@@ -77,7 +77,6 @@ export const ProfileInfoSchema = yup.object({
   login,
   email,
   phone,
-  password,
   display_name,
 });
 

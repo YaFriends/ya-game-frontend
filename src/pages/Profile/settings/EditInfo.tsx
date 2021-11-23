@@ -20,7 +20,7 @@ export const EditInfo: FC<EditProps> = ({ url, userInfo }) => {
       <div className="profile__menu">
         <UserThumbnail avatar={userInfo.avatar} login={userInfo.login} />
         <Button
-          form="profile-edit"
+          form="profileEdit"
           type="submit"
           text={SaveButton}
           typeAction="success"
