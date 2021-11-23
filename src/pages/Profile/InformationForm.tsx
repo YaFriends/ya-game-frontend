@@ -26,11 +26,12 @@ const {
 
 export interface ProfileInfoProps {
   disabled?: boolean;
+  userInfo: ProfileInfo;
 }
 
 type ProfileInfo = Omit<UserData, 'avatar' | 'id'>;
 
-export const InformationForm: FC<ProfileInfoProps> = ({ disabled }) => {
+export const InformationForm: FC<ProfileInfoProps> = ({ disabled, userInfo }) => {
   const {
     handleSubmit,
     register,
@@ -38,6 +39,14 @@ export const InformationForm: FC<ProfileInfoProps> = ({ disabled }) => {
   } = useForm<ProfileInfo>({
     criteriaMode: 'all',
     resolver: yupResolver(ProfileInfoSchema),
+    defaultValues: {
+      first_name: userInfo.first_name,
+      second_name: userInfo.second_name,
+      login: userInfo.login,
+      email: userInfo.email,
+      phone: userInfo.phone,
+      display_name: userInfo.display_name,
+    },
   });
 
   const onSubmit: SubmitHandler<ProfileInfo> = data => UserController.updateProfile(data);

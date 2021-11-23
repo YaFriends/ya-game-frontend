@@ -33,7 +33,7 @@ export const EditInfo: FC<EditProps> = ({ url, userInfo }) => {
         <MainLink text={LinkToBack} href={`${url}`} />
       </div>
       <div className="profile__inputs">
-        <InformationForm disabled={false} />
+        <InformationForm disabled={false} userInfo={userInfo} />
       </div>
     </div>
   );

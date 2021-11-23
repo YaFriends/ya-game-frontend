@@ -2,7 +2,6 @@ import React, { FC } from 'react';
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
 
 import './Profile.scss';
-// import { DUMMY_USER } from '../MOCKS/Dashboard';
 import { UserData } from '../../api/UserAPI';
 import { useAuth } from '../../hooks/use-auth';
 
