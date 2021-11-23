@@ -14,8 +14,8 @@ const UserApi = createApi({
   endpoints: build => ({
     updateProfile: build.mutation<void, UserUpdateProfileProps>({
       query: body => ({
-        url: '/user',
-        method: 'POST',
+        url: '/profile',
+        method: 'PUT',
         credentials: 'include',
         body,
       }),
@@ -23,8 +23,8 @@ const UserApi = createApi({
     }),
     updatePassword: build.mutation<void, UserUpdatePasswordProps>({
       query: body => ({
-        url: '/user',
-        method: 'POST',
+        url: '/password',
+        method: 'PUT',
         credentials: 'include',
         body,
       }),
