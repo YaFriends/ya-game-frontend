@@ -1,0 +1,7 @@
+.error404 {
+  @apply flex-grow mx-auto flex items-center justify-center flex-col;
+
+  &__link {
+    @apply w-full flex items-center justify-center mt-4;
+  }
+}

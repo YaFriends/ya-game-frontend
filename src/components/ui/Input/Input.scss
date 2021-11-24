@@ -1,0 +1,7 @@
+.ui-input {
+  @apply bg-black placeholder-opacity-40 border-white text-white focus:border-blue;
+
+  &--error {
+    @apply bg-red border-red;
+  }
+}

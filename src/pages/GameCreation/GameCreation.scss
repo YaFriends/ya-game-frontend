@@ -1,0 +1,11 @@
+.game-creation {
+  @apply flex-grow w-[354px] h-full mx-auto flex items-center justify-center flex-col;
+
+  &__header {
+    @apply w-full flex items-center justify-between mb-6;
+  }
+
+  &__select {
+    @apply mb-14 w-full;
+  }
+}

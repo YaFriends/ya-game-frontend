@@ -1,4 +1,5 @@
 import { httpExternal } from './http';
+import { AxiosPromise } from 'axios';
 
 export interface UserData {
   id: number;
@@ -29,19 +30,19 @@ export class UserAPI {
     this.endpoint = '/user';
   }
 
-  updateProfile(data: UserUpdateProfileProps): Promise<UserData> {
+  updateProfile(data: UserUpdateProfileProps): AxiosPromise<UserData> {
     return httpExternal.put(`${this.endpoint}/profile`, data);
   }
 
-  updateAvatar(data: FormData): Promise<UserData> {
+  updateAvatar(data: FormData): AxiosPromise<UserData> {
     return httpExternal.put(`${this.endpoint}/profile/avatar`, data);
   }
 
-  updatePassword(data: UserUpdatePasswordProps): Promise<void> {
+  updatePassword(data: UserUpdatePasswordProps): AxiosPromise<void> {
     return httpExternal.put(`${this.endpoint}/password`, data);
   }
 
-  searchUsers(data: SearchUsersProps): Promise<[UserData]> {
+  searchUsers(data: SearchUsersProps): AxiosPromise<UserData[]> {
     return httpExternal.post(`${this.endpoint}/search`, data);
   }
 }

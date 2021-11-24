@@ -9,32 +9,27 @@ class Controller {
   }
 
   async signUp(data: SignUpData) {
-    try {
-      await this.api.signUp(data);
-      return await this.fetchUser();
-    } catch (e) {
-      console.error(e);
-      return e;
-    }
+    return this.api
+      .signUp(data)
+      .then(() => this.fetchUser())
+      .catch(e => {
+        throw Error(e);
+      });
   }
 
   async login(data: LoginData) {
-    try {
-      await this.api.login(data);
-      return await this.fetchUser();
-    } catch (e) {
-      console.error(e);
-      return e;
-    }
+    return this.api
+      .login(data)
+      .then(() => this.fetchUser())
+      .catch(e => {
+        throw Error(e);
+      });
   }
 
   async logout() {
-    try {
-      return this.api.logout();
-    } catch (e) {
-      console.error(e);
-      return e;
-    }
+    return this.api.logout().catch(e => {
+      throw Error(e);
+    });
   }
 
   async fetchUser() {
