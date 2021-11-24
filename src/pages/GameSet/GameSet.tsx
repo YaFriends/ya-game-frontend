@@ -7,7 +7,7 @@ import { Subtitle } from '../../components/ui/Subtitle/Subtitle';
 import { Title } from '../../components/ui/Title/Title';
 import { GameSetController } from '../../controllers/GameSetController';
 import GameSetCoordinator from '../../core/GameSetCoordinator';
-import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux-hooks';
 import { setGameSet } from '../../store/slices/GameSetSlice';
 
 import './game-set.scss';

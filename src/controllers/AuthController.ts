@@ -1,4 +1,5 @@
 import { AuthAPI, LoginData, SignUpData } from '../api/AuthAPI';
+
 // import { getData } from '../utils/getData';
 
 class Controller {
@@ -20,7 +21,7 @@ class Controller {
   async login(data: LoginData) {
     return this.api
       .login(data)
-      .then(() => this.fetchUser())
+      .then(this.fetchUser)
       .catch(e => {
         throw Error(e);
       });
@@ -33,12 +34,12 @@ class Controller {
   }
 
   async fetchUser() {
-    try {
-      return this.api.read().then(({ data }) => data);
-    } catch (e) {
-      console.error(e);
-      return e;
-    }
+    return this.api
+      .read()
+      .then(({ data }) => data)
+      .catch(e => {
+        throw Error(e);
+      });
   }
 }
 

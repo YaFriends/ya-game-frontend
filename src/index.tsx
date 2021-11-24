@@ -7,8 +7,8 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import App from './App';
 import { ErrorBoundary } from './components/ErrorBoundary/ErrorBoundary';
 import { ErrorContainer } from './components/ErrorBoundary/ErrorContainer';
-import { store } from './store';
 import { worker } from './mocks/browser';
+import { store } from './store';
 
 import './index.scss';
 
