@@ -18,7 +18,6 @@ type PageParams = {
 
 export const GameSet: FC<Record<string, never>> = () => {
   const { id: setId }: PageParams = useParams();
-  const [sessionLoading, setSessionLoading] = useState(true);
 
   const dispatch = useAppDispatch();
   const { gameSet } = useAppSelector(({ gameSet }) => gameSet);
@@ -33,8 +32,7 @@ export const GameSet: FC<Record<string, never>> = () => {
   useEffect(() => {
     if (gameSet) {
       setTimeout(() => {
-        setGameCoordinator(new GameSetCoordinator(gameSet.miniGames));
-        setSessionLoading(false);
+        setGameCoordinator(new GameSetCoordinator(gameSet.miniGames, gameSet.teams));
       }, 3000);
     }
   }, [gameSet]);
@@ -43,7 +41,15 @@ export const GameSet: FC<Record<string, never>> = () => {
     <MiniGamePreview key={id} id={id} name={name} icon={icon} classes="game-set__mini-game" />
   ));
 
-  if (sessionLoading) {
+  if (!gameSet) {
+    return (
+      <section className="game-set">
+        <Subtitle text="Загрузка..." />
+      </section>
+    );
+  }
+
+  if (!gameCoordinator) {
     return (
       <section className="game-set">
         <Title text="Выбранные игры" extendClass="mb-6" />
@@ -55,7 +61,7 @@ export const GameSet: FC<Record<string, never>> = () => {
 
   return (
     <section className="game-set">
-      <MiniGame GameSetCoordinator={gameCoordinator as GameSetCoordinator} />
+      <MiniGame GameSetCoordinator={gameCoordinator} gameSet={gameSet} />
     </section>
   );
 };

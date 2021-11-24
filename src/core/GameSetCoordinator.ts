@@ -1,12 +1,17 @@
-import { MiniGame } from '../@types/GameSet';
+import { MiniGame as MiniGameProps } from '../@types/GameSet';
+
+import MiniGame, { Team } from './MiniGame';
+import { MINI_GAME_CONTROLLER_BY_ID } from './constants';
 
 export default class GameSetCoordinator {
-  miniGames: MiniGame[];
+  teams: Team[];
+  miniGames: MiniGameProps[];
   currentMiniGameIndex: number;
-  currentMiniGame: MiniGame;
+  currentMiniGame: MiniGameProps;
 
-  constructor(miniGames: MiniGame[]) {
+  constructor(miniGames: MiniGameProps[], teams: Team[]) {
     this.miniGames = miniGames;
+    this.teams = teams;
     this.currentMiniGameIndex = 0;
     this.currentMiniGame = this.miniGames[this.currentMiniGameIndex];
   }
@@ -21,6 +26,10 @@ export default class GameSetCoordinator {
     return this.setCurrentGame();
   }
 
+  _currentGameController(): MiniGame {
+    return new MINI_GAME_CONTROLLER_BY_ID[this.currentMiniGame.id](this.teams);
+  }
+
   setCurrentGame(): Promise<void> {
     this.currentMiniGame = this.miniGames[this.currentMiniGameIndex];
     return this.loadCurrentGame();
@@ -29,6 +38,13 @@ export default class GameSetCoordinator {
   async loadCurrentGame(): Promise<void> {
     return new Promise(res => {
       setTimeout(res, 4000);
+    });
+  }
+
+  async waitForEndOfCurrentGame(): Promise<void> {
+    return new Promise(async res => {
+      await this._currentGameController().gameLoop();
+      res();
     });
   }
 }

@@ -1,18 +1,33 @@
-import MiniGame, { Team } from '../MiniGame';
 import { TRANSLATION } from '../../lang/ru/translation';
+import { GameLoop } from '../GameLoop';
+import MiniGame, { Team } from '../MiniGame';
 
 export class CircleTriangleSquareMiniGame extends MiniGame {
+  loop: GameLoop;
   constructor(teams: Team[]) {
     super({
       icon: '/static/img/games/circle_triangle_square/icon.jpg',
       name: TRANSLATION.CircleTriangleSquare.label,
       teams,
     });
+
+    this.loop = new GameLoop('canvas');
   }
 
-  draw() {}
+  async gameLoop(): Promise<void> {
+    return new Promise(res => {
+      console.log(this.loop);
+      res();
+    });
+  }
 
-  makeTurn() {}
+  draw() {
+    console.log('draw');
+  }
+
+  makeTurn() {
+    console.log('makeTurn');
+  }
 
   finish() {
     return {

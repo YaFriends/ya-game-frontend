@@ -10,6 +10,12 @@ export class TicTacToeMiniGame extends MiniGame {
     });
   }
 
+  async gameLoop(): Promise<void> {
+    return new Promise(res => {
+      res();
+    });
+  }
+
   draw() {}
 
   makeTurn() {}

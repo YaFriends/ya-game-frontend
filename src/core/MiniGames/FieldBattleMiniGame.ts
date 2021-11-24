@@ -10,6 +10,12 @@ export class FieldBattleMiniGame extends MiniGame {
     });
   }
 
+  async gameLoop(): Promise<void> {
+    return new Promise(res => {
+      res();
+    });
+  }
+
   draw() {}
 
   makeTurn() {}

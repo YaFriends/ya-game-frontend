@@ -1,6 +1,6 @@
 import { UserData } from '../api/UserAPI';
 
-type MiniGameConfig = {
+export type MiniGameConfig = {
   icon: string;
   name: string;
   teams: Team[];
@@ -25,10 +25,13 @@ export default abstract class MiniGame {
     this.teams = teams;
   }
 
+  abstract gameLoop(): Promise<void>;
+
   abstract draw(): void;
 
   abstract finish(): MiniGameFinishResponse;
 
   abstract makeTurn(): void;
-  waitForRivalTurn() {}
+
+  // abstract waitForRivalTurn(): void;
 }
