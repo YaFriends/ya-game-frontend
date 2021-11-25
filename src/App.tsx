@@ -1,9 +1,9 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import { PrivateRoute } from './components/PrivateRoute';
+import { Spinner } from './components/ui/Spinner/Spinner';
 import { useAppDispatch } from './hooks/redux';
-// import { useAuth } from './hooks/use-auth';
 import { Dashboard } from './pages/Dashboard/Dashboard';
 import { Error404 } from './pages/Error404/Error404';
 import { Forum } from './pages/Forum/Forum';
@@ -21,15 +21,14 @@ import { useFetchUserQuery } from './services/AuthAPI';
 import { authActions } from './store/slices/authSlice';
 
 const App: FC<Record<string, never>> = () => {
-  const { data: responseFetchUser = null } = useFetchUserQuery('');
+  const { data: responseFetchUser = null, isLoading } = useFetchUserQuery('');
   const dispatch = useAppDispatch();
-  // const { isAuth } = useAuth();
 
-  useEffect(() => {
-    dispatch(authActions.setCurrentUser(responseFetchUser));
-  });
-  /*if (!isAuth) {
-  }*/
+  dispatch(authActions.setCurrentUser(responseFetchUser));
+
+  if (isLoading) {
+    return <Spinner />;
+  }
 
   return (
     <main className="font-body text-black container game-container">
@@ -43,7 +42,7 @@ const App: FC<Record<string, never>> = () => {
         <PrivateRoute path="/game/:id" component={GameSession} />
         <PrivateRoute path="/leaderboard" exact component={Leaderboard} />
         <PrivateRoute path="/profile/history" exact component={ProfileHistory} />
-        <PrivateRoute path="/profile" exact component={Profile} />
+        <PrivateRoute path="/profile" component={Profile} />
         <PrivateRoute path="/logout" exact component={Logout} />
         <Route path="/main" component={Main} />
         <Route path="*" component={Error404} />
