@@ -1,5 +1,5 @@
 import { GameSetHistory } from '../../@types/GameSet';
-import { UserData } from '../../api/UserAPI';
+import { UserData } from '../../@types/UserTypes';
 
 export const DUMMY_USER: UserData = {
   id: 1,

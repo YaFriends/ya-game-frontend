@@ -1,12 +1,17 @@
 import MiniGame, { Team } from '../MiniGame';
 import { TRANSLATION } from '../../lang/ru/translation';
 
+type ClickMoreMiniGameProps = {
+  teams: Team[];
+  canvasId: string;
+};
+
 export class ClickMoreMiniGame extends MiniGame {
-  constructor(teams: Team[]) {
+  constructor(props: ClickMoreMiniGameProps) {
     super({
       icon: '/static/img/games/click_more/icon.jpg',
       name: TRANSLATION.ClickMore.label,
-      teams,
+      ...props,
     });
   }
 

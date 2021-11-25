@@ -2,13 +2,18 @@ import { TRANSLATION } from '../../lang/ru/translation';
 import { GameLoop } from '../GameLoop';
 import MiniGame, { Team } from '../MiniGame';
 
+type CircleTriangleSquareProps = {
+  teams: Team[];
+  canvasId: string;
+};
+
 export class CircleTriangleSquareMiniGame extends MiniGame {
   loop: GameLoop;
-  constructor(teams: Team[]) {
+  constructor(props: CircleTriangleSquareProps) {
     super({
       icon: '/static/img/games/circle_triangle_square/icon.jpg',
       name: TRANSLATION.CircleTriangleSquare.label,
-      teams,
+      ...props,
     });
 
     this.loop = new GameLoop('canvas');

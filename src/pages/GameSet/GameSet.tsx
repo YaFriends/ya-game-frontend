@@ -5,27 +5,18 @@ import { MiniGame } from '../../components/MiniGame/MiniGame';
 import { MiniGamePreview } from '../../components/MiniGamePreview/MiniGamePreview';
 import { Subtitle } from '../../components/ui/Subtitle/Subtitle';
 import { Title } from '../../components/ui/Title/Title';
-import { GameSetController } from '../../controllers/GameSetController';
 import GameSetCoordinator from '../../core/GameSetCoordinator';
-import { useAppDispatch, useAppSelector } from '../../hooks/redux-hooks';
-import { setGameSet } from '../../store/slices/GameSetSlice';
+import { useFetchSessionQuery } from '../../services/GameSetAPI';
 
 import './game-set.scss';
 
 type PageParams = {
-  id?: string;
+  id: string;
 };
 
 export const GameSet: FC<Record<string, never>> = () => {
   const { id: setId }: PageParams = useParams();
-
-  const dispatch = useAppDispatch();
-  const { gameSet } = useAppSelector(({ gameSet }) => gameSet);
-  useEffect(() => {
-    GameSetController.loadSession(Number(setId)).then(gameSetResponse => {
-      dispatch(setGameSet(gameSetResponse));
-    });
-  }, [setId]);
+  const { data: gameSet = null } = useFetchSessionQuery(setId);
 
   const [gameCoordinator, setGameCoordinator] = useState<GameSetCoordinator | null>(null);
 

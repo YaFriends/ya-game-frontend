@@ -1,12 +1,17 @@
 import MiniGame, { Team } from '../MiniGame';
 import { TRANSLATION } from '../../lang/ru/translation';
 
+type FieldBattleMiniGameProps = {
+  teams: Team[];
+  canvasId: string;
+};
+
 export class FieldBattleMiniGame extends MiniGame {
-  constructor(teams: Team[]) {
+  constructor(props: FieldBattleMiniGameProps) {
     super({
       icon: '/static/img/games/field_battle/icon.jpg',
       name: TRANSLATION.FieldBattle.label,
-      teams,
+      ...props,
     });
   }
 
