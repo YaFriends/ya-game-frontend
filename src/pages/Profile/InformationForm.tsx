@@ -1,14 +1,17 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { useHistory } from 'react-router-dom';
 
 import { UserUpdateProfileProps } from '../../@types/UserTypes';
 import { Form } from '../../components/ui/Form/Form';
 import { Input } from '../../components/ui/Input/Input';
 import { Spinner } from '../../components/ui/Spinner/Spinner';
 import { Title } from '../../components/ui/Title/Title';
+import { useAppDispatch } from '../../hooks/redux';
 import { TRANSLATION } from '../../lang/ru/translation';
 import { useUpdateProfileMutation } from '../../services/UserApi';
+import { authActions } from '../../store/slices/authSlice';
 import { ProfileInfoSchema } from '../../utils/ValidateSchema';
 
 const {
@@ -31,7 +34,10 @@ export interface ProfileInfoProps {
 }
 
 export const InformationForm: FC<ProfileInfoProps> = ({ disabled, userInfo }) => {
-  const [attemptUpdateProfile, { isLoading }] = useUpdateProfileMutation();
+  const [attemptUpdateProfile, { isLoading, data: updatedUser, isSuccess }] =
+    useUpdateProfileMutation();
+  const dispatch = useAppDispatch();
+  const history = useHistory();
 
   const {
     handleSubmit,
@@ -50,10 +56,22 @@ export const InformationForm: FC<ProfileInfoProps> = ({ disabled, userInfo }) =>
     },
   });
 
+  useEffect(() => {
+    if (updatedUser) {
+      dispatch(authActions.setCurrentUser(updatedUser));
+    }
+  }, [updatedUser]);
+
+  useEffect(() => {
+    if (isSuccess) {
+      history.push('/profile');
+    }
+  }, [isSuccess]);
+
   const onSubmit: SubmitHandler<UserUpdateProfileProps> = data => attemptUpdateProfile(data);
 
   return (
-    <>
+    <section>
       {isLoading && <Spinner />}
       <Form name="profileEdit" submit={handleSubmit(onSubmit)}>
         <Title text={disabled ? EditDisabledTitle : EditTitle} extendClass="text-right mb-6" />
@@ -108,6 +126,6 @@ export const InformationForm: FC<ProfileInfoProps> = ({ disabled, userInfo }) =>
           placeholder={AttributeNickname}
         />
       </Form>
-    </>
+    </section>
   );
 };

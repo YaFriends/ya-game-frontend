@@ -1,6 +1,7 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { useHistory } from 'react-router-dom';
 
 import { UserUpdatePasswordProps } from '../../@types/UserTypes';
 import { Form } from '../../components/ui/Form/Form';
@@ -16,8 +17,6 @@ const {
   OldPasswordPlaceholder,
   NewPasswordLabel,
   NewPasswordPlaceholder,
-  ConfirmPasswordLabel,
-  ConfirmPasswordPlaceholder,
   PasswordTitle,
 } = TRANSLATION.Profile;
 
@@ -26,7 +25,15 @@ interface ProfilePassword extends UserUpdatePasswordProps {
 }
 
 export const PasswordForm: FC = () => {
-  const [attemptUpdatePassword, { isLoading }] = useUpdatePasswordMutation();
+  const [attemptUpdatePassword, { isLoading, isSuccess }] = useUpdatePasswordMutation();
+  const history = useHistory();
+
+  useEffect(() => {
+    if (isSuccess) {
+      history.push('/profile');
+    }
+  }, [isSuccess]);
+
   const {
     handleSubmit,
     register,
@@ -37,8 +44,9 @@ export const PasswordForm: FC = () => {
   });
 
   const onSubmit: SubmitHandler<UserUpdatePasswordProps> = data => attemptUpdatePassword(data);
+
   return (
-    <>
+    <section>
       {isLoading && <Spinner />}
       <Form name="profilePassword" submit={handleSubmit(onSubmit)}>
         <Title text={PasswordTitle} extendClass="text-right mb-6" />
@@ -58,15 +66,7 @@ export const PasswordForm: FC = () => {
           type="password"
           placeholder={NewPasswordPlaceholder}
         />
-        <Input
-          register={register}
-          error={errors.confirmPassword}
-          label={ConfirmPasswordLabel}
-          name="confirmPassword"
-          type="password"
-          placeholder={ConfirmPasswordPlaceholder}
-        />
       </Form>
-    </>
+    </section>
   );
 };

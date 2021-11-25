@@ -1,6 +1,11 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-import { UserUpdateProfileProps, UserUpdatePasswordProps } from '../@types/UserTypes';
+import {
+  UserUpdateProfileProps,
+  UserUpdatePasswordProps,
+  UserData,
+  ChangePasswordResponse,
+} from '../@types/UserTypes';
 import { EXTERNAL_API_URL } from '../config';
 
 const servicePoint = '/user';
@@ -10,9 +15,9 @@ export const UserApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: EXTERNAL_API_URL + servicePoint,
   }),
-  tagTypes: ['User'],
+  tagTypes: ['User'], //TODO из другой апишки вытянуть данные
   endpoints: build => ({
-    updateProfile: build.mutation<void, UserUpdateProfileProps>({
+    updateProfile: build.mutation<UserData, UserUpdateProfileProps>({
       query: body => ({
         url: '/profile',
         method: 'PUT',
@@ -21,11 +26,12 @@ export const UserApi = createApi({
       }),
       invalidatesTags: ['User'],
     }),
-    updatePassword: build.mutation<void, UserUpdatePasswordProps>({
+    updatePassword: build.mutation<ChangePasswordResponse, UserUpdatePasswordProps>({
       query: body => ({
         url: '/password',
         method: 'PUT',
         credentials: 'include',
+        responseHandler: response => response.text(),
         body,
       }),
       invalidatesTags: ['User'],

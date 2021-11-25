@@ -75,8 +75,6 @@ export const TRANSLATION: Record<string, Record<string, string>> = {
     OldPasswordPlaceholder: 'Введите старый пароль',
     NewPasswordLabel: 'Новый пароль',
     NewPasswordPlaceholder: 'Введите новый пароль',
-    ConfirmPasswordLabel: 'Повтор нового пароля',
-    ConfirmPasswordPlaceholder: 'Повторите введенный новый пароль',
     EditDisabledTitle: 'Настройки',
     EditTitle: 'Настройки - Изменить данные',
     AttributeName: 'Имя',

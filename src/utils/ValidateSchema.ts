@@ -83,5 +83,4 @@ export const ProfileInfoSchema = yup.object({
 export const ProfilePasswordSchema = yup.object({
   newPassword: password,
   oldPassword: password,
-  confirmPassword: password,
 });
