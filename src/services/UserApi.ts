@@ -5,7 +5,7 @@ import { EXTERNAL_API_URL } from '../config';
 
 const servicePoint = '/user';
 
-const UserApi = createApi({
+export const UserApi = createApi({
   reducerPath: 'userApi',
   baseQuery: fetchBaseQuery({
     baseUrl: EXTERNAL_API_URL + servicePoint,
