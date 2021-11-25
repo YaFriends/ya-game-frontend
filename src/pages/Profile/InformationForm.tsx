@@ -2,7 +2,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import React, { FC } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 
-import { UserData } from '../../api/UserAPI';
+import { UserUpdateProfileProps } from '../../@types/UserTypes';
 import { Form } from '../../components/ui/Form/Form';
 import { Input } from '../../components/ui/Input/Input';
 import { Title } from '../../components/ui/Title/Title';
@@ -25,19 +25,17 @@ export interface ProfileInfoProps {
   disabled?: boolean;
 }
 
-type ProfileInfo = Omit<UserData, 'avatar' | 'id'>;
-
 export const InformationForm: FC<ProfileInfoProps> = ({ disabled }) => {
   const {
     handleSubmit,
     register,
     formState: { errors },
-  } = useForm<ProfileInfo>({
+  } = useForm<UserUpdateProfileProps>({
     criteriaMode: 'all',
     resolver: yupResolver(ProfileInfoSchema),
   });
 
-  const onSubmit: SubmitHandler<ProfileInfo> = data => console.log(data);
+  const onSubmit: SubmitHandler<UserUpdateProfileProps> = data => console.log(data);
   return (
     <Form submit={handleSubmit(onSubmit)} name="profile-edit">
       <Title text={disabled ? EditDisabledTitle : EditTitle} extendClass="text-right mb-6" />
