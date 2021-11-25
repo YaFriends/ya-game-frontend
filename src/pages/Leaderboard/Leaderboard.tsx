@@ -1,12 +1,13 @@
 import React, { FC, useState, useEffect } from 'react';
 
-import { LeaderboardData } from '../../api/LeaderboardAPI';
+import { LeaderboardData } from '../../@types/LeaderboardTypes';
+import { Spinner } from '../../components/ui/Spinner/Spinner';
 import { Subtitle } from '../../components/ui/Subtitle/Subtitle';
 import { Table, HeadItem } from '../../components/ui/Table/Table';
 import { Title } from '../../components/ui/Title/Title';
-import { LeaderboardController } from '../../controllers/LeaderboardController';
-import './Leaderboard.scss';
+import { useGetAllLeaderboardsMutation } from '../../hooks/api';
 import { TRANSLATION } from '../../lang/ru/translation';
+import './Leaderboard.scss';
 
 type PositionLeaderboard = number | null;
 type PositionLeaderboardText = string;
@@ -18,6 +19,8 @@ const HEADERS: HeadItem[] = [
 ];
 
 export const Leaderboard: FC<Record<string, never>> = () => {
+  const [attemptGetAllLeaderboards, { data: responseGetAllLeaderboards, isLoading }] =
+    useGetAllLeaderboardsMutation();
   const [leaderboards, setLeaderboard] = useState<LeaderboardData[]>([]);
   const [positionOnLeaderboard, setPositionOnLeaderboard] = useState<PositionLeaderboard>(null);
   const [positionOnLeaderboardText, setPositionOnLeaderboardText] =
@@ -29,11 +32,16 @@ export const Leaderboard: FC<Record<string, never>> = () => {
   };
 
   useEffect(() => {
-    LeaderboardController.getAllLeaderboards(mockGetAll).then(response => {
-      setLeaderboard([...leaderboards, ...response]);
-      getPositionForCurrentUserOnLeaderboard();
-    });
+    attemptGetAllLeaderboards(mockGetAll);
   }, []);
+
+  useEffect(() => {
+    if (responseGetAllLeaderboards && responseGetAllLeaderboards.length) {
+      setLeaderboard([...leaderboards, ...responseGetAllLeaderboards]);
+    }
+
+    getPositionForCurrentUserOnLeaderboard();
+  }, [responseGetAllLeaderboards]);
 
   const getPositionForCurrentUserOnLeaderboard = (): void => {
     // TODO: написать метод, которая получает из leaderboards.data позицию авторизованного пользователя(currentUser)
@@ -56,6 +64,7 @@ export const Leaderboard: FC<Record<string, never>> = () => {
 
   return (
     <section className="leaderboard">
+      {isLoading && <Spinner />}
       <div className="leaderboard__header">
         <Subtitle text={positionOnLeaderboardText} />
         <Title text={TRANSLATION.Leaderboard.title} />

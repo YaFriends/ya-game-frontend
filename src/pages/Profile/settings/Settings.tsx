@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 
-import { UserData } from '../../../api/UserAPI';
+import { UserData } from '../../../@types/UserTypes';
 import { MainLink } from '../../../components/ui/Link/Link';
 import { TRANSLATION } from '../../../lang/ru/translation';
 import { InformationForm } from '../InformationForm';

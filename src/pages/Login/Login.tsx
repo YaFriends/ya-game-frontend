@@ -3,22 +3,21 @@ import React, { FC } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 
-import { LoginData } from '../../api/AuthAPI';
+import { LoginData } from '../../@types/AuthTypes';
 import { Button } from '../../components/ui/Button/Button';
 import { Form } from '../../components/ui/Form/Form';
 import { Input } from '../../components/ui/Input/Input';
 import { MainLink } from '../../components/ui/Link/Link';
+import { Spinner } from '../../components/ui/Spinner/Spinner';
 import { Title } from '../../components/ui/Title/Title';
-import { AuthController } from '../../controllers/AuthController';
-import { useAppDispatch } from '../../hooks/redux-hooks';
+import { useLoginMutation } from '../../hooks/api';
 import { useAuth } from '../../hooks/use-auth';
 import { TRANSLATION } from '../../lang/ru/translation';
-import { authActions } from '../../store/slices/authSlice';
 import { LoginSchema } from '../../utils/ValidateSchema';
 import './Login.scss';
 
 export const Login: FC<Record<string, never>> = () => {
-  const dispatch = useAppDispatch();
+  const [attemptLogin, { isLoading }] = useLoginMutation();
   const history = useHistory();
   const { isAuth } = useAuth();
 
@@ -35,11 +34,11 @@ export const Login: FC<Record<string, never>> = () => {
     resolver: yupResolver(LoginSchema),
   });
 
-  const onSubmit: SubmitHandler<LoginData> = data =>
-    AuthController.login(data).then(response => dispatch(authActions.setCurrentUser(response)));
+  const onSubmit: SubmitHandler<LoginData> = data => attemptLogin(data);
 
   return (
     <section className="login">
+      {isLoading && <Spinner />}
       <div className="login__header">
         <Title text={TRANSLATION.Login.title} />
         <MainLink text={TRANSLATION.Login.linkToRegisterText} href="/register" />

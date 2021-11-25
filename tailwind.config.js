@@ -7,6 +7,7 @@ module.exports = {
       transparent: 'transparent',
       black: {
         DEFAULT: '#1E2023',
+        40: '#1E202366',
       },
       white: {
         DEFAULT: '#FFF',
