@@ -15,6 +15,7 @@ type GameSetProps = {
 };
 
 export const MiniGame: FC<GameSetProps> = ({ GameSetCoordinator, gameSet }) => {
+  const canvasId = 'canvas';
   const miniGamePreviews = gameSet?.miniGames.map(({ id, name, icon }) => (
     <MiniGamePreview key={id} id={id} name={name} icon={icon} classes="mini-game__top-preview" />
   ));
@@ -34,7 +35,9 @@ export const MiniGame: FC<GameSetProps> = ({ GameSetCoordinator, gameSet }) => {
       </div>
       <div className="mini-game__body">
         <Title extendClass="mb-6" text={GameSetCoordinator.currentMiniGame.name} />
-        <canvas className="mini-game__canvas" id="canvas" />
+        <div className="mini-game__canvas">
+          <canvas className="mini-game__canvas-inner" id={canvasId} width={500} height={500} />
+        </div>
       </div>
     </div>
   );

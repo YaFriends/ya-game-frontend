@@ -15,10 +15,9 @@ export class FieldBattleMiniGame extends MiniGame {
     });
   }
 
-  async gameLoop(): Promise<void> {
-    return new Promise(res => {
-      res();
-    });
+  run() {
+    console.log('running');
+    return new Promise<void>(res => res());
   }
 
   draw() {}

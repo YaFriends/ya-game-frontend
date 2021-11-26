@@ -62,7 +62,7 @@ export const TRANSLATION: Record<string, Record<string, string>> = {
     tableColumnName: 'Имя',
     tableColumnWins: 'Победы',
     subtitleNotTable: 'Тебя нет в таблице',
-    subtitleHaveTable: 'Твое место в таблице #',
+    subtitleHaveTable: 'Твоё место в таблице #',
   },
   Profile: {
     label: 'Профиль',
@@ -129,7 +129,7 @@ export const TRANSLATION: Record<string, Record<string, string>> = {
     label: 'Нажми больше',
   },
   CircleTriangleSquare: {
-    label: 'Круг-треугольник-квадрат',
+    label: 'Круг Треугольник Квадрат',
   },
   FieldBattle: {
     label: 'Битва за поле',

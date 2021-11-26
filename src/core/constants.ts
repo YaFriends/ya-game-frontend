@@ -1,12 +1,12 @@
 import MiniGame from './MiniGame';
-import { CircleTriangleSquareMiniGame } from './MiniGames/CircleTriangleSquareMiniGame';
+import { TicTacToeMiniGame } from './MiniGames/TicTacToeMiniGame';
 
-export const CIRCLE_TRIANGLE_SQUARE_ID = 1;
+export const TIC_TAC_TOE_GAME_ID = 1;
 
 export type SubclassOfMiniGame = (new (x: any) => MiniGame) & {
   [K in keyof typeof MiniGame]: typeof MiniGame[K];
 };
 
 export const MINI_GAME_CONTROLLER_BY_ID: { [x: number]: SubclassOfMiniGame } = {
-  [CIRCLE_TRIANGLE_SQUARE_ID]: CircleTriangleSquareMiniGame,
+  [TIC_TAC_TOE_GAME_ID]: TicTacToeMiniGame,
 };

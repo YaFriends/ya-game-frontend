@@ -8,16 +8,22 @@ export default class GameSetCoordinator {
   miniGames: MiniGameProps[];
   currentMiniGameIndex: number;
   currentMiniGame: MiniGameProps;
+  canvasId: string;
 
   constructor(miniGames: MiniGameProps[], teams: Team[]) {
     this.miniGames = miniGames;
     this.teams = teams;
     this.currentMiniGameIndex = 0;
     this.currentMiniGame = this.miniGames[this.currentMiniGameIndex];
+    this.canvasId = 'canvas';
   }
 
   init(): Promise<void> {
     return this.loadCurrentGame();
+  }
+
+  setCanvas(canvasId: string) {
+    this.canvasId = canvasId;
   }
 
   async loadNextGame(): Promise<void> {
@@ -27,7 +33,10 @@ export default class GameSetCoordinator {
   }
 
   _currentGameController(): MiniGame {
-    return new MINI_GAME_CONTROLLER_BY_ID[this.currentMiniGame.id](this.teams);
+    return new MINI_GAME_CONTROLLER_BY_ID[this.currentMiniGame.id]({
+      teams: this.teams,
+      canvasId: this.canvasId,
+    });
   }
 
   setCurrentGame(): Promise<void> {
@@ -43,7 +52,7 @@ export default class GameSetCoordinator {
 
   async waitForEndOfCurrentGame(): Promise<void> {
     return new Promise(async res => {
-      await this._currentGameController().gameLoop();
+      await this._currentGameController().run();
       res();
     });
   }

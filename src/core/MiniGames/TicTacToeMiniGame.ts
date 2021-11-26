@@ -1,5 +1,6 @@
-import MiniGame, { Team } from '../MiniGame';
 import { TRANSLATION } from '../../lang/ru/translation';
+import MiniGame, { Team } from '../MiniGame';
+
 import { TicTacToeCircle } from './common/TicTacToeCircle';
 import { TicTacToeCross } from './common/TicTacToeCross';
 
@@ -37,13 +38,7 @@ export class TicTacToeMiniGame extends MiniGame {
     this.sectionSize = this.GameLoop.canvasSize / 3;
     this.currentPlayer = 1;
     this.lineColor = '#DDD';
-    this.lineWidth = 10;
-  }
-
-  async gameLoop(): Promise<void> {
-    return new Promise(res => {
-      res();
-    });
+    this.lineWidth = 5;
   }
 
   draw() {
@@ -52,7 +47,9 @@ export class TicTacToeMiniGame extends MiniGame {
     this._addListener();
   }
 
-  makeTurn() {}
+  makeTurn() {
+    console.log('makeTurn');
+  }
 
   finish() {
     return {
@@ -73,6 +70,13 @@ export class TicTacToeMiniGame extends MiniGame {
     };
   }
 
+  run() {
+    return new Promise<void>(() => {
+      this.draw();
+      // res();
+    });
+  }
+
   _initBoard() {
     this.board = Array(9).fill('');
   }
@@ -80,7 +84,6 @@ export class TicTacToeMiniGame extends MiniGame {
   _addPlayingPiece(mouse: { x: number; y: number }) {
     let xCoord;
     let yCoord;
-
     for (let i = 0; i < 9; i++) {
       xCoord = Math.floor(i / 3) * this.sectionSize;
       yCoord = (i % 3) * this.sectionSize;
@@ -91,6 +94,11 @@ export class TicTacToeMiniGame extends MiniGame {
         mouse.y >= yCoord &&
         mouse.y <= yCoord + this.sectionSize
       ) {
+        if (this.board[i] !== '') {
+          return;
+        }
+
+        this.board[i] = this.currentPlayer.toString();
         this._clearPlayingArea(xCoord, yCoord);
 
         if (this.currentPlayer === 1) {
@@ -101,6 +109,7 @@ export class TicTacToeMiniGame extends MiniGame {
               left: xCoord,
             },
           }).draw(this.GameLoop.context);
+          this.currentPlayer = 0;
         } else {
           new TicTacToeCircle({
             sectionSize: this.sectionSize,
@@ -109,13 +118,14 @@ export class TicTacToeMiniGame extends MiniGame {
               left: xCoord,
             },
           }).draw(this.GameLoop.context);
+          this.currentPlayer = 1;
         }
       }
     }
   }
 
   _clearPlayingArea(xCoord: number, yCoord: number) {
-    this.GameLoop.context.fillStyle = '#FFF';
+    this.GameLoop.context.fillStyle = '#8B949E';
     this.GameLoop.context.fillRect(xCoord, yCoord, this.sectionSize, this.sectionSize);
   }
 
@@ -157,15 +167,9 @@ export class TicTacToeMiniGame extends MiniGame {
 
   _addListener() {
     this.GameLoop.canvas.addEventListener('mouseup', event => {
-      if (this.currentPlayer === 1) {
-        this.currentPlayer = 0;
-      } else {
-        this.currentPlayer = 1;
-      }
-
       const canvasMousePosition = this._getCanvasMousePosition(event);
       this._addPlayingPiece(canvasMousePosition);
-      this._drawLines(10, this.lineColor);
+      this._drawLines(this.lineWidth, this.lineColor);
     });
   }
 }

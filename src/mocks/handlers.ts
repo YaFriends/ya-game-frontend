@@ -19,8 +19,8 @@ export const handlers = [
       miniGames: [
         {
           id: 1,
-          name: 'Круг треугольник квадрат',
-          icon: '/static/img/games/circle_triangle_square/icon.jpg',
+          name: 'Крестики-нолики',
+          icon: '/static/img/games/tic_tac_toe/icon.jpg',
         },
       ],
       date: '2020-02-02',

@@ -17,14 +17,13 @@ type PageParams = {
 export const GameSet: FC<Record<string, never>> = () => {
   const { id: setId }: PageParams = useParams();
   const { data: gameSet = null } = useFetchSessionQuery(setId);
-
   const [gameCoordinator, setGameCoordinator] = useState<GameSetCoordinator | null>(null);
 
   useEffect(() => {
     if (gameSet) {
       setTimeout(() => {
         setGameCoordinator(new GameSetCoordinator(gameSet.miniGames, gameSet.teams));
-      }, 3000);
+      }, 100);
     }
   }, [gameSet]);
 

@@ -1,9 +1,8 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import { PrivateRoute } from './components/PrivateRoute';
 import { useAppDispatch } from './hooks/redux';
-import { useAuth } from './hooks/use-auth';
 import { Dashboard } from './pages/Dashboard/Dashboard';
 import { Error404 } from './pages/Error404/Error404';
 import { Forum } from './pages/Forum/Forum';
@@ -21,13 +20,12 @@ import { useFetchUserQuery } from './services/AuthAPI';
 import { authActions } from './store/slices/authSlice';
 
 const App: FC<Record<string, never>> = () => {
-  const { data: responseFetchUser = null } = useFetchUserQuery('');
+  const { data: responseFetchUser = null } = useFetchUserQuery();
   const dispatch = useAppDispatch();
-  const { isAuth } = useAuth();
 
-  if (!isAuth) {
+  useEffect(() => {
     dispatch(authActions.setCurrentUser(responseFetchUser));
-  }
+  }, [responseFetchUser]);
 
   return (
     <main className="font-body text-black container game-container">

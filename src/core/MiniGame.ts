@@ -37,4 +37,5 @@ export default abstract class MiniGame {
   abstract makeTurn(): void;
 
   // abstract waitForRivalTurn(): void;
+  abstract run(): Promise<void>;
 }

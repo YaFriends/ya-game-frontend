@@ -19,11 +19,9 @@ export class CircleTriangleSquareMiniGame extends MiniGame {
     this.loop = new GameLoop('canvas');
   }
 
-  async gameLoop(): Promise<void> {
-    return new Promise(res => {
-      console.log(this.loop);
-      res();
-    });
+  run() {
+    console.log('running');
+    return new Promise<void>(res => res());
   }
 
   draw() {

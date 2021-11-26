@@ -21,6 +21,10 @@ export class BombermansMiniGame extends MiniGame {
     });
   }
 
+  run() {
+    console.log('running');
+    return new Promise<void>(res => res());
+  }
   draw() {}
 
   makeTurn() {}

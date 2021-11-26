@@ -16,4 +16,8 @@
   &__canvas {
     @apply w-full h-[500px] bg-grey;
   }
+
+  &__canvas-inner {
+    @apply mx-auto w-full h-full max-w-[500px];
+  }
 }
