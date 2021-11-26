@@ -15,7 +15,7 @@ export const UserApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: EXTERNAL_API_URL + servicePoint,
   }),
-  tagTypes: ['User'], //TODO из другой апишки вытянуть данные
+  tagTypes: ['User'],
   endpoints: build => ({
     updateProfile: build.mutation<UserData, UserUpdateProfileProps>({
       query: body => ({
