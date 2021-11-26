@@ -38,7 +38,7 @@ export const AuthAPI = createApi({
         credentials: 'include',
       }),
     }),
-    fetchUser: build.query<UserData, string>({
+    fetchUser: build.query<UserData, void>({
       query: () => ({
         url: '/user',
         method: 'GET',

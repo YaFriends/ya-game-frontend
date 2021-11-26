@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import { PrivateRoute } from './components/PrivateRoute';
@@ -21,10 +21,12 @@ import { useFetchUserQuery } from './services/AuthAPI';
 import { authActions } from './store/slices/authSlice';
 
 const App: FC<Record<string, never>> = () => {
-  const { data: responseFetchUser = null, isLoading } = useFetchUserQuery('');
+  const { data: responseFetchUser = null, isLoading } = useFetchUserQuery();
   const dispatch = useAppDispatch();
 
-  dispatch(authActions.setCurrentUser(responseFetchUser));
+  useEffect(() => {
+    dispatch(authActions.setCurrentUser(responseFetchUser));
+  }, [responseFetchUser]);
 
   if (isLoading) {
     return <Spinner />;

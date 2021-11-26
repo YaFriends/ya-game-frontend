@@ -9,7 +9,7 @@ import { Input } from '../../components/ui/Input/Input';
 import { Spinner } from '../../components/ui/Spinner/Spinner';
 import { Title } from '../../components/ui/Title/Title';
 import { TRANSLATION } from '../../lang/ru/translation';
-import { useUpdatePasswordMutation } from '../../services/UserApi';
+import { useUpdatePasswordMutation } from '../../services/UserAPI';
 import { ProfilePasswordSchema } from '../../utils/ValidateSchema';
 
 const {

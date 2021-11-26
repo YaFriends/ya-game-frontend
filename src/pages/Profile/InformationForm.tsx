@@ -10,7 +10,7 @@ import { Spinner } from '../../components/ui/Spinner/Spinner';
 import { Title } from '../../components/ui/Title/Title';
 import { useAppDispatch } from '../../hooks/redux';
 import { TRANSLATION } from '../../lang/ru/translation';
-import { useUpdateProfileMutation } from '../../services/UserApi';
+import { useUpdateProfileMutation } from '../../services/UserAPI';
 import { authActions } from '../../store/slices/authSlice';
 import { ProfileInfoSchema } from '../../utils/ValidateSchema';
 

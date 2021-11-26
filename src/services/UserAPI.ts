@@ -10,7 +10,7 @@ import { EXTERNAL_API_URL } from '../config';
 
 const servicePoint = '/user';
 
-export const UserApi = createApi({
+export const UserAPI = createApi({
   reducerPath: 'userApi',
   baseQuery: fetchBaseQuery({
     baseUrl: EXTERNAL_API_URL + servicePoint,
@@ -39,4 +39,4 @@ export const UserApi = createApi({
   }),
 });
 
-export const { useUpdatePasswordMutation, useUpdateProfileMutation } = UserApi;
+export const { useUpdatePasswordMutation, useUpdateProfileMutation } = UserAPI;
