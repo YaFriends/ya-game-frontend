@@ -15,7 +15,6 @@ export const UserAPI = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: EXTERNAL_API_URL + servicePoint,
   }),
-  tagTypes: ['User'],
   endpoints: build => ({
     updateProfile: build.mutation<UserData, UserUpdateProfileProps>({
       query: body => ({
@@ -24,7 +23,6 @@ export const UserAPI = createApi({
         credentials: 'include',
         body,
       }),
-      invalidatesTags: ['User'],
     }),
     updatePassword: build.mutation<ChangePasswordResponse, UserUpdatePasswordProps>({
       query: body => ({
@@ -34,7 +32,6 @@ export const UserAPI = createApi({
         responseHandler: response => response.text(),
         body,
       }),
-      invalidatesTags: ['User'],
     }),
   }),
 });

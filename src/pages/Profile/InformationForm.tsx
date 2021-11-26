@@ -33,7 +33,7 @@ export interface ProfileInfoProps {
   userInfo: UserUpdateProfileProps;
 }
 
-export const InformationForm: FC<ProfileInfoProps> = ({ disabled, userInfo }) => {
+export const InformationForm: FC<ProfileInfoProps> = ({ disabled = false, userInfo }) => {
   const [attemptUpdateProfile, { isLoading, data: updatedUser, isSuccess }] =
     useUpdateProfileMutation();
   const dispatch = useAppDispatch();
