@@ -1,0 +1,22 @@
+.ui-button-close {
+  @apply absolute w-[15px] h-[15px] top-[28px] right-6 opacity-50 transition-opacity;
+
+  &:before,
+  &:after {
+    @apply absolute h-[15px] w-[2px] top-0 right-[6px] bg-black;
+    content: '';
+  }
+
+  &:before {
+    @apply transform rotate-45;
+  }
+
+  &:after {
+    @apply transform -rotate-45;
+  }
+
+  &:hover,
+  &:focus-within {
+    @apply opacity-100;
+  }
+}
