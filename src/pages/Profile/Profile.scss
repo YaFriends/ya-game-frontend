@@ -13,8 +13,16 @@
 .user-thumbnail {
   @apply flex flex-col items-center mb-14;
 
-  &__avatar{
-    @apply w-30 h-30 rounded-full bg-grey-40 overflow-hidden mb-4;
+  &__avatar {
+    @apply relative w-30 h-30 rounded-full bg-grey-40 overflow-hidden mb-4;
+
+    &:hover,
+    &:focus-within {
+      &:after {
+        @apply absolute top-0 bottom-0 flex items-center justify-center w-full text-lg opacity-50 cursor-pointer;
+        content: 'Изменить';
+      }
+    }
   }
 
   &__image {
@@ -23,5 +31,9 @@
 
   &__login {
     @apply font-bold text-lg;
+  }
+
+  &__input {
+    @apply hidden;
   }
 }
