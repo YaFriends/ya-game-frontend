@@ -1,21 +1,6 @@
-import { UserData } from '../@types/UserTypes';
+import { MiniGameConfig, MiniGameFinishResponse, Team } from '../@types/MiniGame';
 
 import { GameLoop } from './GameLoop';
-
-export type MiniGameConfig = {
-  icon: string;
-  name: string;
-  canvasId: string;
-  teams: Team[];
-};
-
-export type Team = {
-  players: UserData[];
-};
-
-type MiniGameFinishResponse = {
-  winner: Team;
-};
 
 export default abstract class MiniGame {
   icon: string;

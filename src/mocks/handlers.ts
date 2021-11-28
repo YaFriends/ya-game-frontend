@@ -1,8 +1,8 @@
 import { rest } from 'msw';
 
 import { MiniGame } from '../@types/GameSet';
+import { Team } from '../@types/MiniGame';
 import { INTERNAL_API_URL } from '../config';
-import { Team } from '../core/MiniGame';
 
 export const handlers = [
   rest.get(`${INTERNAL_API_URL}/test/:data`, (req, res, ctx) => {

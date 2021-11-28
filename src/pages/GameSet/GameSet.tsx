@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useEffect, useMemo, useState } from 'react';
 import { useParams } from 'react-router';
 
 import { MiniGame } from '../../components/MiniGame/MiniGame';
@@ -16,7 +16,7 @@ type PageParams = {
 
 export const GameSet: FC<Record<string, never>> = () => {
   const { id: setId }: PageParams = useParams();
-  const { data: gameSet = null } = useFetchSessionQuery(setId);
+  const { data: gameSet = null, isLoading } = useFetchSessionQuery(setId);
   const [gameCoordinator, setGameCoordinator] = useState<GameSetCoordinator | null>(null);
 
   useEffect(() => {
@@ -27,11 +27,15 @@ export const GameSet: FC<Record<string, never>> = () => {
     }
   }, [gameSet]);
 
-  const miniGamePreviews = gameSet?.miniGames.map(({ id, name, icon }) => (
-    <MiniGamePreview key={id} id={id} name={name} icon={icon} classes="game-set__mini-game" />
-  ));
+  const miniGamePreviews = useMemo(
+    () =>
+      gameSet?.miniGames.map(({ id, name, icon }) => (
+        <MiniGamePreview key={id} id={id} name={name} icon={icon} classes="game-set__mini-game" />
+      )),
+    [gameSet]
+  );
 
-  if (!gameSet) {
+  if (isLoading || !gameSet) {
     return (
       <section className="game-set">
         <Subtitle text="Загрузка..." />

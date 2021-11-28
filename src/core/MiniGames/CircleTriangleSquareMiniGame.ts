@@ -1,6 +1,7 @@
 import { TRANSLATION } from '../../lang/ru/translation';
 import { GameLoop } from '../GameLoop';
-import MiniGame, { Team } from '../MiniGame';
+import MiniGame from '../MiniGame';
+import { Team } from '../../@types/MiniGame';
 
 type CircleTriangleSquareProps = {
   teams: Team[];

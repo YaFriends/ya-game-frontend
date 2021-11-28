@@ -26,12 +26,15 @@ export const MiniGame: FC<GameSetProps> = ({ GameSetCoordinator, gameSet }) => {
     });
   }, [gameSet]);
 
+  const firstPlayerInFirstTeam = gameSet.teams[0].players[0];
+  const firstPlayerInSecondTeam = gameSet.teams[1].players[0];
+
   return (
     <div className="mini-game">
       <div className="mini-game__top">
-        <Profile user={gameSet.teams[0].players[0]} stats={DUMMY_STATS} />
+        <Profile user={firstPlayerInFirstTeam} stats={DUMMY_STATS} />
         <div className="mini-game__top-previews">{miniGamePreviews}</div>
-        <Profile user={gameSet.teams[1].players[0]} stats={DUMMY_STATS} />
+        <Profile user={firstPlayerInSecondTeam} stats={DUMMY_STATS} />
       </div>
       <div className="mini-game__body">
         <Title extendClass="mb-6" text={GameSetCoordinator.currentMiniGame.name} />

@@ -1,4 +1,4 @@
-import { Team } from '../core/MiniGame';
+import { Team } from './MiniGame';
 
 export type GameSet = {
   id: number;

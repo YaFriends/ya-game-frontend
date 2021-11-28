@@ -1,5 +1,6 @@
-import MiniGame, { Team } from '../MiniGame';
+import MiniGame from '../MiniGame';
 import { TRANSLATION } from '../../lang/ru/translation';
+import { Team } from '../../@types/MiniGame';
 
 type FieldBattleMiniGameProps = {
   teams: Team[];

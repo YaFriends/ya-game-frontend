@@ -1,5 +1,6 @@
+import { Team } from '../../@types/MiniGame';
 import { TRANSLATION } from '../../lang/ru/translation';
-import MiniGame, { Team } from '../MiniGame';
+import MiniGame from '../MiniGame';
 
 import { TicTacToeCircle } from './common/TicTacToeCircle';
 import { TicTacToeCross } from './common/TicTacToeCross';

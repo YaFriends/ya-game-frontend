@@ -1,6 +1,7 @@
 import { MiniGame as MiniGameProps } from '../@types/GameSet';
+import { Team } from '../@types/MiniGame';
 
-import MiniGame, { Team } from './MiniGame';
+import MiniGame from './MiniGame';
 import { MINI_GAME_CONTROLLER_BY_ID } from './constants';
 
 export default class GameSetCoordinator {
