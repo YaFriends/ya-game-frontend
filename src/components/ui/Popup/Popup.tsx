@@ -1,7 +1,6 @@
 import React, { FC, useMemo } from 'react';
 
 import { Button } from '../Button/Button';
-import { ButtonClose } from '../ButtonClose/ButtonClose';
 import { Subtitle } from '../Subtitle/Subtitle';
 
 import './Popup.scss';
@@ -24,7 +23,7 @@ export const Popup: FC<PopupProps> = ({ title, textButton, show, click, children
         <div className="ui-popup__wrapper">
           <header className="ui-popup__header">
             <Subtitle text={title} />
-            <ButtonClose click={click} />
+            <Button type="button" text=" " extendClass="ui-button__close" click={click} />
           </header>
           {children && (
             <main className="ui-popup__main">{React.Children.map(children, child => child)}</main>
