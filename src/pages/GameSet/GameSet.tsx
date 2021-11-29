@@ -6,10 +6,9 @@ import { MiniGamePreview } from '../../components/MiniGamePreview/MiniGamePrevie
 import { Subtitle } from '../../components/ui/Subtitle/Subtitle';
 import { Title } from '../../components/ui/Title/Title';
 import GameSetCoordinator from '../../core/GameSetCoordinator';
-import { useFetchSessionQuery } from '../../services/GameSetAPI';
-
-import './game-set.scss';
 import { TRANSLATION } from '../../lang/ru/translation';
+import { useFetchSessionQuery } from '../../services/GameSetAPI';
+import './game-set.scss';
 
 type PageParams = {
   id: string;

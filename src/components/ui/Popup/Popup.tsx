@@ -8,14 +8,17 @@ import './Popup.scss';
 interface PopupProps {
   title: string;
   textButton: string;
-  show: boolean;
+  isShown?: boolean;
   click: () => void;
 }
 
 const DEFAULT_CLASSES: string[] = ['ui-popup'];
 
-export const Popup: FC<PopupProps> = ({ title, textButton, show, click, children }) => {
-  const classesMemo = useMemo(() => [...DEFAULT_CLASSES, 'ui-popup--show'], [show]);
+export const Popup: FC<PopupProps> = ({ title, textButton, isShown = false, click }) => {
+  const classesMemo = useMemo(
+    () => [...DEFAULT_CLASSES, isShown ? 'ui-popup--show' : ''],
+    [isShown]
+  );
 
   return (
     <div className={classesMemo.join(' ')}>
@@ -23,11 +26,8 @@ export const Popup: FC<PopupProps> = ({ title, textButton, show, click, children
         <div className="ui-popup__wrapper">
           <header className="ui-popup__header">
             <Subtitle text={title} />
-            <Button type="button" text=" " extendClass="ui-button__close" click={click} />
+            <Button type="button" extendClass="ui-button__close" click={click} />
           </header>
-          {children && (
-            <main className="ui-popup__main">{React.Children.map(children, child => child)}</main>
-          )}
           <footer className="ui-popup__footer">
             <Button type="button" text={textButton} click={click} />
           </footer>
