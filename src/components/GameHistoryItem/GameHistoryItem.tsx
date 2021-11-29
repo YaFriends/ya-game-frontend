@@ -2,6 +2,7 @@ import React, { memo } from 'react';
 
 import { TRANSLATION } from '../../lang/ru/translation';
 import { Text } from '../ui/Text/Text';
+import { Team } from '../../@types/MiniGame';
 
 import './game-history-item.scss';
 
@@ -9,10 +10,6 @@ export type Game = {
   id: number;
   name: string;
   icon: string;
-};
-
-export type Team = {
-  players: string[];
 };
 
 export type ResultType = 'win' | 'lose';

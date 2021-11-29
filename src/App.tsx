@@ -9,7 +9,7 @@ import { Error404 } from './pages/Error404/Error404';
 import { Forum } from './pages/Forum/Forum';
 import { GameCreation } from './pages/GameCreation/GameCreation';
 import { GameLobby } from './pages/GameLobby';
-import { GameSession } from './pages/GameSession';
+import { GameSet } from './pages/GameSet/GameSet';
 import { Leaderboard } from './pages/Leaderboard/Leaderboard';
 import { Login } from './pages/Login/Login';
 import { Logout } from './pages/Logout';
@@ -41,7 +41,7 @@ const App: FC<Record<string, never>> = () => {
         <PrivateRoute path="/forum" exact component={Forum} />
         <PrivateRoute path="/game/create" exact component={GameCreation} />
         <PrivateRoute path="/game/lobby" exact component={GameLobby} />
-        <PrivateRoute path="/game/:id" component={GameSession} />
+        <PrivateRoute path="/game/:id" component={GameSet} />
         <PrivateRoute path="/leaderboard" exact component={Leaderboard} />
         <PrivateRoute path="/profile/history" exact component={ProfileHistory} />
         <PrivateRoute path="/profile" component={Profile} />

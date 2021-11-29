@@ -1,17 +1,15 @@
 import React, { FC, ReactNode } from 'react';
 
+import { GameSetHistory } from '../../@types/GameSet';
 import { TRANSLATION } from '../../lang/ru/translation';
-import {
-  GameSetHistoryItem,
-  GameSetHistoryItemProps,
-} from '../GameSetHistoryItem/GameSetHistoryItem';
+import { GameSetHistoryItem } from '../GameSetHistoryItem/GameSetHistoryItem';
 import { Title } from '../ui/Title/Title';
 
 import './game-set-history-list.scss';
 
 export type GameSetHistoryListProps = {
   link: ReactNode;
-  items: GameSetHistoryItemProps[];
+  items: GameSetHistory[];
 };
 
 export const GameSetHistoryList: FC<GameSetHistoryListProps> = ({ items, link }) => {

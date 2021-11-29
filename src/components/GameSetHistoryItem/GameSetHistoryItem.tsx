@@ -1,46 +1,33 @@
 import React, { memo } from 'react';
 
+import { GameSetHistory } from '../../@types/GameSet';
 import { TRANSLATION } from '../../lang/ru/translation';
+import { MiniGamePreview } from '../MiniGamePreview/MiniGamePreview';
 import { Text } from '../ui/Text/Text';
 
 import './game-set-history-item.scss';
 
-export type MiniGame = {
-  id: number;
-  name: string;
-  icon: string;
-};
-
-export type Team = {
-  players: string[];
-};
-
-export type ResultType = 'win' | 'lose';
-
-export type GameSetHistoryItemProps = {
-  id: number;
-  miniGames: MiniGame[];
-  date: string;
-  teams: Team[];
-  result: {
-    id: number;
-    type: ResultType;
-  };
-};
+type Props = GameSetHistory;
 
 export const GameSetHistoryItem = memo(function GameSetHistoryItem({
   miniGames,
   date,
   teams,
   result,
-}: GameSetHistoryItemProps) {
+}: Props) {
   const miniGameGroup = miniGames.map(({ id, name, icon }) => (
-    <div key={id} className="game-set-history-item__info-round">
-      <img src={icon} alt={name} />
-    </div>
+    <MiniGamePreview
+      key={id}
+      id={id}
+      name={name}
+      icon={icon}
+      classes="game-set-history-item__info-round"
+    />
   ));
 
-  const versus = teams.map(({ players }) => players.join(', ')).join(' vs ');
+  const versus = teams
+    .map(({ players }) => players.map(({ login }) => login).join(', '))
+    .join(' vs ');
 
   return (
     <div className="game-set-history-item">
