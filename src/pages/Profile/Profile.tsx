@@ -14,16 +14,18 @@ export const Profile: FC<Record<string, never>> = () => {
   const { currentUser } = useAuth();
 
   return (
-    <Switch>
-      <Route path={path} exact>
-        <Settings url={url} userInfo={currentUser as UserData} />
-      </Route>
-      <Route path={`${path}/edit`}>
-        <EditInfo userInfo={currentUser as UserData} url={url} />
-      </Route>
-      <Route path={`${path}/password`}>
-        <ChangePassword url={url} userInfo={currentUser as UserData} />
-      </Route>
-    </Switch>
+    currentUser && (
+      <Switch>
+        <Route path={path} exact>
+          <Settings url={url} userInfo={currentUser as UserData} />
+        </Route>
+        <Route path={`${path}/edit`}>
+          <EditInfo url={url} userInfo={currentUser as UserData} />
+        </Route>
+        <Route path={`${path}/password`}>
+          <ChangePassword url={url} userInfo={currentUser as UserData} />
+        </Route>
+      </Switch>
+    )
   );
 };

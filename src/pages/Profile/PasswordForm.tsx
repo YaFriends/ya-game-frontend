@@ -20,10 +20,6 @@ const {
   PasswordTitle,
 } = TRANSLATION.Profile;
 
-interface ProfilePassword extends UserUpdatePasswordProps {
-  confirmPassword: string;
-}
-
 export const PasswordForm: FC = () => {
   const [attemptUpdatePassword, { isLoading, isSuccess }] = useUpdatePasswordMutation();
   const history = useHistory();
@@ -38,7 +34,7 @@ export const PasswordForm: FC = () => {
     handleSubmit,
     register,
     formState: { errors },
-  } = useForm<ProfilePassword>({
+  } = useForm<UserUpdatePasswordProps>({
     criteriaMode: 'all',
     resolver: yupResolver(ProfilePasswordSchema),
   });

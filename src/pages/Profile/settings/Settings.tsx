@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 
-import { UserData } from '../../../@types/UserTypes';
+import { SettingsProps } from '../../../@types/ProfileTypes';
 import { DEFAULT_PROFILE_IMAGE_PATH } from '../../../components/constants';
 import { MainLink } from '../../../components/ui/Link/Link';
 import { TRANSLATION } from '../../../lang/ru/translation';
@@ -9,12 +9,7 @@ import { UserThumbnail } from '../UserThumbnail';
 
 const { LinkToBack, LinkToChangeInfo, LinkToChangePassword } = TRANSLATION.Profile;
 
-interface MainProps {
-  url: string;
-  userInfo: UserData;
-}
-
-export const Settings: FC<MainProps> = ({ url, userInfo }) => {
+export const Settings: FC<SettingsProps> = ({ url, userInfo }) => {
   return (
     <div className="profile">
       <div className="profile__menu">
