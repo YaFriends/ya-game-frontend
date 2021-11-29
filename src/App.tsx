@@ -21,16 +21,19 @@ import { useFetchUserQuery } from './services/AuthAPI';
 import { authActions } from './store/slices/authSlice';
 
 const App: FC<Record<string, never>> = () => {
-  const { data: responseFetchUser = null, isLoading } = useFetchUserQuery();
+  const { data: responseFetchUser = null, isLoading, isSuccess } = useFetchUserQuery();
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(authActions.setCurrentUser(responseFetchUser));
   }, [responseFetchUser]);
-
-  if (isLoading) {
+  console.log('isLoading', isLoading);
+  console.log(isSuccess);
+  if (isLoading && !responseFetchUser) {
     return <Spinner />;
   }
+
+  console.log(responseFetchUser);
 
   return (
     <main className="font-body text-black container game-container">
@@ -39,7 +42,7 @@ const App: FC<Record<string, never>> = () => {
         <Route path="/register" exact component={Register} />
         <PrivateRoute path="/" exact component={Dashboard} />
         <PrivateRoute path="/forum" exact component={Forum} />
-        <PrivateRoute path="/game/create" exact component={GameCreation} />
+        <PrivateRoute path="/game/create" component={GameCreation} />
         <PrivateRoute path="/game/lobby" exact component={GameLobby} />
         <PrivateRoute path="/game/:id" component={GameSet} />
         <PrivateRoute path="/leaderboard" exact component={Leaderboard} />

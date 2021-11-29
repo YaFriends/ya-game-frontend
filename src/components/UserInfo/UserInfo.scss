@@ -1,11 +1,11 @@
-.profile {
+.user-info {
   &__line {
     @apply flex items-center;
 
     &--reversed {
       @apply flex-row-reverse;
 
-      .profile {
+      .user-info {
         &__line-item {
           @apply ml-2 last:ml-0 first:mr-0;
         }

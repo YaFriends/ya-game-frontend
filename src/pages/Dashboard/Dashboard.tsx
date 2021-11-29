@@ -1,27 +1,33 @@
 import React, { FC } from 'react';
 
+import { UserData } from '../../@types/UserTypes';
 import { GameSetHistoryList } from '../../components/GameSetHistoryList/GameSetHistoryList';
 import { Menu } from '../../components/Menu';
-import { Profile } from '../../components/Profile/Profile';
+import { UserInfo } from '../../components/UserInfo/UserInfo';
 import { MainLink } from '../../components/ui/Link/Link';
+import { useAuth } from '../../hooks/use-auth';
 import { TRANSLATION } from '../../lang/ru/translation';
-import { DUMMY_GAME_LIST, DUMMY_STATS, DUMMY_USER } from '../MOCKS/Dashboard';
+import { DUMMY_GAME_LIST, DUMMY_STATS } from '../MOCKS/Dashboard';
 
-import './dashboard.scss';
+import './Dashboard.scss';
 
 export const Dashboard: FC<Record<string, never>> = () => {
+  const { currentUser } = useAuth();
+  console.log(currentUser);
   const link = <MainLink text={TRANSLATION.Dashboard.WatchAllGames} href="/profile/history" />;
   return (
-    <section className="dashboard">
-      <div className="dashboard__top">
-        <Profile user={DUMMY_USER} stats={DUMMY_STATS} />
-      </div>
-      <div className="dashboard__body">
-        <Menu />
-        <div className="dashboard__body-games">
-          <GameSetHistoryList items={DUMMY_GAME_LIST} link={link} />
+    currentUser && (
+      <section className="dashboard">
+        <div className="dashboard__top">
+          <UserInfo user={currentUser as UserData} stats={DUMMY_STATS} />
         </div>
-      </div>
-    </section>
+        <div className="dashboard__body">
+          <Menu />
+          <div className="dashboard__body-games">
+            <GameSetHistoryList items={DUMMY_GAME_LIST} link={link} />
+          </div>
+        </div>
+      </section>
+    )
   );
 };

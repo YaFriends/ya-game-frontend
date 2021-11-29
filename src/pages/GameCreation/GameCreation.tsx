@@ -19,9 +19,7 @@ export const GameCreation: FC<Record<string, never>> = () => {
   const [gameCount, setGameCount] = useState<OptionProps>(numberOfGames[0]);
   const { path, url } = useRouteMatch();
 
-  const changeGameCount: SelectedChangeType = count => {
-    setGameCount(count);
-  };
+  const changeGameCount: SelectedChangeType = count => setGameCount(count);
 
   return (
     <section className="game-creation">
