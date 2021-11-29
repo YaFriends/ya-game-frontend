@@ -62,7 +62,7 @@ export const TRANSLATION: Record<string, Record<string, string>> = {
     tableColumnName: 'Имя',
     tableColumnWins: 'Победы',
     subtitleNotTable: 'Тебя нет в таблице',
-    subtitleHaveTable: 'Твое место в таблице #',
+    subtitleHaveTable: 'Твоё место в таблице #',
   },
   Profile: {
     label: 'Профиль',
@@ -116,5 +116,25 @@ export const TRANSLATION: Record<string, Record<string, string>> = {
   ErrorMessage: {
     message: 'Упс, что-то пошло не так',
     buttonText: 'попробовать снова',
+  },
+  Loading: {
+    ChosenGames: 'Выбранные игры',
+    ChosenGame: 'Выбранная игра',
+    label: 'Загрузка...',
+  },
+  TicTacToe: {
+    label: 'Крестики-нолики',
+  },
+  ClickMore: {
+    label: 'Нажми больше',
+  },
+  CircleTriangleSquare: {
+    label: 'Круг Треугольник Квадрат',
+  },
+  FieldBattle: {
+    label: 'Битва за поле',
+  },
+  Bombermans: {
+    label: 'Взорви не себя',
   },
 };

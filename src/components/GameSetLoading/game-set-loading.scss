@@ -1,0 +1,15 @@
+.game-set-loading {
+  @apply flex flex-col items-center justify-center flex-grow;
+
+  &__head {
+    @apply mb-20;
+  }
+
+  &__games {
+    @apply flex justify-center w-[calc(100%+30px)] -mx-3;
+  }
+
+  &__mini-game {
+    @apply w-20 h-20 mx-3;
+  }
+}

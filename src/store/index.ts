@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 
 import { AuthAPI } from '../services/AuthAPI';
+import { GameSetAPI } from '../services/GameSetAPI';
 import { LeaderboardAPI } from '../services/LeaderboardAPI';
 import { UserAPI } from '../services/UserAPI';
 
@@ -11,6 +12,7 @@ export const store = configureStore({
     [AuthAPI.reducerPath]: AuthAPI.reducer,
     [LeaderboardAPI.reducerPath]: LeaderboardAPI.reducer,
     [UserAPI.reducerPath]: UserAPI.reducer,
+    [GameSetAPI.reducerPath]: GameSetAPI.reducer,
     auth: authSlice,
   },
   middleware: getDefaultMiddleware =>
@@ -18,6 +20,7 @@ export const store = configureStore({
       AuthAPI.middleware,
       LeaderboardAPI.middleware,
       UserAPI.middleware,
+      GameSetAPI.middleware,
     ]),
 });
 
