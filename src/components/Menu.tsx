@@ -16,7 +16,8 @@ export const Menu: FC<Record<string, never>> = () => {
           <li className="menu__link">
             <MainLink
               extendClass="ui-link--button-success"
-              href="/game/create"
+              href="/game/234234"
+              // href="/game/create"
               text={TRANSLATION.GameCreation.label}
             />
           </li>

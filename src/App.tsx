@@ -1,15 +1,14 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import { PrivateRoute } from './components/PrivateRoute';
 import { useAppDispatch } from './hooks/redux';
-import { useAuth } from './hooks/use-auth';
 import { Dashboard } from './pages/Dashboard/Dashboard';
 import { Error404 } from './pages/Error404/Error404';
 import { Forum } from './pages/Forum/Forum';
 import { GameCreation } from './pages/GameCreation/GameCreation';
 import { GameLobby } from './pages/GameLobby';
-import { GameSession } from './pages/GameSession';
+import { GameSet } from './pages/GameSet/GameSet';
 import { Leaderboard } from './pages/Leaderboard/Leaderboard';
 import { Login } from './pages/Login/Login';
 import { Logout } from './pages/Logout';
@@ -21,13 +20,12 @@ import { useFetchUserQuery } from './services/AuthAPI';
 import { authActions } from './store/slices/authSlice';
 
 const App: FC<Record<string, never>> = () => {
-  const { data: responseFetchUser = null } = useFetchUserQuery('');
+  const { data: responseFetchUser = null } = useFetchUserQuery();
   const dispatch = useAppDispatch();
-  const { isAuth } = useAuth();
 
-  if (!isAuth) {
+  useEffect(() => {
     dispatch(authActions.setCurrentUser(responseFetchUser));
-  }
+  }, [responseFetchUser]);
 
   return (
     <main className="font-body text-black container game-container">
@@ -38,7 +36,7 @@ const App: FC<Record<string, never>> = () => {
         <PrivateRoute path="/forum" exact component={Forum} />
         <PrivateRoute path="/game/create" exact component={GameCreation} />
         <PrivateRoute path="/game/lobby" exact component={GameLobby} />
-        <PrivateRoute path="/game/:id" component={GameSession} />
+        <PrivateRoute path="/game/:id" component={GameSet} />
         <PrivateRoute path="/leaderboard" exact component={Leaderboard} />
         <PrivateRoute path="/profile/history" exact component={ProfileHistory} />
         <PrivateRoute path="/profile" exact component={Profile} />
