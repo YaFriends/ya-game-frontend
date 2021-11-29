@@ -9,6 +9,7 @@ import GameSetCoordinator from '../../core/GameSetCoordinator';
 import { useFetchSessionQuery } from '../../services/GameSetAPI';
 
 import './game-set.scss';
+import { TRANSLATION } from '../../lang/ru/translation';
 
 type PageParams = {
   id: string;
@@ -38,7 +39,7 @@ export const GameSet: FC<Record<string, never>> = () => {
   if (isLoading || !gameSet) {
     return (
       <section className="game-set">
-        <Subtitle text="Загрузка..." />
+        <Subtitle text={TRANSLATION.Loading.label} />
       </section>
     );
   }
@@ -48,7 +49,7 @@ export const GameSet: FC<Record<string, never>> = () => {
       <section className="game-set">
         <Title text="Выбранные игры" extendClass="mb-6" />
         <div className="game-set__mini-games">{miniGamePreviews}</div>
-        <Subtitle text="Загрузка..." />
+        <Subtitle text={TRANSLATION.Loading.label} />
       </section>
     );
   }
