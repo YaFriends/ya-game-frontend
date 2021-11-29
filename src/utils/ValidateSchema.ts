@@ -77,12 +77,10 @@ export const ProfileInfoSchema = yup.object({
   login,
   email,
   phone,
-  password,
   display_name,
 });
 
 export const ProfilePasswordSchema = yup.object({
   newPassword: password,
   oldPassword: password,
-  confirmPassword: password,
 });
