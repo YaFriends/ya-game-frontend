@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 
 import { UserData } from '../../../@types/UserTypes';
+import { DEFAULT_PROFILE_IMAGE_PATH } from '../../../components/constants';
 import { MainLink } from '../../../components/ui/Link/Link';
 import { TRANSLATION } from '../../../lang/ru/translation';
 import { InformationForm } from '../InformationForm';
@@ -17,7 +18,10 @@ export const Settings: FC<MainProps> = ({ url, userInfo }) => {
   return (
     <div className="profile">
       <div className="profile__menu">
-        <UserThumbnail avatar={userInfo.avatar} login={userInfo.login} />
+        <UserThumbnail
+          avatar={userInfo?.avatar || DEFAULT_PROFILE_IMAGE_PATH}
+          login={userInfo?.login}
+        />
         <MainLink text={LinkToChangeInfo} href={`${url}/edit`} extendClass="ui-link--button mb-6" />
         <MainLink
           text={LinkToChangePassword}
@@ -27,7 +31,7 @@ export const Settings: FC<MainProps> = ({ url, userInfo }) => {
         <MainLink text={LinkToBack} href="/" />
       </div>
       <div className="profile__inputs">
-        <InformationForm disabled={true} />
+        <InformationForm disabled userInfo={userInfo} />
       </div>
     </div>
   );

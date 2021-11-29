@@ -7,6 +7,7 @@ export interface UserData {
   email: string;
   phone: string;
   avatar: string;
+  status?: unknown;
 }
 
 export interface UserUpdatePasswordProps {
@@ -16,6 +17,10 @@ export interface UserUpdatePasswordProps {
 
 export interface SearchUsersProps {
   login: string;
+}
+
+export interface ChangePasswordResponse {
+  data: 'OK' | { reason: string };
 }
 
 export type UserUpdateProfileProps = Omit<UserData, 'avatar' | 'id'>;
