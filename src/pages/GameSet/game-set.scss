@@ -1,0 +1,11 @@
+.game-set {
+  @apply flex-grow flex flex-col items-center justify-center;
+
+  &__mini-games {
+    @apply flex justify-center -mx-3 mb-20;
+  }
+
+  &__mini-game {
+    @apply w-20 h-20 mx-3;
+  }
+}

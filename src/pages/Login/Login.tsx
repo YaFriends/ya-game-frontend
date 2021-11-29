@@ -1,5 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 
@@ -21,9 +21,11 @@ export const Login: FC<Record<string, never>> = () => {
   const history = useHistory();
   const { isAuth } = useAuth();
 
-  if (isAuth) {
-    history.push('/');
-  }
+  useEffect(() => {
+    if (isAuth) {
+      history.push('/');
+    }
+  }, [isAuth]);
 
   const {
     handleSubmit,

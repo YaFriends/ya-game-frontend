@@ -31,14 +31,14 @@ export const AuthAPI = createApi({
       }),
       invalidatesTags: ['User'],
     }),
-    logout: build.mutation<void, string>({
+    logout: build.mutation<void, void>({
       query: () => ({
         url: '/logout',
         method: 'POST',
         credentials: 'include',
       }),
     }),
-    fetchUser: build.query<UserData, string>({
+    fetchUser: build.query<UserData, void>({
       query: () => ({
         url: '/user',
         method: 'GET',

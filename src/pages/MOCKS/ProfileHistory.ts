@@ -1,5 +1,5 @@
+import { GameSetHistory } from '../../@types/GameSet';
 import { UserData } from '../../@types/UserTypes';
-import { GameSetHistoryItemProps } from '../../components/GameSetHistoryItem/GameSetHistoryItem';
 
 export const DUMMY_USER: UserData = {
   id: 1,
@@ -16,12 +16,41 @@ export const DUMMY_STATS = {
   wins: 0,
 };
 
-export const DUMMY_GAME_LIST: GameSetHistoryItemProps[] = [
+export const DUMMY_GAME_LIST: GameSetHistory[] = [
   {
     id: 1,
     miniGames: [{ id: 1, name: 'Test', icon: '/static/img/games/click_more/icon.jpg' }],
     date: '2021-04-11',
-    teams: [{ players: ['Player 1'] }, { players: ['Player 2'] }],
+    teams: [
+      {
+        players: [
+          {
+            login: 'Player 1',
+            id: 1,
+            first_name: 'Test',
+            second_name: 'test 1',
+            display_name: 'Testovich',
+            email: 'string',
+            phone: 'string',
+            avatar: '',
+          },
+        ],
+      },
+      {
+        players: [
+          {
+            login: 'Player 2',
+            id: 1,
+            first_name: 'Test',
+            second_name: 'test 1',
+            display_name: 'Testovich',
+            email: 'string',
+            phone: 'string',
+            avatar: '',
+          },
+        ],
+      },
+    ],
     result: {
       id: 1,
       type: 'win',
@@ -35,7 +64,36 @@ export const DUMMY_GAME_LIST: GameSetHistoryItemProps[] = [
       { id: 3, name: 'Test', icon: '/static/img/games/click_more/icon.jpg' },
     ],
     date: '2021-04-11',
-    teams: [{ players: ['Player 2'] }, { players: ['Player 3'] }],
+    teams: [
+      {
+        players: [
+          {
+            login: 'Player 2',
+            id: 1,
+            first_name: 'Test',
+            second_name: 'test 1',
+            display_name: 'Testovich',
+            email: 'string',
+            phone: 'string',
+            avatar: '',
+          },
+        ],
+      },
+      {
+        players: [
+          {
+            login: 'Player 3',
+            id: 1,
+            first_name: 'Test',
+            second_name: 'test 1',
+            display_name: 'Testovich',
+            email: 'string',
+            phone: 'string',
+            avatar: '',
+          },
+        ],
+      },
+    ],
     result: {
       id: 1,
       type: 'win',
@@ -51,7 +109,36 @@ export const DUMMY_GAME_LIST: GameSetHistoryItemProps[] = [
       { id: 5, name: 'Test', icon: '/static/img/games/click_more/icon.jpg' },
     ],
     date: '2021-04-11',
-    teams: [{ players: ['Player 5'] }, { players: ['Player 6'] }],
+    teams: [
+      {
+        players: [
+          {
+            login: 'Player 5',
+            id: 1,
+            first_name: 'Test',
+            second_name: 'test 1',
+            display_name: 'Testovich',
+            email: 'string',
+            phone: 'string',
+            avatar: '',
+          },
+        ],
+      },
+      {
+        players: [
+          {
+            login: 'Player 6',
+            id: 1,
+            first_name: 'Test',
+            second_name: 'test 1',
+            display_name: 'Testovich',
+            email: 'string',
+            phone: 'string',
+            avatar: '',
+          },
+        ],
+      },
+    ],
     result: {
       id: 1,
       type: 'win',
@@ -61,7 +148,36 @@ export const DUMMY_GAME_LIST: GameSetHistoryItemProps[] = [
     id: 4,
     miniGames: [{ id: 1, name: 'Test', icon: '/static/img/games/click_more/icon.jpg' }],
     date: '2021-04-11',
-    teams: [{ players: ['Player 1'] }, { players: ['Player 2'] }],
+    teams: [
+      {
+        players: [
+          {
+            login: 'Player 1',
+            id: 1,
+            first_name: 'Test',
+            second_name: 'test 1',
+            display_name: 'Testovich',
+            email: 'string',
+            phone: 'string',
+            avatar: '',
+          },
+        ],
+      },
+      {
+        players: [
+          {
+            login: 'Player 2',
+            id: 1,
+            first_name: 'Test',
+            second_name: 'test 1',
+            display_name: 'Testovich',
+            email: 'string',
+            phone: 'string',
+            avatar: '',
+          },
+        ],
+      },
+    ],
     result: {
       id: 1,
       type: 'win',
@@ -71,7 +187,36 @@ export const DUMMY_GAME_LIST: GameSetHistoryItemProps[] = [
     id: 5,
     miniGames: [{ id: 1, name: 'Test', icon: '/static/img/games/click_more/icon.jpg' }],
     date: '2021-04-11',
-    teams: [{ players: ['Player 1'] }, { players: ['Player 2'] }],
+    teams: [
+      {
+        players: [
+          {
+            login: 'Player 1',
+            id: 1,
+            first_name: 'Test',
+            second_name: 'test 1',
+            display_name: 'Testovich',
+            email: 'string',
+            phone: 'string',
+            avatar: '',
+          },
+        ],
+      },
+      {
+        players: [
+          {
+            login: 'Player 2',
+            id: 1,
+            first_name: 'Test',
+            second_name: 'test 1',
+            display_name: 'Testovich',
+            email: 'string',
+            phone: 'string',
+            avatar: '',
+          },
+        ],
+      },
+    ],
     result: {
       id: 1,
       type: 'win',
@@ -85,7 +230,36 @@ export const DUMMY_GAME_LIST: GameSetHistoryItemProps[] = [
       { id: 3, name: 'Test', icon: '/static/img/games/click_more/icon.jpg' },
     ],
     date: '2021-04-11',
-    teams: [{ players: ['Player 2'] }, { players: ['Player 3'] }],
+    teams: [
+      {
+        players: [
+          {
+            login: 'Player 2',
+            id: 1,
+            first_name: 'Test',
+            second_name: 'test 1',
+            display_name: 'Testovich',
+            email: 'string',
+            phone: 'string',
+            avatar: '',
+          },
+        ],
+      },
+      {
+        players: [
+          {
+            login: 'Player 3',
+            id: 1,
+            first_name: 'Test',
+            second_name: 'test 1',
+            display_name: 'Testovich',
+            email: 'string',
+            phone: 'string',
+            avatar: '',
+          },
+        ],
+      },
+    ],
     result: {
       id: 1,
       type: 'win',
@@ -101,7 +275,36 @@ export const DUMMY_GAME_LIST: GameSetHistoryItemProps[] = [
       { id: 5, name: 'Test', icon: '/static/img/games/click_more/icon.jpg' },
     ],
     date: '2021-04-11',
-    teams: [{ players: ['Player 5'] }, { players: ['Player 6'] }],
+    teams: [
+      {
+        players: [
+          {
+            login: 'Player 5',
+            id: 1,
+            first_name: 'Test',
+            second_name: 'test 1',
+            display_name: 'Testovich',
+            email: 'string',
+            phone: 'string',
+            avatar: '',
+          },
+        ],
+      },
+      {
+        players: [
+          {
+            login: 'Player 6',
+            id: 1,
+            first_name: 'Test',
+            second_name: 'test 1',
+            display_name: 'Testovich',
+            email: 'string',
+            phone: 'string',
+            avatar: '',
+          },
+        ],
+      },
+    ],
     result: {
       id: 1,
       type: 'lose',
@@ -111,7 +314,36 @@ export const DUMMY_GAME_LIST: GameSetHistoryItemProps[] = [
     id: 8,
     miniGames: [{ id: 1, name: 'Test', icon: '/static/img/games/click_more/icon.jpg' }],
     date: '2021-04-11',
-    teams: [{ players: ['Player 1'] }, { players: ['Player 2'] }],
+    teams: [
+      {
+        players: [
+          {
+            login: 'Player 1',
+            id: 1,
+            first_name: 'Test',
+            second_name: 'test 1',
+            display_name: 'Testovich',
+            email: 'string',
+            phone: 'string',
+            avatar: '',
+          },
+        ],
+      },
+      {
+        players: [
+          {
+            login: 'Player 2',
+            id: 1,
+            first_name: 'Test',
+            second_name: 'test 1',
+            display_name: 'Testovich',
+            email: 'string',
+            phone: 'string',
+            avatar: '',
+          },
+        ],
+      },
+    ],
     result: {
       id: 1,
       type: 'lose',

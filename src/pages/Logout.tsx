@@ -11,7 +11,7 @@ export const Logout: FC<Record<string, never>> = () => {
   const history = useHistory();
 
   useEffect(() => {
-    attemptLogout('').then(() => {
+    attemptLogout().then(() => {
       dispatch(authActions.setCurrentUser(null));
 
       if (typeof window !== 'undefined') {
