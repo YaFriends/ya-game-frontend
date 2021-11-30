@@ -1,5 +1,5 @@
 .ui-button {
-  @apply bg-blue border-blue text-white;
+  @apply w-full h-[34px] bg-blue border-blue text-white;
 
   &--success {
     @apply bg-green border-green;
@@ -17,6 +17,29 @@
     &:hover,
     &:focus-within {
       @apply opacity-70;
+    }
+  }
+
+  &__close {
+    @apply absolute w-[15px] h-[15px] top-[28px] right-6 opacity-50 transition-opacity bg-transparent border-transparent;
+
+    &:before,
+    &:after {
+      @apply absolute h-[15px] w-[2px] top-0 right-[6px] bg-black;
+      content: '';
+    }
+
+    &:before {
+      @apply transform rotate-45;
+    }
+
+    &:after {
+      @apply transform -rotate-45;
+    }
+
+    &:hover,
+    &:focus-within {
+      @apply opacity-100;
     }
   }
 }

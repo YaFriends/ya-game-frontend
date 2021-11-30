@@ -7,7 +7,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   extendClass?: string;
   typeAction?: 'success' | 'error';
   disabled?: boolean;
-  text: string;
+  text?: string;
   click?: (e: MouseEvent) => void;
   form?: string;
 }
@@ -21,8 +21,6 @@ const DEFAULT_CLASSES: string[] = [
   'rounded-xl',
   'border-2',
   'text-base',
-  'h-[34px]',
-  'w-full',
   'duration-300',
   'ease-in-out',
 ];
@@ -60,7 +58,7 @@ export const Button: FC<ButtonProps> = ({
       disabled={disabled}
       form={form}
       onClick={click}>
-      <span className="w-full">{text}</span>
+      {text && <span className="w-full">{text}</span>}
     </button>
   );
 };
