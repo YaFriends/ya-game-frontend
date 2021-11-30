@@ -5,7 +5,7 @@ import { UserData } from '../@types/UserTypes';
 import { EXTERNAL_API_URL } from '../config';
 
 const servicePoint = '/auth';
-//s
+//ss
 export const AuthAPI = createApi({
   reducerPath: 'authApi',
   baseQuery: fetchBaseQuery({
