@@ -13,12 +13,9 @@ import { store } from './store';
 import './index.scss';
 
 function prepare(): StartReturnType | Promise<void> {
-  if (process.env.NODE_ENV === 'development') {
-    return worker.start({
-      onUnhandledRequest: 'bypass',
-    });
-  }
-  return Promise.resolve();
+  return worker.start({
+    onUnhandledRequest: 'bypass',
+  });
 }
 
 prepare().then(() => {

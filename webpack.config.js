@@ -20,6 +20,16 @@ module.exports = {
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
+    fallback: {
+      "fs": false,
+      "path": false,
+      "http": false,
+      "https": false,
+      "zlib": false,
+      "os": false,
+      "tty": require.resolve('tty-browserify'),
+      "timers": false,
+    },
   },
   module: {
     rules: [
@@ -58,6 +68,9 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env': JSON.stringify(dotenv.parsed),
       'process.env.NODE_ENV': JSON.stringify(isDevelopment ? 'development' : 'production'),
+    }),
+    new webpack.ProvidePlugin({
+      process: 'process/browser',
     }),
   ],
 };
