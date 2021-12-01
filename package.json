@@ -7,7 +7,14 @@
     "start": "webpack-dev-server --mode development",
     "build": "NODE_ENV=production webpack",
     "server": "node server",
-    "test": "jest"
+    "test": "jest",
+    "heroku-login": "heroku login",
+    "heroku-container-login": "heroku container:login",
+    "heroku-checked-apps": "heroku apps",
+    "heroku-create": "heroku create ya-friends-demo-1",
+    "heroku-push": "heroku container:push web -a ya-friends-demo-1",
+    "heroku-release": "heroku container:release web -a ya-friends-demo-1",
+    "heroku": "heroku open -a ya-friends-demo-1"
   },
   "keywords": [
     "yandex",
