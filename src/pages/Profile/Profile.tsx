@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
 
-import { UserData } from '../../@types/UserTypes';
+import { Spinner } from '../../components/ui/Spinner/Spinner';
 import { useAuth } from '../../hooks/use-auth';
 
 import { ChangePassword } from './settings/ChangePassword';
@@ -13,16 +13,20 @@ export const Profile: FC<Record<string, never>> = () => {
   const { path, url } = useRouteMatch();
   const { currentUser } = useAuth();
 
+  if (!currentUser) {
+    return <Spinner />;
+  }
+
   return (
     <Switch>
       <Route path={path} exact>
-        <Settings url={url} userInfo={currentUser as UserData} />
+        <Settings url={url} userInfo={currentUser} />
       </Route>
-      <Route path={`${path}/edit`}>
-        <EditInfo userInfo={currentUser as UserData} url={url} />
+      <Route path={`${path}/edit`} exact>
+        <EditInfo url={url} userInfo={currentUser} />
       </Route>
-      <Route path={`${path}/password`}>
-        <ChangePassword url={url} userInfo={currentUser as UserData} />
+      <Route path={`${path}/password`} exact>
+        <ChangePassword url={url} userInfo={currentUser} />
       </Route>
     </Switch>
   );

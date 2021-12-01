@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 
-import { UserData } from '../../../@types/UserTypes';
+import { SettingsProps } from '../../../@types/ProfileTypes';
 import { DEFAULT_PROFILE_IMAGE_PATH } from '../../../components/constants';
 import { Button } from '../../../components/ui/Button/Button';
 import { MainLink } from '../../../components/ui/Link/Link';
@@ -10,12 +10,7 @@ import { UserThumbnail } from '../UserThumbnail';
 
 const { LinkToBack, SaveButton } = TRANSLATION.Profile;
 
-interface EditProps {
-  url: string;
-  userInfo: UserData;
-}
-
-export const EditInfo: FC<EditProps> = ({ url, userInfo }) => {
+export const EditInfo: FC<SettingsProps> = ({ url, userInfo }) => {
   return (
     <div className="profile">
       <div className="profile__menu">

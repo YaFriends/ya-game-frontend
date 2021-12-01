@@ -33,7 +33,16 @@ export const UserAPI = createApi({
         body,
       }),
     }),
+    updateAvatar: build.mutation<UserData, FormData>({
+      query: body => ({
+        url: '/profile/avatar',
+        method: 'PUT',
+        credentials: 'include',
+        body,
+      }),
+    }),
   }),
 });
 
-export const { useUpdatePasswordMutation, useUpdateProfileMutation } = UserAPI;
+export const { useUpdatePasswordMutation, useUpdateProfileMutation, useUpdateAvatarMutation } =
+  UserAPI;

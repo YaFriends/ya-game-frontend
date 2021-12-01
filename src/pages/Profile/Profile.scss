@@ -13,8 +13,21 @@
 .user-thumbnail {
   @apply flex flex-col items-center mb-14;
 
-  &__avatar{
-    @apply w-30 h-30 rounded-full bg-grey-40 overflow-hidden mb-4;
+  &__text {
+    @apply absolute hidden top-0 bottom-0 flex items-center justify-center w-full text-lg cursor-pointer;
+  }
+
+  &__avatar {
+    @apply relative w-30 h-30 rounded-full bg-grey-40 overflow-hidden mb-4 transition-opacity;
+
+    &:hover,
+    &:focus-within {
+      @apply opacity-50;
+
+      .user-thumbnail__text {
+        @apply flex;
+      }
+    }
   }
 
   &__image {
@@ -23,5 +36,9 @@
 
   &__login {
     @apply font-bold text-lg;
+  }
+
+  &__input {
+    @apply hidden;
   }
 }
