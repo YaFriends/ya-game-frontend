@@ -28,7 +28,7 @@ const App: FC<Record<string, never>> = () => {
     dispatch(authActions.setCurrentUser(responseFetchUser));
   }, [responseFetchUser]);
 
-  if (isLoading) {
+  if (isLoading && !responseFetchUser) {
     return <Spinner />;
   }
 
@@ -39,7 +39,7 @@ const App: FC<Record<string, never>> = () => {
         <Route path="/register" exact component={Register} />
         <PrivateRoute path="/" exact component={Dashboard} />
         <PrivateRoute path="/forum" exact component={Forum} />
-        <PrivateRoute path="/game/create" exact component={GameCreation} />
+        <PrivateRoute path="/game/create" component={GameCreation} />
         <PrivateRoute path="/game/lobby" exact component={GameLobby} />
         <PrivateRoute path="/game/:id" component={GameSet} />
         <PrivateRoute path="/leaderboard" exact component={Leaderboard} />

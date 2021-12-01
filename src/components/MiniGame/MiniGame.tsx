@@ -4,7 +4,7 @@ import { GameSet } from '../../@types/GameSet';
 import GameSetCoordinator from '../../core/GameSetCoordinator';
 import { DUMMY_STATS } from '../../pages/MOCKS/ProfileHistory';
 import { MiniGamePreview } from '../MiniGamePreview/MiniGamePreview';
-import { Profile } from '../Profile/Profile';
+import { UserInfo } from '../UserInfo/UserInfo';
 import { Title } from '../ui/Title/Title';
 
 import './mini-game.scss';
@@ -32,9 +32,9 @@ export const MiniGame: FC<GameSetProps> = ({ GameSetCoordinator, gameSet }) => {
   return (
     <div className="mini-game">
       <div className="mini-game__top">
-        <Profile user={firstPlayerInFirstTeam} stats={DUMMY_STATS} />
+        <UserInfo user={firstPlayerInFirstTeam} stats={DUMMY_STATS} />
         <div className="mini-game__top-previews">{miniGamePreviews}</div>
-        <Profile user={firstPlayerInSecondTeam} stats={DUMMY_STATS} />
+        <UserInfo user={firstPlayerInSecondTeam} stats={DUMMY_STATS} />
       </div>
       <div className="mini-game__body">
         <Title extendClass="mb-6" text={GameSetCoordinator.currentMiniGame.name} />
