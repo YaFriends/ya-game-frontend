@@ -21,19 +21,16 @@ import { useFetchUserQuery } from './services/AuthAPI';
 import { authActions } from './store/slices/authSlice';
 
 const App: FC<Record<string, never>> = () => {
-  const { data: responseFetchUser = null, isLoading, isSuccess } = useFetchUserQuery();
+  const { data: responseFetchUser = null, isLoading } = useFetchUserQuery();
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(authActions.setCurrentUser(responseFetchUser));
   }, [responseFetchUser]);
-  console.log('isLoading', isLoading);
-  console.log(isSuccess);
+
   if (isLoading && !responseFetchUser) {
     return <Spinner />;
   }
-
-  console.log(responseFetchUser);
 
   return (
     <main className="font-body text-black container game-container">
