@@ -86,6 +86,7 @@ export const TRANSLATION: Record<string, Record<string, string>> = {
     AttributeEmail: 'Почта',
     AttributePhone: 'Телефон',
     AttributeNickname: 'Никнейм',
+    userThumbnailHoverText: 'Изменить',
   },
 
   ProfileHistory: { label: 'Профиль: История', ReturnToMain: 'Вернуться на главную' },

@@ -2,6 +2,7 @@ import React, { FC, ChangeEvent, useEffect } from 'react';
 
 import { DEFAULT_PROFILE_IMAGE_PATH } from '../../components/constants';
 import { useAppDispatch } from '../../hooks/redux';
+import { TRANSLATION } from '../../lang/ru/translation';
 import { useUpdateAvatarMutation } from '../../services/UserAPI';
 import { authActions } from '../../store/slices/authSlice';
 import './Profile.scss';
@@ -47,6 +48,7 @@ export const UserThumbnail: FC<AvatarWithLoginProps> = ({ avatar, login }) => {
           }
           alt={login}
         />
+        <span className="user-thumbnail__text">{TRANSLATION.Profile.userThumbnailHoverText}</span>
       </div>
       <input
         id="image-uploader"
