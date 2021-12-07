@@ -3,7 +3,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
-require('dotenv-webpack');
+const Dotenv = require('dotenv-webpack');
 
 console.log(process);
 console.log(process.env);
@@ -57,6 +57,10 @@ module.exports = {
     ],
   },
   plugins: [
+    new Dotenv({
+      systemvars: true,
+      ignoreStub: true,
+    }),
     new HtmlWebpackPlugin({
       template: './public/index.html',
     }),
