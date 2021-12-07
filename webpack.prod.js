@@ -5,6 +5,10 @@ const ESLintPlugin = require('eslint-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 require('dotenv-webpack');
 
+console.log(process);
+console.log(process.env);
+console.log(process.env.TEST_KEK);
+
 module.exports = {
   entry: './src/index.tsx',
   output: {
