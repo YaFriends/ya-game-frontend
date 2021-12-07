@@ -3,7 +3,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
-const Dotenv = require('dotenv-webpack');
+require('dotenv-webpack');
 
 console.log(process);
 console.log(process.env);
@@ -57,9 +57,15 @@ module.exports = {
     ],
   },
   plugins: [
-    new Dotenv({
-      systemvars: true,
-      ignoreStub: true,
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify(process.env.NODE_ENV !== 'production' ? 'development' : 'production'),
+        'API_EXTERNAL': JSON.stringify(process.env.API_EXTERNAL),
+        'TEST_KEK': JSON.stringify(process.env.TEST_KEK),
+        'TEST_PISJA': JSON.stringify('TEST_PISJA2'),
+        'TEST_PISJA3': JSON.stringify('TEST_PISJA23'),
+        'API_INTERNAL': JSON.stringify(process.env.API_INTERNAL),
+      },
     }),
     new HtmlWebpackPlugin({
       template: './public/index.html',
@@ -72,15 +78,6 @@ module.exports = {
     new CopyPlugin({
       patterns: [{ from: 'static', to: 'static' }],
     }),
-    new webpack.DefinePlugin({
-      'process.env': {
-        'NODE_ENV': JSON.stringify(process.env.NODE_ENV !== 'production' ? 'development' : 'production'),
-        'API_EXTERNAL': JSON.stringify(process.env.API_EXTERNAL),
-        'TEST_KEK': JSON.stringify(process.env.TEST_KEK),
-        'TEST_PISJA': JSON.stringify('TEST_PISJA2'),
-        'TEST_PISJA3': JSON.stringify('TEST_PISJA23'),
-        'API_INTERNAL': JSON.stringify(process.env.API_INTERNAL),
-      },
-    }),
+
   ],
 };
