@@ -70,8 +70,5 @@ module.exports = {
         'API_INTERNAL': JSON.stringify(process.env.API_INTERNAL),
       },
     }),
-    new webpack.ProvidePlugin({
-      process: 'process/browser',
-    }),
   ],
 };
