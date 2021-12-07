@@ -6,8 +6,6 @@ import { EXTERNAL_API_URL } from '../config';
 
 const servicePoint = '/auth';
 
-console.log('EXTERNAL_API_URL-AuthAPI', EXTERNAL_API_URL);
-
 export const AuthAPI = createApi({
   reducerPath: 'authApi',
   baseQuery: fetchBaseQuery({
