@@ -4,7 +4,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
-const isDevelopment = process.env.NODE_ENV !== 'production';
 
 module.exports = {
   entry: './src/index.tsx',
@@ -69,7 +68,11 @@ module.exports = {
       systemvars: true,
     }),
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(isDevelopment ? 'development' : 'production'),
+      'process.env': {
+        'NODE_ENV': JSON.stringify(process.env.NODE_ENV !== 'production' ? 'development' : 'production'),
+        'API_EXTERNAL': JSON.stringify(process.env.API_EXTERNAL),
+        'API_INTERNAL': JSON.stringify(process.env.API_INTERNAL),
+      },
     }),
     new webpack.ProvidePlugin({
       process: 'process/browser',
