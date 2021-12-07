@@ -7,14 +7,7 @@
     "start": "webpack-dev-server --mode development",
     "build": "NODE_ENV=production webpack",
     "server": "node server",
-    "test": "jest",
-    "heroku-login": "heroku login",
-    "heroku-container-login": "heroku container:login",
-    "heroku-checked-apps": "heroku apps",
-    "heroku-create": "heroku create ya-friends-demo-1",
-    "heroku-push": "heroku container:push web -a ya-friends-demo-1",
-    "heroku-release": "heroku container:release web -a ya-friends-demo-1",
-    "heroku": "heroku open -a ya-friends-demo-1"
+    "test": "jest"
   },
   "keywords": [
     "yandex",
@@ -37,7 +30,6 @@
     "babel-jest": "27.3.1",
     "copy-webpack-plugin": "9.0.1",
     "css-loader": "6.5.0",
-    "dotenv-webpack": "7.0.3",
     "eslint": "7.32.0",
     "eslint-config-prettier": "8.3.0",
     "eslint-import-resolver-webpack": "0.13.1",
