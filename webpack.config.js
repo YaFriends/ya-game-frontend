@@ -3,10 +3,8 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
-const dotenv = require('dotenv').config({ path: __dirname + '/.env' });
+const Dotenv = require('dotenv-webpack');
 const isDevelopment = process.env.NODE_ENV !== 'production';
-
-console.log('dotenv', dotenv);
 
 module.exports = {
   entry: './src/index.tsx',
@@ -67,8 +65,10 @@ module.exports = {
     new CopyPlugin({
       patterns: [{ from: 'static', to: 'static' }],
     }),
+    new Dotenv({
+      systemvars: true,
+    }),
     new webpack.DefinePlugin({
-      'process.env': JSON.stringify(dotenv.parsed),
       'process.env.NODE_ENV': JSON.stringify(isDevelopment ? 'development' : 'production'),
     }),
     new webpack.ProvidePlugin({
