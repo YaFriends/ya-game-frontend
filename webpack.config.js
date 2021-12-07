@@ -53,6 +53,7 @@ module.exports = {
     ],
   },
   plugins: [
+    new Dotenv(),
     new HtmlWebpackPlugin({
       template: './public/index.html',
     }),
@@ -64,18 +65,14 @@ module.exports = {
     new CopyPlugin({
       patterns: [{ from: 'static', to: 'static' }],
     }),
-    new Dotenv({
-      systemvars: true,
-    }),
     new webpack.DefinePlugin({
       'process.env': {
         'NODE_ENV': JSON.stringify(process.env.NODE_ENV !== 'production' ? 'development' : 'production'),
-        'API_EXTERNAL': 'piska',
+        'API_EXTERNAL': JSON.stringify(process.env.API_EXTERNAL),
+        'TEST_KEK': JSON.stringify(process.env.TEST_KEK),
+        'TEST_PISJA': JSON.stringify('TEST_PISJA'),
         'API_INTERNAL': JSON.stringify(process.env.API_INTERNAL),
       },
-    }),
-    new webpack.ProvidePlugin({
-      process: 'process/browser',
     }),
   ],
 };

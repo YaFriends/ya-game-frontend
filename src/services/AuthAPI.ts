@@ -6,7 +6,7 @@ import { EXTERNAL_API_URL } from '../config';
 
 const servicePoint = '/auth';
 
-console.log('process-AuthAPI', process);
+console.log('EXTERNAL_API_URL-AuthAPI', EXTERNAL_API_URL);
 
 export const AuthAPI = createApi({
   reducerPath: 'authApi',
