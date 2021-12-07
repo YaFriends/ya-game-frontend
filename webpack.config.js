@@ -6,6 +6,8 @@ const CopyPlugin = require('copy-webpack-plugin');
 const dotenv = require('dotenv').config({ path: __dirname + '/.env' });
 const isDevelopment = process.env.NODE_ENV !== 'production';
 
+console.log('dotenv', dotenv);
+
 module.exports = {
   entry: './src/index.tsx',
   output: {
