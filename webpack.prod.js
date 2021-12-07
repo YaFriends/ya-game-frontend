@@ -66,7 +66,7 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env': {
         'NODE_ENV': JSON.stringify(process.env.NODE_ENV !== 'production' ? 'development' : 'production'),
-        'API_EXTERNAL': JSON.stringify(process.env.API_EXTERNAL),
+        'API_EXTERNAL': 'siska',
         'API_INTERNAL': JSON.stringify(process.env.API_INTERNAL),
       },
     }),
