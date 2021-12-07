@@ -13,7 +13,7 @@ import './Dashboard.scss';
 
 export const Dashboard: FC<Record<string, never>> = () => {
   const { currentUser } = useAuth();
-
+  console.log('process-dashboard', process);
   const link = <MainLink text={TRANSLATION.Dashboard.WatchAllGames} href="/profile/history" />;
   return (
     currentUser && (
