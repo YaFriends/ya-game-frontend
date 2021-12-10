@@ -13,11 +13,6 @@ export const Logout: FC<Record<string, never>> = () => {
   useEffect(() => {
     attemptLogout().then(() => {
       dispatch(authActions.setCurrentUser(null));
-
-      if (typeof window !== 'undefined') {
-        localStorage.removeItem('isAuth');
-      }
-
       history.push('/login');
     });
   }, []);

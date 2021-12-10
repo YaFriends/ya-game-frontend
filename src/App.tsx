@@ -2,7 +2,6 @@ import React, { FC, useEffect } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import { PrivateRoute } from './components/PrivateRoute';
-import { Spinner } from './components/ui/Spinner/Spinner';
 import { useAppDispatch } from './hooks/redux';
 import { Dashboard } from './pages/Dashboard/Dashboard';
 import { Error404 } from './pages/Error404/Error404';
@@ -21,16 +20,12 @@ import { useFetchUserQuery } from './services/AuthAPI';
 import { authActions } from './store/slices/authSlice';
 
 const App: FC<Record<string, never>> = () => {
-  const { data: responseFetchUser = null, isLoading } = useFetchUserQuery();
+  const { data: responseFetchUser = null } = useFetchUserQuery();
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(authActions.setCurrentUser(responseFetchUser));
   }, [responseFetchUser]);
-
-  if (isLoading && !responseFetchUser) {
-    return <Spinner />;
-  }
 
   return (
     <main className="font-body text-black container game-container">
