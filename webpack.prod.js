@@ -17,6 +17,16 @@ module.exports = {
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
+    fallback: {
+      "fs": false,
+      "path": false,
+      "http": false,
+      "https": false,
+      "zlib": false,
+      "os": false,
+      "tty": require.resolve('tty-browserify'),
+      "timers": false,
+    },
   },
   module: {
     rules: [
@@ -52,5 +62,6 @@ module.exports = {
     new CopyPlugin({
       patterns: [{ from: 'static', to: 'static' }],
     }),
+
   ],
 };
