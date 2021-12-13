@@ -12,3 +12,5 @@ export type MiniGameFinishResponse = {
 };
 
 export type Rivals = [UserData, UserData];
+
+export type FinishFn = (finish: MiniGameFinishResponse) => void;

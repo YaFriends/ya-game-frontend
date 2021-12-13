@@ -20,10 +20,7 @@ export default abstract class MiniGame {
 
   abstract draw(): void;
 
-  abstract finish(): MiniGameFinishResponse;
+  abstract finish(player: UserData): void;
 
-  abstract makeTurn(): void;
-
-  // abstract waitForRivalTurn(): void;
-  abstract run(): Promise<void>;
+  abstract run(): Promise<MiniGameFinishResponse> | null;
 }

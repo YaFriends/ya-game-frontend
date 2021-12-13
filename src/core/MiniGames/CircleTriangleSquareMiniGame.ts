@@ -1,7 +1,7 @@
 import { TRANSLATION } from '../../lang/ru/translation';
 import { GameLoop } from '../GameLoop';
 import MiniGame from '../MiniGame';
-import { Rivals } from '../../@types/MiniGame';
+import { FinishFn, MiniGameFinishResponse, Rivals } from '../../@types/MiniGame';
 
 type CircleTriangleSquareProps = {
   players: Rivals;
@@ -9,6 +9,7 @@ type CircleTriangleSquareProps = {
 };
 
 export class CircleTriangleSquareMiniGame extends MiniGame {
+  finishCb: FinishFn | null;
   loop: GameLoop;
 
   constructor(props: CircleTriangleSquareProps) {
@@ -19,11 +20,13 @@ export class CircleTriangleSquareMiniGame extends MiniGame {
     });
 
     this.loop = new GameLoop('canvas');
+    this.finishCb = () => null;
   }
 
   run() {
-    console.log('running');
-    return new Promise<void>(res => res());
+    return new Promise<MiniGameFinishResponse>(res => {
+      this.finishCb = res;
+    });
   }
 
   draw() {
@@ -35,17 +38,19 @@ export class CircleTriangleSquareMiniGame extends MiniGame {
   }
 
   finish() {
-    return {
-      winner: {
-        login: 'TeViYu',
-        id: 1,
-        first_name: 'Test',
-        second_name: 'test 1',
-        display_name: 'Testovich',
-        email: 'string',
-        phone: 'string',
-        avatar: '',
-      },
-    };
+    if (typeof this.finishCb === 'function') {
+      this.finishCb({
+        winner: {
+          login: 'TeViYu',
+          id: 1,
+          first_name: 'Test',
+          second_name: 'test 1',
+          display_name: 'Testovich',
+          email: 'string',
+          phone: 'string',
+          avatar: '',
+        },
+      });
+    }
   }
 }

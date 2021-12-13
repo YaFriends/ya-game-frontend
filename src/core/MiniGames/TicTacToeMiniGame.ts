@@ -1,4 +1,4 @@
-import { Rivals } from '../../@types/MiniGame';
+import { FinishFn, MiniGameFinishResponse, Rivals } from '../../@types/MiniGame';
 import { UserData } from '../../@types/UserTypes';
 import { TRANSLATION } from '../../lang/ru/translation';
 import MiniGame from '../MiniGame';
@@ -6,7 +6,7 @@ import MiniGame from '../MiniGame';
 import { TicTacToeCircle } from './common/TicTacToeCircle';
 import { TicTacToeCross } from './common/TicTacToeCross';
 
-type TicTacToeBoardCell = string;
+type TicTacToeBoardCell = -1 | 1 | '';
 type TicTacToeBoard = TicTacToeBoardCell[];
 
 export type TicTacToeFigureProps = {
@@ -29,6 +29,7 @@ export class TicTacToeMiniGame extends MiniGame {
   lineColor: string;
   isCurrentPlayerFirst: boolean;
   currentPlayer: UserData | null;
+  finishCb: FinishFn | null;
 
   constructor(props: TicTacTieMiniGameProps) {
     super({
@@ -43,6 +44,7 @@ export class TicTacToeMiniGame extends MiniGame {
     this.isCurrentPlayerFirst = false;
     this.lineColor = '#DDD';
     this.lineWidth = 5;
+    this.finishCb = () => null;
   }
 
   draw() {
@@ -51,29 +53,18 @@ export class TicTacToeMiniGame extends MiniGame {
     this._addListener();
   }
 
-  makeTurn() {
-    console.log('makeTurn');
+  finish(player: UserData) {
+    if (typeof this.finishCb === 'function') {
+      this.finishCb({
+        winner: player,
+      });
+    }
   }
 
-  finish() {
-    return {
-      winner: {
-        login: 'TeViYu',
-        id: 1,
-        first_name: 'Test',
-        second_name: 'test 1',
-        display_name: 'Testovich',
-        email: 'string',
-        phone: 'string',
-        avatar: '',
-      },
-    };
-  }
-
-  run() {
-    return new Promise<void>(() => {
+  run(): Promise<MiniGameFinishResponse> {
+    return new Promise<MiniGameFinishResponse>(res => {
       this.draw();
-      // res();
+      this.finishCb = res;
     });
   }
 
@@ -98,7 +89,7 @@ export class TicTacToeMiniGame extends MiniGame {
           return;
         }
 
-        this.board[i] = this.isCurrentPlayerFirst ? '1' : '0';
+        this.board[i] = this.isCurrentPlayerFirst ? 1 : -1;
         this._clearPlayingArea(xCoord, yCoord);
 
         if (this.isCurrentPlayerFirst) {
@@ -120,6 +111,8 @@ export class TicTacToeMiniGame extends MiniGame {
           }).draw(this.GameLoop.context);
           this.currentPlayer = this.players[0];
         }
+
+        this.isCurrentPlayerFirst = !this.isCurrentPlayerFirst;
       }
     }
   }
@@ -171,5 +164,32 @@ export class TicTacToeMiniGame extends MiniGame {
       this._addPlayingPiece(canvasMousePosition);
       this._drawLines(this.lineWidth, this.lineColor);
     });
+  }
+
+  _checkForFinish() {
+    for (let i = 0; i < 3; i++) {
+      const currentRowOffset = i * 3;
+      const rowSum =
+        Number(this.board[currentRowOffset]) +
+        Number(this.board[currentRowOffset + 1]) +
+        Number(this.board[currentRowOffset + 2]);
+
+      const colSum = Number(this.board[i]) + Number(this.board[i + 3]) + Number(this.board[i + 6]);
+
+      if (rowSum === 3 || colSum === 3) {
+        this.finish(this.players[0]);
+      } else if (rowSum === -3 || colSum === -3) {
+        this.finish(this.players[1]);
+      }
+    }
+
+    const rightDiagonalSum = Number(this.board[0]) + Number(this.board[4]) + Number(this.board[9]);
+    const leftDiagonalSum = Number(this.board[2]) + Number(this.board[4]) + Number(this.board[7]);
+
+    if (rightDiagonalSum === 3 || leftDiagonalSum === 3) {
+      this.finish(this.players[0]);
+    } else if (rightDiagonalSum === -3 || leftDiagonalSum === -3) {
+      this.finish(this.players[1]);
+    }
   }
 }
