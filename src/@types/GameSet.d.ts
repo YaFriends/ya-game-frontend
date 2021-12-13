@@ -1,10 +1,10 @@
-import { Team } from './MiniGame';
+import { Rivals } from './MiniGame';
 
 export type GameSet = {
   id: number;
   miniGames: MiniGame[];
   date: string;
-  teams: Team[];
+  players: Rivals;
 };
 
 export type MiniGame = {

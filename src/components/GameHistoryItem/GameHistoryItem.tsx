@@ -2,9 +2,9 @@ import React, { memo } from 'react';
 
 import { TRANSLATION } from '../../lang/ru/translation';
 import { Text } from '../ui/Text/Text';
-import { Team } from '../../@types/MiniGame';
 
 import './game-history-item.scss';
+import { Rivals } from '../../@types/MiniGame';
 
 export type Game = {
   id: number;
@@ -18,7 +18,7 @@ export type GameHistoryProps = {
   id: number;
   games: Game[];
   date: string;
-  teams: Team[];
+  players: Rivals;
   result: {
     id: number;
     type: ResultType;
@@ -28,7 +28,7 @@ export type GameHistoryProps = {
 export const GameHistoryItem = memo(function GameHistoryItem({
   games,
   date,
-  teams,
+  players,
   result,
 }: GameHistoryProps) {
   const gameGroup = games.map(({ id, name, icon }) => (
@@ -37,7 +37,7 @@ export const GameHistoryItem = memo(function GameHistoryItem({
     </div>
   ));
 
-  const versus = teams.map(({ players }) => players.join(', ')).join(' vs ');
+  const versus = players.map(({ login }) => login).join(' vs ');
 
   return (
     <div className="game-history-item">

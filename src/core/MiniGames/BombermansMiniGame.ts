@@ -1,9 +1,9 @@
 import MiniGame from '../MiniGame';
 import { TRANSLATION } from '../../lang/ru/translation';
-import { Team } from '../../@types/MiniGame';
+import { Rivals } from '../../@types/MiniGame';
 
 type BombermansProps = {
-  teams: Team[];
+  players: Rivals;
   canvasId: string;
 };
 
@@ -33,18 +33,14 @@ export class BombermansMiniGame extends MiniGame {
   finish() {
     return {
       winner: {
-        players: [
-          {
-            login: 'TeViYu',
-            id: 1,
-            first_name: 'Test',
-            second_name: 'test 1',
-            display_name: 'Testovich',
-            email: 'string',
-            phone: 'string',
-            avatar: '',
-          },
-        ],
+        login: 'TeViYu',
+        id: 1,
+        first_name: 'Test',
+        second_name: 'test 1',
+        display_name: 'Testovich',
+        email: 'string',
+        phone: 'string',
+        avatar: '',
       },
     };
   }

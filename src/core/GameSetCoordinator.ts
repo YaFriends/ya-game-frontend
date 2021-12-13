@@ -1,22 +1,25 @@
 import { MiniGame as MiniGameProps } from '../@types/GameSet';
-import { Team } from '../@types/MiniGame';
+import { Rivals } from '../@types/MiniGame';
+import { UserData } from '../@types/UserTypes';
 
 import MiniGame from './MiniGame';
 import { MINI_GAME_CONTROLLER_BY_ID } from './constants';
 
 export default class GameSetCoordinator {
-  teams: Team[];
+  players: Rivals;
   miniGames: MiniGameProps[];
   currentMiniGameIndex: number;
   currentMiniGame: MiniGameProps;
+  currentMiniGameController: MiniGame | null;
   canvasId: string;
 
-  constructor(miniGames: MiniGameProps[], teams: Team[]) {
+  constructor(miniGames: MiniGameProps[], players: Rivals) {
     this.miniGames = miniGames;
-    this.teams = teams;
+    this.players = players;
     this.currentMiniGameIndex = 0;
     this.currentMiniGame = this.miniGames[this.currentMiniGameIndex];
     this.canvasId = 'canvas';
+    this.currentMiniGameController = null;
   }
 
   init(): Promise<void> {
@@ -27,15 +30,19 @@ export default class GameSetCoordinator {
     this.canvasId = canvasId;
   }
 
+  get currentPlayer(): UserData | null | undefined {
+    return this.currentMiniGameController?.currentPlayer;
+  }
+
   async loadNextGame(): Promise<void> {
     this.currentMiniGameIndex++;
 
     return this.setCurrentGame();
   }
 
-  _currentGameController(): MiniGame {
-    return new MINI_GAME_CONTROLLER_BY_ID[this.currentMiniGame.id]({
-      teams: this.teams,
+  _setCurrentGameController() {
+    this.currentMiniGameController = new MINI_GAME_CONTROLLER_BY_ID[this.currentMiniGame.id]({
+      players: this.players,
       canvasId: this.canvasId,
     });
   }
@@ -53,7 +60,8 @@ export default class GameSetCoordinator {
 
   async waitForEndOfCurrentGame(): Promise<void> {
     return new Promise(async res => {
-      await this._currentGameController().run();
+      this._setCurrentGameController();
+      await this.currentMiniGameController?.run();
       res();
     });
   }

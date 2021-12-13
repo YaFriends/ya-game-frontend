@@ -12,7 +12,7 @@ type Props = GameSetHistory;
 export const GameSetHistoryItem = memo(function GameSetHistoryItem({
   miniGames,
   date,
-  teams,
+  players,
   result,
 }: Props) {
   const miniGameGroup = miniGames.map(({ id, name, icon }) => (
@@ -25,9 +25,7 @@ export const GameSetHistoryItem = memo(function GameSetHistoryItem({
     />
   ));
 
-  const versus = teams
-    .map(({ players }) => players.map(({ login }) => login).join(', '))
-    .join(' vs ');
+  const versus = players.map(({ login }) => login).join(' vs ');
 
   return (
     <div className="game-set-history-item">

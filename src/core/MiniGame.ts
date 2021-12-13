@@ -1,18 +1,21 @@
-import { MiniGameConfig, MiniGameFinishResponse, Team } from '../@types/MiniGame';
+import { MiniGameConfig, MiniGameFinishResponse, Rivals } from '../@types/MiniGame';
+import { UserData } from '../@types/UserTypes';
 
 import { GameLoop } from './GameLoop';
 
 export default abstract class MiniGame {
   icon: string;
   name: string;
-  teams: Team[];
+  players: Rivals;
   GameLoop: GameLoop;
+  currentPlayer: UserData | null;
 
-  protected constructor({ icon, name, teams, canvasId }: MiniGameConfig) {
+  protected constructor({ icon, name, players, canvasId }: MiniGameConfig) {
     this.icon = icon;
     this.name = name;
-    this.teams = teams;
+    this.players = players;
     this.GameLoop = new GameLoop(canvasId);
+    this.currentPlayer = null;
   }
 
   abstract draw(): void;

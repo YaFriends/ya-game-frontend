@@ -1,4 +1,5 @@
-import { Team } from '../../@types/MiniGame';
+import { Rivals } from '../../@types/MiniGame';
+import { UserData } from '../../@types/UserTypes';
 import { TRANSLATION } from '../../lang/ru/translation';
 import MiniGame from '../MiniGame';
 
@@ -17,7 +18,7 @@ export type TicTacToeFigureProps = {
 };
 
 type TicTacTieMiniGameProps = {
-  teams: Team[];
+  players: Rivals;
   canvasId: string;
 };
 
@@ -26,7 +27,8 @@ export class TicTacToeMiniGame extends MiniGame {
   sectionSize: number;
   lineWidth: number;
   lineColor: string;
-  currentPlayer: 0 | 1;
+  isCurrentPlayerFirst: boolean;
+  currentPlayer: UserData | null;
 
   constructor(props: TicTacTieMiniGameProps) {
     super({
@@ -37,7 +39,8 @@ export class TicTacToeMiniGame extends MiniGame {
 
     this.board = [];
     this.sectionSize = this.GameLoop.canvasSize / 3;
-    this.currentPlayer = 1;
+    this.currentPlayer = null;
+    this.isCurrentPlayerFirst = false;
     this.lineColor = '#DDD';
     this.lineWidth = 5;
   }
@@ -55,18 +58,14 @@ export class TicTacToeMiniGame extends MiniGame {
   finish() {
     return {
       winner: {
-        players: [
-          {
-            login: 'TeViYu',
-            id: 1,
-            first_name: 'Test',
-            second_name: 'test 1',
-            display_name: 'Testovich',
-            email: 'string',
-            phone: 'string',
-            avatar: '',
-          },
-        ],
+        login: 'TeViYu',
+        id: 1,
+        first_name: 'Test',
+        second_name: 'test 1',
+        display_name: 'Testovich',
+        email: 'string',
+        phone: 'string',
+        avatar: '',
       },
     };
   }
@@ -99,10 +98,10 @@ export class TicTacToeMiniGame extends MiniGame {
           return;
         }
 
-        this.board[i] = this.currentPlayer.toString();
+        this.board[i] = this.isCurrentPlayerFirst ? '1' : '0';
         this._clearPlayingArea(xCoord, yCoord);
 
-        if (this.currentPlayer === 1) {
+        if (this.isCurrentPlayerFirst) {
           new TicTacToeCross({
             sectionSize: this.sectionSize,
             params: {
@@ -110,7 +109,7 @@ export class TicTacToeMiniGame extends MiniGame {
               left: xCoord,
             },
           }).draw(this.GameLoop.context);
-          this.currentPlayer = 0;
+          this.currentPlayer = this.players[1];
         } else {
           new TicTacToeCircle({
             sectionSize: this.sectionSize,
@@ -119,7 +118,7 @@ export class TicTacToeMiniGame extends MiniGame {
               left: xCoord,
             },
           }).draw(this.GameLoop.context);
-          this.currentPlayer = 1;
+          this.currentPlayer = this.players[0];
         }
       }
     }
