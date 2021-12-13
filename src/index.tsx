@@ -12,11 +12,28 @@ import { store } from './store';
 
 import './index.scss';
 
+function startServiceWorker() {
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker
+        .register('/cacheServiceWorker.js', { scope: 'cache-service-worker' })
+        .then(registration => {
+          console.log('ServiceWorker registration successful with  scope: ', registration.scope);
+        })
+        .catch((error: string) => {
+          console.log('ServiceWorker registration failed: ', error);
+        });
+    });
+  }
+}
+
 function prepare(): StartReturnType | Promise<void> {
   return worker.start({
     onUnhandledRequest: 'bypass',
   });
 }
+
+startServiceWorker();
 
 prepare().then(() => {
   ReactDOM.render(
