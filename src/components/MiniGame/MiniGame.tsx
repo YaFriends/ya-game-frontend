@@ -21,8 +21,8 @@ export const MiniGame: FC<GameSetProps> = ({ GameSetCoordinator, gameSet }) => {
   ));
 
   useEffect(() => {
-    GameSetCoordinator.waitForEndOfCurrentGame().then(() => {
-      console.log('ended');
+    GameSetCoordinator.init().then(data => {
+      console.log('ended', data);
     });
   }, [gameSet]);
 

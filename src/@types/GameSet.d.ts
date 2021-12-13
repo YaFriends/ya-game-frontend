@@ -1,4 +1,5 @@
-import { Rivals } from './MiniGame';
+import { MiniGameFinishResponse, Rivals } from './MiniGame';
+import { UserData } from './UserTypes';
 
 export type GameSet = {
   id: number;
@@ -21,3 +22,11 @@ export type GameSetResult = {
 };
 
 export type GameSetHistory = GameSet & { result: GameSetResult };
+
+export type GameSetFinishFn = (finish: MiniGameFinishResponse) => void;
+
+export type GameSetFinishResponse = { winner: UserData };
+
+export type GameSetFinishStat = {
+  [key: number]: number;
+};

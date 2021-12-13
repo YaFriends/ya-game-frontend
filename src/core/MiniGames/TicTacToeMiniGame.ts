@@ -30,6 +30,7 @@ export class TicTacToeMiniGame extends MiniGame {
   isCurrentPlayerFirst: boolean;
   currentPlayer: UserData | null;
   finishCb: FinishFn | null;
+  totalMoves: number;
 
   constructor(props: TicTacTieMiniGameProps) {
     super({
@@ -45,6 +46,7 @@ export class TicTacToeMiniGame extends MiniGame {
     this.lineColor = '#DDD';
     this.lineWidth = 5;
     this.finishCb = () => null;
+    this.totalMoves = 0;
   }
 
   draw() {
@@ -113,8 +115,19 @@ export class TicTacToeMiniGame extends MiniGame {
         }
 
         this.isCurrentPlayerFirst = !this.isCurrentPlayerFirst;
+        this.totalMoves++;
+        this._checkForFinish();
+
+        if (this.totalMoves === this.board.length) {
+          this._restartGame();
+        }
       }
     }
+  }
+
+  _restartGame() {
+    this.totalMoves = 0;
+    this._initBoard();
   }
 
   _clearPlayingArea(xCoord: number, yCoord: number) {
@@ -175,7 +188,6 @@ export class TicTacToeMiniGame extends MiniGame {
         Number(this.board[currentRowOffset + 2]);
 
       const colSum = Number(this.board[i]) + Number(this.board[i + 3]) + Number(this.board[i + 6]);
-
       if (rowSum === 3 || colSum === 3) {
         this.finish(this.players[0]);
       } else if (rowSum === -3 || colSum === -3) {
