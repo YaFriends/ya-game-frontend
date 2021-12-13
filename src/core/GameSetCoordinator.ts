@@ -1,5 +1,5 @@
 import { MiniGame as MiniGameProps } from '../@types/GameSet';
-import { Rivals } from '../@types/MiniGame';
+import { MiniGameFinishResponse, Rivals } from '../@types/MiniGame';
 import { UserData } from '../@types/UserTypes';
 
 import MiniGame from './MiniGame';
@@ -58,11 +58,11 @@ export default class GameSetCoordinator {
     });
   }
 
-  async waitForEndOfCurrentGame(): Promise<void> {
+  async waitForEndOfCurrentGame(): Promise<MiniGameFinishResponse> {
     return new Promise(async res => {
       this._setCurrentGameController();
-      await this.currentMiniGameController?.run();
-      res();
+      const response = await this.currentMiniGameController!.run();
+      res(response);
     });
   }
 }

@@ -22,5 +22,5 @@ export default abstract class MiniGame {
 
   abstract finish(player: UserData): void;
 
-  abstract run(): Promise<MiniGameFinishResponse> | null;
+  abstract run(): Promise<MiniGameFinishResponse>;
 }
