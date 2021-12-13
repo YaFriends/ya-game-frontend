@@ -56,6 +56,7 @@ export class TicTacToeMiniGame extends MiniGame {
   }
 
   finish(player: UserData) {
+    this._removeListener();
     if (typeof this.finishCb === 'function') {
       this.finishCb({
         winner: player,
@@ -72,6 +73,10 @@ export class TicTacToeMiniGame extends MiniGame {
 
   _initBoard() {
     this.board = Array(9).fill('');
+  }
+
+  _clearBoard() {
+    this.GameLoop.context.clearRect(0, 0, this.GameLoop.canvasSize, this.GameLoop.canvasSize);
   }
 
   _addPlayingPiece(mouse: { x: number; y: number }) {
@@ -171,12 +176,18 @@ export class TicTacToeMiniGame extends MiniGame {
     };
   }
 
+  _onMouseUp = (event: MouseEvent) => {
+    const canvasMousePosition = this._getCanvasMousePosition(event);
+    this._addPlayingPiece(canvasMousePosition);
+    this._drawLines(this.lineWidth, this.lineColor);
+  };
+
   _addListener() {
-    this.GameLoop.canvas.addEventListener('mouseup', event => {
-      const canvasMousePosition = this._getCanvasMousePosition(event);
-      this._addPlayingPiece(canvasMousePosition);
-      this._drawLines(this.lineWidth, this.lineColor);
-    });
+    this.GameLoop.canvas.addEventListener('mouseup', this._onMouseUp);
+  }
+
+  _removeListener() {
+    this.GameLoop.canvas.removeEventListener('mouseup', this._onMouseUp);
   }
 
   _checkForFinish() {

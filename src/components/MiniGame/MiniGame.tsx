@@ -22,7 +22,7 @@ export const MiniGame: FC<GameSetProps> = ({ GameSetCoordinator, gameSet }) => {
 
   useEffect(() => {
     GameSetCoordinator.init().then(data => {
-      console.log('ended', data);
+      console.log(data);
     });
   }, [gameSet]);
 
