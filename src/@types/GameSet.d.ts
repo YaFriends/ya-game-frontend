@@ -28,5 +28,5 @@ export type GameSetFinishFn = (finish: MiniGameFinishResponse) => void;
 export type GameSetFinishResponse = { winner: UserData };
 
 export type GameSetFinishStat = {
-  [key: number]: number;
+  [key: UserData['id']]: number;
 };

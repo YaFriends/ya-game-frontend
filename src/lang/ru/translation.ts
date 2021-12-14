@@ -138,4 +138,12 @@ export const TRANSLATION: Record<string, Record<string, string>> = {
   Bombermans: {
     label: 'Взорви не себя',
   },
+  GameSetEnd: {
+    you: 'Поздравляем! Ты победил :)',
+    notYou: 'Упс, кажется, твоему товарищу повезло чуть-чуть больше',
+    winner: 'Ииииииииии наш победитель:',
+    played: 'Вы играли в:',
+    backToMain: 'Вернуться на главную',
+    playAgain: 'Сыграть еще',
+  },
 };

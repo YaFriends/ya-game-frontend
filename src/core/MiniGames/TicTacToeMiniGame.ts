@@ -132,12 +132,19 @@ export class TicTacToeMiniGame extends MiniGame {
 
   _restartGame() {
     this.totalMoves = 0;
-    this._initBoard();
+    this._removeListener();
+    this._clearGameBoard();
+    this.draw();
   }
 
   _clearPlayingArea(xCoord: number, yCoord: number) {
     this.GameLoop.context.fillStyle = '#8B949E';
     this.GameLoop.context.fillRect(xCoord, yCoord, this.sectionSize, this.sectionSize);
+  }
+
+  _clearGameBoard() {
+    this.GameLoop.context.fillStyle = '#8B949E';
+    this.GameLoop.context.fillRect(0, 0, this.GameLoop.canvasSize, this.GameLoop.canvasSize);
   }
 
   _drawLines(lineWidth: number, strokeStyle: string) {
@@ -206,8 +213,8 @@ export class TicTacToeMiniGame extends MiniGame {
       }
     }
 
-    const rightDiagonalSum = Number(this.board[0]) + Number(this.board[4]) + Number(this.board[9]);
-    const leftDiagonalSum = Number(this.board[2]) + Number(this.board[4]) + Number(this.board[7]);
+    const rightDiagonalSum = Number(this.board[0]) + Number(this.board[4]) + Number(this.board[8]);
+    const leftDiagonalSum = Number(this.board[2]) + Number(this.board[4]) + Number(this.board[6]);
 
     if (rightDiagonalSum === 3 || leftDiagonalSum === 3) {
       this.finish(this.players[0]);
