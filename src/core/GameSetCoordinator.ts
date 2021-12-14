@@ -33,8 +33,8 @@ export default class GameSetCoordinator {
 
   init(): Promise<GameSetFinishResponse> {
     return new Promise<GameSetFinishResponse>(async res => {
-      await this.loadAndStartCurrentGame();
       this.finishCb = res;
+      await this.loadAndStartCurrentGame();
     });
   }
 

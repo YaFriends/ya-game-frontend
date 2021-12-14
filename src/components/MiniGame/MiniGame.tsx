@@ -21,8 +21,8 @@ export const MiniGame: FC<GameSetProps> = ({ GameSetCoordinator, gameSet }) => {
   ));
 
   useEffect(() => {
-    GameSetCoordinator.init().then(data => {
-      console.log(data);
+    GameSetCoordinator.init().then(({ winner }) => {
+      console.log(winner);
     });
   }, [gameSet]);
 

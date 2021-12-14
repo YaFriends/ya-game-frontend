@@ -66,8 +66,8 @@ export class TicTacToeMiniGame extends MiniGame {
 
   run(): Promise<MiniGameFinishResponse> {
     return new Promise<MiniGameFinishResponse>(res => {
-      this.draw();
       this.finishCb = res;
+      this.draw();
     });
   }
 
