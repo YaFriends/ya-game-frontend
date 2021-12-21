@@ -1,4 +1,5 @@
 import { FinishFn, MiniGameFinishResponse, Rivals } from '../../@types/MiniGame';
+import { UserData } from '../../@types/UserTypes';
 import { TRANSLATION } from '../../lang/ru/translation';
 import MiniGame from '../MiniGame';
 
@@ -9,6 +10,9 @@ type ClickMoreMiniGameProps = {
 
 export class ClickMoreMiniGame extends MiniGame {
   finishCb: FinishFn | null;
+  clickCount: number;
+  player: UserData | null;
+  enemy: UserData | null;
 
   constructor(props: ClickMoreMiniGameProps) {
     super({
@@ -17,16 +21,34 @@ export class ClickMoreMiniGame extends MiniGame {
       ...props,
     });
     this.finishCb = () => null;
+    this.clickCount = 0;
+    this.player = null;
+    this.enemy = null;
   }
 
   run() {
     return new Promise<MiniGameFinishResponse>(res => {
       this.finishCb = res;
+      this.draw();
     });
   }
 
   draw() {
-    console.log('hello');
+    this._drawFlasks();
+    this._addListener();
+  }
+
+  _drawFlasks() {
+    console.log(this.GameLoop);
+  }
+
+  _onMouseUp = () => {
+    this.clickCount++;
+    console.log(this.clickCount);
+  };
+
+  _addListener() {
+    this.GameLoop.canvas.addEventListener('mouseup', this._onMouseUp);
   }
 
   finish() {
