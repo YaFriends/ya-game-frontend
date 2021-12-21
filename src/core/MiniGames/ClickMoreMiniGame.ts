@@ -39,7 +39,16 @@ export class ClickMoreMiniGame extends MiniGame {
   }
 
   _drawFlasks() {
-    console.log(this.GameLoop);
+    console.log(this.GameLoop.canvas.getBoundingClientRect().x);
+    const canvas = this.GameLoop.canvas;
+    canvas.blur();
+    const ctx = this.GameLoop.context;
+    ctx.strokeStyle = 'rgba(139, 194, 255, 0.4)';
+    ctx.lineWidth = 30;
+    ctx.beginPath();
+    ctx.moveTo(canvas.clientLeft, 10);
+    ctx.lineTo(canvas.clientLeft, canvas.height - 10);
+    ctx.stroke();
   }
 
   _onMouseUp = () => {
