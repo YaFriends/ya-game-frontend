@@ -1,4 +1,4 @@
-import { FlaskProps } from './Action';
+import { FlaskProps } from './Behavior';
 
 export class Flask {
   color: string;
@@ -14,8 +14,7 @@ export class Flask {
   }
 
   draw(context: CanvasRenderingContext2D, canvas: HTMLCanvasElement) {
-    const { left, height, width } = canvas.getBoundingClientRect();
-    console.log(left, height);
+    const { height, width } = canvas.getBoundingClientRect();
     const margin = 10;
     const x = this.leftSide ? canvas.clientLeft : width;
     context.strokeStyle = this.color;
