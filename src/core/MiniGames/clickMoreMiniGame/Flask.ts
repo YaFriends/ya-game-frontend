@@ -30,14 +30,18 @@ export class Flask {
     this.context.moveTo(x, height - this.margin);
     this.context.lineTo(x, this.margin);
     this.context.stroke();
+    this.context.beginPath();
   }
 
   fill(lineToY: number) {
-    const gradient = this.context.createLinearGradient(0, this.canvas.height, 0, 0);
-    gradient.addColorStop(0, 'green');
-    gradient.addColorStop(lineToY / 100, 'green');
-    gradient.addColorStop(lineToY / 100, 'rgba(139, 194, 255, 0.4)');
-    this.context.fillStyle = gradient;
-    this.context.fillRect(0, 500, 10, 10);
+    if (lineToY > 100) {
+      lineToY = 100;
+    }
+    const { height, width } = this.canvas.getBoundingClientRect();
+    const x = this.leftSide ? this.canvas.clientLeft : width;
+    this.context.strokeStyle = this.color;
+    this.context.moveTo(x, height - (((height - 2 * this.margin) / 100) * lineToY + this.margin));
+    this.context.lineTo(x, height - this.margin);
+    this.context.stroke();
   }
 }

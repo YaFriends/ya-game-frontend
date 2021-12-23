@@ -5,6 +5,7 @@ import MiniGame from '../MiniGame';
 
 import { Behavior, BehaviorProps } from './clickMoreMiniGame/Behavior';
 import { FlasksController } from './clickMoreMiniGame/FlasksController';
+import { Opponent } from './clickMoreMiniGame/Opponent';
 import { Player } from './clickMoreMiniGame/Player';
 
 type ClickMoreMiniGameProps = {
@@ -14,10 +15,11 @@ type ClickMoreMiniGameProps = {
 
 export class ClickMoreMiniGame extends MiniGame {
   finishCb: FinishFn | null;
-  player: Player | null;
-  opponent: UserData | null;
+  player: Behavior | null;
+  opponent: Behavior | null;
   addPointEvent: CustomEvent;
   maxClick: number;
+  playersProgress: FlasksController | null;
 
   constructor(props: ClickMoreMiniGameProps) {
     super({
@@ -26,31 +28,40 @@ export class ClickMoreMiniGame extends MiniGame {
       ...props,
     });
     this.finishCb = () => null;
-    this.maxClick = this.GameLoop.canvas.height; //500
+    this.maxClick = 100;
     this.player = null;
     this.opponent = null;
     this.addPointEvent = new CustomEvent('addPointEvent', {
       bubbles: true,
     });
+    this.playersProgress = null;
   }
 
   run() {
+    console.log(this.players);
     return new Promise<MiniGameFinishResponse>(res => {
       this.finishCb = res;
       this.draw();
+      this._addListener();
     });
   }
 
   draw() {
-    new FlasksController(this.GameLoop.canvas, this.GameLoop.context);
-    this._addListener();
     const playerProps: BehaviorProps = {
       user: this.players[0],
       canvas: this.GameLoop.canvas,
       addPointEvent: this.addPointEvent,
     };
     this.player = new Player(playerProps);
-    // this.player;
+
+    const opponentProps: BehaviorProps = {
+      user: this.players[1],
+      canvas: this.GameLoop.canvas,
+      addPointEvent: this.addPointEvent,
+    };
+    this.opponent = new Opponent(opponentProps);
+
+    this.playersProgress = new FlasksController(this.GameLoop.canvas, this.GameLoop.context);
   }
 
   _addListener() {
@@ -62,14 +73,8 @@ export class ClickMoreMiniGame extends MiniGame {
   }
 
   _checkWinner = () => {
-    if (this.player !== null) {
-      const clickCountPlayer = this.player.clickCount;
-      console.log(clickCountPlayer);
-      new FlasksController(this.GameLoop.canvas, this.GameLoop.context).fill(
-        true,
-        'green',
-        clickCountPlayer
-      );
+    this._drawProgress();
+    if (this.player !== null && this.opponent !== null) {
       const player = this._isWinner(this.player);
       if (player) {
         return this.finish(this.players[0]);
@@ -77,6 +82,15 @@ export class ClickMoreMiniGame extends MiniGame {
     }
     return null;
   };
+
+  _drawProgress() {
+    if (this.player !== null) {
+      this.playersProgress?.fill(true, this.player.clickCount);
+    }
+    if (this.opponent !== null) {
+      this.playersProgress?.fill(false, this.opponent.clickCount);
+    }
+  }
 
   _isWinner(player: Behavior): boolean {
     return player.clickCount >= this.maxClick;

@@ -16,7 +16,7 @@ export abstract class Behavior {
   protected constructor({ user, canvas, addPointEvent }: BehaviorProps) {
     this.user = user;
     this.clickCount = 0;
-    this.step = 5;
+    this.step = 20;
     this.canvas = canvas;
     this.addPointEvent = addPointEvent;
   }
