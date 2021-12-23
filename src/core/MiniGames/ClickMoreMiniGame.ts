@@ -3,7 +3,7 @@ import { UserData } from '../../@types/UserTypes';
 import { TRANSLATION } from '../../lang/ru/translation';
 import MiniGame from '../MiniGame';
 
-import { Behavior } from './clickMoreMiniGame/Behavior';
+import { Behavior, BehaviorProps } from './clickMoreMiniGame/Behavior';
 import { FlasksController } from './clickMoreMiniGame/FlasksController';
 import { Player } from './clickMoreMiniGame/Player';
 
@@ -12,17 +12,12 @@ type ClickMoreMiniGameProps = {
   canvasId: string;
 };
 
-export type BehaviorProps = {
-  user: UserData;
-  canvas: HTMLCanvasElement;
-  addPointEvent: CustomEvent;
-};
-
 export class ClickMoreMiniGame extends MiniGame {
   finishCb: FinishFn | null;
   player: Player | null;
   opponent: UserData | null;
   addPointEvent: CustomEvent;
+  maxClick: number;
 
   constructor(props: ClickMoreMiniGameProps) {
     super({
@@ -31,13 +26,11 @@ export class ClickMoreMiniGame extends MiniGame {
       ...props,
     });
     this.finishCb = () => null;
+    this.maxClick = this.GameLoop.canvas.height; //500
     this.player = null;
     this.opponent = null;
     this.addPointEvent = new CustomEvent('addPointEvent', {
       bubbles: true,
-      detail: {
-        player: this.players,
-      },
     });
   }
 
@@ -70,6 +63,13 @@ export class ClickMoreMiniGame extends MiniGame {
 
   _checkWinner = () => {
     if (this.player !== null) {
+      const clickCountPlayer = this.player.clickCount;
+      console.log(clickCountPlayer);
+      new FlasksController(this.GameLoop.canvas, this.GameLoop.context).fill(
+        true,
+        'green',
+        clickCountPlayer
+      );
       const player = this._isWinner(this.player);
       if (player) {
         return this.finish(this.players[0]);
@@ -79,7 +79,7 @@ export class ClickMoreMiniGame extends MiniGame {
   };
 
   _isWinner(player: Behavior): boolean {
-    return player.clickCount >= 300;
+    return player.clickCount >= this.maxClick;
   }
 
   finish(player: UserData) {

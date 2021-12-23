@@ -1,6 +1,4 @@
-import { BehaviorProps } from '../ClickMoreMiniGame';
-
-import { Behavior } from './Behavior';
+import { Behavior, BehaviorProps } from './Behavior';
 
 export class Player extends Behavior {
   constructor(props: BehaviorProps) {

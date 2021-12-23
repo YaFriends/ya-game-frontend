@@ -1,5 +1,10 @@
 import { UserData } from '../../../@types/UserTypes';
-import { BehaviorProps } from '../ClickMoreMiniGame';
+
+export type BehaviorProps = {
+  user: UserData;
+  canvas: HTMLCanvasElement;
+  addPointEvent: CustomEvent;
+};
 
 export abstract class Behavior {
   user: UserData;
@@ -11,7 +16,7 @@ export abstract class Behavior {
   protected constructor({ user, canvas, addPointEvent }: BehaviorProps) {
     this.user = user;
     this.clickCount = 0;
-    this.step = 50;
+    this.step = 5;
     this.canvas = canvas;
     this.addPointEvent = addPointEvent;
   }

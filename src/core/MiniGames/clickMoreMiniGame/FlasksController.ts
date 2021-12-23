@@ -12,9 +12,15 @@ export class FlasksController {
   run() {
     this._createOpacityFlasks(true);
     this._createOpacityFlasks(false);
-    /*if (this.clickCount >= this.canvas.height) {
-      this.finish();
-    }*/
+  }
+
+  fill(leftSide: boolean, color: string, fill: number) {
+    new Flask({
+      color: color,
+      leftSide: leftSide,
+      canvas: this.canvas,
+      context: this.context,
+    }).fill(fill);
   }
 
   _createOpacityFlasks(leftSide: boolean) {
