@@ -3,6 +3,8 @@ import { UserData } from '../../@types/UserTypes';
 import { TRANSLATION } from '../../lang/ru/translation';
 import MiniGame from '../MiniGame';
 
+import { Behavior } from './clickMoreMiniGame/Behavior';
+import { FlasksController } from './clickMoreMiniGame/FlasksController';
 import { Player } from './clickMoreMiniGame/Player';
 
 type ClickMoreMiniGameProps = {
@@ -12,17 +14,14 @@ type ClickMoreMiniGameProps = {
 
 export type BehaviorProps = {
   user: UserData;
-  context: CanvasRenderingContext2D;
   canvas: HTMLCanvasElement;
-  color: string;
-  isLeftSide: boolean;
   addPointEvent: CustomEvent;
 };
 
 export class ClickMoreMiniGame extends MiniGame {
   finishCb: FinishFn | null;
-  player: UserData | null;
-  enemy: UserData | null;
+  player: Player | null;
+  opponent: UserData | null;
   addPointEvent: CustomEvent;
 
   constructor(props: ClickMoreMiniGameProps) {
@@ -33,8 +32,13 @@ export class ClickMoreMiniGame extends MiniGame {
     });
     this.finishCb = () => null;
     this.player = null;
-    this.enemy = null;
-    this.addPointEvent = new CustomEvent('addPointEvent', { bubbles: true });
+    this.opponent = null;
+    this.addPointEvent = new CustomEvent('addPointEvent', {
+      bubbles: true,
+      detail: {
+        player: this.players,
+      },
+    });
   }
 
   run() {
@@ -45,18 +49,41 @@ export class ClickMoreMiniGame extends MiniGame {
   }
 
   draw() {
+    new FlasksController(this.GameLoop.canvas, this.GameLoop.context).run();
+    this._addListener();
     const playerProps: BehaviorProps = {
       user: this.players[0],
-      context: this.GameLoop.context,
       canvas: this.GameLoop.canvas,
-      color: 'green',
-      isLeftSide: true,
       addPointEvent: this.addPointEvent,
     };
-    new Player(playerProps).draw();
+    this.player = new Player(playerProps);
+    // this.player;
+  }
+
+  _addListener() {
+    this.GameLoop.canvas.addEventListener('addPointEvent', this._checkWinner);
+  }
+
+  _removeListener() {
+    this.GameLoop.canvas.removeEventListener('addPointEvent', this._checkWinner);
+  }
+
+  _checkWinner = () => {
+    if (this.player !== null) {
+      const player = this._isWinner(this.player);
+      if (player) {
+        return this.finish(this.players[0]);
+      }
+    }
+    return null;
+  };
+
+  _isWinner(player: Behavior): boolean {
+    return player.clickCount >= 300;
   }
 
   finish(player: UserData) {
+    this._removeListener();
     if (typeof this.finishCb === 'function') {
       this.finishCb({
         winner: player,

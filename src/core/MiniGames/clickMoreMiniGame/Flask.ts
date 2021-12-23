@@ -1,27 +1,39 @@
-import { FlaskProps } from './Behavior';
+export type FlaskProps = {
+  color: string;
+  leftSide: boolean;
+  canvas: HTMLCanvasElement;
+  context: CanvasRenderingContext2D;
+};
 
 export class Flask {
   color: string;
-  lineToY: number;
   leftSide: boolean;
   margin: number;
+  canvas: HTMLCanvasElement;
+  context: CanvasRenderingContext2D;
 
-  constructor({ color, lineToY, leftSide }: FlaskProps) {
+  constructor({ color, leftSide, canvas, context }: FlaskProps) {
+    this.canvas = canvas;
+    this.context = context;
     this.color = color;
-    this.lineToY = lineToY;
     this.leftSide = leftSide;
     this.margin = 10;
+    this._draw('rgba(139, 194, 255, 0.4)', 10);
   }
 
-  draw(context: CanvasRenderingContext2D, canvas: HTMLCanvasElement) {
-    const { height, width } = canvas.getBoundingClientRect();
+  _draw(color: string, lineToY: number) {
+    const { height, width } = this.canvas.getBoundingClientRect();
     const margin = 10;
-    const x = this.leftSide ? canvas.clientLeft : width;
-    context.strokeStyle = this.color;
-    context.lineWidth = 30;
-    context.beginPath();
-    context.moveTo(x, height - margin);
-    context.lineTo(x, this.lineToY);
-    context.stroke();
+    const x = this.leftSide ? this.canvas.clientLeft : width;
+    this.context.strokeStyle = color;
+    this.context.lineWidth = 30;
+    this.context.beginPath();
+    this.context.moveTo(x, height - margin);
+    this.context.lineTo(x, lineToY);
+    this.context.stroke();
+  }
+
+  fill(lineToY: number) {
+    this._draw(this.color, lineToY);
   }
 }
