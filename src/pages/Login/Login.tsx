@@ -1,5 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import React, { FC, useEffect } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 
@@ -10,22 +10,36 @@ import { Input } from '../../components/ui/Input/Input';
 import { MainLink } from '../../components/ui/Link/Link';
 import { Spinner } from '../../components/ui/Spinner/Spinner';
 import { Title } from '../../components/ui/Title/Title';
-import { useLoginMutation } from '../../hooks/api';
+import { useLoginMutation, useLazyGetAppIdQuery } from '../../hooks/api';
 import { useAuth } from '../../hooks/use-auth';
 import { TRANSLATION } from '../../lang/ru/translation';
 import { LoginSchema } from '../../utils/ValidateSchema';
 import './Login.scss';
 
 export const Login: FC<Record<string, never>> = () => {
-  const [attemptLogin, { isLoading }] = useLoginMutation();
+  const [attemptLogin, { isLoading: loginLoading }] = useLoginMutation();
+  const [attemptGetAppId, { data: getAppIdData, isLoading: getAppIdLoading }] =
+    useLazyGetAppIdQuery();
+  const [isLoading, setIsLoading] = useState(false);
   const history = useHistory();
   const { isAuth } = useAuth();
+  const redirect_uri = 'http://localhost:8000';
 
   useEffect(() => {
     if (isAuth) {
       history.push('/');
     }
   }, [isAuth]);
+
+  useEffect(() => {
+    setIsLoading(loginLoading || getAppIdLoading);
+  }, [loginLoading, getAppIdLoading]);
+
+  useEffect(() => {
+    if (getAppIdData !== undefined) {
+      document.location.href = `https://oauth.yandex.ru/authorize?response_type=code&client_id=${getAppIdData?.service_id}&redirect_uri=${redirect_uri}`;
+    }
+  }, [getAppIdData]);
 
   const {
     handleSubmit,
@@ -37,6 +51,8 @@ export const Login: FC<Record<string, never>> = () => {
   });
 
   const onSubmit: SubmitHandler<LoginData> = data => attemptLogin(data);
+
+  const handleOAuth = () => attemptGetAppId(redirect_uri);
 
   return (
     <section className="login">
@@ -65,6 +81,13 @@ export const Login: FC<Record<string, never>> = () => {
         </div>
         <div className="login__button">
           <Button name="button-login" type="submit" text={TRANSLATION.Login.submitButtonText} />
+          <Button
+            name="button-OAuth-yandex"
+            type="button"
+            extendClass="mt-2"
+            text={TRANSLATION.Login.OAuthYandex}
+            click={handleOAuth}
+          />
         </div>
       </Form>
       <div className="login__link">

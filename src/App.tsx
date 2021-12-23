@@ -16,12 +16,25 @@ import { Main } from './pages/Main/Main';
 import { Profile } from './pages/Profile/Profile';
 import { ProfileHistory } from './pages/ProfileHistory/ProfileHistory';
 import { Register } from './pages/Register/Register';
-import { useFetchUserQuery } from './services/AuthAPI';
+import { useFetchUserQuery, useLazyFetchUserQuery } from './services/AuthAPI';
+import { useOAuthYandexMutation } from './services/OAuthAPI';
 import { authActions } from './store/slices/authSlice';
 
 const App: FC<Record<string, never>> = () => {
+  const [attemptOAuthYandex] = useOAuthYandexMutation();
   const { data: responseFetchUser = null } = useFetchUserQuery();
+  const [attemptFetchUser] = useLazyFetchUserQuery();
   const dispatch = useAppDispatch();
+  const redirect_uri = 'http://localhost:8000';
+
+  useEffect(() => {
+    if (/code=([^&]+)/.exec(document.location.href) !== null) {
+      attemptOAuthYandex({
+        code: /code=([^&]+)/.exec(document.location.href)![1],
+        redirect_uri: redirect_uri,
+      }).then(() => attemptFetchUser());
+    }
+  }, [document.location.href]);
 
   useEffect(() => {
     dispatch(authActions.setCurrentUser(responseFetchUser));
