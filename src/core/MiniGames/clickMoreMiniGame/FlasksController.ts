@@ -3,15 +3,14 @@ import { Flask } from './Flask';
 export class FlasksController {
   canvas: HTMLCanvasElement;
   context: CanvasRenderingContext2D;
+  flaskForFirstPlayer: Flask;
+  flaskForSecondPlayer: Flask;
 
   constructor(canvas: HTMLCanvasElement, context: CanvasRenderingContext2D) {
     this.canvas = canvas;
     this.context = context;
-  }
-
-  run() {
-    this._createOpacityFlasks(true);
-    this._createOpacityFlasks(false);
+    this.flaskForFirstPlayer = this._createOpacityFlasks(true);
+    this.flaskForSecondPlayer = this._createOpacityFlasks(true);
   }
 
   fill(leftSide: boolean, color: string, fill: number) {
@@ -24,7 +23,7 @@ export class FlasksController {
   }
 
   _createOpacityFlasks(leftSide: boolean) {
-    new Flask({
+    return new Flask({
       color: 'rgba(139, 194, 255, 0.4)',
       leftSide: leftSide,
       canvas: this.canvas,

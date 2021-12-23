@@ -42,7 +42,7 @@ export class ClickMoreMiniGame extends MiniGame {
   }
 
   draw() {
-    new FlasksController(this.GameLoop.canvas, this.GameLoop.context).run();
+    new FlasksController(this.GameLoop.canvas, this.GameLoop.context);
     this._addListener();
     const playerProps: BehaviorProps = {
       user: this.players[0],
