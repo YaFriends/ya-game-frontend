@@ -17,11 +17,11 @@ export const handlers = [
     const body: { id: number; miniGames: MiniGame[]; date: string; players: Rivals } = {
       id: 1,
       miniGames: [
-        /*{
+        {
           id: 1,
           name: 'Крестики-нолики',
           icon: '/static/img/games/tic_tac_toe/icon.jpg',
-        },*/
+        },
         {
           id: 2,
           name: 'Самый быстрый кликун',
