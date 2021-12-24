@@ -4,8 +4,10 @@ export class Opponent extends Behavior {
   interval: number;
   constructor(props: BehaviorProps) {
     super(props);
-
     this.interval = 0;
+  }
+
+  run() {
     this._startClicking();
   }
 

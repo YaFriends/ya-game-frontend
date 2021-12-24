@@ -19,6 +19,8 @@ export abstract class Behavior {
     this.addPointEvent = addPointEvent;
   }
 
+  abstract run(): void;
+
   protected addPoint() {
     this.clickCount++;
     this.canvas.dispatchEvent(this.addPointEvent);

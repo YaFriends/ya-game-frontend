@@ -15,8 +15,8 @@ type ClickMoreMiniGameProps = {
 
 export class ClickMoreMiniGame extends MiniGame {
   finishCb: FinishFn | null;
-  player: Behavior | null;
-  opponent: Behavior | null;
+  player: Behavior;
+  opponent: Behavior;
   addPointEvent: CustomEvent;
   clicksForWin: number;
   playersProgress: FlasksController | null;
@@ -29,9 +29,9 @@ export class ClickMoreMiniGame extends MiniGame {
     });
     this.finishCb = () => null;
     this.clicksForWin = 100;
-    this.player = null;
-    this.opponent = null;
     this.addPointEvent = new CustomEvent('addPointEvent');
+    this.player = new Player(this._createBehaviorProps(this.players[0]));
+    this.opponent = new Opponent(this._createBehaviorProps(this.players[1]));
     this.playersProgress = null;
   }
 
@@ -46,18 +46,19 @@ export class ClickMoreMiniGame extends MiniGame {
     const image = new Image();
     const { width, height } = this.GameLoop.canvas.getBoundingClientRect();
     image.src = '../../../static/img/games/click_more/tap.png';
-    image.addEventListener('load', () => {
+    const drawImage = () => {
       const x = width / 2 - image.width / 2;
       const y = height / 2 - image.height / 2;
       this.GameLoop.context.drawImage(image, x, y);
-    });
+    };
+    image.addEventListener('load', drawImage);
   }
 
   _countDownBeforePlay = () => {
-    let countDown = 0;
+    let countDown = 3;
     const countDownInterval = setInterval(() => {
       this._clearCanvas();
-      this._drawPreview(countDown--);
+      this._drawCounter(countDown--);
       if (countDown < 0) {
         this._clearCanvas();
         clearInterval(countDownInterval);
@@ -72,11 +73,12 @@ export class ClickMoreMiniGame extends MiniGame {
 
   _play() {
     this.draw();
-    this._createPlayers();
-    this._addListener();
+    this._addListenerForPoints();
+    this.player.run();
+    this.opponent.run();
   }
 
-  _drawPreview(count: number) {
+  _drawCounter(count: number) {
     const context = this.GameLoop.context;
     const canvas = this.GameLoop.canvas;
     context.font = '500 80px Ubuntu, sans-serif';
@@ -91,50 +93,35 @@ export class ClickMoreMiniGame extends MiniGame {
     this._drawHand();
   }
 
-  _createPlayers() {
-    const playerProps: BehaviorProps = {
-      user: this.players[0],
+  _createBehaviorProps = (player: UserData): BehaviorProps => {
+    return {
+      user: player,
       canvas: this.GameLoop.canvas,
       addPointEvent: this.addPointEvent,
     };
-    this.player = new Player(playerProps);
+  };
 
-    const opponentProps: BehaviorProps = {
-      user: this.players[1],
-      canvas: this.GameLoop.canvas,
-      addPointEvent: this.addPointEvent,
-    };
-    this.opponent = new Opponent(opponentProps);
+  _addListenerForPoints() {
+    this.GameLoop.canvas.addEventListener('addPointEvent', this._checkWinnerAndDrawProgress);
   }
 
-  _addListener() {
-    this.GameLoop.canvas.addEventListener('addPointEvent', this._checkWinner);
+  _removeListenerForPoints() {
+    this.GameLoop.canvas.removeEventListener('addPointEvent', this._checkWinnerAndDrawProgress);
   }
 
-  _removeListener() {
-    this.GameLoop.canvas.removeEventListener('addPointEvent', this._checkWinner);
-  }
-
-  _checkWinner = () => {
+  _checkWinnerAndDrawProgress = () => {
     this._drawProgress();
-    if (this.player !== null && this.opponent !== null) {
-      const playerIsWin = this._isWinner(this.player);
-      const opponentIsWin = this._isWinner(this.opponent);
-      if (opponentIsWin || playerIsWin) {
-        return this.finish(playerIsWin ? this.players[0] : this.players[1]);
-      }
+    const playerIsWin = this._isWinner(this.player);
+    const opponentIsWin = this._isWinner(this.opponent);
+    if (opponentIsWin || playerIsWin) {
+      this.finish(playerIsWin ? this.players[0] : this.players[1]);
     }
-    return null;
   };
 
   _drawProgress() {
     const onePercent = this.clicksForWin / 100;
-    if (this.player !== null) {
-      this.playersProgress?.fill(true, this.player.clickCount / onePercent);
-    }
-    if (this.opponent !== null) {
-      this.playersProgress?.fill(false, this.opponent.clickCount / onePercent);
-    }
+    this.playersProgress?.fill(true, this.player.clickCount / onePercent);
+    this.playersProgress?.fill(false, this.opponent.clickCount / onePercent);
   }
 
   _isWinner(player: Behavior): boolean {
@@ -142,9 +129,9 @@ export class ClickMoreMiniGame extends MiniGame {
   }
 
   finish(player: UserData) {
-    this.player?.finish();
-    this.opponent?.finish();
-    this._removeListener();
+    this.player.finish();
+    this.opponent.finish();
+    this._removeListenerForPoints();
     if (typeof this.finishCb === 'function') {
       this.finishCb({
         winner: player,

@@ -3,12 +3,14 @@ import { Behavior, BehaviorProps } from './Behavior';
 export class Player extends Behavior {
   constructor(props: BehaviorProps) {
     super(props);
-    this._addListener();
   }
-
   _onMouseUp = () => {
     this.addPoint();
   };
+
+  run() {
+    this._addListener();
+  }
 
   _addListener() {
     this.canvas.addEventListener('mouseup', this._onMouseUp);
