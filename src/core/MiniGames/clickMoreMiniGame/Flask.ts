@@ -21,16 +21,15 @@ export class Flask {
     this._draw();
   }
 
-  _draw(color = 'rgba(139, 194, 255, 0.4)') {
+  _draw() {
     const { height, width } = this.canvas.getBoundingClientRect();
     const x = this.leftSide ? this.canvas.clientLeft : width;
-    this.context.strokeStyle = color;
+    this.context.strokeStyle = 'rgba(139, 194, 255, 0.4)';
     this.context.lineWidth = 30;
     this.context.beginPath();
     this.context.moveTo(x, height - this.margin);
     this.context.lineTo(x, this.margin);
     this.context.stroke();
-    this.context.beginPath();
   }
 
   fill(lineToY: number) {
@@ -39,6 +38,7 @@ export class Flask {
     }
     const { height, width } = this.canvas.getBoundingClientRect();
     const x = this.leftSide ? this.canvas.clientLeft : width;
+    this.context.beginPath();
     this.context.strokeStyle = this.color;
     this.context.moveTo(x, height - (((height - 2 * this.margin) / 100) * lineToY + this.margin));
     this.context.lineTo(x, height - this.margin);

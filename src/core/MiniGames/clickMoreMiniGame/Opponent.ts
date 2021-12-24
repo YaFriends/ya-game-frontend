@@ -14,7 +14,7 @@ export class Opponent extends Behavior {
   };
 
   _startClicking() {
-    this.interval = window.setInterval(this._addPoint, 1000);
+    this.interval = window.setInterval(this._addPoint, 300);
   }
 
   _clearInterval() {
