@@ -2,6 +2,7 @@ import React, { FC, useEffect } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import { PrivateRoute } from './components/PrivateRoute';
+import { REDIRECT_URI_FOR_OAUTH } from './config';
 import { useAppDispatch } from './hooks/redux';
 import { Dashboard } from './pages/Dashboard/Dashboard';
 import { Error404 } from './pages/Error404/Error404';
@@ -25,13 +26,12 @@ const App: FC<Record<string, never>> = () => {
   const { data: responseFetchUser = null } = useFetchUserQuery();
   const [attemptFetchUser] = useLazyFetchUserQuery();
   const dispatch = useAppDispatch();
-  const redirect_uri = 'http://localhost:8000';
 
   useEffect(() => {
     if (/code=([^&]+)/.exec(document.location.href) !== null) {
       attemptOAuthYandex({
         code: /code=([^&]+)/.exec(document.location.href)![1],
-        redirect_uri: redirect_uri,
+        redirect_uri: REDIRECT_URI_FOR_OAUTH,
       }).then(() => attemptFetchUser());
     }
   }, [document.location.href]);

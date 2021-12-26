@@ -10,6 +10,7 @@ import { Input } from '../../components/ui/Input/Input';
 import { MainLink } from '../../components/ui/Link/Link';
 import { Spinner } from '../../components/ui/Spinner/Spinner';
 import { Title } from '../../components/ui/Title/Title';
+import { REDIRECT_URI_FOR_OAUTH } from '../../config';
 import { useLoginMutation, useLazyGetAppIdQuery } from '../../hooks/api';
 import { useAuth } from '../../hooks/use-auth';
 import { TRANSLATION } from '../../lang/ru/translation';
@@ -23,7 +24,6 @@ export const Login: FC<Record<string, never>> = () => {
   const [isLoading, setIsLoading] = useState(false);
   const history = useHistory();
   const { isAuth } = useAuth();
-  const redirect_uri = 'http://localhost:8000';
 
   useEffect(() => {
     if (isAuth) {
@@ -37,7 +37,7 @@ export const Login: FC<Record<string, never>> = () => {
 
   useEffect(() => {
     if (getAppIdData !== undefined) {
-      document.location.href = `https://oauth.yandex.ru/authorize?response_type=code&client_id=${getAppIdData?.service_id}&redirect_uri=${redirect_uri}`;
+      document.location.href = `https://oauth.yandex.ru/authorize?response_type=code&client_id=${getAppIdData?.service_id}&redirect_uri=${REDIRECT_URI_FOR_OAUTH}`;
     }
   }, [getAppIdData]);
 
@@ -52,7 +52,7 @@ export const Login: FC<Record<string, never>> = () => {
 
   const onSubmit: SubmitHandler<LoginData> = data => attemptLogin(data);
 
-  const handleOAuth = () => attemptGetAppId(redirect_uri);
+  const handleOAuth = () => attemptGetAppId(REDIRECT_URI_FOR_OAUTH);
 
   return (
     <section className="login">
