@@ -3,6 +3,7 @@ import React, { memo } from 'react';
 import { Rivals } from '../../@types/MiniGame';
 import { TRANSLATION } from '../../lang/ru/translation';
 import { Text } from '../ui/Text/Text';
+import { getRivals } from '../../utils/game';
 
 import './game-history-item.scss';
 
@@ -37,7 +38,7 @@ export const GameHistoryItem = memo(function GameHistoryItem({
     </div>
   ));
 
-  const versus = players.map(({ login }) => login).join(' vs ');
+  const rivals = getRivals(players);
 
   return (
     <div className="game-history-item">
@@ -47,7 +48,7 @@ export const GameHistoryItem = memo(function GameHistoryItem({
         </div>
         <div className="game-history-item__info-item">
           <Text text={`${TRANSLATION.Game.Date}: ${date}`} />
-          <Text text={versus} />
+          <Text text={rivals} />
         </div>
       </div>
       <Text
