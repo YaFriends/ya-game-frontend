@@ -1,18 +1,21 @@
-import { StartReturnType } from 'msw/lib/types/setupWorker/glossary';
+// import { StartReturnType } from 'msw/lib/types/setupWorker/glossary';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { StaticRouter } from 'react-router-dom';
+import 'babel-polyfill';
+
+// import { Provider } from 'react-redux';
+// import { BrowserRouter as Router } from 'react-router-dom';
 
 import App from './App';
 import { ErrorBoundary } from './components/ErrorBoundary/ErrorBoundary';
 import { ErrorContainer } from './components/ErrorBoundary/ErrorContainer';
-import { worker } from './mocks/browser';
-import { store } from './store';
+// import { worker } from './mocks/browser';
+// import { store } from './store';
 
 import './index.scss';
 
-function startServiceWorker() {
+/*function startServiceWorker() {
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
       navigator.serviceWorker
@@ -25,28 +28,26 @@ function startServiceWorker() {
         });
     });
   }
-}
+}*/
 
-function prepare(): StartReturnType | Promise<void> {
+/*function prepare(): StartReturnType | Promise<void> {
   return worker.start({
     onUnhandledRequest: 'bypass',
   });
-}
+}*/
 
-startServiceWorker();
+// startServiceWorker();
 
-prepare().then(() => {
-  ReactDOM.render(
-    <ErrorBoundary
-      fallbackRender={props => {
-        return <ErrorContainer {...props} />;
-      }}>
-      <Router>
-        <Provider store={store}>
-          <App />
-        </Provider>
-      </Router>
-    </ErrorBoundary>,
-    document.getElementById('root')
-  );
-});
+ReactDOM.hydrate(
+  <ErrorBoundary
+    fallbackRender={props => {
+      return <ErrorContainer {...props} />;
+    }}>
+    <StaticRouter>
+      {/*<Provider store={store}>*/}
+      <App />
+      {/*</Provider>*/}
+    </StaticRouter>
+  </ErrorBoundary>,
+  document.getElementById('mount')
+);
