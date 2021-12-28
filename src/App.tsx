@@ -1,5 +1,5 @@
-import React, { FC, useEffect } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import React, { FC } from 'react';
+/*import { Switch, Route } from 'react-router-dom';
 
 import { PrivateRoute } from './components/PrivateRoute';
 import { useAppDispatch } from './hooks/redux';
@@ -15,21 +15,22 @@ import { Logout } from './pages/Logout';
 import { Main } from './pages/Main/Main';
 import { Profile } from './pages/Profile/Profile';
 import { ProfileHistory } from './pages/ProfileHistory/ProfileHistory';
-import { Register } from './pages/Register/Register';
-import { useFetchUserQuery } from './services/AuthAPI';
-import { authActions } from './store/slices/authSlice';
+import { Register } from './pages/Register/Register';*/
+/*import { useFetchUserQuery } from './services/AuthAPI';
+import { authActions } from './store/slices/authSlice';*/
 
 const App: FC<Record<string, never>> = () => {
-  const { data: responseFetchUser = null } = useFetchUserQuery();
+  /*const { data: responseFetchUser = null } = useFetchUserQuery();
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(authActions.setCurrentUser(responseFetchUser));
-  }, [responseFetchUser]);
+  }, [responseFetchUser]);*/
 
   return (
     <main className="font-body text-black container game-container">
-      <Switch>
+      привет
+      {/*<Switch>
         <Route path="/login" exact component={Login} />
         <Route path="/register" exact component={Register} />
         <PrivateRoute path="/" exact component={Dashboard} />
@@ -43,7 +44,7 @@ const App: FC<Record<string, never>> = () => {
         <PrivateRoute path="/logout" exact component={Logout} />
         <Route path="/main" component={Main} />
         <Route path="*" component={Error404} />
-      </Switch>
+      </Switch>*/}
     </main>
   );
 };
