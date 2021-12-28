@@ -1,15 +1,15 @@
+import { ConnectedRouter } from 'connected-react-router';
 import { StartReturnType } from 'msw/lib/types/setupWorker/glossary';
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import { Provider } from 'react-redux';
-import { StaticRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
 import 'babel-polyfill';
 
 import App from './App';
 import { ErrorBoundary } from './components/ErrorBoundary/ErrorBoundary';
 import { ErrorContainer } from './components/ErrorBoundary/ErrorContainer';
 import { worker } from './mocks/browser';
-// import { store } from './store';
+import { store, history } from './store';
 
 import './index.scss';
 
@@ -42,11 +42,11 @@ prepare().then(() => {
       fallbackRender={props => {
         return <ErrorContainer {...props} />;
       }}>
-      <StaticRouter>
-        {/*<Provider store={store}>*/}
-        <App />
-        {/*</Provider>*/}
-      </StaticRouter>
+      <ConnectedRouter history={history}>
+        <Provider store={store}>
+          <App />
+        </Provider>
+      </ConnectedRouter>
     </ErrorBoundary>,
     document.getElementById('root')
   );
