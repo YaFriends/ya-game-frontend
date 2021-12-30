@@ -4,7 +4,7 @@
   "description": "Simple multi games app",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --mode development",
+    "start": "webpack-dev-server --mode development --port 8000",
     "build": "NODE_ENV=production webpack",
     "server": "node server",
     "test": "jest"
@@ -73,6 +73,6 @@
     "tty-browserify": "0.0.1"
   },
   "msw": {
-    "workerDirectory": "dist"
+    "workerDirectory": "public"
   }
 }
