@@ -46,5 +46,5 @@ function getHtml(reactHtml: JSX.Element) {
     </html>
   );
 
-  return `<!DOCTYPE html>${html}`;
+  return `<!doctype html>${html}`;
 }

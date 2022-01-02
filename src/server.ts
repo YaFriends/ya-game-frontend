@@ -1,22 +1,35 @@
 import path from 'path';
 
-import express from 'express';
+import express, { RequestHandler } from 'express';
+import webpack from 'webpack';
+import devMiddleware from 'webpack-dev-middleware';
+import hotMiddleware from 'webpack-hot-middleware';
+
+import clientConfig from '../webpack/client.config';
+import { IS_DEV } from '../webpack/env';
 
 import 'babel-polyfill';
 import serverRenderMiddleware from './server-render-middleware';
 
 const app = express();
 
-app.use(express.static(path.join(__dirname, '/dist/')));
+function getWebpackMiddlewares(config: any): RequestHandler[] {
+  const compiler = webpack(config);
 
-/*app.get('/mockServiceWorker.js', (req, res) => {
+  return [
+    devMiddleware(compiler, {
+      publicPath: config.output?.publicPath,
+    }),
+    hotMiddleware(compiler, { path: `/__webpack_hmr` }),
+  ];
+}
+
+app.use(express.static(path.join(__dirname, '../dist')));
+
+app.get('/mockServiceWorker.js', (req, res) => {
   res.sendFile(path.resolve(__dirname, 'dist/mockServiceWorker.js'));
 });
 
-app.use('/!*', function (req, res) {
-  res.sendFile(path.join(__dirname, '/index.html'));
-});*/
-
-app.use('/*', serverRenderMiddleware);
+app.get('/*', IS_DEV ? getWebpackMiddlewares(clientConfig) : [], serverRenderMiddleware);
 
 export { app };
