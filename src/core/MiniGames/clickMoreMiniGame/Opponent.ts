@@ -2,9 +2,11 @@ import { Behavior, BehaviorProps } from './Behavior';
 
 export class Opponent extends Behavior {
   interval: number;
+  clickingSpeed: number;
   constructor(props: BehaviorProps) {
     super(props);
     this.interval = 0;
+    this.clickingSpeed = 300;
   }
 
   run() {
@@ -16,7 +18,7 @@ export class Opponent extends Behavior {
   };
 
   _startClicking() {
-    this.interval = window.setInterval(this._addPoint, 300);
+    this.interval = window.setInterval(this._addPoint, this.clickingSpeed);
   }
 
   _clearInterval() {

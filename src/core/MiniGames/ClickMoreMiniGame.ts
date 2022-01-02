@@ -20,6 +20,8 @@ export class ClickMoreMiniGame extends MiniGame {
   addPointEvent: CustomEvent;
   clicksForWin: number;
   playersProgress: FlasksController | null;
+  countDown: number;
+  countDownStep: number;
 
   constructor(props: ClickMoreMiniGameProps) {
     super({
@@ -33,6 +35,8 @@ export class ClickMoreMiniGame extends MiniGame {
     this.player = new Player(this._createBehaviorProps(this.players[0]));
     this.opponent = new Opponent(this._createBehaviorProps(this.players[1]));
     this.playersProgress = null;
+    this.countDown = 3;
+    this.countDownStep = 1000;
   }
 
   run() {
@@ -55,16 +59,15 @@ export class ClickMoreMiniGame extends MiniGame {
   }
 
   _countDownBeforePlay = () => {
-    let countDown = 3;
     const countDownInterval = setInterval(() => {
       this._clearCanvas();
-      this._drawCounter(countDown--);
-      if (countDown < 0) {
+      this._drawCounter(this.countDown--);
+      if (this.countDown < 0) {
         this._clearCanvas();
         clearInterval(countDownInterval);
         this._play();
       }
-    }, 1000);
+    }, this.countDownStep);
   };
 
   _clearCanvas() {
