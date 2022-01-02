@@ -1,8 +1,7 @@
 import React, { FC } from 'react';
+import { Switch, Route, Link } from 'react-router-dom';
 
-/*import { Switch, Route } from 'react-router-dom';
-
-import { PrivateRoute } from './components/PrivateRoute';
+/*import { PrivateRoute } from './components/PrivateRoute';
 import { useAppDispatch } from './hooks/redux';
 import { Dashboard } from './pages/Dashboard/Dashboard';
 import { Error404 } from './pages/Error404/Error404';
@@ -20,6 +19,10 @@ import { Register } from './pages/Register/Register';*/
 /*import { useFetchUserQuery } from './services/AuthAPI';
 import { authActions } from './store/slices/authSlice';*/
 
+export const Main = () => <div>Главная</div>;
+export const Second = () => <div>Вторичная</div>;
+export const Third = () => <div>Third</div>;
+
 const App: FC<Record<string, never>> = () => {
   /*const { data: responseFetchUser = null } = useFetchUserQuery();
   const dispatch = useAppDispatch();
@@ -30,7 +33,14 @@ const App: FC<Record<string, never>> = () => {
 
   return (
     <main className="font-body text-black container game-container">
-      привет
+      <Link to="/second">на вторая страница</Link>
+      <Link to="/third">на третью</Link>
+      <Link to="/">на главную</Link>
+      <Switch>
+        <Route path="/second" component={Second} />
+        <Route path="/third" component={Third} />
+        <Route path="/" component={Main} />
+      </Switch>
       {/*<Switch>
         <Route path="/login" exact component={Login} />
         <Route path="/register" exact component={Register} />

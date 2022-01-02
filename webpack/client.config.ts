@@ -3,17 +3,11 @@ import { Configuration, Entry, WebpackPluginInstance as Plugin } from 'webpack';
 import { TsconfigPathsPlugin } from 'tsconfig-paths-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import CompressionPlugin from 'compression-webpack-plugin';
-// import * as HtmlWebpackPlugin from "html-webpack-plugin";
 
 import { IS_DEV, DIST_DIR, SRC_DIR } from './env';
 import fileLoader from './loaders/file';
 import cssLoader from './loaders/css';
 import jsLoader from './loaders/js';
-
-
-/*const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ESLintPlugin = require('eslint-webpack-plugin');
-const CopyPlugin = require('copy-webpack-plugin');*/
 
 const config: Configuration = {
     entry: ([
@@ -35,25 +29,11 @@ const config: Configuration = {
     module: {
         rules: [fileLoader.client, cssLoader.client, jsLoader.client],
     },
-    /*plugins: [
-      new HtmlWebpackPlugin({
-        template: './public/index.html',
-      }),
-      new ESLintPlugin({
-        extensions: ['ts', 'tsx'],
-        files: ['src'],
-        fix: true,
-      }),
-      new CopyPlugin({
-        patterns: [{ from: 'static', to: 'static' }],
-      }),
-    ],*/
     plugins: [
         new MiniCssExtractPlugin({ filename: '[name].css' }),
         !IS_DEV && new CompressionPlugin(),
     ].filter(Boolean) as Plugin[],
     devtool: 'source-map',
-
     performance: {
         hints: IS_DEV ? false : 'warning',
     },
