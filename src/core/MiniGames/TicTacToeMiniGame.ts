@@ -1,4 +1,4 @@
-import { FinishFn, MiniGameFinishResponse, Rivals } from '../../@types/MiniGame';
+import { FinishFn, MiniGameFinishResponse, MiniGamePickInfo, Rivals } from '../../@types/MiniGame';
 import { UserData } from '../../@types/UserTypes';
 import { TRANSLATION } from '../../lang/ru/translation';
 import MiniGame from '../MiniGame';
@@ -47,6 +47,15 @@ export class TicTacToeMiniGame extends MiniGame {
     this.lineWidth = 5;
     this.finishCb = () => null;
     this.totalMoves = 0;
+  }
+
+  static get config(): MiniGamePickInfo {
+    return {
+      miniGame: TicTacToeMiniGame,
+      icon: '/static/img/games/tic_tac_toe/icon.jpg',
+      pick: '/static/img/games/tic_tac_toe/pick.png',
+      name: TRANSLATION.TicTacToe.label,
+    };
   }
 
   draw() {

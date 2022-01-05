@@ -12,6 +12,7 @@ export type MiniGame = {
   id: number;
   name: string;
   icon: string;
+  pick?: string;
 };
 
 export type ResultType = 'win' | 'lose';

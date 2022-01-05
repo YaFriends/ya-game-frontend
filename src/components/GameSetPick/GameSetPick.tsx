@@ -1,65 +1,51 @@
 import React, { FC } from 'react';
 
 import { GameSet } from '../../@types/GameSet';
+import { UserData } from '../../@types/UserTypes';
+import { MINI_GAMES } from '../../core/constants';
 import { TRANSLATION } from '../../lang/ru/translation';
-import { DUMMY_STATS } from '../../pages/MOCKS/ProfileHistory';
-import { UserInfo } from '../UserInfo/UserInfo';
-import { Title } from '../ui/Title/Title';
+import { GameSetHead } from '../GameSetHead/GameSetHead';
 
 import './game-set-pick.scss';
+import { PICK_CHOOSES } from './constants';
 
 export type GameSetPickProps = {
   gameSet: GameSet;
 };
 
 export const GameSetPick: FC<Record<string, never>> = () => {
-  const { title } = TRANSLATION.GameSetPick;
-
-  const gameSet: GameSet = {
-    id: 1,
-    miniGames: [],
-    date: '2020-02-02',
-    teams: [
-      {
-        players: [
-          {
-            login: 'Player 1',
-            id: 1,
-            first_name: 'Test',
-            second_name: 'test 1',
-            display_name: 'Testovich',
-            email: 'string',
-            phone: 'string',
-            avatar: '',
-          },
-        ],
-      },
-      {
-        players: [
-          {
-            login: 'Player 2',
-            id: 2,
-            first_name: 'Test',
-            second_name: 'test 1',
-            display_name: 'Testovich',
-            email: 'string',
-            phone: 'string',
-            avatar: '',
-          },
-        ],
-      },
-    ],
+  const rival: UserData = {
+    login: 'Player 2',
+    id: 2,
+    first_name: 'Test',
+    second_name: 'test 1',
+    display_name: 'Testovich',
+    email: 'string',
+    phone: 'string',
+    avatar: '',
   };
 
-  const firstPlayerInFirstTeam = gameSet.teams[0].players[0];
-  const firstPlayerInSecondTeam = gameSet.teams[1].players[0];
+  const miniGames = MINI_GAMES.map(({ name, icon, pick }, i) => (
+    <div className="game-set-pick__game" key={i}>
+      <div className="game-set-pick__game-image">
+        <img src={pick || icon} alt={name} />
+      </div>
+    </div>
+  ));
+
+  const chooses = PICK_CHOOSES.map(({ type, icon }, i) => (
+    <div className="game-set-pick__choose" key={i}>
+      <img src={icon} alt={type} />
+    </div>
+  ));
 
   return (
     <div className="game-set-pick">
-      <div className="game-set-pick__top">
-        <UserInfo user={firstPlayerInFirstTeam} stats={DUMMY_STATS} />
-        <Title text={title} />
-        <UserInfo user={firstPlayerInSecondTeam} stats={DUMMY_STATS} />
+      <GameSetHead rival={rival} title={TRANSLATION.GameSetPick.title} />
+      <div className="game-set-pick__board">
+        <div className="game-set-pick__board-chooses">{chooses}</div>
+        <div className="game-set-pick__board-games">{miniGames}</div>
+        <div className="game-set-pick__board-chooses">{chooses}</div>
       </div>
     </div>
   );

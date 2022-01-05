@@ -1,5 +1,29 @@
 .game-set-pick {
-  &__top {
-    @apply flex justify-between items-center mb-6 w-full;
+  &__board {
+    @apply flex justify-between;
+  }
+
+  &__board-games {
+    @apply w-[300px] mx-5;
+  }
+
+  &__game {
+    @apply w-full mb-6 last:mb-0 cursor-pointer;
+  }
+
+  &__game-image {
+    @apply w-full;
+
+    img {
+      @apply block w-full;
+    }
+  }
+
+  &__board-chooses {
+    @apply w-20;
+  }
+
+  &__choose {
+    @apply w-20 h-20 mb-6 last:mb-0 cursor-pointer;
   }
 }
