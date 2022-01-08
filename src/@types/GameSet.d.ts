@@ -3,9 +3,12 @@ import { UserData } from './UserTypes';
 
 export type GameSet = {
   id: number;
-  miniGames: MiniGame[];
   date: string;
   players: Rivals;
+};
+
+export type GameSetInGame = GameSet & {
+  miniGames: MiniGame[];
 };
 
 export type MiniGame = {
@@ -22,7 +25,7 @@ export type GameSetResult = {
   type: ResultType;
 };
 
-export type GameSetHistory = GameSet & { result: GameSetResult };
+export type GameSetHistory = GameSetInGame & { result: GameSetResult };
 
 export type GameSetFinishFn = (finish: MiniGameFinishResponse) => void;
 

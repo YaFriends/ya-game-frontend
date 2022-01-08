@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-import { GameSet } from '../@types/GameSet';
+import { GameSetInGame } from '../@types/GameSet';
 import { INTERNAL_API_URL } from '../config';
 
 const servicePoint = '/session';
@@ -12,7 +12,7 @@ export const GameSetAPI = createApi({
   }),
   tagTypes: ['GameSet'],
   endpoints: build => ({
-    fetchSession: build.query<GameSet, string>({
+    fetchSession: build.query<GameSetInGame, string>({
       query: (id: string) => ({
         url: id,
         method: 'GET',

@@ -19,11 +19,20 @@
     }
   }
 
-  &__board-chooses {
+  &__board-bans {
     @apply w-20;
   }
 
-  &__choose {
-    @apply w-20 h-20 mb-6 last:mb-0 cursor-pointer;
+  &__ban {
+    @apply relative w-20 h-20 mb-6 last:mb-0 cursor-pointer;
+    @apply after:absolute after:inset-0 after:bg-red after:opacity-70;
+
+    img {
+      @apply block w-full h-full;
+    }
+  }
+
+  &__ban-title {
+    @apply absolute text-white text-2xl top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10;
   }
 }

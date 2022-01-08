@@ -138,9 +138,6 @@ export const TRANSLATION: Record<string, Record<string, string>> = {
   Bombermans: {
     label: 'Взорви не себя',
   },
-  GameSetPick: {
-    title: 'Pick/Ban игр',
-  },
   GameSetEnd: {
     you: 'Поздравляем! Ты победил :)',
     notYou: 'Упс, кажется, твоему товарищу повезло чуть-чуть больше',
@@ -148,5 +145,9 @@ export const TRANSLATION: Record<string, Record<string, string>> = {
     played: 'Вы играли в:',
     backToMain: 'Вернуться на главную',
     playAgain: 'Сыграть еще',
+  },
+  GameSetPick: {
+    title: 'Pick/Ban игр',
+    ban: 'BANNED',
   },
 };

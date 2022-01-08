@@ -13,7 +13,7 @@ import './game-set-head.scss';
 type GameSetHeadProps = {
   title?: string;
   miniGames?: MiniGame[];
-  rival: UserData;
+  rival: UserData | null;
 };
 
 export const GameSetHead: FC<GameSetHeadProps> = ({ title, miniGames, rival }) => {
@@ -31,7 +31,7 @@ export const GameSetHead: FC<GameSetHeadProps> = ({ title, miniGames, rival }) =
       <div className="game-set-head">
         <UserInfo user={currentUser} stats={DUMMY_STATS} />
         {gameInfo}
-        <UserInfo user={rival} stats={DUMMY_STATS} />
+        {rival && <UserInfo user={rival} stats={DUMMY_STATS} />}
       </div>
     );
   }
