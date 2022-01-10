@@ -13,6 +13,10 @@ export const handlers = [
 
     return res(ctx.json(body), ctx.status(200));
   }),
+  rest.get('/session/create', (req, res, ctx) => {
+    const body = 'testLinkIsHere';
+    return res(ctx.json(body), ctx.status(200));
+  }),
   rest.get('/session/:id', (req, res, ctx) => {
     const body: { id: number; miniGames: MiniGame[]; date: string; players: Rivals } = {
       id: 1,

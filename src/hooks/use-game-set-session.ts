@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react';
+
 import { CurrentUser } from '../@types/AuthTypes';
 import { UserData } from '../@types/UserTypes';
 
@@ -10,6 +12,14 @@ type UseGameSetSession = {
 
 export const useGameSetSession = (): UseGameSetSession => {
   const currentUser: CurrentUser = useAppSelector(({ auth }) => auth.currentUser);
+  // todo: get from socket
+  const [rival, setRival] = useState<CurrentUser>(null);
+  useEffect(() => {
+    const t = setTimeout(() => {
+      setRival(currentUser);
+    }, 5000);
 
-  return { currentUser, rival: currentUser };
+    return () => clearTimeout(t);
+  }, []);
+  return { currentUser, rival };
 };
