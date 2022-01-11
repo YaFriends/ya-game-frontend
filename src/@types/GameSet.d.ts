@@ -5,9 +5,6 @@ export type GameSet = {
   id: number;
   date: string;
   players: Rivals;
-};
-
-export type GameSetInGame = GameSet & {
   miniGames: MiniGame[];
 };
 
@@ -25,7 +22,7 @@ export type GameSetResult = {
   type: ResultType;
 };
 
-export type GameSetHistory = GameSetInGame & { result: GameSetResult };
+export type GameSetHistory = GameSet & { result: GameSetResult };
 
 export type GameSetFinishFn = (finish: MiniGameFinishResponse) => void;
 

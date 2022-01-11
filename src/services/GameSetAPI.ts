@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-import { GameSetInGame } from '../@types/GameSet';
+import { GameSet } from '../@types/GameSet';
 import { INTERNAL_API_URL } from '../config';
 
 const servicePoint = '/session';
@@ -12,14 +12,14 @@ export const GameSetAPI = createApi({
   }),
   keepUnusedDataFor: 0,
   endpoints: build => ({
-    generateLink: build.query<string, void>({
+    generateLink: build.query<string, null>({
       query: () => ({
         url: '/create',
         method: 'GET',
         credentials: 'include',
       }),
     }),
-    fetchSession: build.query<GameSetInGame, string>({
+    fetchSession: build.query<GameSet, string>({
       query: (id: string) => ({
         url: id,
         method: 'GET',

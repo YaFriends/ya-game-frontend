@@ -1,11 +1,4 @@
-import React, {
-  useState,
-  useEffect,
-  useRef,
-  FC,
-  SetStateAction,
-  SelectHTMLAttributes,
-} from 'react';
+import React, { useState, useEffect, useRef, FC, SelectHTMLAttributes } from 'react';
 
 import './Select.scss';
 
@@ -14,18 +7,18 @@ import { Label } from '../Label/Label';
 
 import { Option } from './Option';
 
-export type SelectedChangeType = (option: SetStateAction<OptionProps>) => void;
+export type SelectedChangeType = (option: any) => void;
 
 export interface OptionProps {
   label: string;
-  value: string;
+  value: number;
   disabled?: boolean;
 }
 
 export interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
   label: string;
   options: OptionProps[];
-  selected: OptionProps;
+  selected?: OptionProps;
   onSelectedChange: SelectedChangeType;
   placeholder?: string;
 }
@@ -69,7 +62,7 @@ export const Select: FC<SelectProps> = ({
   };
 
   const renderedOptions = options?.map(({ value, label, disabled }) => {
-    if (value === selected.value) {
+    if (value === selected?.value) {
       return null;
     }
     return (
@@ -112,7 +105,7 @@ export const Select: FC<SelectProps> = ({
       <div onClick={toggleOpen}>
         <div className={open ? SELECT_CLASSES_OPEN : SELECT_CLASSES_CLOSE}>
           <div className={holderIsActive ? 'select__label_active' : 'select__label'}>
-            {localHolder || selected.label}
+            {localHolder || selected?.label}
           </div>
           <Arrow degree={open ? '180' : '0'} />
         </div>

@@ -1,29 +1,26 @@
 import React, { FC, useEffect, useMemo, useState } from 'react';
-import { useParams } from 'react-router';
 
+import { GameSetPick } from '../../components/GameSetPick/GameSetPick';
 import { MiniGame } from '../../components/MiniGame/MiniGame';
 import { MiniGamePreview } from '../../components/MiniGamePreview/MiniGamePreview';
 import { Subtitle } from '../../components/ui/Subtitle/Subtitle';
 import { Title } from '../../components/ui/Title/Title';
 import GameSetCoordinator from '../../core/GameSetCoordinator';
+import { useGameSetSession } from '../../hooks/use-game-set-session';
 import { TRANSLATION } from '../../lang/ru/translation';
-import { useFetchSessionQuery } from '../../services/GameSetAPI';
+import { InvitationLink } from '../GameCreation/InvitationLink';
+
 import './game-set.scss';
 
-type PageParams = {
-  id: string;
-};
-
 export const GameSet: FC<Record<string, never>> = () => {
-  const { id: setId }: PageParams = useParams();
-  const { data: gameSet = null, isLoading } = useFetchSessionQuery(setId);
+  const { rival, gameSet, isGameSetLoading, totalMiniGames, addMiniGames } = useGameSetSession();
   const [gameCoordinator, setGameCoordinator] = useState<GameSetCoordinator | null>(null);
-
   useEffect(() => {
     if (gameSet) {
-      setTimeout(() => {
+      const miniGamesHadPicked = gameSet.miniGames.length === totalMiniGames;
+      if (miniGamesHadPicked) {
         setGameCoordinator(new GameSetCoordinator(gameSet.miniGames, gameSet.players));
-      }, 1000);
+      }
     }
   }, [gameSet]);
 
@@ -35,11 +32,29 @@ export const GameSet: FC<Record<string, never>> = () => {
     [gameSet]
   );
 
-  if (isLoading || !gameSet) {
+  if (isGameSetLoading || !gameSet) {
     return (
       <section className="game-set">
         <Subtitle text={TRANSLATION.Loading.label} />
       </section>
+    );
+  }
+
+  if (!rival) {
+    return (
+      <section className="game-set">
+        <InvitationLink />
+      </section>
+    );
+  }
+  if (totalMiniGames !== gameSet.miniGames.length) {
+    return (
+      <GameSetPick
+        gameSet={gameSet}
+        totalMiniGames={totalMiniGames}
+        rival={rival}
+        addMiniGames={addMiniGames}
+      />
     );
   }
 

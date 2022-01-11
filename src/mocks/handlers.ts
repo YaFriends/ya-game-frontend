@@ -20,13 +20,7 @@ export const handlers = [
   rest.get('/session/:id', (req, res, ctx) => {
     const body: { id: number; miniGames: MiniGame[]; date: string; players: Rivals } = {
       id: 1,
-      miniGames: [
-        {
-          id: 1,
-          name: 'Крестики-нолики',
-          icon: '/static/img/games/tic_tac_toe/icon.jpg',
-        },
-      ],
+      miniGames: [],
       date: '2020-02-02',
       players: [
         {

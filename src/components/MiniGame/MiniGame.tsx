@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from 'react';
 
-import { GameSetInGame } from '../../@types/GameSet';
+import { GameSet } from '../../@types/GameSet';
 import { UserData } from '../../@types/UserTypes';
 import GameSetCoordinator from '../../core/GameSetCoordinator';
 import { GameSetEnd } from '../GameSetEnd/GameSetEnd';
@@ -11,7 +11,7 @@ import './mini-game.scss';
 
 type GameSetProps = {
   GameSetCoordinator: GameSetCoordinator;
-  gameSet: GameSetInGame;
+  gameSet: GameSet;
 };
 
 const canvasId = 'canvas';

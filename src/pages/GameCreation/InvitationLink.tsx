@@ -10,7 +10,7 @@ import { TRANSLATION } from '../../lang/ru/translation';
 import { useGenerateLinkQuery } from '../../services/GameSetAPI';
 
 export const InvitationLink: FC = () => {
-  const { data: link, isLoading } = useGenerateLinkQuery();
+  const { data: link } = useGenerateLinkQuery(null);
   const { rival } = useGameSetSession();
 
   if (rival && link) {
@@ -28,9 +28,7 @@ export const InvitationLink: FC = () => {
       <Title text={TRANSLATION.InvitationLink.label} extendClass="mb-6" />
       <Subtitle text={link || TRANSLATION.InvitationLink.defaultLink} extendClass="mb-6" />
       <Text text={TRANSLATION.InvitationLink.awaiting} extendClass="mb-10" />
-      {!isLoading && (
-        <Button type="button" text={TRANSLATION.InvitationLink.ButtonText} click={copyLink} />
-      )}
+      <Button type="button" text={TRANSLATION.InvitationLink.ButtonText} click={copyLink} />
     </section>
   );
 };

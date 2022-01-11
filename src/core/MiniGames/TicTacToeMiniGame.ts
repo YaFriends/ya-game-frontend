@@ -2,6 +2,7 @@ import { FinishFn, MiniGameFinishResponse, MiniGamePickInfo, Rivals } from '../.
 import { UserData } from '../../@types/UserTypes';
 import { TRANSLATION } from '../../lang/ru/translation';
 import MiniGame from '../MiniGame';
+import { TIC_TAC_TOE_GAME_ID } from '../constants';
 
 import { TicTacToeCircle } from './common/TicTacToeCircle';
 import { TicTacToeCross } from './common/TicTacToeCross';
@@ -51,6 +52,7 @@ export class TicTacToeMiniGame extends MiniGame {
 
   static get config(): MiniGamePickInfo {
     return {
+      id: TIC_TAC_TOE_GAME_ID,
       miniGame: TicTacToeMiniGame,
       icon: '/static/img/games/tic_tac_toe/icon.jpg',
       pick: '/static/img/games/tic_tac_toe/pick.png',
