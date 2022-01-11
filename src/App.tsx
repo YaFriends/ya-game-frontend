@@ -2,8 +2,9 @@ import React, { FC, useEffect } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import { PrivateRoute } from './components/PrivateRoute';
+import { SwitchTheme } from './components/ui/SwitchTheme/SwitchTheme';
 import { REDIRECT_URI_FOR_OAUTH } from './config';
-import { useAppDispatch } from './hooks/redux';
+import { useAppDispatch, useAppSelector } from './hooks/redux';
 import { Dashboard } from './pages/Dashboard/Dashboard';
 import { Error404 } from './pages/Error404/Error404';
 import { Forum } from './pages/Forum/Forum';
@@ -20,12 +21,24 @@ import { Register } from './pages/Register/Register';
 import { useFetchUserQuery, useLazyFetchUserQuery } from './services/AuthAPI';
 import { useOAuthYandexMutation } from './services/OAuthAPI';
 import { authActions } from './store/slices/authSlice';
+import { currentTheme, themeActions } from './store/slices/themeSlice';
 
 const App: FC<Record<string, never>> = () => {
   const [attemptOAuthYandex] = useOAuthYandexMutation();
   const { data: responseFetchUser = null } = useFetchUserQuery();
   const [attemptFetchUser] = useLazyFetchUserQuery();
   const dispatch = useAppDispatch();
+  const currentTheme: currentTheme = useAppSelector(state => state.theme.currentTheme);
+
+  if (typeof window !== 'undefined') {
+    useEffect(() => {
+      dispatch(
+        themeActions.setCurrentTheme(
+          ((localStorage.getItem('theme') as currentTheme) || 'dark') as currentTheme
+        )
+      );
+    }, []);
+  }
 
   useEffect(() => {
     if (/code=([^&]+)/.exec(document.location.href) !== null) {
@@ -40,8 +53,22 @@ const App: FC<Record<string, never>> = () => {
     dispatch(authActions.setCurrentUser(responseFetchUser));
   }, [responseFetchUser]);
 
+  useEffect(() => {
+    const rootTag = document.getElementById('root');
+    rootTag!.className = '';
+    rootTag!.classList.add(`theme--${currentTheme}`);
+  }, [currentTheme]);
+
   return (
-    <main className="font-body text-black container game-container">
+    <main
+      className={[
+        'font-body',
+        'text-black',
+        'container',
+        'game-container',
+        `theme--${currentTheme}`,
+      ].join(' ')}>
+      <SwitchTheme />
       <Switch>
         <Route path="/login" exact component={Login} />
         <Route path="/register" exact component={Register} />

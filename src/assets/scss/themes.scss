@@ -1,0 +1,9 @@
+.theme {
+  &--light {
+    @apply bg-white;
+  }
+
+  &--dark {
+    @apply bg-black;
+  }
+}

@@ -8,8 +8,10 @@ import { Form } from '../../components/ui/Form/Form';
 import { Input } from '../../components/ui/Input/Input';
 import { Spinner } from '../../components/ui/Spinner/Spinner';
 import { Title } from '../../components/ui/Title/Title';
+import { useAppSelector } from '../../hooks/redux';
 import { TRANSLATION } from '../../lang/ru/translation';
 import { useUpdatePasswordMutation } from '../../services/UserAPI';
+import { currentTheme } from '../../store/slices/themeSlice';
 import { ProfilePasswordSchema } from '../../utils/ValidateSchema';
 
 const {
@@ -23,6 +25,7 @@ const {
 export const PasswordForm: FC = () => {
   const [attemptUpdatePassword, { isLoading, isSuccess }] = useUpdatePasswordMutation();
   const history = useHistory();
+  const currentTheme: currentTheme = useAppSelector(state => state.theme.currentTheme);
 
   useEffect(() => {
     if (isSuccess) {
@@ -45,7 +48,7 @@ export const PasswordForm: FC = () => {
     <section>
       {isLoading && <Spinner />}
       <Form name="profilePassword" submit={handleSubmit(onSubmit)}>
-        <Title text={PasswordTitle} extendClass="text-right mb-6" />
+        <Title text={PasswordTitle} extendClass="text-right mb-6" theme={currentTheme} />
         <Input
           register={register}
           error={errors.oldPassword}

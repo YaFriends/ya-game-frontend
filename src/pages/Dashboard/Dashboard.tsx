@@ -5,15 +5,24 @@ import { GameSetHistoryList } from '../../components/GameSetHistoryList/GameSetH
 import { Menu } from '../../components/Menu';
 import { UserInfo } from '../../components/UserInfo/UserInfo';
 import { MainLink } from '../../components/ui/Link/Link';
+import { useAppSelector } from '../../hooks/redux';
 import { useAuth } from '../../hooks/use-auth';
 import { TRANSLATION } from '../../lang/ru/translation';
+import { currentTheme } from '../../store/slices/themeSlice';
 import { DUMMY_GAME_LIST, DUMMY_STATS } from '../MOCKS/Dashboard';
 
 import './Dashboard.scss';
 
 export const Dashboard: FC<Record<string, never>> = () => {
   const { currentUser } = useAuth();
-  const link = <MainLink text={TRANSLATION.Dashboard.WatchAllGames} href="/profile/history" />;
+  const currentTheme: currentTheme = useAppSelector(state => state.theme.currentTheme);
+  const link = (
+    <MainLink
+      text={TRANSLATION.Dashboard.WatchAllGames}
+      href="/profile/history"
+      theme={currentTheme}
+    />
+  );
   return (
     currentUser && (
       <section className="dashboard">

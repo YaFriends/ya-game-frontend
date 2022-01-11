@@ -12,8 +12,10 @@ import { Spinner } from '../../components/ui/Spinner/Spinner';
 import { Title } from '../../components/ui/Title/Title';
 import { REDIRECT_URI_FOR_OAUTH } from '../../config';
 import { useLoginMutation, useLazyGetAppIdQuery } from '../../hooks/api';
+import { useAppSelector } from '../../hooks/redux';
 import { useAuth } from '../../hooks/use-auth';
 import { TRANSLATION } from '../../lang/ru/translation';
+import { currentTheme } from '../../store/slices/themeSlice';
 import { LoginSchema } from '../../utils/ValidateSchema';
 import './Login.scss';
 
@@ -24,6 +26,7 @@ export const Login: FC<Record<string, never>> = () => {
   const [isLoading, setIsLoading] = useState(false);
   const history = useHistory();
   const { isAuth } = useAuth();
+  const currentTheme: currentTheme = useAppSelector(state => state.theme.currentTheme);
 
   useEffect(() => {
     if (isAuth) {
@@ -58,8 +61,12 @@ export const Login: FC<Record<string, never>> = () => {
     <section className="login">
       {isLoading && <Spinner />}
       <div className="login__header">
-        <Title text={TRANSLATION.Login.title} />
-        <MainLink text={TRANSLATION.Login.linkToRegisterText} href="/register" />
+        <Title text={TRANSLATION.Login.title} theme={currentTheme} />
+        <MainLink
+          text={TRANSLATION.Login.linkToRegisterText}
+          href="/register"
+          theme={currentTheme}
+        />
       </div>
       <Form name="loginForm" submit={handleSubmit(onSubmit)}>
         <div>
@@ -91,7 +98,7 @@ export const Login: FC<Record<string, never>> = () => {
         </div>
       </Form>
       <div className="login__link">
-        <MainLink text={TRANSLATION.Login.linkToDashboardText} href="/main" />
+        <MainLink text={TRANSLATION.Login.linkToDashboardText} href="/main" theme={currentTheme} />
       </div>
     </section>
   );

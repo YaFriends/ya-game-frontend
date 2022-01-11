@@ -7,6 +7,7 @@ import { OAuthAPI } from '../services/OAuthAPI';
 import { UserAPI } from '../services/UserAPI';
 
 import authSlice from './slices/authSlice';
+import themeSlice from './slices/themeSlice';
 
 export const store = configureStore({
   reducer: {
@@ -16,6 +17,7 @@ export const store = configureStore({
     [OAuthAPI.reducerPath]: OAuthAPI.reducer,
     [UserAPI.reducerPath]: UserAPI.reducer,
     auth: authSlice,
+    theme: themeSlice,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware().concat([
