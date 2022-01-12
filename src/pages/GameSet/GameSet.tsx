@@ -15,6 +15,7 @@ import './game-set.scss';
 export const GameSet: FC<Record<string, never>> = () => {
   const { rival, gameSet, isGameSetLoading, totalMiniGames, addMiniGames } = useGameSetSession();
   const [gameCoordinator, setGameCoordinator] = useState<GameSetCoordinator | null>(null);
+
   useEffect(() => {
     if (gameSet) {
       const miniGamesHadPicked = gameSet.miniGames.length === totalMiniGames;

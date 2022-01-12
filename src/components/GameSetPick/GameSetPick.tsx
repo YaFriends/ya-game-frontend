@@ -27,8 +27,9 @@ export const GameSetPick: FC<GameSetPickProps> = ({
   const [bannedByCurrentUser, setBannerByCurrentUser] = useState<MiniGamePickInfo[]>([]);
   const [bannedByRival, setBannerByRival] = useState<MiniGamePickInfo[]>([]);
   const areGamesPicked = gameSet?.miniGames.length === totalMiniGames;
+
   const banGame = (game: MiniGamePickInfo) => {
-    setMiniGamesToPick(miniGamesToPick.filter(miniGame => miniGame.id !== game.id));
+    setMiniGamesToPick(miniGamesToPick.filter(({ id }) => id !== game.id));
 
     //todo: пка нет сокета, приходится так
     if (true) {
