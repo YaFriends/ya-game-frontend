@@ -2,7 +2,7 @@ import React, { FC, useMemo } from 'react';
 
 import { TableHeadProps, TableHeadCellProps } from './Table';
 
-const DEFAULT_CLASSES: string[] = ['ui-table__head'];
+const DEFAULT_CLASSES: string[] = ['ui-table__head', 'dark:text-white'];
 const DEFAULT_CLASSES_HEAD_ROW: string[] = ['ui-table__head-row', 'h-[50px]'];
 
 const TableHeadCell: FC<TableHeadCellProps> = ({ item }: TableHeadCellProps) => {

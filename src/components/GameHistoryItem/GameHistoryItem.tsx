@@ -1,9 +1,7 @@
 import React, { memo } from 'react';
 
 import { Rivals } from '../../@types/MiniGame';
-import { useAppSelector } from '../../hooks/redux';
 import { TRANSLATION } from '../../lang/ru/translation';
-import { currentTheme } from '../../store/slices/themeSlice';
 import { getRivals } from '../../utils/game';
 import { Text } from '../ui/Text/Text';
 
@@ -41,7 +39,6 @@ export const GameHistoryItem = memo(function GameHistoryItem({
   ));
 
   const rivals = getRivals(players);
-  const currentTheme: currentTheme = useAppSelector(state => state.theme.currentTheme);
 
   return (
     <div className="game-history-item">
@@ -50,14 +47,13 @@ export const GameHistoryItem = memo(function GameHistoryItem({
           {gameGroup}
         </div>
         <div className="game-history-item__info-item">
-          <Text text={`${TRANSLATION.Game.Date}: ${date}`} theme={currentTheme} />
-          <Text text={rivals} theme={currentTheme} />
+          <Text text={`${TRANSLATION.Game.Date}: ${date}`} />
+          <Text text={rivals} />
         </div>
       </div>
       <Text
         extendClass={`game-history-item__result game-history-item__result--${result.type}`}
         text={TRANSLATION.GameResult[result.type]}
-        theme={currentTheme}
       />
     </div>
   );

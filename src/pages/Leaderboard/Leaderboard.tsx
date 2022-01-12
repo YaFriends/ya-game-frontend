@@ -6,9 +6,7 @@ import { Subtitle } from '../../components/ui/Subtitle/Subtitle';
 import { Table, HeadItem } from '../../components/ui/Table/Table';
 import { Title } from '../../components/ui/Title/Title';
 import { useGetAllLeaderboardsMutation } from '../../hooks/api';
-import { useAppSelector } from '../../hooks/redux';
 import { TRANSLATION } from '../../lang/ru/translation';
-import { currentTheme } from '../../store/slices/themeSlice';
 import './Leaderboard.scss';
 
 type PositionLeaderboard = number | null;
@@ -27,7 +25,6 @@ export const Leaderboard: FC<Record<string, never>> = () => {
   const [positionOnLeaderboard, setPositionOnLeaderboard] = useState<PositionLeaderboard>(null);
   const [positionOnLeaderboardText, setPositionOnLeaderboardText] =
     useState<PositionLeaderboardText>(TRANSLATION.Leaderboard.subtitleNotTable);
-  const currentTheme: currentTheme = useAppSelector(state => state.theme.currentTheme);
   const mockGetAll = {
     ratingFieldName: 'yaFriendsScore', //  Поле по которому мы сортируем выдачу с бэка
     cursor: 0,
@@ -69,8 +66,8 @@ export const Leaderboard: FC<Record<string, never>> = () => {
     <section className="leaderboard">
       {isLoading && <Spinner />}
       <div className="leaderboard__header">
-        <Subtitle text={positionOnLeaderboardText} theme={currentTheme} />
-        <Title text={TRANSLATION.Leaderboard.title} theme={currentTheme} />
+        <Subtitle text={positionOnLeaderboardText} />
+        <Title text={TRANSLATION.Leaderboard.title} />
       </div>
 
       <Table headers={HEADERS} body={body} />

@@ -1,8 +1,6 @@
 import React, { memo } from 'react';
 
-import { useAppSelector } from '../../hooks/redux';
 import { TRANSLATION } from '../../lang/ru/translation';
-import { currentTheme } from '../../store/slices/themeSlice';
 import { MiniGamePreview, MiniGamePreviewProps } from '../MiniGamePreview/MiniGamePreview';
 import { Text } from '../ui/Text/Text';
 import { Title } from '../ui/Title/Title';
@@ -25,15 +23,14 @@ export const GameSetLoading = memo(function GameSetLoading({ miniGames }: GameSe
       classes="game-set-loading__mini-game"
     />
   ));
-  const currentTheme: currentTheme = useAppSelector(state => state.theme.currentTheme);
 
   return (
     <div className="game-set-loading">
       <div className="game-set-loading__head">
-        <Title text={title} theme={currentTheme} />
+        <Title text={title} />
         {miniGameGroup}
       </div>
-      <Text text={label} theme={currentTheme} />
+      <Text text={label} />
     </div>
   );
 });

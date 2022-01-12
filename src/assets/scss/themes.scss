@@ -1,9 +1,3 @@
-.theme {
-  &--light {
-    @apply bg-white;
-  }
-
-  &--dark {
-    @apply bg-black;
-  }
+.dark {
+  @apply bg-black;
 }

@@ -5,9 +5,7 @@ import './GameCreation.scss';
 import { MainLink } from '../../components/ui/Link/Link';
 import { Select, OptionProps, SelectedChangeType } from '../../components/ui/Select/Select';
 import { Title } from '../../components/ui/Title/Title';
-import { useAppSelector } from '../../hooks/redux';
 import { TRANSLATION } from '../../lang/ru/translation';
-import { currentTheme } from '../../store/slices/themeSlice';
 
 import { InvitationLink } from './InvitationLink';
 
@@ -20,7 +18,6 @@ const numberOfGames: OptionProps[] = [
 export const GameCreation: FC<Record<string, never>> = () => {
   const [gameCount, setGameCount] = useState<OptionProps>(numberOfGames[0]);
   const { path, url } = useRouteMatch();
-  const currentTheme: currentTheme = useAppSelector(state => state.theme.currentTheme);
 
   const changeGameCount: SelectedChangeType = count => setGameCount(count);
 
@@ -29,8 +26,8 @@ export const GameCreation: FC<Record<string, never>> = () => {
       <Switch>
         <Route path={path} exact>
           <div className="game-creation__header">
-            <MainLink text={TRANSLATION.GameCreation.BackLink} href="/" theme={currentTheme} />
-            <Title text={TRANSLATION.GameCreation.CreateSession} theme={currentTheme} />
+            <MainLink text={TRANSLATION.GameCreation.BackLink} href="/" />
+            <Title text={TRANSLATION.GameCreation.CreateSession} />
           </div>
           <div className="game-creation__select">
             <Select
@@ -45,7 +42,6 @@ export const GameCreation: FC<Record<string, never>> = () => {
             text={TRANSLATION.GameCreation.ButtonText}
             extendClass="ui-link--button-success"
             href={`${url}/link`}
-            theme={currentTheme}
           />
         </Route>
         <Route path={`${path}/link`}>

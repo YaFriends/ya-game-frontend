@@ -8,11 +8,10 @@ import { Form } from '../../components/ui/Form/Form';
 import { Input } from '../../components/ui/Input/Input';
 import { Spinner } from '../../components/ui/Spinner/Spinner';
 import { Title } from '../../components/ui/Title/Title';
-import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { useAppDispatch } from '../../hooks/redux';
 import { TRANSLATION } from '../../lang/ru/translation';
 import { useUpdateProfileMutation } from '../../services/UserAPI';
 import { authActions } from '../../store/slices/authSlice';
-import { currentTheme } from '../../store/slices/themeSlice';
 import { ProfileInfoSchema } from '../../utils/ValidateSchema';
 
 const {
@@ -39,7 +38,6 @@ export const InformationForm: FC<ProfileInfoProps> = ({ disabled = false, userIn
     useUpdateProfileMutation();
   const dispatch = useAppDispatch();
   const history = useHistory();
-  const currentTheme: currentTheme = useAppSelector(state => state.theme.currentTheme);
 
   const {
     handleSubmit,
@@ -76,11 +74,7 @@ export const InformationForm: FC<ProfileInfoProps> = ({ disabled = false, userIn
     <section>
       {isLoading && <Spinner />}
       <Form name="profileEdit" submit={handleSubmit(onSubmit)}>
-        <Title
-          text={disabled ? EditDisabledTitle : EditTitle}
-          extendClass="text-right mb-6"
-          theme={currentTheme}
-        />
+        <Title text={disabled ? EditDisabledTitle : EditTitle} extendClass="text-right mb-6" />
         <Input
           register={register}
           error={errors.first_name}

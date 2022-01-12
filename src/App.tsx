@@ -56,18 +56,11 @@ const App: FC<Record<string, never>> = () => {
   useEffect(() => {
     const rootTag = document.getElementById('root');
     rootTag!.className = '';
-    rootTag!.classList.add(`theme--${currentTheme}`);
+    rootTag!.classList.add(currentTheme);
   }, [currentTheme]);
 
   return (
-    <main
-      className={[
-        'font-body',
-        'text-black',
-        'container',
-        'game-container',
-        `theme--${currentTheme}`,
-      ].join(' ')}>
+    <main className="font-body text-black container game-container dark:bg-black">
       <SwitchTheme />
       <Switch>
         <Route path="/login" exact component={Login} />

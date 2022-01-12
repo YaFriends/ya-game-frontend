@@ -6,10 +6,8 @@ import { MiniGamePreview } from '../../components/MiniGamePreview/MiniGamePrevie
 import { Subtitle } from '../../components/ui/Subtitle/Subtitle';
 import { Title } from '../../components/ui/Title/Title';
 import GameSetCoordinator from '../../core/GameSetCoordinator';
-import { useAppSelector } from '../../hooks/redux';
 import { TRANSLATION } from '../../lang/ru/translation';
 import { useFetchSessionQuery } from '../../services/GameSetAPI';
-import { currentTheme } from '../../store/slices/themeSlice';
 import './game-set.scss';
 
 type PageParams = {
@@ -20,7 +18,6 @@ export const GameSet: FC<Record<string, never>> = () => {
   const { id: setId }: PageParams = useParams();
   const { data: gameSet = null, isLoading } = useFetchSessionQuery(setId);
   const [gameCoordinator, setGameCoordinator] = useState<GameSetCoordinator | null>(null);
-  const currentTheme: currentTheme = useAppSelector(state => state.theme.currentTheme);
 
   useEffect(() => {
     if (gameSet) {
@@ -41,7 +38,7 @@ export const GameSet: FC<Record<string, never>> = () => {
   if (isLoading || !gameSet) {
     return (
       <section className="game-set">
-        <Subtitle text={TRANSLATION.Loading.label} theme={currentTheme} />
+        <Subtitle text={TRANSLATION.Loading.label} />
       </section>
     );
   }
@@ -49,9 +46,9 @@ export const GameSet: FC<Record<string, never>> = () => {
   if (!gameCoordinator) {
     return (
       <section className="game-set">
-        <Title text="Выбранные игры" extendClass="mb-6" theme={currentTheme} />
+        <Title text="Выбранные игры" extendClass="mb-6" />
         <div className="game-set__mini-games">{miniGamePreviews}</div>
-        <Subtitle text={TRANSLATION.Loading.label} theme={currentTheme} />
+        <Subtitle text={TRANSLATION.Loading.label} />
       </section>
     );
   }

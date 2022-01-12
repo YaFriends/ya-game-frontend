@@ -10,11 +10,9 @@ import { Input } from '../../components/ui/Input/Input';
 import { MainLink } from '../../components/ui/Link/Link';
 import { Spinner } from '../../components/ui/Spinner/Spinner';
 import { Title } from '../../components/ui/Title/Title';
-import { useAppSelector } from '../../hooks/redux';
 import { useAuth } from '../../hooks/use-auth';
 import { TRANSLATION } from '../../lang/ru/translation';
 import { useSignUpMutation } from '../../services/AuthAPI';
-import { currentTheme } from '../../store/slices/themeSlice';
 import { SignUpSchema } from '../../utils/ValidateSchema';
 
 import './Register.scss';
@@ -23,7 +21,6 @@ export const Register: FC<Record<string, never>> = () => {
   const [attemptSignUp, { isLoading }] = useSignUpMutation();
   const history = useHistory();
   const { isAuth } = useAuth();
-  const currentTheme: currentTheme = useAppSelector(state => state.theme.currentTheme);
 
   useEffect(() => {
     if (isAuth) {
@@ -46,8 +43,8 @@ export const Register: FC<Record<string, never>> = () => {
     <section className="register">
       {isLoading && <Spinner />}
       <div className="register__header">
-        <MainLink text="Назад" href="/login" theme={currentTheme} />
-        <Title text="Регистрация" theme={currentTheme} />
+        <MainLink text="Назад" href="/login" />
+        <Title text="Регистрация" />
       </div>
       <Form name="registerForm" submit={handleSubmit(onSubmit)}>
         <div>
