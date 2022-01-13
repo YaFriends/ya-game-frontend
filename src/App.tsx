@@ -1,7 +1,6 @@
 import React, { FC, useEffect } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import { GameSetPick } from './components/GameSetPick/GameSetPick';
 import { PrivateRoute } from './components/PrivateRoute';
 import { REDIRECT_URI_FOR_OAUTH } from './config';
 import { useAppDispatch } from './hooks/redux';
@@ -55,7 +54,6 @@ const App: FC<Record<string, never>> = () => {
         <PrivateRoute path="/profile/history" exact component={ProfileHistory} />
         <PrivateRoute path="/profile" component={Profile} />
         <PrivateRoute path="/logout" exact component={Logout} />
-        <Route path="/test" component={GameSetPick} />
         <Route path="/main" component={Main} />
         <Route path="*" component={Error404} />
       </Switch>

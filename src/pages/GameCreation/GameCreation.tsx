@@ -13,8 +13,8 @@ import { useGenerateLinkQuery } from '../../services/GameSetAPI';
 
 const numberOfGames: OptionProps[] = [
   { value: 1, label: '1' },
-  { value: 2, label: '2', disabled: true },
   { value: 3, label: '3', disabled: true },
+  { value: 5, label: '5', disabled: true },
 ];
 
 export const GameCreation: FC<Record<string, never>> = () => {
