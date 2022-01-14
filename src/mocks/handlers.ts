@@ -22,6 +22,16 @@ export const handlers = [
           name: 'Крестики-нолики',
           icon: '/static/img/games/tic_tac_toe/icon.jpg',
         },
+        {
+          id: 2,
+          name: 'Самый быстрый кликун',
+          icon: '/static/img/games/click_more/icon.jpg',
+        },
+        {
+          id: 3,
+          name: 'Круг Треугольник Квадрат',
+          icon: '/static/img/games/circle_triangle_square/icon.jpg',
+        },
       ],
       date: '2020-02-02',
       players: [

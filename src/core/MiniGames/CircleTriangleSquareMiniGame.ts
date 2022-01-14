@@ -1,7 +1,7 @@
+import { FinishFn, MiniGameFinishResponse, Rivals } from '../../@types/MiniGame';
 import { TRANSLATION } from '../../lang/ru/translation';
 import { GameLoop } from '../GameLoop';
 import MiniGame from '../MiniGame';
-import { FinishFn, MiniGameFinishResponse, Rivals } from '../../@types/MiniGame';
 
 type CircleTriangleSquareProps = {
   players: Rivals;

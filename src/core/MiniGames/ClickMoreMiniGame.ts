@@ -1,6 +1,6 @@
-import MiniGame from '../MiniGame';
-import { TRANSLATION } from '../../lang/ru/translation';
 import { FinishFn, MiniGameFinishResponse, Rivals } from '../../@types/MiniGame';
+import { TRANSLATION } from '../../lang/ru/translation';
+import MiniGame from '../MiniGame';
 
 type ClickMoreMiniGameProps = {
   players: Rivals;
