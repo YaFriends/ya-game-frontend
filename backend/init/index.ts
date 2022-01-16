@@ -1,15 +1,14 @@
 import { Sequelize, SequelizeOptions } from 'sequelize-typescript';
 
 const sequelizeOptions: SequelizeOptions = {
-  host: process.env.POSTGRES_HOST || 'localhost',
-  port: (process.env.POSTGRES_PORT as number | undefined) || 5477,
+  host: process.env.POSTGRES_HOST || 'psql',
+  port: 5432,
   username: process.env.POSTGRES_USER,
   password: process.env.POSTGRES_PASSWORD,
   database: process.env.POSTGRES_DB,
-  dialect: 'postgres', // 'mysql', 'sqlite', 'mariadb', 'mssql'
+  dialect: 'postgres',
 };
-console.log(sequelizeOptions);
-// Создаем инстанс Sequelize
+
 export const sequelize = new Sequelize(sequelizeOptions);
 
 export async function dbConnect() {
