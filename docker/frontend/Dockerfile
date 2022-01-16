@@ -6,5 +6,8 @@ WORKDIR /var/www
 COPY . .
 ARG DOCKER_ENV
 ENV NODE_ENV=${DOCKER_ENV}
+
+RUN yarn
+
 # Запускаем сервак
 CMD ./scripts/start.sh
