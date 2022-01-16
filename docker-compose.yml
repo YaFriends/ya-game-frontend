@@ -1,18 +1,6 @@
-version: "3.3"
+version: "3.6"
 
 services:
-    my-app:
-        build:
-            context: .
-        depends_on:
-            - psql
-        env_file:
-            ./.env
-        ports:
-            - "5000:5000"
-        restart: always
-        networks:
-            - postgres
     psql:
         container_name: psql
         restart: always
@@ -22,22 +10,18 @@ services:
         env_file:
             ./.env
         volumes:
-            - ./docker/postgresql:/var/lib/postgresql
-            # Если у вас есть схема БД, которую можно подгрузить на старте, — передайте её
-            - ./docker/postgresql-init/dbinit.sql:/docker-entrypoint-initdb.d/dbinit.sql
+            - ./docker/postgresql/shared:/var/lib/postgresql
         ports:
-            - "5432:5432"
+            - "5477:5432"
         networks:
             - postgres
     pgadmin:
         container_name: pgadmin_container
         image: dpage/pgadmin4:5.7
-        environment:
-            PGADMIN_DEFAULT_EMAIL: admin@admin.com
-            PGADMIN_DEFAULT_PASSWORD: secret
-            PGADMIN_LISTEN_PORT: 80
+        env_file:
+            ./.env
         volumes:
-            - ./docker/pgadmin:/var/lib/pgadmin
+            - ./docker/pgadmin/shared:/var/lib/pgadmin
         ports:
             - "5050:80"
         restart: unless-stopped
@@ -45,16 +29,38 @@ services:
             - psql
         networks:
             - postgres
-    node:
-        container_name: node
-        image: node:14.17.6
-        restart: always
+    frontend:
+        container_name: frontend
+        build:
+            context: ./
+            dockerfile: ./docker/frontend/Dockerfile
+        env_file:
+            ./.env
+        ports:
+            - "8080:8080"
         volumes:
-            - ./node/:/node/
+            - ./:/var/www
         depends_on:
             - psql
-        links:
+        networks:
+            - postgres
+    backend:
+        container_name: backend
+        build:
+            context: ./
+            dockerfile: ./docker/backend/Dockerfile
+        env_file:
+            ./.env
+        volumes:
+            - ./backend:/var/www/backend
+        depends_on:
+            - frontend
             - psql
+        networks:
+            - postgres
+
+volumes:
+    pgadmin-data:
 
 networks:
     postgres:

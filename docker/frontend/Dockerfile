@@ -4,13 +4,7 @@ WORKDIR /var/www
 
 # Копируем всё что нужно из локальной папки в образ
 COPY . .
-
-# Устанавливаем все только нужно
-RUN yarn install --frozen-lockfile && yarn build && npx msw init dist/ --save
-
-# Шарим порт
-EXPOSE 8080
-
+ARG DOCKER_ENV
+ENV NODE_ENV=${DOCKER_ENV}
 # Запускаем сервак
-CMD node server.js
-CMD node backend/index.js
+CMD ./scripts/start.sh
