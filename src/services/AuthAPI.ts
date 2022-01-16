@@ -1,10 +1,20 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import {
+  buildCreateApi,
+  coreModule,
+  reactHooksModule,
+  fetchBaseQuery,
+} from '@reduxjs/toolkit/query/react';
 
 import { LoginData, SignUpData } from '../@types/AuthTypes';
 import { UserData } from '../@types/UserTypes';
 import { EXTERNAL_API_URL } from '../config';
 
 const servicePoint = '/auth';
+
+const createApi = buildCreateApi(
+  coreModule(),
+  reactHooksModule({ unstable__sideEffectsInRender: true })
+);
 
 export const AuthAPI = createApi({
   reducerPath: 'authApi',

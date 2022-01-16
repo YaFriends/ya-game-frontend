@@ -1,4 +1,4 @@
-import { StartReturnType } from 'msw/lib/types/setupWorker/glossary';
+// import { StartReturnType } from 'msw/lib/types/setupWorker/glossary';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
@@ -8,12 +8,12 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import App from './App';
 import { ErrorBoundary } from './components/ErrorBoundary/ErrorBoundary';
 import { ErrorContainer } from './components/ErrorBoundary/ErrorContainer';
-import { worker } from './mocks/browser';
-import { store } from './store';
+// import { worker } from './mocks/browser';
+import { preparedState } from './store';
 
 import './index.scss';
 
-function startServiceWorker() {
+/*function startServiceWorker() {
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
       navigator.serviceWorker
@@ -34,20 +34,28 @@ function prepare(): StartReturnType | Promise<void> {
   });
 }
 
-startServiceWorker();
+startServiceWorker();*/
 
-prepare().then(() => {
-  ReactDOM.hydrate(
-    <ErrorBoundary
-      fallbackRender={props => {
-        return <ErrorContainer {...props} />;
-      }}>
-      <Provider store={store}>
-        <Router>
-          <App />
-        </Router>
-      </Provider>
-    </ErrorBoundary>,
-    document.getElementById('mount')
-  );
-});
+declare global {
+  interface Window {
+    __PRELOADED_STATE__: any;
+  }
+}
+
+const store = preparedState(window.__PRELOADED_STATE__);
+
+// prepare().then(() => {
+ReactDOM.hydrate(
+  <ErrorBoundary
+    fallbackRender={props => {
+      return <ErrorContainer {...props} />;
+    }}>
+    <Provider store={store}>
+      <Router>
+        <App />
+      </Router>
+    </Provider>
+  </ErrorBoundary>,
+  document.getElementById('mount')
+);
+// });

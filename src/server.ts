@@ -23,7 +23,6 @@ function getWebpackMiddlewares(config: any): RequestHandler[] {
     hotMiddleware(compiler, { path: `/__webpack_hmr` }),
   ];
 }
-
 app.use(express.static(path.join(__dirname, '../dist')));
 
 app.get('/mockServiceWorker.js', (req, res) => {

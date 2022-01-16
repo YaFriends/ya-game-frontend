@@ -21,6 +21,10 @@ const config: Configuration = {
                 loader: 'null-loader',
             },
             {
+                test: /\.s[ac]ss$/i,
+                loader: 'null-loader',
+            },
+            {
                 test: /\.(ts|tsx)$/,
                 use: { loader: 'ts-loader' },
                 exclude: /node_modules/,
