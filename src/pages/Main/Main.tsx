@@ -22,7 +22,7 @@ export const Main: FC<Record<string, never>> = () => {
         <div className="main__game">
           <img
             src="/static/img/games/circle_triangle_square/icon.jpg"
-            alt="circle_triangle_square"
+            alt={TRANSLATION.Main.circle_triangle_square}
           />
           <div>
             <Subtitle text={TRANSLATION.Main.circle_triangle_square} />
@@ -34,10 +34,10 @@ export const Main: FC<Record<string, never>> = () => {
             <Subtitle text={TRANSLATION.Main.click_more} />
             <Text text={TRANSLATION.Main.click_moreDesc} />
           </div>
-          <img src="/static/img/games/click_more/icon.jpg" alt="click_more" />
+          <img src="/static/img/games/click_more/icon.jpg" alt={TRANSLATION.Main.click_more} />
         </div>
         <div className="main__game">
-          <img src="/static/img/games/tic_tac_toe/icon.jpg" alt="tic_tac_toe" />
+          <img src="/static/img/games/tic_tac_toe/icon.jpg" alt={TRANSLATION.Main.tic_tac_toe} />
           <div>
             <Subtitle text={TRANSLATION.Main.tic_tac_toe} />
           </div>
@@ -47,10 +47,10 @@ export const Main: FC<Record<string, never>> = () => {
             <Subtitle text={TRANSLATION.Main.field_battle} />
             <Text text={TRANSLATION.Main.field_battleDesc} />
           </div>
-          <img src="/static/img/games/field_battle/icon.jpg" alt="field_battle" />
+          <img src="/static/img/games/field_battle/icon.jpg" alt={TRANSLATION.Main.field_battle} />
         </div>
         <div className="main__game">
-          <img src="/static/img/games/bombermans/icon.jpg" alt="bombermans" />
+          <img src="/static/img/games/bombermans/icon.jpg" alt={TRANSLATION.Main.bombermans} />
           <div>
             <Subtitle text={TRANSLATION.Main.bombermans} />
             <Text text={TRANSLATION.Main.bombermansDesc} />
