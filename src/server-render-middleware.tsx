@@ -6,19 +6,15 @@ import { StaticRouterContext } from 'react-router';
 import { StaticRouter } from 'react-router-dom';
 
 import 'whatwg-fetch';
-// @ts-ignore
-import xhr2 from 'xhr2';
 
 import App from './App';
-import { AuthAPI } from './services/AuthAPI';
 import { preparedState } from './store';
-global.XMLHttpRequest = xhr2;
+import { renderObject } from './utils/renderObject';
 
 export default (req: Request, res: Response) => {
   const location = req.url;
   const context: StaticRouterContext = {};
   const store = preparedState({});
-  console.log(req.cookies);
   const jsx = (
     <Provider store={store}>
       <StaticRouter context={context} location={location}>
@@ -31,9 +27,8 @@ export default (req: Request, res: Response) => {
     res.redirect(context.url);
     return;
   }
-  Promise.all([store.dispatch(AuthAPI.endpoints.fetchUser.initiate())]).then(() => {
-    res.status(context.statusCode || 200).send(getHtml(jsx, store));
-  });
+
+  res.status(context.statusCode || 200).send(getHtml(jsx, store));
 };
 
 function getHtml(reactHtml: JSX.Element, store?: ReturnType<typeof preparedState>) {
@@ -56,7 +51,7 @@ function getHtml(reactHtml: JSX.Element, store?: ReturnType<typeof preparedState
         <script src="/main.js"></script>
         <script
           dangerouslySetInnerHTML={{
-            __html: `window.__PRELOADED_STATE__ = ${JSON.stringify(store?.getState())}`,
+            __html: `window.__PRELOADED_STATE__ = ${renderObject(store?.getState())}`,
           }}
         />
       </body>
