@@ -32,7 +32,7 @@ export const useGameSetSession = (): UseGameSetSession => {
 
   const currentUser: CurrentUser = useAppSelector(({ auth }) => auth.currentUser);
 
-  // todo: get from socket
+  // todo: получать из сокета
   const [rival, setRival] = useState<CurrentUser>(null);
 
   const addMiniGames = (miniGames: MiniGame[]) => {
@@ -41,7 +41,6 @@ export const useGameSetSession = (): UseGameSetSession => {
     }
   };
 
-  // todo: send it to server cause of possible disconnect
   const addMiniGame = (miniGame: MiniGame) => {
     addMiniGames([miniGame]);
   };
@@ -58,6 +57,7 @@ export const useGameSetSession = (): UseGameSetSession => {
     }
   }, [gameSet]);
 
+  // todo: уйдет, когда будет получение из сокета
   useEffect(() => {
     const t = setTimeout(() => {
       setRival(currentUser);

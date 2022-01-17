@@ -54,30 +54,42 @@ export const GameSetPick: FC<GameSetPickProps> = ({
     }
   }, [gameSet, miniGamesToPick, totalMiniGames, areGamesPicked]);
 
-  const miniGames = miniGamesToPick.map(({ id, name, icon, pick_image, miniGame }, i) => (
-    <div
-      className="game-set-pick__game"
-      key={i}
-      onClick={() => banGame({ id, name, icon, pick_image, miniGame })}>
-      <div className="game-set-pick__game-image">
-        <img src={pick_image || icon} alt={name} />
-      </div>
-    </div>
-  ));
+  const miniGames = useMemo(
+    () =>
+      miniGamesToPick.map(({ id, name, icon, pick_image, miniGame }, i) => (
+        <div
+          className="game-set-pick__game"
+          key={i}
+          onClick={() => banGame({ id, name, icon, pick_image, miniGame })}>
+          <div className="game-set-pick__game-image">
+            <img src={pick_image || icon} alt={name} />
+          </div>
+        </div>
+      )),
+    [miniGamesToPick]
+  );
 
-  const bannedGamesByCurrentUser = bannedByCurrentUser.map(({ name, icon }, i) => (
-    <div className="game-set-pick__ban" key={i} title={name}>
-      <img src={icon} alt={name} />
-      <div className="game-set-pick__ban-title">{TRANSLATION.GameSetPick.ban}</div>
-    </div>
-  ));
+  const bannedGamesByCurrentUser = useMemo(
+    () =>
+      bannedByCurrentUser.map(({ name, icon }, i) => (
+        <div className="game-set-pick__ban" key={i} title={name}>
+          <img src={icon} alt={name} />
+          <div className="game-set-pick__ban-title">{TRANSLATION.GameSetPick.ban}</div>
+        </div>
+      )),
+    [bannedByCurrentUser]
+  );
 
-  const bannedGamesByRival = bannedByRival.map(({ name, icon }, i) => (
-    <div className="game-set-pick__ban" key={i} title={name}>
-      <img src={icon} alt={name} />
-      <div className="game-set-pick__ban-title">{TRANSLATION.GameSetPick.ban}</div>
-    </div>
-  ));
+  const bannedGamesByRival = useMemo(
+    () =>
+      bannedByRival.map(({ name, icon }, i) => (
+        <div className="game-set-pick__ban" key={i} title={name}>
+          <img src={icon} alt={name} />
+          <div className="game-set-pick__ban-title">{TRANSLATION.GameSetPick.ban}</div>
+        </div>
+      )),
+    [bannedByRival]
+  );
 
   return (
     <div className="game-set-pick">
