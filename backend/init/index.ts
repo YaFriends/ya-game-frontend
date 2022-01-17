@@ -11,7 +11,7 @@ const sequelizeOptions: SequelizeOptions = {
 
 export const sequelize = new Sequelize(sequelizeOptions);
 
-export async function dbConnect() {
+export const dbConnect = async () => {
   try {
     await sequelize.authenticate(); // Проверка аутентификации в БД
     await sequelize.sync(); // Синхронизация базы данных
@@ -19,4 +19,4 @@ export async function dbConnect() {
   } catch (error) {
     console.error('Unable to connect to the database:', error);
   }
-}
+};
