@@ -13,12 +13,12 @@ import { InvitationLink } from '../GameCreation/InvitationLink';
 import './game-set.scss';
 
 export const GameSet: FC<Record<string, never>> = () => {
-  const { rival, gameSet, isGameSetLoading, totalMiniGames, addMiniGames } = useGameSetSession();
+  const { rival, gameSet, isGameSetLoading, addMiniGames } = useGameSetSession();
   const [gameCoordinator, setGameCoordinator] = useState<GameSetCoordinator | null>(null);
 
   useEffect(() => {
     if (gameSet) {
-      const miniGamesHadPicked = gameSet.miniGames.length === totalMiniGames;
+      const miniGamesHadPicked = gameSet.miniGames.length === gameSet.totalGames;
       if (miniGamesHadPicked) {
         setGameCoordinator(new GameSetCoordinator(gameSet.miniGames, gameSet.players));
       }
@@ -48,11 +48,11 @@ export const GameSet: FC<Record<string, never>> = () => {
       </section>
     );
   }
-  if (totalMiniGames !== gameSet.miniGames.length) {
+  if (gameSet.totalGames !== gameSet.miniGames.length) {
     return (
       <GameSetPick
         gameSet={gameSet}
-        totalMiniGames={totalMiniGames}
+        totalMiniGames={gameSet.totalGames}
         rival={rival}
         addMiniGames={addMiniGames}
       />

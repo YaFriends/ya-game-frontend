@@ -1,11 +1,13 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useEffect, useMemo, useState } from 'react';
 
 import { GameSet } from '../../@types/GameSet';
 import { MiniGamePickInfo } from '../../@types/MiniGame';
 import { UserData } from '../../@types/UserTypes';
 import { MINI_GAMES } from '../../core/constants';
-import { UseGameSetSession } from '../../hooks/use-game-set-session';
+import { useAuth } from '../../hooks/use-auth';
+import { useGameSetSession, UseGameSetSession } from '../../hooks/use-game-set-session';
 import { TRANSLATION } from '../../lang/ru/translation';
+import { useUpdateGameSetMutation } from '../../services/GameSetAPI';
 import { GameSetHead } from '../GameSetHead/GameSetHead';
 
 import './game-set-pick.scss';
@@ -23,19 +25,22 @@ export const GameSetPick: FC<GameSetPickProps> = ({
   totalMiniGames,
   addMiniGames,
 }) => {
+  const { currentUser } = useAuth();
+  const { bannedByCurrentUser, bannedByRival } = useGameSetSession();
   const [miniGamesToPick, setMiniGamesToPick] = useState<MiniGamePickInfo[]>(MINI_GAMES);
-  const [bannedByCurrentUser, setBannerByCurrentUser] = useState<MiniGamePickInfo[]>([]);
-  const [bannedByRival, setBannerByRival] = useState<MiniGamePickInfo[]>([]);
-  const areGamesPicked = gameSet?.miniGames.length === totalMiniGames;
+  const [updateGameSet] = useUpdateGameSetMutation();
+  const areGamesPicked = useMemo(
+    () => gameSet?.miniGames.length === totalMiniGames,
+    [gameSet, totalMiniGames]
+  );
 
   const banGame = (game: MiniGamePickInfo) => {
     setMiniGamesToPick(miniGamesToPick.filter(({ id }) => id !== game.id));
-
-    //todo: пка нет сокета, приходится так
-    if (true) {
-      setBannerByCurrentUser([...bannedByCurrentUser, game]);
-    } else {
-      setBannerByRival([...bannedByRival, game]);
+    if (gameSet && currentUser) {
+      updateGameSet({
+        id: gameSet.id,
+        bans: [...gameSet.bans, { ...game, banned_by: currentUser?.id }],
+      });
     }
   };
 
@@ -49,13 +54,13 @@ export const GameSetPick: FC<GameSetPickProps> = ({
     }
   }, [gameSet, miniGamesToPick, totalMiniGames, areGamesPicked]);
 
-  const miniGames = miniGamesToPick.map(({ id, name, icon, pick, miniGame }, i) => (
+  const miniGames = miniGamesToPick.map(({ id, name, icon, pick_image, miniGame }, i) => (
     <div
       className="game-set-pick__game"
       key={i}
-      onClick={() => banGame({ id, name, icon, pick, miniGame })}>
+      onClick={() => banGame({ id, name, icon, pick_image, miniGame })}>
       <div className="game-set-pick__game-image">
-        <img src={pick || icon} alt={name} />
+        <img src={pick_image || icon} alt={name} />
       </div>
     </div>
   ));

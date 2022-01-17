@@ -1,11 +1,10 @@
-import { cloneDeep } from 'lodash';
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 
 import { CurrentUser } from '../@types/AuthTypes';
 import { GameSet, MiniGame } from '../@types/GameSet';
 import { UserData } from '../@types/UserTypes';
-import { useFetchSessionQuery } from '../services/GameSetAPI';
+import { useFetchSessionQuery, useUpdateGameSetMutation } from '../services/GameSetAPI';
 
 import { useAppSelector } from './redux';
 
@@ -14,8 +13,8 @@ export type UseGameSetSession = {
   rival: UserData | null;
   gameSet: GameSet | null;
   isGameSetLoading: boolean;
-  totalMiniGames: number;
-  setTotalMiniGames: Dispatch<SetStateAction<number>>;
+  bannedByCurrentUser: MiniGame[];
+  bannedByRival: MiniGame[];
   addMiniGame: (miniGame: MiniGame) => void;
   addMiniGames: (miniGames: MiniGame[]) => void;
 };
@@ -25,40 +24,44 @@ type PageParams = {
 };
 
 export const useGameSetSession = (): UseGameSetSession => {
-  const [totalMiniGames, setTotalMiniGames] = useState<number>(1);
   const { id: setId }: PageParams = useParams();
+  const [updateGameSet] = useUpdateGameSetMutation();
   const { data: gameSet = null, isLoading } = useFetchSessionQuery(setId);
-  const [localGameSet, setLocalGameSet] = useState<GameSet | null>(cloneDeep(gameSet));
+  const [bannedByCurrentUser, setBannedByCurrentUser] = useState<MiniGame[]>([]);
+  const [bannedByRival, setBannedByRival] = useState<MiniGame[]>([]);
+
   const currentUser: CurrentUser = useAppSelector(({ auth }) => auth.currentUser);
+
   // todo: get from socket
   const [rival, setRival] = useState<CurrentUser>(null);
 
-  // todo: send it to server cause of possible disconnect
-  const addMiniGame = (miniGame: MiniGame) => {
-    if (localGameSet) {
-      const newSet = cloneDeep(localGameSet);
-      newSet.miniGames = [...newSet.miniGames, miniGame];
-
-      setLocalGameSet(newSet);
+  const addMiniGames = (miniGames: MiniGame[]) => {
+    if (gameSet) {
+      updateGameSet({ id: gameSet.id, miniGames: [...gameSet.miniGames, ...miniGames] });
     }
   };
+
   // todo: send it to server cause of possible disconnect
-  const addMiniGames = (miniGames: MiniGame[]) => {
-    if (localGameSet) {
-      const newSet = cloneDeep(localGameSet);
-      newSet.miniGames = [...newSet.miniGames, ...miniGames];
-      setLocalGameSet(newSet);
-    }
+  const addMiniGame = (miniGame: MiniGame) => {
+    addMiniGames([miniGame]);
   };
 
   useEffect(() => {
-    setLocalGameSet(gameSet);
+    if (gameSet) {
+      const _bannedByCurrentUser = gameSet.bans.filter(
+        ({ banned_by }) => banned_by === currentUser?.id
+      );
+      const _bannedByRival = gameSet.bans.filter(({ banned_by }) => banned_by !== currentUser?.id);
+
+      setBannedByCurrentUser(_bannedByCurrentUser);
+      setBannedByRival(_bannedByRival);
+    }
   }, [gameSet]);
 
   useEffect(() => {
     const t = setTimeout(() => {
       setRival(currentUser);
-    }, 3000);
+    }, 2000);
 
     return () => clearTimeout(t);
   }, []);
@@ -66,10 +69,10 @@ export const useGameSetSession = (): UseGameSetSession => {
   return {
     currentUser,
     rival,
-    gameSet: localGameSet,
+    gameSet,
     isGameSetLoading: isLoading,
-    totalMiniGames,
-    setTotalMiniGames,
+    bannedByCurrentUser,
+    bannedByRival,
     addMiniGame,
     addMiniGames,
   };

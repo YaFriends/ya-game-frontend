@@ -13,7 +13,7 @@ export type MiniGameInfo = {
 
 export type MiniGamePickInfo = MiniGameInfo & {
   id: number;
-  pick?: string;
+  pick_image?: string;
   miniGame: SubclassOfMiniGame;
 };
 

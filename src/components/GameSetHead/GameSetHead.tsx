@@ -4,7 +4,7 @@ import { MiniGame } from '../../@types/GameSet';
 import { UserData } from '../../@types/UserTypes';
 import { useAuth } from '../../hooks/use-auth';
 import { DUMMY_STATS } from '../../pages/MOCKS/ProfileHistory';
-import { MiniGamePreview } from '../MiniGamePreview/MiniGamePreview';
+import { MiniGamePreviews } from '../MiniGamePreviews/MiniGamePreviews';
 import { UserInfo } from '../UserInfo/UserInfo';
 import { Title } from '../ui/Title/Title';
 
@@ -20,9 +20,7 @@ export const GameSetHead: FC<GameSetHeadProps> = ({ title, miniGames, rival }) =
   const { currentUser } = useAuth();
   let gameInfo;
   if (miniGames) {
-    gameInfo = miniGames.map(({ id, name, icon }) => (
-      <MiniGamePreview key={id} id={id} name={name} icon={icon} classes="mini-game__top-preview" />
-    ));
+    gameInfo = <MiniGamePreviews miniGames={miniGames} className="mini-game__top-preview" />;
   } else if (title) {
     gameInfo = <Title text={title} />;
   }
@@ -36,5 +34,5 @@ export const GameSetHead: FC<GameSetHeadProps> = ({ title, miniGames, rival }) =
     );
   }
 
-  return <div className="game-set-top"></div>;
+  return <div className="game-set-top" />;
 };

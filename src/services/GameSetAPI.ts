@@ -26,7 +26,14 @@ export const GameSetAPI = createApi({
         credentials: 'include',
       }),
     }),
+    updateGameSet: build.mutation<GameSet, Partial<GameSet> & Pick<GameSet, 'id'>>({
+      query: ({ id, ...patch }) => ({
+        url: `/${id}`,
+        method: 'PATCH',
+        body: patch,
+      }),
+    }),
   }),
 });
 
-export const { useFetchSessionQuery, useGenerateLinkQuery } = GameSetAPI;
+export const { useFetchSessionQuery, useGenerateLinkQuery, useUpdateGameSetMutation } = GameSetAPI;
