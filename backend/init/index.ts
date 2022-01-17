@@ -9,7 +9,7 @@ const sequelizeOptions: SequelizeOptions = {
   dialect: 'postgres',
 };
 
-export const sequelize = new Sequelize(sequelizeOptions);
+const sequelize = new Sequelize(sequelizeOptions);
 
 export const dbConnect = async () => {
   try {

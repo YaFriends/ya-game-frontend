@@ -1,7 +1,7 @@
 import { dbConnect } from './init';
 
 (() => {
-  dbConnect().then(async () => {
-    console.log('Connected');
+  dbConnect().then(() => {
+    console.info('Connected');
   });
 })();
