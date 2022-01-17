@@ -1,0 +1,67 @@
+version: "3.6"
+
+services:
+    psql:
+        container_name: psql
+        restart: always
+        image: postgres:13.3
+        environment:
+            PGDATA: "/var/lib/postgresql/data/pgdata"
+        env_file:
+            ./.env
+        volumes:
+            - ./docker/postgresql/shared:/var/lib/postgresql
+        ports:
+            - "5477:5432"
+        networks:
+            - postgres
+    pgadmin:
+        container_name: pgadmin_container
+        image: dpage/pgadmin4:5.7
+        env_file:
+            ./.env
+        volumes:
+            - ./docker/pgadmin/shared:/var/lib/pgadmin
+        ports:
+            - "5050:80"
+        restart: unless-stopped
+        depends_on:
+            - psql
+        networks:
+            - postgres
+    frontend:
+        container_name: frontend
+        build:
+            context: ./
+            dockerfile: ./docker/frontend/Dockerfile
+        env_file:
+            ./.env
+        ports:
+            - "8000:8000"
+        volumes:
+            - ./:/var/www
+        depends_on:
+            - psql
+        networks:
+            - postgres
+    backend:
+        container_name: backend
+        build:
+            context: ./
+            dockerfile: ./docker/backend/Dockerfile
+        env_file:
+            ./.env
+        volumes:
+            - ./backend:/var/www/backend
+        depends_on:
+            - frontend
+            - psql
+        networks:
+            - postgres
+
+volumes:
+    pgadmin-data:
+
+networks:
+    postgres:
+        driver: bridge

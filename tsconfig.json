@@ -12,6 +12,7 @@
     "noUnusedLocals": true,
     "esModuleInterop": true,
     "strict": true,
+    "emitDecoratorMetadata": true,
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
     "skipLibCheck": true,
