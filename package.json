@@ -4,7 +4,7 @@
   "description": "Simple multi games app",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --mode development --port 8080",
+    "start": "webpack-dev-server --mode development --port 8000",
     "docker:start": "docker compose down && docker compose build && docker compose up -d --force-recreate",
     "build": "NODE_ENV=production webpack",
     "docker:build": "docker compose down && docker compose build --build-arg DOCKER_ENV=production && docker compose up -d --force-recreate",

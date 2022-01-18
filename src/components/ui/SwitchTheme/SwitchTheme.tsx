@@ -1,67 +1,79 @@
-import React, { FC, MouseEvent, useRef } from 'react';
+import React, { FC, MouseEvent, useMemo, useState } from 'react';
 
 import './SwitchTheme.scss';
 import { useAppDispatch } from '../../../hooks/redux';
 import { currentTheme, themeActions } from '../../../store/slices/themeSlice';
 
+const darkTheme = 'dark';
+const lightTheme = 'light';
+
 export const SwitchTheme: FC = () => {
-  const switchControl = useRef(null);
-  const switchButton = useRef(null);
-  const switchDark = useRef(null);
-  const switchLight = useRef(null);
-  const allButtons: HTMLElement[] = [
-    switchButton.current as unknown as HTMLElement,
-    switchDark.current as unknown as HTMLElement,
-    switchLight.current as unknown as HTMLElement,
-  ];
+  const [isOpen, setIsOpen] = useState(false);
+  const [currentTheme, setCurrentTheme] = useState(darkTheme);
   const dispatch = useAppDispatch();
-  let currentTheme = 'dark';
 
   const handleToggleThemesList = () => {
-    (switchControl.current as unknown as HTMLElement).classList.toggle('switch-theme--open');
-
     if (typeof window !== 'undefined') {
-      currentTheme = (localStorage.getItem('theme') as currentTheme) || 'dark';
+      setCurrentTheme((localStorage.getItem('theme') as currentTheme) || darkTheme);
     }
 
-    allButtons.forEach(i =>
-      (i as HTMLElement).dataset.theme === currentTheme
-        ? i.classList.add('switch-theme__button--active')
-        : i.classList.remove('switch-theme__button--active')
-    );
+    setIsOpen(!isOpen);
   };
 
   const handleToggleTheme = (e: MouseEvent) => {
     const target = e.target as HTMLElement;
-    const changeTheme: currentTheme = (target.dataset.theme as currentTheme) || 'dark';
+    const changeTheme: currentTheme = (target.dataset.theme as currentTheme) || darkTheme;
 
-    currentTheme = changeTheme;
+    setCurrentTheme(changeTheme);
     dispatch(themeActions.setCurrentTheme(changeTheme as currentTheme));
 
     if (typeof window !== 'undefined') {
-      localStorage.setItem('theme', currentTheme);
+      localStorage.setItem('theme', changeTheme);
+    }
+  };
+
+  const classesMemoSwitchControl = useMemo(() => {
+    if (isOpen) {
+      return ['switch-theme', 'switch-theme--open'];
     }
 
-    allButtons.forEach(i => i.classList.remove('switch-theme__button--active'));
-    target.classList.add('switch-theme__button--active');
+    return ['switch-theme'];
+  }, [isOpen]);
+
+  const classesMemoSwitchButtonTheme = (buttonTheme: string): string[] => {
+    return useMemo(() => {
+      const classes = ['switch-theme__button'];
+
+      if (buttonTheme === darkTheme) {
+        classes.push('switch-theme__button-black');
+      }
+
+      if (buttonTheme === lightTheme) {
+        classes.push('switch-theme__button-white');
+      }
+
+      if (buttonTheme === currentTheme) {
+        classes.push('switch-theme__button--active');
+      }
+
+      return classes;
+    }, [currentTheme]);
   };
 
   return (
-    <div ref={switchControl} className="switch-theme">
-      <button ref={switchButton} className="switch-theme__button" onClick={handleToggleThemesList}>
+    <div className={classesMemoSwitchControl.join(' ')}>
+      <button className="switch-theme__button" onClick={handleToggleThemesList}>
         <img src="/static/img/icon-switch-theme.png" alt="icon-switch-theme" />
       </button>
       <div className="switch-theme__themes-list">
         <button
-          ref={switchDark}
-          className="switch-theme__button switch-theme__button-black"
-          data-theme="dark"
+          className={classesMemoSwitchButtonTheme(darkTheme).join(' ')}
+          data-theme={darkTheme}
           onClick={handleToggleTheme}
         />
         <button
-          ref={switchLight}
-          className="switch-theme__button switch-theme__button-white"
-          data-theme="light"
+          className={classesMemoSwitchButtonTheme(lightTheme).join(' ')}
+          data-theme={lightTheme}
           onClick={handleToggleTheme}
         />
       </div>
