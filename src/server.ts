@@ -16,6 +16,10 @@ const app = express();
 function getWebpackMiddlewares(config: any): RequestHandler[] {
   const compiler = webpack(config);
 
+  if (!IS_DEV) {
+    return [];
+  }
+
   return [
     devMiddleware(compiler, {
       publicPath: config.output?.publicPath,
@@ -30,6 +34,6 @@ app.get('/mockServiceWorker.js', (req, res) => {
   res.sendFile(path.resolve(__dirname, 'dist/mockServiceWorker.js'));
 });
 
-app.get('/*', IS_DEV ? getWebpackMiddlewares(clientConfig) : [], serverRenderMiddleware);
+app.get('/*', getWebpackMiddlewares(clientConfig), serverRenderMiddleware);
 
 export { app };
