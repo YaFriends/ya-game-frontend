@@ -22,6 +22,25 @@
 
 ## Установка
 Установить зависимости ```yarn```
+
+## .env
+Необходимо создать файл ```.env``` по примеру ```.env-example```
+
+Поля:
+```dotenv
+API_EXTERNAL= # урл апишки яндекса
+API_INTERNAL= # урл апишки ноды - бека
+
+POSTGRES_USER= # юзер в базе
+POSTGRES_PASSWORD= # пароль от юзера
+POSTGRES_DB= # название бд
+
+PGADMIN_DEFAULT_EMAIL= # email для логина в pgAdmin
+PGADMIN_DEFAULT_PASSWORD= # password для pgAdmin
+PGADMIN_LISTEN_PORT=# port для pgAdmin; 
+
+BACKEND_PORT=# port для backend
+```
     
 ## Команды для запуска
 - Dev Сборка ```yarn start```
@@ -35,4 +54,3 @@
 ## Тесты
 ## Лицензия
 [MIT](https://choosealicense.com/licenses/mit/)
-
