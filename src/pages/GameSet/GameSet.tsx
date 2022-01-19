@@ -12,6 +12,26 @@ import { InvitationLink } from '../GameCreation/InvitationLink';
 
 import './game-set.scss';
 
+const GameSetLoading: FC = () => (
+  <section className="game-set">
+    <Subtitle text={TRANSLATION.Loading.label} />
+  </section>
+);
+
+const GameSetLink: FC = () => (
+  <section className="game-set">
+    <InvitationLink />
+  </section>
+);
+
+const GameSetRoundLoading: FC<{ miniGamePreviews: JSX.Element[] }> = ({ miniGamePreviews }) => (
+  <section className="game-set">
+    <Title text="Выбранные игры" extendClass="mb-6" />
+    <div className="game-set__mini-games">{miniGamePreviews}</div>
+    <Subtitle text={TRANSLATION.Loading.label} />
+  </section>
+);
+
 export const GameSet: FC<Record<string, never>> = () => {
   const { rival, gameSet, isGameSetLoading, addMiniGames } = useGameSetSession();
   const [gameCoordinator, setGameCoordinator] = useState<GameSetCoordinator | null>(null);
@@ -29,24 +49,16 @@ export const GameSet: FC<Record<string, never>> = () => {
     () =>
       gameSet?.miniGames.map(({ id, name, icon }) => (
         <MiniGamePreview key={id} id={id} name={name} icon={icon} classes="game-set__mini-game" />
-      )),
+      )) || [],
     [gameSet]
   );
 
   if (isGameSetLoading || !gameSet) {
-    return (
-      <section className="game-set">
-        <Subtitle text={TRANSLATION.Loading.label} />
-      </section>
-    );
+    return <GameSetLoading />;
   }
 
   if (!rival) {
-    return (
-      <section className="game-set">
-        <InvitationLink />
-      </section>
-    );
+    return <GameSetLink />;
   }
 
   if (gameSet.totalGames !== gameSet.miniGames.length) {
@@ -61,13 +73,7 @@ export const GameSet: FC<Record<string, never>> = () => {
   }
 
   if (!gameCoordinator) {
-    return (
-      <section className="game-set">
-        <Title text="Выбранные игры" extendClass="mb-6" />
-        <div className="game-set__mini-games">{miniGamePreviews}</div>
-        <Subtitle text={TRANSLATION.Loading.label} />
-      </section>
-    );
+    return <GameSetRoundLoading miniGamePreviews={miniGamePreviews} />;
   }
 
   return (
