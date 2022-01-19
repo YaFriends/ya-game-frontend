@@ -34,15 +34,18 @@ export const GameSetPick: FC<GameSetPickProps> = ({
     [gameSet, totalMiniGames]
   );
 
-  const banGame = useCallback((game: MiniGamePickInfo) => {
-    setMiniGamesToPick(miniGamesToPick.filter(({ id }) => id !== game.id));
-    if (gameSet && currentUser) {
-      updateGameSet({
-        id: gameSet.id,
-        bans: [...gameSet.bans, { ...game, banned_by: currentUser?.id }],
-      });
-    }
-  }, [miniGamesToPick, gameSet, currentUser]);
+  const banGame = useCallback(
+    (game: MiniGamePickInfo) => {
+      setMiniGamesToPick(miniGamesToPick.filter(({ id }) => id !== game.id));
+      if (gameSet && currentUser) {
+        updateGameSet({
+          id: gameSet.id,
+          bans: [...gameSet.bans, { ...game, banned_by: currentUser?.id }],
+        });
+      }
+    },
+    [miniGamesToPick, gameSet, currentUser]
+  );
 
   useEffect(() => {
     if (totalMiniGames >= MINI_GAMES.length && !areGamesPicked) {
