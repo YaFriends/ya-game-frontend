@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useMemo, useState } from 'react';
+import React, { FC, useCallback, useEffect, useMemo, useState } from 'react';
 
 import { GameSet } from '../../@types/GameSet';
 import { MiniGamePickInfo } from '../../@types/MiniGame';
@@ -34,7 +34,7 @@ export const GameSetPick: FC<GameSetPickProps> = ({
     [gameSet, totalMiniGames]
   );
 
-  const banGame = (game: MiniGamePickInfo) => {
+  const banGame = useCallback((game: MiniGamePickInfo) => {
     setMiniGamesToPick(miniGamesToPick.filter(({ id }) => id !== game.id));
     if (gameSet && currentUser) {
       updateGameSet({
@@ -42,7 +42,7 @@ export const GameSetPick: FC<GameSetPickProps> = ({
         bans: [...gameSet.bans, { ...game, banned_by: currentUser?.id }],
       });
     }
-  };
+  }, [miniGamesToPick, gameSet, currentUser]);
 
   useEffect(() => {
     if (totalMiniGames >= MINI_GAMES.length && !areGamesPicked) {
