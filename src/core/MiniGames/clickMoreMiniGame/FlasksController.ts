@@ -1,4 +1,4 @@
-import { Flask } from './Flask';
+import { Flask, PlayerSide } from './Flask';
 
 export class FlasksController {
   canvas: HTMLCanvasElement;
@@ -9,22 +9,22 @@ export class FlasksController {
   constructor(canvas: HTMLCanvasElement, context: CanvasRenderingContext2D) {
     this.canvas = canvas;
     this.context = context;
-    this.flaskForFirstPlayer = this._createOpacityFlasks(true, 'green');
-    this.flaskForSecondPlayer = this._createOpacityFlasks(false, 'blue');
+    this.flaskForFirstPlayer = this._createOpacityFlasks(PlayerSide.left, 'green');
+    this.flaskForSecondPlayer = this._createOpacityFlasks(PlayerSide.right, 'blue');
   }
 
-  fill(leftSide: boolean, fill: number) {
-    if (leftSide) {
+  fill(playerSide: PlayerSide, fill: number) {
+    if (playerSide === PlayerSide.left) {
       this.flaskForFirstPlayer.fill(fill);
     } else {
       this.flaskForSecondPlayer.fill(fill);
     }
   }
 
-  _createOpacityFlasks(leftSide: boolean, color: string) {
+  _createOpacityFlasks(playerSide: PlayerSide, color: string) {
     return new Flask({
       color: color,
-      leftSide: leftSide,
+      playerSide: playerSide,
       canvas: this.canvas,
       context: this.context,
     });

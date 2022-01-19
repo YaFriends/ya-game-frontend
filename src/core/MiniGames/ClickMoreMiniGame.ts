@@ -2,6 +2,7 @@ import { FinishFn, MiniGameFinishResponse, Rivals } from '../../@types/MiniGame'
 import { UserData } from '../../@types/UserTypes';
 import { TRANSLATION } from '../../lang/ru/translation';
 import MiniGame from '../MiniGame';
+import { PlayerSide } from '../MiniGames/clickMoreMiniGame/Flask';
 
 import { Behavior, BehaviorProps } from './clickMoreMiniGame/Behavior';
 import { FlasksController } from './clickMoreMiniGame/FlasksController';
@@ -123,8 +124,8 @@ export class ClickMoreMiniGame extends MiniGame {
 
   _drawProgress() {
     const onePercent = this.clicksForWin / 100;
-    this.playersProgress?.fill(true, this.player.clickCount / onePercent);
-    this.playersProgress?.fill(false, this.opponent.clickCount / onePercent);
+    this.playersProgress?.fill(PlayerSide.left, this.player.clickCount / onePercent);
+    this.playersProgress?.fill(PlayerSide.right, this.opponent.clickCount / onePercent);
   }
 
   _isWinner(player: Behavior): boolean {
