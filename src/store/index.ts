@@ -3,6 +3,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { AuthAPI } from '../services/AuthAPI';
 import { GameSetAPI } from '../services/GameSetAPI';
 import { LeaderboardAPI } from '../services/LeaderboardAPI';
+import { OAuthAPI } from '../services/OAuthAPI';
 import { UserAPI } from '../services/UserAPI';
 
 import authSlice from './slices/authSlice';
@@ -10,17 +11,19 @@ import authSlice from './slices/authSlice';
 export const store = configureStore({
   reducer: {
     [AuthAPI.reducerPath]: AuthAPI.reducer,
-    [LeaderboardAPI.reducerPath]: LeaderboardAPI.reducer,
-    [UserAPI.reducerPath]: UserAPI.reducer,
     [GameSetAPI.reducerPath]: GameSetAPI.reducer,
+    [LeaderboardAPI.reducerPath]: LeaderboardAPI.reducer,
+    [OAuthAPI.reducerPath]: OAuthAPI.reducer,
+    [UserAPI.reducerPath]: UserAPI.reducer,
     auth: authSlice,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware().concat([
       AuthAPI.middleware,
-      LeaderboardAPI.middleware,
-      UserAPI.middleware,
       GameSetAPI.middleware,
+      LeaderboardAPI.middleware,
+      OAuthAPI.middleware,
+      UserAPI.middleware,
     ]),
 });
 

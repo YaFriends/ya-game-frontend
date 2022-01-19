@@ -2,6 +2,7 @@ import React, { FC, useEffect } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import { PrivateRoute } from './components/PrivateRoute';
+import { REDIRECT_URI_FOR_OAUTH } from './config';
 import { useAppDispatch } from './hooks/redux';
 import { Dashboard } from './pages/Dashboard/Dashboard';
 import { Error404 } from './pages/Error404/Error404';
@@ -16,12 +17,24 @@ import { Main } from './pages/Main/Main';
 import { Profile } from './pages/Profile/Profile';
 import { ProfileHistory } from './pages/ProfileHistory/ProfileHistory';
 import { Register } from './pages/Register/Register';
-import { useFetchUserQuery } from './services/AuthAPI';
+import { useFetchUserQuery, useLazyFetchUserQuery } from './services/AuthAPI';
+import { useOAuthYandexMutation } from './services/OAuthAPI';
 import { authActions } from './store/slices/authSlice';
 
 const App: FC<Record<string, never>> = () => {
+  const [attemptOAuthYandex] = useOAuthYandexMutation();
   const { data: responseFetchUser = null } = useFetchUserQuery();
+  const [attemptFetchUser] = useLazyFetchUserQuery();
   const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (/code=([^&]+)/.exec(document.location.href) !== null) {
+      attemptOAuthYandex({
+        code: /code=([^&]+)/.exec(document.location.href)![1],
+        redirect_uri: REDIRECT_URI_FOR_OAUTH,
+      }).then(() => attemptFetchUser());
+    }
+  }, [document.location.href]);
 
   useEffect(() => {
     dispatch(authActions.setCurrentUser(responseFetchUser));
