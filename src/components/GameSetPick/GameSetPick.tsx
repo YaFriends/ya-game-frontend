@@ -48,7 +48,6 @@ export const GameSetPick: FC<GameSetPickProps> = ({
     if (totalMiniGames >= MINI_GAMES.length && !areGamesPicked) {
       addMiniGames(MINI_GAMES);
     }
-
     if (miniGamesToPick.length === totalMiniGames && !areGamesPicked) {
       addMiniGames(miniGamesToPick);
     }

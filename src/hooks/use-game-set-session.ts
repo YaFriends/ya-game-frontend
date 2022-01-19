@@ -29,7 +29,6 @@ export const useGameSetSession = (): UseGameSetSession => {
   const { data: gameSet = null, isLoading } = useFetchSessionQuery(setId);
   const [bannedByCurrentUser, setBannedByCurrentUser] = useState<MiniGame[]>([]);
   const [bannedByRival, setBannedByRival] = useState<MiniGame[]>([]);
-
   const currentUser: CurrentUser = useAppSelector(({ auth }) => auth.currentUser);
 
   // todo: получать из сокета

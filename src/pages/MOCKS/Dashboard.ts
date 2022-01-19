@@ -8,6 +8,7 @@ export const DUMMY_GAME_LIST: GameSetHistory[] = [
   {
     id: 1,
     totalGames: 3,
+    link: 'testLinkIsHere',
     bans: [],
     miniGames: [{ id: 1, name: 'Test', icon: '/static/img/games/click_more/icon.jpg' }],
     date: '2021-04-11',
@@ -41,6 +42,7 @@ export const DUMMY_GAME_LIST: GameSetHistory[] = [
   {
     id: 2,
     totalGames: 3,
+    link: 'testLinkIsHere',
     bans: [],
     miniGames: [
       { id: 1, name: 'Test', icon: '/static/img/games/click_more/icon.jpg' },
@@ -78,6 +80,7 @@ export const DUMMY_GAME_LIST: GameSetHistory[] = [
   {
     id: 3,
     totalGames: 3,
+    link: 'testLinkIsHere',
     bans: [],
     miniGames: [
       { id: 1, name: 'Test', icon: '/static/img/games/click_more/icon.jpg' },
@@ -117,6 +120,7 @@ export const DUMMY_GAME_LIST: GameSetHistory[] = [
   {
     id: 4,
     totalGames: 3,
+    link: 'testLinkIsHere',
     bans: [],
     miniGames: [{ id: 1, name: 'Test', icon: '/static/img/games/click_more/icon.jpg' }],
     date: '2021-04-11',

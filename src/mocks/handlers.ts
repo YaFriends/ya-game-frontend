@@ -1,8 +1,40 @@
 import { rest } from 'msw';
 
-import { MiniGame } from '../@types/GameSet';
-import { Rivals } from '../@types/MiniGame';
+import { GameSet } from '../@types/GameSet';
 import { INTERNAL_API_URL } from '../config';
+
+const setupGameSet = (totalGames: number): GameSet => ({
+  id: 1,
+  miniGames: [],
+  bans: [],
+  totalGames,
+  date: '2020-02-02',
+  link: 'testLinkIsHere',
+  players: [
+    {
+      login: 'Player 1',
+      id: 1,
+      first_name: 'Test',
+      second_name: 'test 1',
+      display_name: 'Testovich',
+      email: 'string',
+      phone: 'string',
+      avatar: '',
+    },
+    {
+      login: 'Player 2',
+      id: 2,
+      first_name: 'Test',
+      second_name: 'test 1',
+      display_name: 'Testovich',
+      email: 'string',
+      phone: 'string',
+      avatar: '',
+    },
+  ],
+});
+
+let currentGameSet = setupGameSet(0);
 
 export const handlers = [
   rest.get(`${INTERNAL_API_URL}/test/:data`, (req, res, ctx) => {
@@ -13,38 +45,17 @@ export const handlers = [
 
     return res(ctx.json(body), ctx.status(200));
   }),
-  rest.get('/session/create', (req, res, ctx) => {
-    const body = 'testLinkIsHere';
-    return res(ctx.json(body), ctx.status(200));
+  rest.post<{ totalGames: number }>('/session/create', (req, res, ctx) => {
+    const { totalGames } = req.body;
+
+    currentGameSet = setupGameSet(totalGames);
+    return res(ctx.json(currentGameSet), ctx.status(200));
   }),
   rest.get('/session/:id', (req, res, ctx) => {
-    const body: { id: number; miniGames: MiniGame[]; date: string; players: Rivals } = {
-      id: 1,
-      miniGames: [],
-      date: '2020-02-02',
-      players: [
-        {
-          login: 'Player 1',
-          id: 1,
-          first_name: 'Test',
-          second_name: 'test 1',
-          display_name: 'Testovich',
-          email: 'string',
-          phone: 'string',
-          avatar: '',
-        },
-        {
-          login: 'Player 2',
-          id: 2,
-          first_name: 'Test',
-          second_name: 'test 1',
-          display_name: 'Testovich',
-          email: 'string',
-          phone: 'string',
-          avatar: '',
-        },
-      ],
-    };
-    return res(ctx.json(body), ctx.status(200));
+    return res(ctx.json(currentGameSet), ctx.status(200));
+  }),
+  rest.patch<Partial<GameSet> & Pick<GameSet, 'id'>>('/session/:id', (req, res, ctx) => {
+    currentGameSet = { ...currentGameSet, ...req.body };
+    return res(ctx.json(currentGameSet), ctx.status(200));
   }),
 ];

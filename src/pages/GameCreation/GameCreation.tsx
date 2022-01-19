@@ -7,19 +7,20 @@ import { Button } from '../../components/ui/Button/Button';
 import { MainLink } from '../../components/ui/Link/Link';
 import { Select, OptionProps, SelectedChangeType } from '../../components/ui/Select/Select';
 import { Title } from '../../components/ui/Title/Title';
+import { MINI_GAMES } from '../../core/constants';
 import { TRANSLATION } from '../../lang/ru/translation';
 import { useGenerateLinkQuery } from '../../services/GameSetAPI';
 
 const numberOfGames: OptionProps[] = [
-  { value: 1, label: '1' },
-  { value: 3, label: '3', disabled: true },
-  { value: 5, label: '5', disabled: true },
+  { value: 1, label: '1', disabled: MINI_GAMES.length < 1 },
+  { value: 3, label: '3', disabled: MINI_GAMES.length < 3 },
+  { value: 5, label: '5', disabled: MINI_GAMES.length < 5 },
 ];
 
 export const GameCreation: FC<Record<string, never>> = () => {
   const [skip, setSkip] = useState<boolean>(true);
-  const { data: link } = useGenerateLinkQuery(null, { skip });
   const [totalMiniGames, setTotalMiniGames] = useState<number>(0);
+  const { data: gameSet } = useGenerateLinkQuery(totalMiniGames, { skip });
   const selected = numberOfGames.find(({ value }) => value === totalMiniGames);
   const changeGameCount: SelectedChangeType = ({ value }: OptionProps) => setTotalMiniGames(value);
 
@@ -27,8 +28,8 @@ export const GameCreation: FC<Record<string, never>> = () => {
     setSkip(false);
   };
 
-  if (link) {
-    return <Redirect to={`/game/${link}`} />;
+  if (gameSet?.link) {
+    return <Redirect to={`/game/${gameSet.link}`} />;
   }
 
   return (

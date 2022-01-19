@@ -11,13 +11,16 @@ export const GameSetAPI = createApi({
     baseUrl: INTERNAL_API_URL + servicePoint,
   }),
   keepUnusedDataFor: 0,
+  tagTypes: ['gameSet'],
   endpoints: build => ({
-    generateLink: build.query<string, null>({
-      query: () => ({
+    generateLink: build.query<GameSet, number>({
+      query: (totalGames: number) => ({
         url: '/create',
-        method: 'GET',
+        method: 'POST',
         credentials: 'include',
+        body: { totalGames },
       }),
+      providesTags: ['gameSet'],
     }),
     fetchSession: build.query<GameSet, string>({
       query: (id: string) => ({
@@ -25,6 +28,7 @@ export const GameSetAPI = createApi({
         method: 'GET',
         credentials: 'include',
       }),
+      providesTags: ['gameSet'],
     }),
     updateGameSet: build.mutation<GameSet, Partial<GameSet> & Pick<GameSet, 'id'>>({
       query: ({ id, ...patch }) => ({
@@ -32,6 +36,7 @@ export const GameSetAPI = createApi({
         method: 'PATCH',
         body: patch,
       }),
+      invalidatesTags: ['gameSet'],
     }),
   }),
 });

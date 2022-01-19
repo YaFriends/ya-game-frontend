@@ -8,6 +8,7 @@ export type GameSet = {
   totalGames: number;
   miniGames: MiniGame[];
   bans: BannedMiniGame[];
+  link: string;
 };
 
 export type MiniGame = {

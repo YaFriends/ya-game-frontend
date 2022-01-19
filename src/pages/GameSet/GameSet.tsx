@@ -48,6 +48,7 @@ export const GameSet: FC<Record<string, never>> = () => {
       </section>
     );
   }
+
   if (gameSet.totalGames !== gameSet.miniGames.length) {
     return (
       <GameSetPick
