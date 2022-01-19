@@ -1,4 +1,4 @@
-import React, { FC, MouseEvent, useMemo, useState } from 'react';
+import React, { FC, MouseEvent, useMemo, useState, useCallback } from 'react';
 
 import './SwitchTheme.scss';
 import { useAppDispatch } from '../../../hooks/redux';
@@ -22,13 +22,13 @@ export const SwitchTheme: FC = () => {
 
   const handleToggleTheme = (e: MouseEvent) => {
     const target = e.target as HTMLElement;
-    const changeTheme: currentTheme = (target.dataset.theme as currentTheme) || darkTheme;
+    const changedTheme: currentTheme = (target.dataset.theme as currentTheme) || darkTheme;
 
-    setCurrentTheme(changeTheme);
-    dispatch(themeActions.setCurrentTheme(changeTheme as currentTheme));
+    setCurrentTheme(changedTheme);
+    dispatch(themeActions.setCurrentTheme(changedTheme as currentTheme));
 
     if (typeof window !== 'undefined') {
-      localStorage.setItem('theme', changeTheme);
+      localStorage.setItem('theme', changedTheme);
     }
   };
 
@@ -40,8 +40,8 @@ export const SwitchTheme: FC = () => {
     return ['switch-theme'];
   }, [isOpen]);
 
-  const classesMemoSwitchButtonTheme = (buttonTheme: string): string[] => {
-    return useMemo(() => {
+  const classesMemoSwitchButtonTheme = useCallback(
+    (buttonTheme: string): string[] => {
       const classes = ['switch-theme__button'];
 
       if (buttonTheme === darkTheme) {
@@ -57,8 +57,9 @@ export const SwitchTheme: FC = () => {
       }
 
       return classes;
-    }, [currentTheme]);
-  };
+    },
+    [currentTheme]
+  );
 
   return (
     <div className={classesMemoSwitchControl.join(' ')}>
