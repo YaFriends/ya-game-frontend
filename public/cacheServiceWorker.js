@@ -10,13 +10,13 @@
 // ];
 
 self.addEventListener('install', () => {
-  console.log('install');
+  console.info('install');
 });
 
 self.addEventListener('fetch', () => {
-  console.log('fetch');
+  console.info('fetch');
 });
 
 self.addEventListener('activate', () => {
-  console.log('activate');
+  console.info('activate');
 });

@@ -4,6 +4,7 @@ import { PreloadedState } from 'redux';
 import { AuthAPI } from '../services/AuthAPI';
 import { GameSetAPI } from '../services/GameSetAPI';
 import { LeaderboardAPI } from '../services/LeaderboardAPI';
+import { OAuthAPI } from '../services/OAuthAPI';
 import { UserAPI } from '../services/UserAPI';
 
 import authSlice from './slices/authSlice';
@@ -12,19 +13,20 @@ export const preparedState = (initialStore?: PreloadedState<any>) =>
   configureStore({
     reducer: {
       [AuthAPI.reducerPath]: AuthAPI.reducer,
-      [LeaderboardAPI.reducerPath]: LeaderboardAPI.reducer,
-      [UserAPI.reducerPath]: UserAPI.reducer,
       [GameSetAPI.reducerPath]: GameSetAPI.reducer,
+      [LeaderboardAPI.reducerPath]: LeaderboardAPI.reducer,
+      [OAuthAPI.reducerPath]: OAuthAPI.reducer,
+      [UserAPI.reducerPath]: UserAPI.reducer,
       auth: authSlice,
     },
     preloadedState: initialStore,
-
     middleware: getDefaultMiddleware =>
       getDefaultMiddleware().concat([
         AuthAPI.middleware,
-        LeaderboardAPI.middleware,
-        UserAPI.middleware,
         GameSetAPI.middleware,
+        LeaderboardAPI.middleware,
+        OAuthAPI.middleware,
+        UserAPI.middleware,
       ]),
   });
 

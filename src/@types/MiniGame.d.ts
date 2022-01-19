@@ -1,14 +1,16 @@
+import { UserData } from './UserTypes';
+
 export type MiniGameConfig = {
   icon: string;
   name: string;
   canvasId: string;
-  teams: Team[];
-};
-
-export type Team = {
-  players: UserData[];
+  players: Rivals;
 };
 
 export type MiniGameFinishResponse = {
-  winner: Team;
+  winner: UserData;
 };
+
+export type Rivals = [UserData, UserData];
+
+export type FinishFn = (finish: MiniGameFinishResponse) => void;

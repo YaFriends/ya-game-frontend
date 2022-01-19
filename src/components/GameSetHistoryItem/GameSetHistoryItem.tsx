@@ -2,6 +2,7 @@ import React, { memo } from 'react';
 
 import { GameSetHistory } from '../../@types/GameSet';
 import { TRANSLATION } from '../../lang/ru/translation';
+import { getRivals } from '../../utils/game';
 import { MiniGamePreview } from '../MiniGamePreview/MiniGamePreview';
 import { Text } from '../ui/Text/Text';
 
@@ -12,7 +13,7 @@ type Props = GameSetHistory;
 export const GameSetHistoryItem = memo(function GameSetHistoryItem({
   miniGames,
   date,
-  teams,
+  players,
   result,
 }: Props) {
   const miniGameGroup = miniGames.map(({ id, name, icon }) => (
@@ -25,9 +26,7 @@ export const GameSetHistoryItem = memo(function GameSetHistoryItem({
     />
   ));
 
-  const versus = teams
-    .map(({ players }) => players.map(({ login }) => login).join(', '))
-    .join(' vs ');
+  const rivals = getRivals(players);
 
   return (
     <div className="game-set-history-item">
@@ -37,7 +36,7 @@ export const GameSetHistoryItem = memo(function GameSetHistoryItem({
         </div>
         <div className="game-set-history-item__info-item">
           <Text text={`${TRANSLATION.Game.Date}: ${date}`} />
-          <Text text={versus} />
+          <Text text={rivals} />
         </div>
       </div>
       <Text
