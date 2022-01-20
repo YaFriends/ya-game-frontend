@@ -2,8 +2,8 @@ import React, { memo } from 'react';
 
 import { Rivals } from '../../@types/MiniGame';
 import { TRANSLATION } from '../../lang/ru/translation';
-import { Text } from '../ui/Text/Text';
 import { getRivals } from '../../utils/game';
+import { Text } from '../ui/Text/Text';
 
 import './game-history-item.scss';
 

@@ -1,0 +1,40 @@
+.switch-theme {
+  @apply absolute top-4 right-4;
+
+  &--open {
+    .switch-theme__themes-list {
+      @apply flex;
+    }
+  }
+
+  &__button {
+    @apply w-[2rem] h-[2rem] cursor-pointer bg-transparent border-[3px] border-solid border-transparent;
+    filter: grayscale(1);
+
+    & img {
+      @apply pointer-events-none;
+    }
+
+    &--active {
+      @apply border-blue;
+      filter: grayscale(0);
+    }
+
+    &-black {
+      @apply bg-black border-blue;
+    }
+
+    &-white {
+      @apply bg-white border-blue;
+    }
+
+    &:hover,
+    &:focus-within {
+      filter: grayscale(0);
+    }
+  }
+
+  &__themes-list {
+    @apply absolute top-12 right-0 items-center hidden gap-4;
+  }
+}

@@ -1,11 +1,3 @@
 .ui-subtitle {
-  @apply text-lg;
-
-  &--light {
-    @apply text-black;
-  }
-
-  &--dark {
-    @apply text-white;
-  }
+  @apply text-lg text-black dark:text-white;
 }

@@ -1,7 +1,45 @@
 .main {
-  @apply flex-grow mx-auto flex items-center justify-center flex-col;
+  &__header {
+    @apply flex items-center justify-end gap-8;
+  }
 
   &__link {
-    @apply w-full flex items-center justify-center mt-4 flex-col;
+    @apply flex items-center gap-4;
+  }
+
+  &__games {
+    @apply max-w-[680px] w-full mt-4 mb-0 mx-auto flex flex-col gap-8;
+  }
+
+  &__game {
+    @apply flex items-center justify-between;
+
+    & > img {
+      @apply max-w-[200px];
+    }
+
+    & > div:nth-child(even) {
+      @apply pl-4;
+
+      h2, p {
+        @apply text-right;
+      }
+    }
+
+    & > div:nth-child(odd) {
+      @apply pr-4;
+
+      h2, p {
+        @apply text-left;
+      }
+    }
+  }
+
+  &__team {
+    @apply flex items-center justify-between;
+  }
+
+  &__team-card {
+    @apply flex flex-col max-w-[200px];
   }
 }

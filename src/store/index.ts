@@ -8,6 +8,7 @@ import { OAuthAPI } from '../services/OAuthAPI';
 import { UserAPI } from '../services/UserAPI';
 
 import authSlice from './slices/authSlice';
+import themeSlice from './slices/themeSlice';
 
 export const preparedState = (initialStore?: PreloadedState<any>) =>
   configureStore({
@@ -18,6 +19,7 @@ export const preparedState = (initialStore?: PreloadedState<any>) =>
       [OAuthAPI.reducerPath]: OAuthAPI.reducer,
       [UserAPI.reducerPath]: UserAPI.reducer,
       auth: authSlice,
+      theme: themeSlice,
     },
     preloadedState: initialStore,
     middleware: getDefaultMiddleware =>

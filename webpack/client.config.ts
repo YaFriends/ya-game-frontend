@@ -1,6 +1,7 @@
 import path from 'path';
 
 import CompressionPlugin from 'compression-webpack-plugin';
+import CopyPlugin from 'copy-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import { TsconfigPathsPlugin } from 'tsconfig-paths-webpack-plugin';
 import { Configuration, Entry, WebpackPluginInstance as Plugin } from 'webpack';
@@ -53,6 +54,9 @@ const config: Configuration = {
   plugins: [
     new MiniCssExtractPlugin({ filename: '[name].css' }),
     !IS_DEV && new CompressionPlugin(),
+    new CopyPlugin({
+      patterns: [{ from: 'static', to: 'static' }],
+    }),
   ].filter(Boolean) as Plugin[],
   devtool: 'source-map',
   performance: {

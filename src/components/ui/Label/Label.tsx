@@ -6,7 +6,7 @@ type LabelProps = {
   label?: string;
 };
 
-const DEFAULT_CLASSES: string[] = ['font-bold', 'text-lg', 'text-black', 'mb-1'];
+const DEFAULT_CLASSES: string[] = ['font-bold', 'text-lg', 'text-black', 'mb-1', 'dark:text-white'];
 
 export const Label: FC<LabelProps> = ({ name, id, label }: LabelProps) => {
   return (
