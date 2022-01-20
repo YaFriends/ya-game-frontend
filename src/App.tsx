@@ -56,7 +56,7 @@ const App: FC<Record<string, never>> = () => {
   }, [responseFetchUser]);
 
   useEffect(() => {
-    const rootTag = document.getElementById('root');
+    const rootTag = document.getElementById('mount');
     rootTag!.className = '';
     rootTag!.classList.add(currentTheme);
   }, [currentTheme]);
