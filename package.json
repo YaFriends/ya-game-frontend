@@ -11,7 +11,7 @@
     "docker:start": "docker compose down && docker compose build && docker compose up -d --force-recreate",
     "build": "NODE_ENV=production && yarn clean && webpack --mode production",
     "docker:build": "docker compose down && docker compose build --build-arg DOCKER_ENV=production && docker compose up -d --force-recreate",
-    "server": "node server",
+    "server": "node index.js",
     "test": "jest"
   },
   "keywords": [

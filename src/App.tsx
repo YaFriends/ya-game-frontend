@@ -27,6 +27,7 @@ const App: FC<Record<string, never>> = () => {
   const { data: responseFetchUser = null } = useFetchUserQuery();
   const [attemptFetchUser] = useLazyFetchUserQuery();
   const dispatch = useAppDispatch();
+  const documentLocation = isServer ? {} : document.location.href;
 
   useEffect(() => {
     if (/code=([^&]+)/.exec(document.location.href) !== null) {
@@ -35,7 +36,7 @@ const App: FC<Record<string, never>> = () => {
         redirect_uri: REDIRECT_URI_FOR_OAUTH,
       }).then(() => attemptFetchUser());
     }
-  }, [isServer || document.location.href]); //TODO подумать над реализацией
+  }, [documentLocation]);
 
   useEffect(() => {
     dispatch(authActions.setCurrentUser(responseFetchUser));
