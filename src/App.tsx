@@ -20,12 +20,14 @@ import { Register } from './pages/Register/Register';
 import { useFetchUserQuery, useLazyFetchUserQuery } from './services/AuthAPI';
 import { useOAuthYandexMutation } from './services/OAuthAPI';
 import { authActions } from './store/slices/authSlice';
+import { isServer } from './utils/isServer';
 
 const App: FC<Record<string, never>> = () => {
   const [attemptOAuthYandex] = useOAuthYandexMutation();
   const { data: responseFetchUser = null } = useFetchUserQuery();
   const [attemptFetchUser] = useLazyFetchUserQuery();
   const dispatch = useAppDispatch();
+  const documentLocation = isServer ? {} : document.location.href;
 
   useEffect(() => {
     if (/code=([^&]+)/.exec(document.location.href) !== null) {
@@ -34,7 +36,7 @@ const App: FC<Record<string, never>> = () => {
         redirect_uri: REDIRECT_URI_FOR_OAUTH,
       }).then(() => attemptFetchUser());
     }
-  }, [document.location.href]);
+  }, [documentLocation]);
 
   useEffect(() => {
     dispatch(authActions.setCurrentUser(responseFetchUser));
