@@ -22,6 +22,7 @@ import { useFetchUserQuery, useLazyFetchUserQuery } from './services/AuthAPI';
 import { useOAuthYandexMutation } from './services/OAuthAPI';
 import { authActions } from './store/slices/authSlice';
 import { currentTheme, themeActions } from './store/slices/themeSlice';
+import { isServer } from './utils/isServer';
 
 const App: FC<Record<string, never>> = () => {
   const [attemptOAuthYandex] = useOAuthYandexMutation();
@@ -39,6 +40,7 @@ const App: FC<Record<string, never>> = () => {
       );
     }, []);
   }
+  const documentLocation = isServer ? {} : document.location.href;
 
   useEffect(() => {
     if (/code=([^&]+)/.exec(document.location.href) !== null) {
@@ -47,7 +49,7 @@ const App: FC<Record<string, never>> = () => {
         redirect_uri: REDIRECT_URI_FOR_OAUTH,
       }).then(() => attemptFetchUser());
     }
-  }, [document.location.href]);
+  }, [documentLocation]);
 
   useEffect(() => {
     dispatch(authActions.setCurrentUser(responseFetchUser));
