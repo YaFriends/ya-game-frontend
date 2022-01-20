@@ -28,7 +28,7 @@ function getWebpackMiddlewares(config: typeof clientConfig): RequestHandler[] {
 app.use(express.static(path.join(__dirname, '../dist')));
 
 app.get('/mockServiceWorker.js', (req, res) => {
-  res.sendFile(path.resolve(__dirname, 'dist/mockServiceWorker.js'));
+  res.sendFile(path.resolve(__dirname, '/mockServiceWorker.js'));
 });
 
 app.get('/*', getWebpackMiddlewares(clientConfig), serverRenderMiddleware);

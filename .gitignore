@@ -22,3 +22,5 @@ dist
 
 node_modules/
 jspm_packages/
+
+docker/**/shared

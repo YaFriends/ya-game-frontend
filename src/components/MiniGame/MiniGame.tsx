@@ -1,8 +1,10 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 
 import { GameSet } from '../../@types/GameSet';
+import { UserData } from '../../@types/UserTypes';
 import GameSetCoordinator from '../../core/GameSetCoordinator';
 import { DUMMY_STATS } from '../../pages/MOCKS/ProfileHistory';
+import { GameSetEnd } from '../GameSetEnd/GameSetEnd';
 import { MiniGamePreview } from '../MiniGamePreview/MiniGamePreview';
 import { UserInfo } from '../UserInfo/UserInfo';
 import { Title } from '../ui/Title/Title';
@@ -14,20 +16,26 @@ type GameSetProps = {
   gameSet: GameSet;
 };
 
+const canvasId = 'canvas';
+
 export const MiniGame: FC<GameSetProps> = ({ GameSetCoordinator, gameSet }) => {
-  const canvasId = 'canvas';
-  const miniGamePreviews = gameSet?.miniGames.map(({ id, name, icon }) => (
+  const [winner, setWinner] = useState<UserData | null>(null);
+  const miniGamePreviews = gameSet.miniGames.map(({ id, name, icon }) => (
     <MiniGamePreview key={id} id={id} name={name} icon={icon} classes="mini-game__top-preview" />
   ));
 
   useEffect(() => {
-    GameSetCoordinator.waitForEndOfCurrentGame().then(() => {
-      console.log('ended');
+    GameSetCoordinator.init().then(({ winner }) => {
+      setWinner(winner);
     });
   }, [gameSet]);
 
-  const firstPlayerInFirstTeam = gameSet.teams[0].players[0];
-  const firstPlayerInSecondTeam = gameSet.teams[1].players[0];
+  const firstPlayerInFirstTeam = gameSet.players[0];
+  const firstPlayerInSecondTeam = gameSet.players[1];
+
+  if (winner) {
+    return <GameSetEnd winner={winner} miniGames={gameSet.miniGames} />;
+  }
 
   return (
     <div className="mini-game">

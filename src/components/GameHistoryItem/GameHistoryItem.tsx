@@ -1,8 +1,9 @@
 import React, { memo } from 'react';
 
+import { Rivals } from '../../@types/MiniGame';
 import { TRANSLATION } from '../../lang/ru/translation';
 import { Text } from '../ui/Text/Text';
-import { Team } from '../../@types/MiniGame';
+import { getRivals } from '../../utils/game';
 
 import './game-history-item.scss';
 
@@ -18,7 +19,7 @@ export type GameHistoryProps = {
   id: number;
   games: Game[];
   date: string;
-  teams: Team[];
+  players: Rivals;
   result: {
     id: number;
     type: ResultType;
@@ -28,7 +29,7 @@ export type GameHistoryProps = {
 export const GameHistoryItem = memo(function GameHistoryItem({
   games,
   date,
-  teams,
+  players,
   result,
 }: GameHistoryProps) {
   const gameGroup = games.map(({ id, name, icon }) => (
@@ -37,7 +38,7 @@ export const GameHistoryItem = memo(function GameHistoryItem({
     </div>
   ));
 
-  const versus = teams.map(({ players }) => players.join(', ')).join(' vs ');
+  const rivals = getRivals(players);
 
   return (
     <div className="game-history-item">
@@ -47,7 +48,7 @@ export const GameHistoryItem = memo(function GameHistoryItem({
         </div>
         <div className="game-history-item__info-item">
           <Text text={`${TRANSLATION.Game.Date}: ${date}`} />
-          <Text text={versus} />
+          <Text text={rivals} />
         </div>
       </div>
       <Text

@@ -22,8 +22,8 @@ export const GameSet: FC<Record<string, never>> = () => {
   useEffect(() => {
     if (gameSet) {
       setTimeout(() => {
-        setGameCoordinator(new GameSetCoordinator(gameSet.miniGames, gameSet.teams));
-      }, 100);
+        setGameCoordinator(new GameSetCoordinator(gameSet.miniGames, gameSet.players));
+      }, 1000);
     }
   }, [gameSet]);
 

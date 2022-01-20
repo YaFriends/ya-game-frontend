@@ -1,11 +1,12 @@
-import { Team } from '../../@types/MiniGame';
+import { FinishFn, MiniGameFinishResponse, Rivals } from '../../@types/MiniGame';
+import { UserData } from '../../@types/UserTypes';
 import { TRANSLATION } from '../../lang/ru/translation';
 import MiniGame from '../MiniGame';
 
 import { TicTacToeCircle } from './common/TicTacToeCircle';
 import { TicTacToeCross } from './common/TicTacToeCross';
 
-type TicTacToeBoardCell = string;
+type TicTacToeBoardCell = -1 | 1 | '';
 type TicTacToeBoard = TicTacToeBoardCell[];
 
 export type TicTacToeFigureProps = {
@@ -17,7 +18,7 @@ export type TicTacToeFigureProps = {
 };
 
 type TicTacTieMiniGameProps = {
-  teams: Team[];
+  players: Rivals;
   canvasId: string;
 };
 
@@ -26,7 +27,10 @@ export class TicTacToeMiniGame extends MiniGame {
   sectionSize: number;
   lineWidth: number;
   lineColor: string;
-  currentPlayer: 0 | 1;
+  isCurrentPlayerFirst: boolean;
+  currentPlayer: UserData | null;
+  finishCb: FinishFn | null;
+  totalMoves: number;
 
   constructor(props: TicTacTieMiniGameProps) {
     super({
@@ -37,9 +41,12 @@ export class TicTacToeMiniGame extends MiniGame {
 
     this.board = [];
     this.sectionSize = this.GameLoop.canvasSize / 3;
-    this.currentPlayer = 1;
+    this.currentPlayer = null;
+    this.isCurrentPlayerFirst = false;
     this.lineColor = '#DDD';
     this.lineWidth = 5;
+    this.finishCb = () => null;
+    this.totalMoves = 0;
   }
 
   draw() {
@@ -48,38 +55,28 @@ export class TicTacToeMiniGame extends MiniGame {
     this._addListener();
   }
 
-  makeTurn() {
-    console.log('makeTurn');
+  finish(player: UserData) {
+    this._removeListener();
+    if (typeof this.finishCb === 'function') {
+      this.finishCb({
+        winner: player,
+      });
+    }
   }
 
-  finish() {
-    return {
-      winner: {
-        players: [
-          {
-            login: 'TeViYu',
-            id: 1,
-            first_name: 'Test',
-            second_name: 'test 1',
-            display_name: 'Testovich',
-            email: 'string',
-            phone: 'string',
-            avatar: '',
-          },
-        ],
-      },
-    };
-  }
-
-  run() {
-    return new Promise<void>(() => {
+  run(): Promise<MiniGameFinishResponse> {
+    return new Promise<MiniGameFinishResponse>(res => {
+      this.finishCb = res;
       this.draw();
-      // res();
     });
   }
 
   _initBoard() {
     this.board = Array(9).fill('');
+  }
+
+  _clearBoard() {
+    this.GameLoop.context.clearRect(0, 0, this.GameLoop.canvasSize, this.GameLoop.canvasSize);
   }
 
   _addPlayingPiece(mouse: { x: number; y: number }) {
@@ -99,10 +96,10 @@ export class TicTacToeMiniGame extends MiniGame {
           return;
         }
 
-        this.board[i] = this.currentPlayer.toString();
+        this.board[i] = this.isCurrentPlayerFirst ? 1 : -1;
         this._clearPlayingArea(xCoord, yCoord);
 
-        if (this.currentPlayer === 1) {
+        if (this.isCurrentPlayerFirst) {
           new TicTacToeCross({
             sectionSize: this.sectionSize,
             params: {
@@ -110,7 +107,7 @@ export class TicTacToeMiniGame extends MiniGame {
               left: xCoord,
             },
           }).draw(this.GameLoop.context);
-          this.currentPlayer = 0;
+          this.currentPlayer = this.players[1];
         } else {
           new TicTacToeCircle({
             sectionSize: this.sectionSize,
@@ -119,15 +116,35 @@ export class TicTacToeMiniGame extends MiniGame {
               left: xCoord,
             },
           }).draw(this.GameLoop.context);
-          this.currentPlayer = 1;
+          this.currentPlayer = this.players[0];
+        }
+
+        this.isCurrentPlayerFirst = !this.isCurrentPlayerFirst;
+        this.totalMoves++;
+        this._checkForFinish();
+
+        if (this.totalMoves === this.board.length) {
+          this._restartGame();
         }
       }
     }
   }
 
+  _restartGame() {
+    this.totalMoves = 0;
+    this._removeListener();
+    this._clearGameBoard();
+    this.draw();
+  }
+
   _clearPlayingArea(xCoord: number, yCoord: number) {
     this.GameLoop.context.fillStyle = '#8B949E';
     this.GameLoop.context.fillRect(xCoord, yCoord, this.sectionSize, this.sectionSize);
+  }
+
+  _clearGameBoard() {
+    this.GameLoop.context.fillStyle = '#8B949E';
+    this.GameLoop.context.fillRect(0, 0, this.GameLoop.canvasSize, this.GameLoop.canvasSize);
   }
 
   _drawLines(lineWidth: number, strokeStyle: string) {
@@ -166,11 +183,43 @@ export class TicTacToeMiniGame extends MiniGame {
     };
   }
 
+  _onMouseUp = (event: MouseEvent) => {
+    const canvasMousePosition = this._getCanvasMousePosition(event);
+    this._addPlayingPiece(canvasMousePosition);
+    this._drawLines(this.lineWidth, this.lineColor);
+  };
+
   _addListener() {
-    this.GameLoop.canvas.addEventListener('mouseup', event => {
-      const canvasMousePosition = this._getCanvasMousePosition(event);
-      this._addPlayingPiece(canvasMousePosition);
-      this._drawLines(this.lineWidth, this.lineColor);
-    });
+    this.GameLoop.canvas.addEventListener('mouseup', this._onMouseUp);
+  }
+
+  _removeListener() {
+    this.GameLoop.canvas.removeEventListener('mouseup', this._onMouseUp);
+  }
+
+  _checkForFinish() {
+    for (let i = 0; i < 3; i++) {
+      const currentRowOffset = i * 3;
+      const rowSum =
+        Number(this.board[currentRowOffset]) +
+        Number(this.board[currentRowOffset + 1]) +
+        Number(this.board[currentRowOffset + 2]);
+
+      const colSum = Number(this.board[i]) + Number(this.board[i + 3]) + Number(this.board[i + 6]);
+      if (rowSum === 3 || colSum === 3) {
+        this.finish(this.players[0]);
+      } else if (rowSum === -3 || colSum === -3) {
+        this.finish(this.players[1]);
+      }
+    }
+
+    const rightDiagonalSum = Number(this.board[0]) + Number(this.board[4]) + Number(this.board[8]);
+    const leftDiagonalSum = Number(this.board[2]) + Number(this.board[4]) + Number(this.board[6]);
+
+    if (rightDiagonalSum === 3 || leftDiagonalSum === 3) {
+      this.finish(this.players[0]);
+    } else if (rightDiagonalSum === -3 || leftDiagonalSum === -3) {
+      this.finish(this.players[1]);
+    }
   }
 }

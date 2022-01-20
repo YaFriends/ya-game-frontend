@@ -1,0 +1,23 @@
+.game-set-end {
+  @apply text-center;
+
+  &__winner {
+    @apply font-bold text-3xl mb-10;
+  }
+
+  &__links {
+    @apply flex justify-center;
+
+    .ui-link {
+      @apply m-2;
+    }
+  }
+
+  &__mini-games {
+    @apply flex -mx-3 justify-center mb-3;
+  }
+
+  &__mini-game {
+    @apply mx-3 w-10 h-10;
+  }
+}
