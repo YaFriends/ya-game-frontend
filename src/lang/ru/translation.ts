@@ -131,6 +131,13 @@ export const TRANSLATION: Record<string, Record<string, string>> = {
   },
   CircleTriangleSquare: {
     label: 'Круг Треугольник Квадрат',
+    circle: 'Круг',
+    triangle: 'Треугольник',
+    square: 'Квадрат',
+    chooseCardWithFigure: 'Выберите карточку с фигурой',
+    nobody: 'Ничья',
+    selectedShapes: 'Выбранные фигуры',
+    win: 'Победил',
   },
   FieldBattle: {
     label: 'Битва за поле',

@@ -23,7 +23,7 @@ export default class GameSetCoordinator {
   constructor(miniGames: MiniGameProps[], players: Rivals) {
     this.miniGames = miniGames;
     this.players = players;
-    this.currentMiniGameIndex = 2;
+    this.currentMiniGameIndex = 0;
     this.currentMiniGame = this.miniGames[this.currentMiniGameIndex];
     this.canvasId = 'canvas';
     this.currentMiniGameController = null;

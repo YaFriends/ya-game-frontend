@@ -16,6 +16,8 @@ type CircleTriangleSquareProps = {
   canvasId: string;
 };
 
+const FONT_FOR_TEXT = 'bold 24px sans-serif';
+
 // Игрок выбирает одну из 3 корточек на след. экране показывается выбор игроков и далее на след экране, кто победил и снова по кругу до 3 побед
 export class CircleTriangleSquareMiniGame extends MiniGame {
   finishCb: FinishFn | null;
@@ -36,19 +38,19 @@ export class CircleTriangleSquareMiniGame extends MiniGame {
       {
         id: 1,
         name: 'circle',
-        label: 'Круг',
+        label: TRANSLATION.CircleTriangleSquare.circle,
         src: '/static/img/games/circle_triangle_square/circle.jpeg',
       },
       {
         id: 2,
         name: 'triangle',
-        label: 'Треугольник',
+        label: TRANSLATION.CircleTriangleSquare.triangle,
         src: '/static/img/games/circle_triangle_square/triangle.jpeg',
       },
       {
         id: 3,
         name: 'square',
-        label: 'Квадрат',
+        label: TRANSLATION.CircleTriangleSquare.square,
         src: '/static/img/games/circle_triangle_square/square.jpeg',
       },
     ];
@@ -84,8 +86,8 @@ export class CircleTriangleSquareMiniGame extends MiniGame {
     this._clearGameField();
     const step = 150;
 
-    this.GameLoop.context.font = 'bold 24px sans-serif';
-    this.GameLoop.context.fillText('Выберите карточку с фигурой', 60, 75);
+    this.GameLoop.context.font = FONT_FOR_TEXT;
+    this.GameLoop.context.fillText(TRANSLATION.CircleTriangleSquare.chooseCardWithFigure, 60, 75);
 
     this.items.forEach(({ src }, index) => {
       const image = new Image();
@@ -106,12 +108,12 @@ export class CircleTriangleSquareMiniGame extends MiniGame {
     this._clearGameField();
     const step = 150;
 
+    this.GameLoop.context.font = FONT_FOR_TEXT;
+
     if (isNobody) {
-      this.GameLoop.context.font = 'bold 24px sans-serif';
-      this.GameLoop.context.fillText('Ничья', 210, 75);
+      this.GameLoop.context.fillText(TRANSLATION.CircleTriangleSquare.nobody, 210, 75);
     } else {
-      this.GameLoop.context.font = 'bold 24px sans-serif';
-      this.GameLoop.context.fillText('Выбранные фигуры', 130, 75);
+      this.GameLoop.context.fillText(TRANSLATION.CircleTriangleSquare.selectedShapes, 130, 75);
     }
 
     [currentPlayer, enemyPlayer].forEach((i, index) => {
@@ -133,8 +135,8 @@ export class CircleTriangleSquareMiniGame extends MiniGame {
   _initStageEndGame(winnerOnRound: number) {
     this._clearGameField();
 
-    this.GameLoop.context.font = 'bold 24px sans-serif';
-    this.GameLoop.context.fillText('Победил', 200, 75);
+    this.GameLoop.context.font = FONT_FOR_TEXT;
+    this.GameLoop.context.fillText(TRANSLATION.CircleTriangleSquare.win, 200, 75);
 
     const item = this.items.find(({ id }) => id === winnerOnRound);
 
