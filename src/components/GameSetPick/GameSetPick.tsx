@@ -58,13 +58,13 @@ export const GameSetPick: FC<GameSetPickProps> = ({
 
   const miniGames = useMemo(
     () =>
-      miniGamesToPick.map(({ id, name, icon, pick_image, miniGame }, i) => (
+      miniGamesToPick.map(({ id, name, icon, pick_image_url, miniGame }, i) => (
         <div
           className="game-set-pick__game"
           key={i}
-          onClick={() => banGame({ id, name, icon, pick_image, miniGame })}>
+          onClick={() => banGame({ id, name, icon, pick_image_url, miniGame })}>
           <div className="game-set-pick__game-image">
-            <img src={pick_image || icon} alt={name} />
+            <img src={pick_image_url || icon} alt={name} />
           </div>
         </div>
       )),

@@ -15,7 +15,7 @@ export type MiniGame = {
   id: number;
   name: string;
   icon: string;
-  pick_image?: string;
+  pick_image_url?: string;
 };
 
 export type BannedMiniGame = MiniGame & { banned_by: UserData['id'] };

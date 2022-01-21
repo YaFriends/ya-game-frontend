@@ -55,7 +55,7 @@ export class TicTacToeMiniGame extends MiniGame {
       id: TIC_TAC_TOE_GAME_ID,
       miniGame: TicTacToeMiniGame,
       icon: '/static/img/games/tic_tac_toe/icon.jpg',
-      pick_image: '/static/img/games/tic_tac_toe/pick.png',
+      pick_image_url: '/static/img/games/tic_tac_toe/pick.png',
       name: TRANSLATION.TicTacToe.label,
     };
   }
