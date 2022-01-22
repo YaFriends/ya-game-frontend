@@ -1,3 +1,5 @@
+import { MiniGamePickInfo } from '../@types/MiniGame';
+
 import MiniGame from './MiniGame';
 import { ClickMoreMiniGame } from './MiniGames/ClickMoreMiniGame';
 import { TicTacToeMiniGame } from './MiniGames/TicTacToeMiniGame';
@@ -13,3 +15,5 @@ export const MINI_GAME_CONTROLLER_BY_ID: { [x: number]: SubclassOfMiniGame } = {
   [TIC_TAC_TOE_GAME_ID]: TicTacToeMiniGame,
   [CLICK_MORE_GAME_ID]: ClickMoreMiniGame,
 };
+
+export const MINI_GAMES: MiniGamePickInfo[] = [TicTacToeMiniGame.config];

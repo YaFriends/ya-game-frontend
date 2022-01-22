@@ -10,17 +10,35 @@ export const GameSetAPI = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: INTERNAL_API_URL + servicePoint,
   }),
-  tagTypes: ['GameSet'],
+  keepUnusedDataFor: 0,
+  tagTypes: ['gameSet'],
   endpoints: build => ({
+    generateLink: build.query<GameSet, number>({
+      query: (totalGames: number) => ({
+        url: '/create',
+        method: 'POST',
+        credentials: 'include',
+        body: { totalGames },
+      }),
+      providesTags: ['gameSet'],
+    }),
     fetchSession: build.query<GameSet, string>({
       query: (id: string) => ({
         url: id,
         method: 'GET',
         credentials: 'include',
       }),
-      providesTags: ['GameSet'],
+      providesTags: ['gameSet'],
+    }),
+    updateGameSet: build.mutation<GameSet, Partial<GameSet> & Pick<GameSet, 'id'>>({
+      query: ({ id, ...patch }) => ({
+        url: `/${id}`,
+        method: 'PATCH',
+        body: patch,
+      }),
+      invalidatesTags: ['gameSet'],
     }),
   }),
 });
 
-export const { useFetchSessionQuery } = GameSetAPI;
+export const { useFetchSessionQuery, useGenerateLinkQuery, useUpdateGameSetMutation } = GameSetAPI;

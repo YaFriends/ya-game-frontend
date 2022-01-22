@@ -51,7 +51,9 @@ export const TRANSLATION: Record<string, Record<string, string>> = {
   },
   InvitationLink: {
     label: 'Ссылка для приглашения',
-    ButtonText: 'Скопировать',
+    ButtonText: 'Скопировать ссылку',
+    defaultLink: 'Получаем ссылку...',
+    awaiting: 'Ожидание подключение противника...',
   },
   GameLobby: {
     label: 'Игра: лобби',
@@ -162,5 +164,9 @@ export const TRANSLATION: Record<string, Record<string, string>> = {
     played: 'Вы играли в:',
     backToMain: 'Вернуться на главную',
     playAgain: 'Сыграть еще',
+  },
+  GameSetPick: {
+    title: 'Pick/Ban игр',
+    ban: 'BANNED',
   },
 };
