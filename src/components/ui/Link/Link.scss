@@ -1,11 +1,5 @@
 .ui-link {
-  &--light {
-    @apply text-black;
-  }
-
-  &--dark {
-    @apply text-white;
-  }
+  @apply text-black dark:text-white;
 
   &--button {
     @apply w-full inline-block px-5 py-1 rounded-12px no-underline text-center text-white bg-blue !important;

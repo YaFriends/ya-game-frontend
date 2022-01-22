@@ -4,13 +4,12 @@ import './Text.scss';
 interface TextProps {
   extendClass?: string;
   text: string;
-  theme?: 'dark' | 'light';
 }
 
 const DEFAULT_CLASSES: string[] = ['ui-text'];
 
-const classes = (theme: 'dark' | 'light', extendClass?: string): string[] => {
-  const result = [...DEFAULT_CLASSES, `ui-text--${theme}`];
+const classes = (extendClass?: string): string[] => {
+  const result = [...DEFAULT_CLASSES];
 
   if (extendClass) {
     result.push(extendClass);
@@ -19,8 +18,8 @@ const classes = (theme: 'dark' | 'light', extendClass?: string): string[] => {
   return result;
 };
 
-export const Text: FC<TextProps> = ({ extendClass = '', text, theme = 'light' }) => {
-  const classesMemo = useMemo(() => classes(theme, extendClass), [theme, extendClass]);
+export const Text: FC<TextProps> = ({ extendClass = '', text }) => {
+  const classesMemo = useMemo(() => classes(extendClass), [extendClass]);
 
   return <p className={classesMemo.join(' ')}>{text}</p>;
 };

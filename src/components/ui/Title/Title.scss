@@ -1,11 +1,3 @@
 .ui-title {
-  @apply text-2xl;
-
-  &--light {
-    @apply text-black;
-  }
-
-  &--dark {
-    @apply text-white;
-  }
+  @apply text-2xl text-black dark:text-white;
 }

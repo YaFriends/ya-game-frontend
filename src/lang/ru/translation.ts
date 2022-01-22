@@ -111,10 +111,27 @@ export const TRANSLATION: Record<string, Record<string, string>> = {
     link: 'В главное меню',
   },
   Main: {
-    label: 'Скоро тут будет лендинг',
-    linkToLogin: 'Авторизоваться',
-    linkToDashboard: 'Пройти в главное меню',
-    linkToRegister: 'Зарегистрироваться',
+    label: 'YaFriends',
+    linkToLogin: 'Входи',
+    linkToRegister: 'Регистрируйся',
+    gamesLabel: 'Игры',
+    circle_triangle_square: 'Квадрат/Круг/Треугольник',
+    circle_triangle_squareDesc: 'Механика игры, как и в камень/ножницы/бумага.',
+    click_more: 'Самый быстрый кликун',
+    click_moreDesc:
+      'Необходимо кликать на скорость, побеждает тот, кто заполнит свою колбу кликов первым',
+    tic_tac_toe: 'Крестики/Нолики',
+    field_battle: 'Квадраты',
+    field_battleDesc:
+      'Необходимо кидать кости, и закрашивать области на игровом поле, побеждает тот, кто закрасит большее количество клеток к концу игры. Игра заканчивается когда на поле больше нет ходов',
+    bombermans: 'Взрывашка',
+    bombermansDesc:
+      '1 этап, игроки ставят по n бомб на поле. 2 этап - надо взорвать бомбу противника. Побеждает тот, кто быстрее нашел бомбу противника.',
+    team: 'Команда',
+    teamName1: 'Юра',
+    teamName2: 'Роман',
+    teamName3: 'Виген',
+    teamName4: 'Сергей',
   },
   ErrorMessage: {
     message: 'Упс, что-то пошло не так',

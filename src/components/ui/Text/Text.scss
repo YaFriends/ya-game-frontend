@@ -1,9 +1,3 @@
 .ui-text {
-  &--light {
-    @apply text-black;
-  }
-
-  &--dark {
-    @apply text-white;
-  }
+  @apply text-black dark:text-white;
 }

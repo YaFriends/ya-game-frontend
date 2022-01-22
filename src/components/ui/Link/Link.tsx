@@ -6,7 +6,6 @@ interface LinkProps {
   extendClass?: string;
   text: string;
   href?: string;
-  theme?: 'dark' | 'light';
 }
 
 const DEFAULT_CLASSES: string[] = [
@@ -17,8 +16,8 @@ const DEFAULT_CLASSES: string[] = [
   'ease-in-out',
 ];
 
-const classes = (theme: 'dark' | 'light', extendClass?: string): string[] => {
-  const result = [...DEFAULT_CLASSES, `ui-link--${theme}`];
+const classes = (extendClass?: string): string[] => {
+  const result = [...DEFAULT_CLASSES];
 
   if (extendClass) {
     result.push(extendClass);
@@ -27,13 +26,8 @@ const classes = (theme: 'dark' | 'light', extendClass?: string): string[] => {
   return result;
 };
 
-export const MainLink: FC<LinkProps> = ({
-  extendClass = '',
-  text,
-  href = '#',
-  theme = 'light',
-}: LinkProps) => {
-  const classesMemo = useMemo(() => classes(theme, extendClass), [theme, extendClass]);
+export const MainLink: FC<LinkProps> = ({ extendClass = '', text, href = '#' }: LinkProps) => {
+  const classesMemo = useMemo(() => classes(extendClass), [extendClass]);
 
   return (
     <Link className={classesMemo.join(' ')} to={href}>
