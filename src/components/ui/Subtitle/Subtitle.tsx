@@ -4,13 +4,12 @@ import './Subtitle.scss';
 interface SubtitleProps {
   extendClass?: string;
   text: string;
-  theme?: 'dark' | 'light';
 }
 
 const DEFAULT_CLASSES: string[] = ['ui-subtitle', 'text-center', 'font-bold'];
 
-const classes = (theme: 'dark' | 'light', extendClass?: string): string[] => {
-  const result = [...DEFAULT_CLASSES, `ui-subtitle--${theme}`];
+const classes = (extendClass?: string): string[] => {
+  const result = [...DEFAULT_CLASSES];
 
   if (extendClass) {
     result.push(extendClass);
@@ -19,12 +18,8 @@ const classes = (theme: 'dark' | 'light', extendClass?: string): string[] => {
   return result;
 };
 
-export const Subtitle: FC<SubtitleProps> = ({
-  extendClass = '',
-  text,
-  theme = 'light',
-}: SubtitleProps) => {
-  const classesMemo = useMemo(() => classes(theme, extendClass), [theme, extendClass]);
+export const Subtitle: FC<SubtitleProps> = ({ extendClass = '', text }: SubtitleProps) => {
+  const classesMemo = useMemo(() => classes(extendClass), [extendClass]);
 
   return <h2 className={classesMemo.join(' ')}>{text}</h2>;
 };

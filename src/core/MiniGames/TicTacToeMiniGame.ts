@@ -1,7 +1,8 @@
-import { FinishFn, MiniGameFinishResponse, Rivals } from '../../@types/MiniGame';
+import { FinishFn, MiniGameFinishResponse, MiniGamePickInfo, Rivals } from '../../@types/MiniGame';
 import { UserData } from '../../@types/UserTypes';
 import { TRANSLATION } from '../../lang/ru/translation';
 import MiniGame from '../MiniGame';
+import { TIC_TAC_TOE_GAME_ID } from '../constants';
 
 import { TicTacToeCircle } from './common/TicTacToeCircle';
 import { TicTacToeCross } from './common/TicTacToeCross';
@@ -47,6 +48,16 @@ export class TicTacToeMiniGame extends MiniGame {
     this.lineWidth = 5;
     this.finishCb = () => null;
     this.totalMoves = 0;
+  }
+
+  static get config(): MiniGamePickInfo {
+    return {
+      id: TIC_TAC_TOE_GAME_ID,
+      miniGame: TicTacToeMiniGame,
+      icon: '/static/img/games/tic_tac_toe/icon.jpg',
+      pick_image_url: '/static/img/games/tic_tac_toe/pick.png',
+      name: TRANSLATION.TicTacToe.label,
+    };
   }
 
   draw() {

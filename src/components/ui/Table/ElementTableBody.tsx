@@ -2,7 +2,7 @@ import React, { FC, useMemo } from 'react';
 
 import { TableBodyProps, TableBodyRowProps, TableBodyCellProps } from './Table';
 
-const DEFAULT_CLASSES: string[] = ['ui-table__body'];
+const DEFAULT_CLASSES: string[] = ['ui-table__body', 'dark:text-white'];
 const DEFAULT_CLASSES_BODY_ROW: string[] = ['ui-table__body-row', 'h-[50px]'];
 const DEFAULT_CLASSES_BODY_CELL: string[] = [
   'ui-table__body-cell',

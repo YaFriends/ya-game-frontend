@@ -3,16 +3,22 @@ import { UserData } from './UserTypes';
 
 export type GameSet = {
   id: number;
-  miniGames: MiniGame[];
   date: string;
   players: Rivals;
+  totalGames: number;
+  miniGames: MiniGame[];
+  bans: BannedMiniGame[];
+  link: string;
 };
 
 export type MiniGame = {
   id: number;
   name: string;
   icon: string;
+  pick_image_url?: string;
 };
+
+export type BannedMiniGame = MiniGame & { banned_by: UserData['id'] };
 
 export type ResultType = 'win' | 'lose';
 
@@ -29,4 +35,9 @@ export type GameSetFinishResponse = { winner: UserData };
 
 export type GameSetFinishStat = {
   [key: UserData['id']]: number;
+};
+
+export type MiniGamePreviewsProps = {
+  miniGames: MiniGame[];
+  className: string;
 };

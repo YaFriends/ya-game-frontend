@@ -1,16 +1,4 @@
 import { GameSetHistory } from '../../@types/GameSet';
-import { UserData } from '../../@types/UserTypes';
-
-export const DUMMY_USER: UserData = {
-  id: 1,
-  first_name: 'Test',
-  second_name: 'Testov',
-  display_name: 'Testovich',
-  login: 'testLogin',
-  email: 'test@test.com',
-  phone: '8 925 562 16 59',
-  avatar: '',
-};
 
 export const DUMMY_STATS = {
   wins: 0,
@@ -19,6 +7,9 @@ export const DUMMY_STATS = {
 export const DUMMY_GAME_LIST: GameSetHistory[] = [
   {
     id: 1,
+    totalGames: 3,
+    link: 'testLinkIsHere',
+    bans: [],
     miniGames: [{ id: 1, name: 'Test', icon: '/static/img/games/click_more/icon.jpg' }],
     date: '2021-04-11',
     players: [
@@ -50,6 +41,9 @@ export const DUMMY_GAME_LIST: GameSetHistory[] = [
   },
   {
     id: 2,
+    totalGames: 3,
+    link: 'testLinkIsHere',
+    bans: [],
     miniGames: [
       { id: 1, name: 'Test', icon: '/static/img/games/click_more/icon.jpg' },
       { id: 2, name: 'Test', icon: '/static/img/games/click_more/icon.jpg' },
@@ -85,6 +79,9 @@ export const DUMMY_GAME_LIST: GameSetHistory[] = [
   },
   {
     id: 3,
+    totalGames: 3,
+    link: 'testLinkIsHere',
+    bans: [],
     miniGames: [
       { id: 1, name: 'Test', icon: '/static/img/games/click_more/icon.jpg' },
       { id: 2, name: 'Test', icon: '/static/img/games/click_more/icon.jpg' },
@@ -122,6 +119,9 @@ export const DUMMY_GAME_LIST: GameSetHistory[] = [
   },
   {
     id: 4,
+    totalGames: 3,
+    link: 'testLinkIsHere',
+    bans: [],
     miniGames: [{ id: 1, name: 'Test', icon: '/static/img/games/click_more/icon.jpg' }],
     date: '2021-04-11',
     players: [
@@ -153,6 +153,9 @@ export const DUMMY_GAME_LIST: GameSetHistory[] = [
   },
   {
     id: 5,
+    totalGames: 3,
+    link: 'testLinkIsHere',
+    bans: [],
     miniGames: [{ id: 1, name: 'Test', icon: '/static/img/games/click_more/icon.jpg' }],
     date: '2021-04-11',
     players: [
@@ -184,6 +187,9 @@ export const DUMMY_GAME_LIST: GameSetHistory[] = [
   },
   {
     id: 6,
+    totalGames: 3,
+    link: 'testLinkIsHere',
+    bans: [],
     miniGames: [
       { id: 1, name: 'Test', icon: '/static/img/games/click_more/icon.jpg' },
       { id: 2, name: 'Test', icon: '/static/img/games/click_more/icon.jpg' },
@@ -219,6 +225,9 @@ export const DUMMY_GAME_LIST: GameSetHistory[] = [
   },
   {
     id: 7,
+    totalGames: 3,
+    link: 'testLinkIsHere',
+    bans: [],
     miniGames: [
       { id: 1, name: 'Test', icon: '/static/img/games/click_more/icon.jpg' },
       { id: 2, name: 'Test', icon: '/static/img/games/click_more/icon.jpg' },
@@ -256,6 +265,9 @@ export const DUMMY_GAME_LIST: GameSetHistory[] = [
   },
   {
     id: 8,
+    totalGames: 3,
+    link: 'testLinkIsHere',
+    bans: [],
     miniGames: [{ id: 1, name: 'Test', icon: '/static/img/games/click_more/icon.jpg' }],
     date: '2021-04-11',
     players: [

@@ -1,29 +1,47 @@
 import React, { FC, useEffect, useMemo, useState } from 'react';
-import { useParams } from 'react-router';
 
+import { GameSetPick } from '../../components/GameSetPick/GameSetPick';
 import { MiniGame } from '../../components/MiniGame/MiniGame';
 import { MiniGamePreview } from '../../components/MiniGamePreview/MiniGamePreview';
 import { Subtitle } from '../../components/ui/Subtitle/Subtitle';
 import { Title } from '../../components/ui/Title/Title';
 import GameSetCoordinator from '../../core/GameSetCoordinator';
+import { useGameSetSession } from '../../hooks/use-game-set-session';
 import { TRANSLATION } from '../../lang/ru/translation';
-import { useFetchSessionQuery } from '../../services/GameSetAPI';
+import { InvitationLink } from '../GameCreation/InvitationLink';
+
 import './game-set.scss';
 
-type PageParams = {
-  id: string;
-};
+const GameSetLoading: FC = () => (
+  <section className="game-set">
+    <Subtitle text={TRANSLATION.Loading.label} />
+  </section>
+);
+
+const GameSetLink: FC = () => (
+  <section className="game-set">
+    <InvitationLink />
+  </section>
+);
+
+const GameSetRoundLoading: FC<{ miniGamePreviews: JSX.Element[] }> = ({ miniGamePreviews }) => (
+  <section className="game-set">
+    <Title text="Выбранные игры" extendClass="mb-6" />
+    <div className="game-set__mini-games">{miniGamePreviews}</div>
+    <Subtitle text={TRANSLATION.Loading.label} />
+  </section>
+);
 
 export const GameSet: FC<Record<string, never>> = () => {
-  const { id: setId }: PageParams = useParams();
-  const { data: gameSet = null, isLoading } = useFetchSessionQuery(setId);
+  const { rival, gameSet, isGameSetLoading, addMiniGames } = useGameSetSession();
   const [gameCoordinator, setGameCoordinator] = useState<GameSetCoordinator | null>(null);
 
   useEffect(() => {
     if (gameSet) {
-      setTimeout(() => {
+      const miniGamesHadPicked = gameSet.miniGames.length === gameSet.totalGames;
+      if (miniGamesHadPicked) {
         setGameCoordinator(new GameSetCoordinator(gameSet.miniGames, gameSet.players));
-      }, 1000);
+      }
     }
   }, [gameSet]);
 
@@ -31,26 +49,31 @@ export const GameSet: FC<Record<string, never>> = () => {
     () =>
       gameSet?.miniGames.map(({ id, name, icon }) => (
         <MiniGamePreview key={id} id={id} name={name} icon={icon} classes="game-set__mini-game" />
-      )),
+      )) || [],
     [gameSet]
   );
 
-  if (isLoading || !gameSet) {
+  if (isGameSetLoading || !gameSet) {
+    return <GameSetLoading />;
+  }
+
+  if (!rival) {
+    return <GameSetLink />;
+  }
+
+  if (gameSet.totalGames !== gameSet.miniGames.length) {
     return (
-      <section className="game-set">
-        <Subtitle text={TRANSLATION.Loading.label} />
-      </section>
+      <GameSetPick
+        gameSet={gameSet}
+        totalMiniGames={gameSet.totalGames}
+        rival={rival}
+        addMiniGames={addMiniGames}
+      />
     );
   }
 
   if (!gameCoordinator) {
-    return (
-      <section className="game-set">
-        <Title text="Выбранные игры" extendClass="mb-6" />
-        <div className="game-set__mini-games">{miniGamePreviews}</div>
-        <Subtitle text={TRANSLATION.Loading.label} />
-      </section>
-    );
+    return <GameSetRoundLoading miniGamePreviews={miniGamePreviews} />;
   }
 
   return (

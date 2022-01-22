@@ -4,7 +4,7 @@
       "dom",
       "es2017"
     ],
-    "module": "esnext",
+    "module": "commonjs",
     "moduleResolution": "node",
     "target": "es5",
     "jsx": "react",
@@ -17,8 +17,9 @@
     "experimentalDecorators": true,
     "skipLibCheck": true,
     "declaration": false,
-    "sourceMap": false,
-    "baseUrl": ".",
+    "resolveJsonModule": true,
+    "sourceMap": true,
+    "baseUrl": "src",
     "outDir": "./dist",
     "paths": {
       "*": ["./src/*"]

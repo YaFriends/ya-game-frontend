@@ -12,7 +12,7 @@ export const Spinner: FC<Record<string, never>> = () => {
         <div className="arc" />
         <div className="arc" />
       </div>
-      <Subtitle text="Загружаем..." theme="dark" />
+      <Subtitle text="Загружаем..." />
     </section>
   );
 };
