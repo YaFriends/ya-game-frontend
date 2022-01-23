@@ -19,4 +19,8 @@ export const MINI_GAME_CONTROLLER_BY_ID: { [x: number]: SubclassOfMiniGame } = {
   [CIRCLE_TRIANGLE_SQUARE_GAME_ID]: CircleTriangleSquareMiniGame,
 };
 
-export const MINI_GAMES: MiniGamePickInfo[] = [TicTacToeMiniGame.config];
+export const MINI_GAMES: MiniGamePickInfo[] = [
+  TicTacToeMiniGame.config,
+  ClickMoreMiniGame.config,
+  CircleTriangleSquareMiniGame.config,
+];
