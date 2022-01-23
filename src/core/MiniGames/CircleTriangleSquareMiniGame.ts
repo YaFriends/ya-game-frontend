@@ -1,8 +1,9 @@
-import { FinishFn, MiniGameFinishResponse, Rivals } from '../../@types/MiniGame';
+import { FinishFn, MiniGameFinishResponse, MiniGamePickInfo, Rivals } from '../../@types/MiniGame';
 import { UserData } from '../../@types/UserTypes';
 import { TRANSLATION } from '../../lang/ru/translation';
 import { GameLoop } from '../GameLoop';
 import MiniGame from '../MiniGame';
+import { CIRCLE_TRIANGLE_SQUARE_GAME_ID } from '../constants';
 
 type itemProps = {
   id: number;
@@ -60,6 +61,16 @@ export class CircleTriangleSquareMiniGame extends MiniGame {
 
     this.loop = new GameLoop('canvas');
     this.finishCb = () => null;
+  }
+
+  static get config(): MiniGamePickInfo {
+    return {
+      id: CIRCLE_TRIANGLE_SQUARE_GAME_ID,
+      miniGame: CircleTriangleSquareMiniGame,
+      icon: '/static/img/games/circle_triangle_square/icon.jpg',
+      pick_image_url: '/static/img/games/circle_triangle_square/pick.png',
+      name: TRANSLATION.CircleTriangleSquare.label,
+    };
   }
 
   run() {

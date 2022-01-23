@@ -1,8 +1,9 @@
-import { FinishFn, MiniGameFinishResponse, Rivals } from '../../@types/MiniGame';
+import { FinishFn, MiniGameFinishResponse, MiniGamePickInfo, Rivals } from '../../@types/MiniGame';
 import { UserData } from '../../@types/UserTypes';
 import { TRANSLATION } from '../../lang/ru/translation';
 import MiniGame from '../MiniGame';
 import { PlayerSide } from '../MiniGames/clickMoreMiniGame/Flask';
+import { CLICK_MORE_GAME_ID } from '../constants';
 
 import { Behavior, BehaviorProps } from './clickMoreMiniGame/Behavior';
 import { FlasksController } from './clickMoreMiniGame/FlasksController';
@@ -38,6 +39,16 @@ export class ClickMoreMiniGame extends MiniGame {
     this.playersProgress = null;
     this.countDown = 3;
     this.countDownStep = 1000;
+  }
+
+  static get config(): MiniGamePickInfo {
+    return {
+      id: CLICK_MORE_GAME_ID,
+      miniGame: ClickMoreMiniGame,
+      icon: '/static/img/games/click_more/icon.jpg',
+      pick_image_url: '/static/img/games/click_more/pick.png',
+      name: TRANSLATION.ClickMore.label,
+    };
   }
 
   run() {
