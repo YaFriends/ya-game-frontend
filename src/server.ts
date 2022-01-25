@@ -1,6 +1,7 @@
 import path from 'path';
 
 import express, { RequestHandler } from 'express';
+import helmet from 'helmet';
 import webpack from 'webpack';
 import devMiddleware from 'webpack-dev-middleware';
 import hotMiddleware from 'webpack-hot-middleware';
@@ -25,6 +26,18 @@ function getWebpackMiddlewares(config: typeof clientConfig): RequestHandler[] {
     hotMiddleware(compiler, { path: `/__webpack_hmr` }),
   ];
 }
+
+app.use(helmet.xssFilter());
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      'default-src': '*',
+      'img-src': '*',
+      'script-src': '*',
+    },
+  })
+);
+
 app.use(express.static(path.join(__dirname, '../dist')));
 
 app.get('/mockServiceWorker.js', (req, res) => {
