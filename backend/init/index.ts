@@ -1,5 +1,13 @@
 import { Sequelize, SequelizeOptions } from 'sequelize-typescript';
 
+import User from '../models/User';
+import PostComment from '../models/PostComment';
+import Like from '../models/Like';
+import Post from '../models/Post';
+import MiniGame from '../models/MiniGame';
+import GameSet from '../models/GameSet';
+import GameHistory from '../models/GameHistory';
+
 const sequelizeOptions: SequelizeOptions = {
   host: process.env.POSTGRES_HOST || 'psql',
   port: 5432,
@@ -10,6 +18,8 @@ const sequelizeOptions: SequelizeOptions = {
 };
 
 const sequelize = new Sequelize(sequelizeOptions);
+
+sequelize.addModels([User, GameHistory, GameSet, Like, MiniGame, Post, PostComment]);
 
 export const dbConnect = async () => {
   try {
