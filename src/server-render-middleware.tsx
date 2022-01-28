@@ -4,10 +4,10 @@ import { renderToStaticMarkup } from 'react-dom/server';
 import { Provider } from 'react-redux';
 import { StaticRouterContext } from 'react-router';
 import { StaticRouter } from 'react-router-dom';
-
 import 'whatwg-fetch';
 
 import App from './App';
+import { nonce } from './server';
 import { preparedState } from './store';
 import { renderObject } from './utils/renderObject';
 
@@ -48,8 +48,9 @@ function getHtml(reactHtml: JSX.Element, store?: ReturnType<typeof preparedState
       </head>
       <body>
         <div id="mount">{reactHtml}</div>
-        <script src="/main.js"></script>
+        <script nonce={nonce} src="/main.js"></script>
         <script
+          nonce={nonce}
           dangerouslySetInnerHTML={{
             __html: `window.__PRELOADED_STATE__ = ${renderObject(store?.getState())}`,
           }}

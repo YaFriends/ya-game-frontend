@@ -1,3 +1,4 @@
+import crypto from 'crypto';
 import path from 'path';
 
 import express, { RequestHandler } from 'express';
@@ -13,6 +14,7 @@ import 'babel-polyfill';
 import serverRenderMiddleware from './server-render-middleware';
 
 const app = express();
+export const nonce = crypto.randomBytes(16).toString('hex');
 
 function getWebpackMiddlewares(config: typeof clientConfig): RequestHandler[] {
   const compiler = webpack(config);
@@ -27,16 +29,19 @@ function getWebpackMiddlewares(config: typeof clientConfig): RequestHandler[] {
   ];
 }
 
-app.use(helmet.xssFilter());
 app.use(
   helmet.contentSecurityPolicy({
     directives: {
-      'default-src': '*',
-      'img-src': '*',
-      'script-src': '*',
+      defaultSrc: ["'self'", '*.ya-praktikum.tech'],
+      imgSrc: ["'self'", 'ya-praktikum.tech'],
+      scriptSrc: ["'self'", `'nonce-${nonce}'`],
+      connectSrc: ["'self'", 'ya-praktikum.tech'],
+      workerSrc: ["'self'"],
     },
   })
 );
+
+app.use(helmet.xssFilter());
 
 app.use(express.static(path.join(__dirname, '../dist')));
 
