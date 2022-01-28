@@ -1,10 +1,17 @@
-import GameHistory, { GameHistoryCreationAttributes } from '../models/GameHistory';
+import { Request, Response } from 'express';
+
+import GameHistory from '../models/GameHistory';
 
 export const GameHistoryController = {
-  create(gameHistory: GameHistoryCreationAttributes) {
-    return GameHistory.create(gameHistory);
+  create(req: Request, res: Response) {
+    return GameHistory.create(req.body).then(result => {
+      res.status(200).send(result);
+    });
   },
-  getByUserId(user_id: number) {
-    return GameHistory.findOne({ where: { user_id } });
+  getByUserId(req: Request, res: Response) {
+    const { user_id } = req.body;
+    return GameHistory.findOne({ where: { user_id } }).then(result => {
+      res.status(200).send(result);
+    });
   },
 };

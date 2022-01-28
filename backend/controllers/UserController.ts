@@ -1,19 +1,26 @@
-import User, { UserCreationAttributes } from '../models/User';
+import { Request, Response } from 'express';
+
+import User from '../models/User';
 
 export const UserController = {
-  create({ external_id, avatar_path, display_name }: UserCreationAttributes) {
-    return User.create({ external_id, avatar_path, display_name });
+  create(req: Request, res: Response) {
+    return User.create(req.body).then(result => {
+      res.status(201).send(result);
+    });
   },
-  updateById(id: number, UserData: UserCreationAttributes) {
-    return User.update(UserData, { where: { id } });
+  updateById(req: Request, res: Response) {
+    return User.update(req.body, { where: { id: req.body.id } }).then(result => {
+      res.status(204).send(result);
+    });
   },
-  deleteById(id: number) {
-    return User.destroy({ where: { id } });
+  getById(req: Request, res: Response) {
+    return User.findOne({ where: { id: req.body.id } }).then(result => {
+      res.status(200).send(result);
+    });
   },
-  getById(id: number) {
-    return User.findOne({ where: { id } });
-  },
-  getByExternalId(external_id: number) {
-    return User.findOne({ where: { external_id } });
+  getByExternalId(req: Request, res: Response) {
+    return User.findOne({ where: { external_id: req.body.id } }).then(result => {
+      res.status(200).send(result);
+    });
   },
 };

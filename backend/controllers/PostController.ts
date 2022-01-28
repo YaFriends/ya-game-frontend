@@ -1,29 +1,45 @@
-import Post, { PostCreationAttributes } from '../models/Post';
+import { Request, Response } from 'express';
+
+import Post from '../models/Post';
 import { LikeController } from './LikeController';
 import { PostCommentController } from './PostCommentController';
 
 export const PostController = {
-  getAll() {
-    return Post.findAll();
+  getAll(req: Request, res: Response) {
+    return Post.findAll().then(result => {
+      res.status(200).send(result);
+    });
   },
-  getById(id: number) {
-    return Post.findOne({ where: { id } });
+  getById(req: Request, res: Response) {
+    return Post.findOne({ where: { id: req.params.id } }).then(result => {
+      res.status(200).send(result);
+    });
   },
-  create(postInfo: PostCreationAttributes) {
-    return Post.create(postInfo);
+  create(req: Request, res: Response) {
+    return Post.create(req.body).then(result => {
+      res.status(201).send(result);
+    });
   },
-  deleteById(id: number) {
-    return Post.destroy({ where: { id } });
+  deleteById(req: Request, res: Response) {
+    return Post.destroy({ where: { id: req.params.id } }).then(result => {
+      res.status(200).send(result);
+    });
   },
-  like(post_id: number, user_id: number) {
-    return LikeController.create({ post_id, user_id });
+  like(req: Request, res: Response) {
+    return LikeController.create({ post_id: Number(req.params.id), user_id: req.body.id }).then(
+      result => {
+        res.status(201).send(result);
+      }
+    );
   },
-  async comment(post_id: number, content: string, user_id: number, parent_id?: number) {
-    const post = await PostController.getById(post_id);
+  async comment(req: Request, res: Response) {
+    const post = await Post.findOne({ where: { id: req.params.id } });
     if (post) {
-      return PostCommentController.create({ post, content, user_id, parent_id });
+      return PostCommentController.new({ post, ...req.body }).then(result => {
+        res.status(201).send(result);
+      });
     }
 
-    return false;
+    return res.status(404).send({ message: 'Post not found' });
   },
 };
