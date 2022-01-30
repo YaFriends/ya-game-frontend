@@ -21,12 +21,12 @@ jobs:
       run: yarn && yarn docker:build
     - name: check docker image
       run: docker image list
-    - name: login in docker hub on Yandex Cloud
-      run: |
-        echo ${{ secrets.OAUTH_TOKEN_ON_YANDEX_CLOUD }} | docker login \
-          --username oauth \
-          --password-stdin \
-          cr.yandex
+#     - name: login in docker hub on Yandex Cloud
+#       run: |
+#         echo ${{ secrets.OAUTH_TOKEN_ON_YANDEX_CLOUD }} | docker login \
+#           --username oauth \
+#           --password-stdin \
+#           cr.yandex
     - name: push frontend
       run: |
         docker tag ya-game-frontend_frontend \
