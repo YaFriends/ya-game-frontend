@@ -11,7 +11,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-#     - uses: actions/checkout@v2
     - name: Create SSH key
       run: |
         mkdir -p ~/.ssh/
@@ -24,7 +23,9 @@ jobs:
         SSH_KNOWN_HOSTS: ${{secrets.SSH_KNOWN_HOSTS}}
     - run: ssh -i ${{ github.workspace }}/../private.key ${{ secrets.YA_CLOUD_HOST }}
     - run: curl https://storage.yandexcloud.net/yandexcloud-yc/install.sh | bash
+    - run: source "/home/runner/.bashrc"
     - run: yc iam service-account --folder-id b1gl2m5po7bas9ioh2iv list
+#     - uses: actions/checkout@v2
 #     - uses: actions/setup-node@v2
 #       with:
 #         node-version: '14'
