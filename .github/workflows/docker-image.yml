@@ -15,7 +15,7 @@ jobs:
     - name: write ssh key
       run: echo ${{ secrets.SSH_KEY }} > id_rsa
     - name: connect on ssh
-      run: ssh -i id_rsa yafriends@51.250.9.48
+      run: ssh -i ./id_rsa yafriends@51.250.9.48
 #     - uses: actions/setup-node@v2
 #       with:
 #         node-version: '14'
