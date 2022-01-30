@@ -24,11 +24,11 @@ jobs:
     - name: login in docker hub on Yandex Cloud
       run: |
         docker login \
-        --username oauth \
-        --password ${{ secrets.OAUTH_TOKEN_ON_YANDEX_CLOUD }} \
-        cr.yandex \
+          --username oauth \
+          --password ${{ secrets.OAUTH_TOKEN_ON_YANDEX_CLOUD }} \
+          cr.yandex
         docker tag ya-game-frontend_frontend \
-        cr.yandex/${{ secrets.ID_FRONTEND_REGISTRY }}/ya-game-frontend_frontend:latest \
+        cr.yandex/${{ secrets.ID_FRONTEND_REGISTRY }}/ya-game-frontend_frontend:latest
         docker push cr.yandex/${{ secrets.ID_FRONTEND_REGISTRY }}/ya-game-frontend_frontend:latest
 #     - name: push frontend
 #       run: |
