@@ -23,8 +23,7 @@ jobs:
         SSH_KNOWN_HOSTS: ${{secrets.SSH_KNOWN_HOSTS}}
     - run: ssh -T -i ${{ github.workspace }}/../private.key ${{ secrets.YA_CLOUD_HOST }}
     - run: curl https://storage.yandexcloud.net/yandexcloud-yc/install.sh | bash
-    - run: exec bash -l
-    - run: echo 'source /home/runner/yandex-cloud/completion.zsh.inc' >>  ~/.zshrc
+    - run: chsh -s /bin/zsh
     - run: yc iam service-account --folder-id b1gl2m5po7bas9ioh2iv list
 #     - uses: actions/checkout@v2
 #     - uses: actions/setup-node@v2
