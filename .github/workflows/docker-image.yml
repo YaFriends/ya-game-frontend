@@ -12,10 +12,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 #     - uses: actions/checkout@v2
-    - name: write ssh key
-      run: echo ${{ secrets.SSH_KEY }} > id_rsa
+    - run: echo $HOME/.ssh/key
     - name: connect on ssh
-      run: ssh -T -i ./id_rsa yafriends@51.250.9.48
+      run: ssh -T -i $HOME/.ssh/key yafriends@51.250.9.48
 #     - uses: actions/setup-node@v2
 #       with:
 #         node-version: '14'
