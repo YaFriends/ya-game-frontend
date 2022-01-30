@@ -26,7 +26,8 @@ jobs:
         echo ${{ secrets.OAUTH_TOKEN_ON_YANDEX_CLOUD }} | docker login \
           --username oauth \
           --password-stdin \
-          cr.yandex
+          cr.yandex \
+        docker config ls
     - name: push frontend
       run: |
         docker tag ya-game-frontend_frontend \
