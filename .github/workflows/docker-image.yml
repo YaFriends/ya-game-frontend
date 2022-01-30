@@ -15,6 +15,10 @@ jobs:
     - uses: actions/setup-node@v2
       with:
         node-version: '14'
+    - name: create .env file
+      run: |
+        echo ${{ secrets.ENV }} > .env
+    #/home/runner/work/ya-game-frontend/ya-game-frontend/
     - name: create docker image
       run: |
         npm install
