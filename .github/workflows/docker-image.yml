@@ -32,8 +32,8 @@ jobs:
     - name: push frontend
       run: |
         docker tag ya-game-frontend_frontend \
-        cr.yandex/crp3p6k47790pdc54tc4/ya-game-frontend_frontend:latest
-        docker push cr.yandex/crp3p6k47790pdc54tc4/ya-game-frontend_frontend:latest
+        cr.yandex/${{ secrets.ID_FRONTEND_REGISTRY }}/ya-game-frontend_frontend:latest
+        docker push cr.yandex/${{ secrets.ID_FRONTEND_REGISTRY }}/ya-game-frontend_frontend:latest
     - name: push backend
       run: docker image push cr.yandex/${{ secrets.ID_BACNEND_REGISTRY }}/ya-game-frontend_backend:latest
     - name: push postgres
