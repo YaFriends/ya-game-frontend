@@ -12,6 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: S
-      run: |
-            yc iam key create --service-account-name default-sa -o key.json
+    - name: install cli on Yandex CLoud
+      run: curl https://storage.yandexcloud.net/yandexcloud-yc/install.sh | \ bash -s -- -a
+    - name: check Yandex Cloud profile
+      run: yc config profile list
