@@ -28,7 +28,7 @@ jobs:
           --password-stdin \
           cr.yandex
     - name: config
-      run: docker config ls
+      run: docker swarm init && docker config ls
     - name: push frontend
       run: |
         docker tag ya-game-frontend_frontend \
