@@ -13,9 +13,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: connect on ssh
-      run: |
-        echo ${{ secrets.SSH_KEY }} > id_rsa &&
-        ssh -i id_rsa yafriends@51.250.9.48
+      run: echo ${{ secrets.SSH_KEY }} > id_rsa && ssh -i id_rsa yafriends@51.250.9.48
 #     - uses: actions/setup-node@v2
 #       with:
 #         node-version: '14'
