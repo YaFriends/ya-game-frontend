@@ -27,6 +27,8 @@ jobs:
           --username oauth \
           --password-stdin \
           cr.yandex
+    - name: ss
+      run: echo cr.yandex | docker-credential-yc get
     - name: push frontend
       run: |
         docker tag ya-game-frontend_frontend \
