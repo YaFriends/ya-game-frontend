@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 #     - uses: actions/checkout@v2
-    - run: echo $HOME/.ssh/key
+    - run: cd $HOME/.ssh/key ls
     - name: connect on ssh
       run: ssh -T -i $HOME/.ssh/key yafriends@51.250.9.48
 #     - uses: actions/setup-node@v2
