@@ -30,4 +30,6 @@ jobs:
          --password ${{ secrets.OAUTH_TOKEN_ON_YANDEX_CLOUD }} \
          cr.yandex
     - name: check list
-      run: docker image list
+      run: |
+        docker image list
+        docker image get 8a4a01e26103
