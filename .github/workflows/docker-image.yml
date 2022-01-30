@@ -12,9 +12,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Yandex Image Registry Action
-      uses: pyropy/yandex-cloud-image-registry@v0.8-alpha
-      with:
-        YC_SERVICE_ACCOUNT_KEY_FILE: ${{ secrets.JSON_KEY }}
-        YC_IMG_REGISTRY_ID: crp3p6k47790pdc54tc4
-        DOCKER_IMG_NAME: ${{ github.sha }}
+    - name: S
+      run: |
+            yc iam key create --service-account-name default-sa -o key.json
