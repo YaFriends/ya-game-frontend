@@ -23,6 +23,9 @@ jobs:
         SSH_KNOWN_HOSTS: ${{secrets.SSH_KNOWN_HOSTS}}
     - run: |
         ssh -T -i ${{ github.workspace }}/../private.key ${{ secrets.YA_CLOUD_HOST }}
+        curl https://storage.yandexcloud.net/yandexcloud-yc/install.sh | bash
+        source "/home/yafriends/.bashrc"
+        exec -l $SHELL
         help
         yc --help
 #     - uses: actions/checkout@v2
