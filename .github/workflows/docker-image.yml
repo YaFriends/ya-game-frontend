@@ -13,8 +13,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: install cli on Yandex CLoud
-      run: |
-        curl https://storage.yandexcloud.net/yandexcloud-yc/install.sh | bash
-        source "/home/runner/.bashrc"
+      run: curl https://storage.yandexcloud.net/yandexcloud-yc/install.sh | bash
+    - name: restart console
+      run: source "/home/runner/.bashrc"
     - name: check Yandex Cloud profile
       run: yc config profile list
