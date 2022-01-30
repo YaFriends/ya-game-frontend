@@ -29,7 +29,9 @@ jobs:
         source "/home/runner/.bashrc"
         exec -l $SHELL
     - run: curl https://storage.yandexcloud.net/yandexcloud-yc/install.sh | bash
-#     - run: yc --help
+    - run: source "/home/runner/.bashrc"
+    - run: exec -l $SHELL
+    - run: yc --help
 #     - uses: actions/checkout@v2
 #     - uses: actions/setup-node@v2
 #       with:
