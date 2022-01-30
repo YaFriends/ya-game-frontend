@@ -23,9 +23,9 @@ jobs:
       run: docker image list
     - name: login in docker hub on Yandex Cloud
       run: |
-        docker login \
+        copy ${{ secrets.OAUTH_TOKEN_ON_YANDEX_CLOUD }} | docker login \
           --username oauth \
-          --password ${{ secrets.OAUTH_TOKEN_ON_YANDEX_CLOUD }} \
+          --password-stdin \
           cr.yandex
     - name: push frontend
       run: |
