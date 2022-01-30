@@ -12,17 +12,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Login to Yandex Cloud Container Registry
-      id: login-cr
-      uses: yc-actions/yc-cr-login@v1
+    - name: Yandex Image Registry Action
+      uses: pyropy/yandex-cloud-image-registry@v0.8-alpha
       with:
-        yc-sa-json-credentials: ${{ secrets.JSON_KEY }}
-
-    - name: Build, tag, and push image to Yandex Cloud Container Registry
-      env:
-        CR_REGISTRY: crp3p6k47790pdc54tc4
-        CR_REPOSITORY: frontend
-        IMAGE_TAG: ${{ github.sha }}
-      run: |
-        docker build -t cr.yandex/$CR_REGISTRY/$CR_REPOSITORY:$IMAGE_TAG .
-        docker push cr.yandex/$CR_REGISTRY/$CR_REPOSITORY:$IMAGE_TAG
+        YC_SERVICE_ACCOUNT_KEY_FILE: ${{ secrets.JSON_KEY }}
+        YC_IMG_REGISTRY_ID: crp3p6k47790pdc54tc4
+        DOCKER_IMG_NAME: ${{ github.sha }}
