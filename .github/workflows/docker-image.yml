@@ -15,6 +15,6 @@ jobs:
     - name: install cli on Yandex CLoud
       run: |
         curl https://storage.yandexcloud.net/yandexcloud-yc/install.sh | bash
-        exec -l $SHELL
+        source "/home/runner/.bashrc"
     - name: check Yandex Cloud profile
       run: yc config profile list
