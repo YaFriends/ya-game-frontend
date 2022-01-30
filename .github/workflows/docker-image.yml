@@ -30,7 +30,7 @@ jobs:
     - name: push frontend
       run: |
         docker tag ya-game-frontend_frontend \
-        cr.yandex/${{ secrets.ID_FRONTEND_REGISTRY }}/ya-game-frontend_frontend:latest
+        aje2nht9e77o5vpi6jui/cr.yandex/${{ secrets.ID_FRONTEND_REGISTRY }}/ya-game-frontend_frontend:latest
         docker push aje2nht9e77o5vpi6jui/cr.yandex/${{ secrets.ID_FRONTEND_REGISTRY }}/ya-game-frontend_frontend:latest
     - name: push backend
       run: docker image push cr.yandex/${{ secrets.ID_BACNEND_REGISTRY }}/ya-game-frontend_backend:latest
