@@ -12,30 +12,34 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - uses: actions/setup-node@v2
-      with:
-        node-version: '14'
-    - name: create .env file
-      run: echo ${{ secrets.ENV }} > .env
-    - name: create docker image
-      run: yarn && yarn docker:build
-    - name: check docker image
-      run: docker image list
-    - name: login in docker hub on Yandex Cloud
+    - name: connect on ssh
       run: |
-        echo ${{ secrets.OAUTH_TOKEN_ON_YANDEX_CLOUD }} | docker login \
-          --username oauth \
-          --password-stdin \
-          cr.yandex
-    - name: push frontend
-      run: |
-        docker tag ya-game-frontend_frontend \
-        cr.yandex/${{ secrets.ID_FRONTEND_REGISTRY }}/ya-game-frontend_frontend:latest
-        docker push cr.yandex/${{ secrets.ID_FRONTEND_REGISTRY }}/ya-game-frontend_frontend:latest
-    - name: push backend
-      run: docker image push cr.yandex/${{ secrets.ID_BACNEND_REGISTRY }}/ya-game-frontend_backend:latest
-    - name: push postgres
-      run: docker image push cr.yandex/${{ secrets.ID_DB_REGISTRY }}/postgres:13.3
-    - name: push dpage/pgadmin4
-      run: docker image push cr.yandex/${{ secrets.ID_DB_ADMIN_REGISTRY }}/dpage/pgadmin4:5.7 
+        ssh-keygen -t rsa -b 2048
+        ssh yafriends@51.250.9.48
+#     - uses: actions/setup-node@v2
+#       with:
+#         node-version: '14'
+#     - name: create .env file
+#       run: echo ${{ secrets.ENV }} > .env
+#     - name: create docker image
+#       run: yarn && yarn docker:build
+#     - name: check docker image
+#       run: docker image list
+#     - name: login in docker hub on Yandex Cloud
+#       run: |
+#         echo ${{ secrets.OAUTH_TOKEN_ON_YANDEX_CLOUD }} | docker login \
+#           --username oauth \
+#           --password-stdin \
+#           cr.yandex
+#     - name: push frontend
+#       run: |
+#         docker tag ya-game-frontend_frontend \
+#         cr.yandex/${{ secrets.ID_FRONTEND_REGISTRY }}/ya-game-frontend_frontend:latest
+#         docker push cr.yandex/${{ secrets.ID_FRONTEND_REGISTRY }}/ya-game-frontend_frontend:latest
+#     - name: push backend
+#       run: docker image push cr.yandex/${{ secrets.ID_BACNEND_REGISTRY }}/ya-game-frontend_backend:latest
+#     - name: push postgres
+#       run: docker image push cr.yandex/${{ secrets.ID_DB_REGISTRY }}/postgres:13.3
+#     - name: push dpage/pgadmin4
+#       run: docker image push cr.yandex/${{ secrets.ID_DB_ADMIN_REGISTRY }}/dpage/pgadmin4:5.7 
         
