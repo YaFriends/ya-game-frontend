@@ -13,8 +13,6 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: install cli on Yandex CLoud
-      run: curl https://storage.yandexcloud.net/yandexcloud-yc/install.sh | bash
-    - name: restart console
-      run: source "/home/runner/.bashrc"
-    - name: check Yandex Cloud profile
-      run: yc config profile list
+      run: |
+        export IAM_TOKEN=`yc iam create-token`
+        curl -H "Authorization: Bearer ${IAM_TOKEN}" \ https://resource-manager.api.cloud.yandex.net/resource-manager/v1/clouds
