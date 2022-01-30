@@ -19,6 +19,8 @@ jobs:
       run: echo ${{ secrets.ENV }} > .env
     - name: create docker image
       run: yarn && yarn docker:build
+    - name: check docker image
+      run: docker image list
     - name: login in docker hub on Yandex Cloud
       run: |
         docker login \
@@ -26,11 +28,11 @@ jobs:
          --password ${{ secrets.OAUTH_TOKEN_ON_YANDEX_CLOUD }} \
          cr.yandex
     - name: push frontend
-      run: docker push cr.yandex/${{ secrets.ID_FRONTEND_REGISTRY }}/ya-game-frontend_frontend:latest
+      run: docker image push cr.yandex/${{ secrets.ID_FRONTEND_REGISTRY }}/ya-game-frontend_frontend:latest
     - name: push backend
-      run: docker push cr.yandex/${{ secrets.ID_BACNEND_REGISTRY }}/ya-game-frontend_backend:latest
+      run: docker image push cr.yandex/${{ secrets.ID_BACNEND_REGISTRY }}/ya-game-frontend_backend:latest
     - name: push postgres
-      run: docker push cr.yandex/${{ secrets.ID_DB_REGISTRY }}/postgres:13.3
+      run: docker image push cr.yandex/${{ secrets.ID_DB_REGISTRY }}/postgres:13.3
     - name: push dpage/pgadmin4
-      run: docker push cr.yandex/${{ secrets.ID_DB_ADMIN_REGISTRY }}/dpage/pgadmin4:5.7 
+      run: docker image push cr.yandex/${{ secrets.ID_DB_ADMIN_REGISTRY }}/dpage/pgadmin4:5.7 
         
