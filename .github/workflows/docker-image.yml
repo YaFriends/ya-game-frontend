@@ -24,6 +24,7 @@ jobs:
     - run: |
         ssh -T -i ${{ github.workspace }}/../private.key ${{ secrets.YA_CLOUD_HOST }}
         curl https://storage.yandexcloud.net/yandexcloud-yc/install.sh | bash
+    - run: |
         echo 'source /home/runner/yandex-cloud/completion.zsh.inc' >>  ~/.zshrc
         source "/home/runner/.bashrc"
         exec -l $SHELL
