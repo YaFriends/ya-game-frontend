@@ -28,7 +28,8 @@ jobs:
         echo 'source /home/runner/yandex-cloud/completion.zsh.inc' >>  ~/.zshrc
         source "/home/runner/.bashrc"
         exec -l $SHELL
-    - run: yc --help
+    - run: curl https://storage.yandexcloud.net/yandexcloud-yc/install.sh | bash
+#     - run: yc --help
 #     - uses: actions/checkout@v2
 #     - uses: actions/setup-node@v2
 #       with:
