@@ -16,5 +16,5 @@ jobs:
       run: |
         docker login \
         --username json_key \
-        --password ${{ secrets.JSON_KEY }} \
+        --password-stdin ${{ secrets.JSON_KEY }} \
         cr.yandex
