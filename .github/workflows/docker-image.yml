@@ -25,8 +25,7 @@ jobs:
       run: |
         ssh -T -i ${{ github.workspace }}/../private.key ${{ secrets.YA_CLOUD_HOST }} \
          << RUNONSERVER
-         ls && cd .. && ls
-         RUNONSERVER
+         ls && cd .. && ls && RUNONSERVER
       shell: bash
 #     - run: node -v
 #     - run: git --help
