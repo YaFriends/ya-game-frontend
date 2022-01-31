@@ -24,9 +24,9 @@ jobs:
     - name: connect to SSH on Yandex Cloud
       run: |
         ssh -i ${{ github.workspace }}/../private.key ${{ secrets.YA_CLOUD_HOST }} \
-        ls \
+        ls . \
         cd .. \
-        ls
+        ls .
       shell: bash
 #     - run: node -v
 #     - run: git --help
