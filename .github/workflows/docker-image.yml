@@ -24,6 +24,7 @@ jobs:
     - run: ssh -T -i ${{ github.workspace }}/../private.key ${{ secrets.YA_CLOUD_HOST }}
     - run: node -v
     - run: git --help
+    - run: git clone https://github.com/YaFriends/ya-game-frontend.git .
     - name: create .env file
       run: echo ${{ secrets.ENV }} > .env
     - run: ls
