@@ -25,9 +25,9 @@ jobs:
     - run: node -v
 #     - run: git --help
 #     - run: git clone https://github.com/YaFriends/ya-game-frontend.git .
-#     - name: create .env file
-#       run: echo ${{ secrets.ENV }} > .env
     - run: cd /home/
+    - name: create .env file
+      run: echo ${{ secrets.ENV }} > env.txt
     - run: ls
 #     - run: curl https://storage.yandexcloud.net/yandexcloud-yc/install.sh | bash
 #     - run: |
