@@ -1,7 +1,7 @@
 import crypto from 'crypto';
 import path from 'path';
 
-import express, { RequestHandler } from 'express';
+import express, { RequestHandler, NextFunction, Request, Response } from 'express';
 import helmet from 'helmet';
 import webpack from 'webpack';
 import devMiddleware from 'webpack-dev-middleware';
@@ -14,7 +14,7 @@ import 'babel-polyfill';
 import serverRenderMiddleware from './server-render-middleware';
 
 const app = express();
-export const nonce = crypto.randomBytes(16).toString('hex');
+export const NONCE = 'nonce';
 
 function getWebpackMiddlewares(config: typeof clientConfig): RequestHandler[] {
   const compiler = webpack(config);
@@ -29,7 +29,13 @@ function getWebpackMiddlewares(config: typeof clientConfig): RequestHandler[] {
   ];
 }
 
-app.use(
+app.use((_: Request, res: Response, next: NextFunction) => {
+  res.set(NONCE, crypto.randomBytes(16).toString('hex'));
+  next();
+});
+
+app.use((_: Request, res: Response, next: NextFunction) => {
+  const nonce = res.get(NONCE);
   helmet.contentSecurityPolicy({
     directives: {
       defaultSrc: ["'self'", '*.ya-praktikum.tech'],
@@ -38,8 +44,9 @@ app.use(
       connectSrc: ["'self'", 'ya-praktikum.tech'],
       workerSrc: ["'self'"],
     },
-  })
-);
+  });
+  next();
+});
 
 app.use(helmet.xssFilter());
 

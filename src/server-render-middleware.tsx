@@ -7,12 +7,13 @@ import { StaticRouter } from 'react-router-dom';
 import 'whatwg-fetch';
 
 import App from './App';
-import { nonce } from './server';
+import { NONCE } from './server';
 import { preparedState } from './store';
 import { renderObject } from './utils/renderObject';
 
 export default (req: Request, res: Response) => {
   const location = req.url;
+  const nonce = res.get(NONCE);
   const context: StaticRouterContext = {};
   const store = preparedState({});
   const jsx = (
@@ -28,10 +29,10 @@ export default (req: Request, res: Response) => {
     return;
   }
 
-  res.status(context.statusCode || 200).send(getHtml(jsx, store));
+  res.status(context.statusCode || 200).send(getHtml(jsx, store, nonce));
 };
 
-function getHtml(reactHtml: JSX.Element, store?: ReturnType<typeof preparedState>) {
+function getHtml(reactHtml: JSX.Element, store?: ReturnType<typeof preparedState>, nonce?: string) {
   const html = renderToStaticMarkup(
     <html lang="ru">
       <head>
