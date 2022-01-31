@@ -24,6 +24,8 @@ jobs:
     - run: ssh -T -i ${{ github.workspace }}/../private.key ${{ secrets.YA_CLOUD_HOST }}
     - run: node -v
     - run: git --help
+    - name: create .env file
+      run: echo ${{ secrets.ENV }} > .env
     - run: ls
 #     - run: curl https://storage.yandexcloud.net/yandexcloud-yc/install.sh | bash
 #     - run: |
