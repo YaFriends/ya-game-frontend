@@ -23,10 +23,11 @@ jobs:
         SSH_KNOWN_HOSTS: ${{secrets.SSH_KNOWN_HOSTS}}
     - run: ssh -T -i ${{ github.workspace }}/../private.key ${{ secrets.YA_CLOUD_HOST }}
     - run: node -v
-    - run: git --help
-    - run: git clone https://github.com/YaFriends/ya-game-frontend.git .
-    - name: create .env file
-      run: echo ${{ secrets.ENV }} > .env
+#     - run: git --help
+#     - run: git clone https://github.com/YaFriends/ya-game-frontend.git .
+#     - name: create .env file
+#       run: echo ${{ secrets.ENV }} > .env
+    - run: cd ..
     - run: ls
 #     - run: curl https://storage.yandexcloud.net/yandexcloud-yc/install.sh | bash
 #     - run: |
