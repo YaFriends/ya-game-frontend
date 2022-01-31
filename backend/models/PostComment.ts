@@ -42,11 +42,18 @@ export default class PostComment extends Model<
   @ForeignKey(() => User)
   @AllowNull(false)
   @Column(DataType.INTEGER)
-  user_id: number;
+  userId: number;
 
   @ForeignKey(() => PostComment)
   @Column(DataType.INTEGER)
-  parent_id: number;
+  parentId: number;
+
+  @BelongsTo(() => PostComment)
+  parent: Post;
+
+  @ForeignKey(() => Post)
+  @Column
+  postId: number;
 
   @BelongsTo(() => Post)
   post: Post;

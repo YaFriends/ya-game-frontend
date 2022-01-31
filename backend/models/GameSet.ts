@@ -6,12 +6,15 @@ import {
   PrimaryKey,
   Default,
   DataType,
-  HasMany,
+  BelongsToMany,
 } from 'sequelize-typescript';
 import { Optional } from 'sequelize';
 
 import User from './User';
 import MiniGame from './MiniGame';
+import GameSetPlayer from './GameSetPlayer';
+import GameSetMiniGame from './GameSetMiniGame';
+import GameSetBan from './GameSetBan';
 
 interface GameSetAttributes {
   id: number;
@@ -42,13 +45,13 @@ export default class GameSet extends Model<GameSetAttributes, GameSetCreationAtt
   @Column(DataType.STRING)
   link: string;
 
-  @HasMany(() => User)
+  @BelongsToMany(() => User, () => GameSetPlayer)
   players: User;
 
-  @HasMany(() => MiniGame)
+  @BelongsToMany(() => MiniGame, () => GameSetMiniGame)
   miniGames: MiniGame;
 
-  @HasMany(() => MiniGame)
+  @BelongsToMany(() => MiniGame, () => GameSetBan)
   bans: MiniGame;
 
   get date() {

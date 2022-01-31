@@ -7,6 +7,9 @@ import Post from '../models/Post';
 import MiniGame from '../models/MiniGame';
 import GameSet from '../models/GameSet';
 import GameHistory from '../models/GameHistory';
+import GameSetBan from '../models/GameSetBan';
+import GameSetMiniGame from '../models/GameSetMiniGame';
+import GameSetPlayer from '../models/GameSetPlayer';
 
 const sequelizeOptions: SequelizeOptions = {
   host: process.env.POSTGRES_HOST || 'psql',
@@ -19,7 +22,18 @@ const sequelizeOptions: SequelizeOptions = {
 
 const sequelize = new Sequelize(sequelizeOptions);
 
-sequelize.addModels([User, GameHistory, GameSet, Like, MiniGame, Post, PostComment]);
+sequelize.addModels([
+  User,
+  GameHistory,
+  GameSet,
+  Like,
+  MiniGame,
+  Post,
+  PostComment,
+  GameSetBan,
+  GameSetMiniGame,
+  GameSetPlayer,
+]);
 
 export const dbConnect = async () => {
   try {
