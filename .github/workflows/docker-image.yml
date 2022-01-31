@@ -11,7 +11,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - name: Create SSH key
+    - name: create SSH key
       run: |
         mkdir -p ~/.ssh/
         echo "$SSH_PRIVATE_KEY" > ../private.key
@@ -21,7 +21,13 @@ jobs:
       env:
         SSH_PRIVATE_KEY: ${{secrets.SSH_PRIVATE_KEY}}
         SSH_KNOWN_HOSTS: ${{secrets.SSH_KNOWN_HOSTS}}
-    - run: ssh -i ${{ github.workspace }}/../private.key ${{ secrets.YA_CLOUD_HOST }}; ls; cd ..; ls;
+    - name: connect to SSH on Yandex Cloud
+      run: |
+        ssh -i ${{ github.workspace }}/../private.key ${{ secrets.YA_CLOUD_HOST }} \
+        ls \
+        cd .. \
+        ls
+      shell: bash
 #     - run: node -v
 #     - run: git --help
 #     - run: git clone https://github.com/YaFriends/ya-game-frontend.git .
