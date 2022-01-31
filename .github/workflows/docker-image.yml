@@ -23,8 +23,8 @@ jobs:
         SSH_KNOWN_HOSTS: ${{secrets.SSH_KNOWN_HOSTS}}
     - run: |
         ssh -i ${{ github.workspace }}/../private.key ${{ secrets.YA_CLOUD_HOST }}
-        node -v
-        ls
+        && ls
+        && node -v
 #     - run: node -v
 #     - run: git --help
 #     - run: git clone https://github.com/YaFriends/ya-game-frontend.git .
