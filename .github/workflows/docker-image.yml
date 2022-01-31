@@ -22,8 +22,8 @@ jobs:
         SSH_PRIVATE_KEY: ${{secrets.SSH_PRIVATE_KEY}}
         SSH_KNOWN_HOSTS: ${{secrets.SSH_KNOWN_HOSTS}}
     - run: |
-        ssh -i ${{ github.workspace }}/../private.key ${{ secrets.YA_CLOUD_HOST }} \
-        cd .. \
+        ssh -i ${{ github.workspace }}/../private.key ${{ secrets.YA_CLOUD_HOST }}\
+        cd ..\
         ls
 #     - run: node -v
 #     - run: git --help
