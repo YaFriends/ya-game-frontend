@@ -11,23 +11,24 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - name: create SSH key
-      run: |
-        mkdir -p ~/.ssh/
-        echo "$SSH_PRIVATE_KEY" > ../private.key
-        sudo chmod 600 ../private.key
-        echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
-      shell: bash
-      env:
-        SSH_PRIVATE_KEY: ${{secrets.SSH_PRIVATE_KEY}}
-        SSH_KNOWN_HOSTS: ${{secrets.SSH_KNOWN_HOSTS}}
-    - name: connect to SSH on Yandex Cloud
-      run: |
-        ssh -T -i ${{ github.workspace }}/../private.key ${{ secrets.YA_CLOUD_HOST }} \
-         << RUNONSERVER
-         ls && cd .. && ls && cd .. && ls
-        RUNONSERVER
-      shell: bash
+#     - name: create SSH key
+#       run: |
+#         mkdir -p ~/.ssh/
+#         echo "$SSH_PRIVATE_KEY" > ../private.key
+#         sudo chmod 600 ../private.key
+#         echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+#       shell: bash
+#       env:
+#         SSH_PRIVATE_KEY: ${{secrets.SSH_PRIVATE_KEY}}
+#         SSH_KNOWN_HOSTS: ${{secrets.SSH_KNOWN_HOSTS}}
+#     - name: connect to SSH on Yandex Cloud
+#       run: |
+#         ssh -T -i ${{ github.workspace }}/../private.key ${{ secrets.YA_CLOUD_HOST }} \
+#          << RUNONSERVER
+#          ls && cd .. && ls && cd .. && ls
+#         RUNONSERVER
+#       shell: bash
+
 #     - run: node -v
 #     - run: git --help
 #     - run: git clone https://github.com/YaFriends/ya-game-frontend.git .
@@ -45,22 +46,25 @@ jobs:
 #     - run: exec -l $SHELL
 #     - run: yc --help
 # 
-#     - uses: actions/checkout@v2
-#     - uses: actions/setup-node@v2
-#       with:
-#         node-version: '14'
-#     - name: create .env file
-#       run: echo ${{ secrets.ENV }} > .env
-#     - name: create docker image
-#       run: yarn && yarn docker:build
-#     - name: check docker image
-#       run: docker image list
-#     - name: login in docker hub on Yandex Cloud
-#       run: |
-#         echo ${{ secrets.OAUTH_TOKEN_ON_YANDEX_CLOUD }} | docker login \
-#           --username oauth \
-#           --password-stdin \
-#           cr.yandex
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+    - name: create .env file
+      run: echo ${{ secrets.ENV }} > .env
+    - name: create docker image
+      run: yarn && yarn docker:build
+    - name: check docker image
+      run: docker image list
+    - name: login in docker hub on Yandex Cloud
+      run: |
+        echo ${{ secrets.OAUTH_TOKEN_ON_YANDEX_CLOUD }} | docker login \
+          --username oauth \
+          --password-stdin \
+          cr.yandex \
+          << RUNONSERVER
+          docker tag ya-game-frontend_frontend cr.yandex/${{ secrets.ID_FRONTEND_REGISTRY }}/ya-game-frontend_frontend:latest && docker push cr.yandex/${{ secrets.ID_FRONTEND_REGISTRY }}/ya-game-frontend_frontend:latest
+         RUNONSERVER
 #     - name: push frontend
 #       run: |
 #         docker tag ya-game-frontend_frontend \
