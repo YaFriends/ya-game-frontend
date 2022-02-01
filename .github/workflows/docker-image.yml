@@ -29,12 +29,19 @@ jobs:
           run: docker tag ya-game-frontend_frontend cr.yandex/${{ secrets.ID_FRONTEND_REGISTRY }}/ya-game-frontend_frontend:latest
         - name: push frontend
           run: docker push cr.yandex/${{ secrets.ID_FRONTEND_REGISTRY }}/ya-game-frontend_frontend:latest
-#     - name: push backend
-#       run: docker image push cr.yandex/${{ secrets.ID_BACNEND_REGISTRY }}/ya-game-frontend_backend:latest
-#     - name: push postgres
-#       run: docker image push cr.yandex/${{ secrets.ID_DB_REGISTRY }}/postgres:13.3
-#     - name: push dpage/pgadmin4
-#       run: docker image push cr.yandex/${{ secrets.ID_DB_ADMIN_REGISTRY }}/dpage/pgadmin4:5.7 
+        - name: tag backend
+          run: docker tag ya-game-frontend_backend cr.yandex/${{ secrets.ID_BACNEND_REGISTRY }}/ya-game-frontend_backend:latest
+        - name: push backend
+          run: docker push cr.yandex/${{ secrets.ID_BACNEND_REGISTRY }}/ya-game-frontend_backend:latest
+        - name: tag postgres
+          run: docker tag postgres cr.yandex/${{ secrets.ID_DB_REGISTRY }}/postgres:13.3
+        - name: push postgres
+          run: docker push cr.yandex/${{ secrets.ID_DB_REGISTRY }}/postgres:13.3
+        - name: tag dpage/pgadmin4
+          run: docker tag dpage/pgadmin4 cr.yandex/${{ secrets.ID_DB_ADMIN_REGISTRY }}/dpage/pgadmin4:5.7
+        - name: push dpage/pgadmin4
+          run: docker push cr.yandex/${{ secrets.ID_DB_ADMIN_REGISTRY }}/dpage/pgadmin4:5.7
+#      
 #     - name: create SSH key
 #       run: |
 #         mkdir -p ~/.ssh/
