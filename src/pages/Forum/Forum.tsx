@@ -16,9 +16,9 @@ import { PostSchema } from '../../utils/ValidateSchema';
 import { PostCreationAttributes, PostCreationFN } from '../../../backend/models/Post';
 import { Form } from '../../components/ui/Form/Form';
 import { Textarea } from '../../components/ui/Textarea/Textarea';
+import { MainLink } from '../../components/ui/Link/Link';
 
 import './Forum.scss';
-import { MainLink } from '../../components/ui/Link/Link';
 
 export const Forum: FC = () => {
   const { currentUser } = useAuth();
