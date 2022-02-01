@@ -84,3 +84,9 @@ export const ProfilePasswordSchema = yup.object({
   newPassword: password,
   oldPassword: password,
 });
+
+export const PostSchema = yup.object({
+  title: yup.string(),
+  description: yup.string(),
+  created_by: yup.number(),
+});

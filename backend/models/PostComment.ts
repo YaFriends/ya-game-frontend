@@ -18,7 +18,7 @@ interface PostCommentAttributes {
   content: string;
   user_id: number;
   parent_id?: number;
-  post: Post;
+  post_id: number;
 }
 
 export interface PostCommentCreationAttributes extends Optional<PostCommentAttributes, 'id'> {}
@@ -49,7 +49,7 @@ export default class PostComment extends Model<
   parentId: number;
 
   @BelongsTo(() => PostComment)
-  parent: Post;
+  parent: PostComment;
 
   @ForeignKey(() => Post)
   @Column
