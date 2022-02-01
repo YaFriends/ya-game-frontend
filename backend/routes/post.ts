@@ -7,5 +7,6 @@ export const registerRoutes = (app: Express) => {
   app.get('/posts/:id', [PostController.getById]);
   app.delete('/posts/:id', [PostController.deleteById]);
   app.post('/posts/:id/like', [PostController.like]);
+  app.delete('/posts/:id/like', [PostController.unlike]);
   app.post('/posts/:id/comment', [PostController.comment]);
 };

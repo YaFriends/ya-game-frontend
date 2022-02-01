@@ -14,7 +14,7 @@ interface PopupProps {
 
 const DEFAULT_CLASSES: string[] = ['ui-popup'];
 
-export const Popup: FC<PopupProps> = ({ title, textButton, isShown = false, click }) => {
+export const Popup: FC<PopupProps> = ({ title, textButton, isShown = false, click, children }) => {
   const classesMemo = useMemo(
     () => [...DEFAULT_CLASSES, isShown ? 'ui-popup--show' : ''],
     [isShown]
@@ -28,6 +28,7 @@ export const Popup: FC<PopupProps> = ({ title, textButton, isShown = false, clic
             <Subtitle text={title} />
             <Button type="button" extendClass="ui-button__close" click={click} />
           </header>
+          {children}
           <footer className="ui-popup__footer">
             <Button type="button" text={textButton} click={click} />
           </footer>

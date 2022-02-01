@@ -33,7 +33,7 @@ export default class Like extends Model<LikeAttributes, LikeCreationAttributes> 
   @ForeignKey(() => Post)
   @AllowNull(false)
   @Column(DataType.INTEGER)
-  post_id: string;
+  post_id: number;
 
   @ForeignKey(() => User)
   @AllowNull(false)
