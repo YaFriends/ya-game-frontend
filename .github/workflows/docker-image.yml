@@ -62,8 +62,8 @@ jobs:
             --username oauth \
             --password ${{ secrets.OAUTH_TOKEN_ON_YANDEX_CLOUD }} \
             cr.yandex && \
-          docker tag ya-game-frontend_frontend cr.yandex/${{ secrets.ID_FRONTEND_REGISTRY }}/ya-game-frontend_frontend:latest && \
-          docker push cr.yandex/${{ secrets.ID_FRONTEND_REGISTRY }}/ya-game-frontend_frontend:latest
+          docker tag ya-game-frontend_frontend cr.yandex/${{ secrets.ID_FRONTEND_REGISTRY }}/ya-game-frontend_frontend:latest
+#          docker push cr.yandex/${{ secrets.ID_FRONTEND_REGISTRY }}/ya-game-frontend_frontend:latest
 #     - name: push frontend
 #       run: |
 #         docker tag ya-game-frontend_frontend \
