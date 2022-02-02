@@ -181,5 +181,7 @@ export const TRANSLATION: Record<string, Record<string, string>> = {
     delete: 'Удалить пост',
     comments: 'Комментарии',
     noComments: 'К сожалению, пока еще нет комментариев, но ты можешь быть первым!',
+    addComment: 'Оставить комментарий',
+    reply: 'Ответить',
   },
 };

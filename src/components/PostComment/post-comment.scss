@@ -1,2 +1,11 @@
 .post-comment {
+  @apply mb-6 last:mb-0;
+
+  &__body {
+    @apply flex w-full mb-3;
+  }
+
+  &__author {
+    @apply mr-3
+  }
 }

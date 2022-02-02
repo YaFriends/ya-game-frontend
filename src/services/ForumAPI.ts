@@ -12,7 +12,7 @@ export const ForumAPI = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: INTERNAL_API_URL + servicePoint,
   }),
-  tagTypes: ['Posts'],
+  tagTypes: ['Posts', 'Post'],
   endpoints: build => ({
     loadPosts: build.query<Post[], void>({
       query: () => ({
@@ -37,6 +37,7 @@ export const ForumAPI = createApi({
         method: 'GET',
         credentials: 'include',
       }),
+      providesTags: ['Post'],
     }),
     deletePost: build.mutation<void, number>({
       query: id => ({
@@ -53,7 +54,7 @@ export const ForumAPI = createApi({
         credentials: 'include',
         body: { user_id },
       }),
-      invalidatesTags: ['Posts'],
+      invalidatesTags: ['Posts', 'Post'],
     }),
     unlikePost: build.mutation<Like, { id: number; user_id: number }>({
       query: ({ id, user_id }) => ({
@@ -62,24 +63,31 @@ export const ForumAPI = createApi({
         credentials: 'include',
         body: { user_id },
       }),
-      invalidatesTags: ['Posts'],
+      invalidatesTags: ['Posts', 'Post'],
     }),
-    commentPost: build.mutation<
-      PostComment,
-      { id: Pick<Post, 'id'>; comment: PostCommentCreationAttributes }
-    >({
-      query: ({ id, comment }) => ({
-        url: `/${id}/comment`,
+    commentPost: build.mutation<PostComment, PostCommentCreationAttributes>({
+      query: comment => ({
+        url: `/${comment.postId}/comment`,
         method: 'POST',
         credentials: 'include',
         body: comment,
       }),
+      invalidatesTags: ['Post'],
+    }),
+    loadComments: build.query<PostComment[], number | undefined>({
+      query: postId => ({
+        url: `/${postId}/comments`,
+        method: 'GET',
+        credentials: 'include',
+      }),
+      providesTags: ['Post'],
     }),
   }),
 });
 
 export const {
   useLoadPostQuery,
+  useLoadCommentsQuery,
   useLoadPostsQuery,
   useCreatePostMutation,
   useDeletePostMutation,
