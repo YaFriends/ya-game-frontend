@@ -1,0 +1,5 @@
+.forum-post {
+  &__head {
+    @apply pb-5 mb-5 border-b border-grey dark:border-white last:mb-0;
+  }
+}

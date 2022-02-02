@@ -13,7 +13,7 @@ import User from './User';
 import { Optional } from 'sequelize';
 import Post from './Post';
 
-interface PostCommentAttributes {
+export interface PostCommentAttributes {
   id: number;
   content: string;
   user_id: number;
