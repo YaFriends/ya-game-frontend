@@ -186,5 +186,7 @@ export const TRANSLATION: Record<string, Record<string, string>> = {
     like: 'Лайкнуть',
     unlike: 'Убрать лайк',
     delete: 'Удалить пост',
+    comments: 'Комментарии',
+    noComments: 'К сожалению, пока еще нет комментариев, но ты можешь быть первым!',
   },
 };

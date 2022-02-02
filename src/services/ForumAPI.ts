@@ -31,8 +31,8 @@ export const ForumAPI = createApi({
       }),
       invalidatesTags: ['Posts'],
     }),
-    loadPost: build.query<Post, { id: Pick<Post, 'id'> }>({
-      query: ({ id }) => ({
+    loadPost: build.query<Post, number>({
+      query: id => ({
         url: `/${id}`,
         method: 'GET',
         credentials: 'include',
