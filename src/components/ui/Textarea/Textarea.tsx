@@ -1,4 +1,4 @@
-import React, { FC, useMemo } from 'react';
+import React, { FC, FormEventHandler, useMemo } from 'react';
 import { UseFormRegister, FieldError } from 'react-hook-form';
 
 import { Label } from '../Label/Label';
@@ -11,8 +11,10 @@ export interface TextareaProps {
   label?: string;
   id?: string;
   name: string;
+  extendClass?: string;
   placeholder?: string;
   disabled?: boolean;
+  onInput?: FormEventHandler<HTMLTextAreaElement>;
 }
 
 const DEFAULT_CLASSES: string[] = [
@@ -26,6 +28,7 @@ const DEFAULT_CLASSES: string[] = [
   'px-3',
   'py-2',
   'focus:outline-none',
+  'w-full',
 ];
 
 const classes = (error?: string, disabled?: boolean): string[] => {
@@ -52,11 +55,13 @@ export const Textarea: FC<TextareaProps> = ({
   id,
   name,
   placeholder,
+  extendClass,
   disabled = false,
+  onInput = () => {},
 }) => {
   const classesMemo = useMemo(() => classes(error?.message, disabled), [error?.message]);
   return (
-    <div className="block relative mb-6 last:mb-0">
+    <div className={`block relative mb-6 last:mb-0 ${extendClass}`}>
       {label && <Label name={name} id={id || name} label={label} />}
       <textarea
         {...register(name)}
@@ -65,6 +70,7 @@ export const Textarea: FC<TextareaProps> = ({
         id={id || name}
         placeholder={placeholder}
         disabled={disabled}
+        onInput={onInput}
       />
       {error && <Error text={error?.message} />}
     </div>

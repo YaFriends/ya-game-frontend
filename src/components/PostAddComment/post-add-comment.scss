@@ -1,0 +1,7 @@
+.post-add-comment {
+    @apply w-1/2 min-w-[500px] max-w-full relative;
+
+    button {
+        @apply absolute bottom-1 right-1 z-10;
+    }
+}

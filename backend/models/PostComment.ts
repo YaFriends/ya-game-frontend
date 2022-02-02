@@ -16,9 +16,9 @@ import Post from './Post';
 export interface PostCommentAttributes {
   id: number;
   content: string;
-  user_id: number;
-  parent_id?: number;
-  post_id: number;
+  userId: number;
+  parentId?: number;
+  postId: number;
 }
 
 export interface PostCommentCreationAttributes extends Optional<PostCommentAttributes, 'id'> {}
@@ -52,9 +52,17 @@ export default class PostComment extends Model<
   parent: PostComment;
 
   @ForeignKey(() => Post)
+  @AllowNull(false)
   @Column
   postId: number;
 
   @BelongsTo(() => Post)
   post: Post;
+
+  get children() {
+    return PostComment.findAll({
+      where: { parentId: this.getDataValue('id') },
+      include: ['children'],
+    });
+  }
 }
