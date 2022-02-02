@@ -16,9 +16,9 @@ import { Icon } from '../../components/Icon/Icon';
 import { Like } from '../../components/Icon/svgs/Like';
 import { Comment } from '../../components/Icon/svgs/Comment';
 import { PostAddComment } from '../../components/PostAddComment/PostAddComment';
+import { MainLink } from '../../components/ui/Link/Link';
 
 import './forum-post.scss';
-import { MainLink } from '../../components/ui/Link/Link';
 
 type PageParams = {
   id: string;
