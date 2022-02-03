@@ -74,20 +74,11 @@ export const ForumAPI = createApi({
       }),
       invalidatesTags: ['Post'],
     }),
-    loadComments: build.query<PostComment[], number | undefined>({
-      query: postId => ({
-        url: `/${postId}/comments`,
-        method: 'GET',
-        credentials: 'include',
-      }),
-      providesTags: ['Post'],
-    }),
   }),
 });
 
 export const {
   useLoadPostQuery,
-  useLoadCommentsQuery,
   useLoadPostsQuery,
   useCreatePostMutation,
   useDeletePostMutation,

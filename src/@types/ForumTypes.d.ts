@@ -17,6 +17,7 @@ export type PostComment = {
   parent?: PostComment;
   postId: number;
   post?: Post;
+  children?: PostComment[];
 };
 
 export type Like = {

@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useState } from 'react';
+import React, { FC, useCallback, useMemo, useState } from 'react';
 import { PostComment as PostCommentType } from '../../@types/ForumTypes';
 import { DEFAULT_PROFILE_IMAGE_PATH } from '../constants';
 import { PostAddComment } from '../PostAddComment/PostAddComment';
@@ -19,6 +19,16 @@ export const PostComment: FC<PostCommentProps> = props => {
     setIsCommentOpened(true);
   }, [post_id, comment]);
 
+  const renderComments = useMemo(() => {
+    if (!comment.children) {
+      return null;
+    }
+
+    return comment.children.map(child => (
+      <PostComment key={child.id} comment={child} post_id={post_id} />
+    ));
+  }, [comment]);
+
   return (
     <div className="post-comment">
       <div className="post-comment__body">
@@ -36,11 +46,18 @@ export const PostComment: FC<PostCommentProps> = props => {
             type="button"
             click={onCommentClick}
             text={TRANSLATION.Post.reply}
-            extendClass="w-auto mx-0 px-3"
+            extendClass="w-auto !mx-0 px-3"
           />
         </div>
       )}
-      {isCommentOpen && <PostAddComment postId={post_id} parentId={comment.id} />}
+      {isCommentOpen && (
+        <PostAddComment
+          postId={post_id}
+          parentId={comment.id}
+          onSend={() => setIsCommentOpened(false)}
+        />
+      )}
+      {renderComments && <div className="post-comment__children">{renderComments}</div>}
     </div>
   );
 };
