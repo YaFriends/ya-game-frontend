@@ -71,6 +71,10 @@ export const Forum: FC = () => {
     setIsPopupVisible(false);
   }, []);
 
+  const handleClose = useCallback(() => {
+    setIsPopupVisible(false);
+  }, []);
+
   return (
     <section className="main forum">
       <div className="forum__head">
@@ -82,7 +86,8 @@ export const Forum: FC = () => {
         isShown={isPopupVisible}
         title={TRANSLATION.Forum.popupTitle}
         textButton={TRANSLATION.Forum.popupSend}
-        click={handleSubmit(onPostCreate)}>
+        onSubmit={handleSubmit(onPostCreate)}
+        onClose={handleClose}>
         <Form extendClass="px-3" name="profileEdit" submit={handleSubmit(onPostCreate)}>
           <Input
             error={errors.title}

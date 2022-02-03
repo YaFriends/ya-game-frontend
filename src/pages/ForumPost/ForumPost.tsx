@@ -1,7 +1,8 @@
-import React, { FC, useEffect, useMemo, useState } from 'react';
+import React, { FC, useMemo } from 'react';
+import { cloneDeep } from 'lodash';
 
 import { Title } from '../../components/ui/Title/Title';
-import { useLoadCommentsQuery, useLoadPostQuery } from '../../services/ForumAPI';
+import { useLoadPostQuery } from '../../services/ForumAPI';
 import { useParams } from 'react-router';
 import { Spinner } from '../../components/ui/Spinner/Spinner';
 import { Text } from '../../components/ui/Text/Text';
@@ -17,6 +18,7 @@ import { Comment } from '../../components/Icon/svgs/Comment';
 import { PostAddComment } from '../../components/PostAddComment/PostAddComment';
 
 import './forum-post.scss';
+import { MainLink } from '../../components/ui/Link/Link';
 
 type PageParams = {
   id: string;
@@ -26,17 +28,29 @@ export const ForumPost: FC = () => {
   const { id: postId }: PageParams = useParams();
   const { data: post, isLoading } = useLoadPostQuery(Number(postId));
   const { likeText, onLikeClick } = usePostActions(post);
-  const [skip, setSkip] = useState(true);
-  const { data: c } = useLoadCommentsQuery(post?.id, { skip });
-  useEffect(() => {
-    if (post) {
-      setSkip(false);
-    }
-  }, [post]);
-  console.log(c);
+
   let { comments } = post || {};
+
   const rootComments = useMemo(() => {
-    return (comments || []).filter(({ parentId }) => parentId === null);
+    if (!comments) {
+      return [];
+    }
+
+    const cloneComments = cloneDeep(comments);
+
+    cloneComments.forEach(comment => {
+      if (comment.parentId) {
+        const rootComment = cloneComments.find(({ id }) => id === comment.parentId);
+        if (rootComment) {
+          if (!rootComment.children) {
+            rootComment.children = [];
+          }
+          rootComment.children.push(comment);
+        }
+      }
+    });
+
+    return cloneComments.filter(({ parentId }) => parentId === null);
   }, [comments]);
 
   if (isLoading) {
@@ -52,6 +66,11 @@ export const ForumPost: FC = () => {
   return (
     <div className="forum-post">
       <div className="forum-post__block">
+        <MainLink
+          href="/forum"
+          text={TRANSLATION.Post.back}
+          extendClass="ui-link--button w-auto !mx-0 mb-4"
+        />
         <div className="forum-post__block-line forum-post__block-line--between">
           <Title text={title} extendClass="!text-left mb-5" />
           <div className="forum-post__info">

@@ -19,6 +19,7 @@ type FormData = {
 type PostAddCommentProps = {
   postId: number;
   parentId?: number;
+  onSend?: () => void;
 };
 
 export const PostAddComment: FC<PostAddCommentProps> = props => {
@@ -39,7 +40,7 @@ export const PostAddComment: FC<PostAddCommentProps> = props => {
     },
   });
 
-  const { postId, parentId } = props;
+  const { postId, parentId, onSend } = props;
 
   const onSubmit = useCallback(
     (data: FormData) => {
@@ -55,6 +56,10 @@ export const PostAddComment: FC<PostAddCommentProps> = props => {
       });
 
       reset({ message: '' });
+
+      if (typeof onSend === 'function') {
+        onSend();
+      }
     },
     [postId, parentId, currentUser]
   );
@@ -66,13 +71,6 @@ export const PostAddComment: FC<PostAddCommentProps> = props => {
   return (
     <div className="post-add-comment">
       <Form name="send-comment" submit={handleSubmit(onSubmit)}>
-        <Textarea
-          error={errors.message}
-          register={register}
-          name="message"
-          onInput={handleTextAreaInput}
-          extendClass="mb-0!"
-        />
         {messageFilled && (
           <button>
             <Icon fill="white" width={25} height={25} viewBox="0 0 493 493">
@@ -80,6 +78,13 @@ export const PostAddComment: FC<PostAddCommentProps> = props => {
             </Icon>
           </button>
         )}
+        <Textarea
+          error={errors.message}
+          register={register}
+          name="message"
+          onInput={handleTextAreaInput}
+          extendClass="mb-0!"
+        />
       </Form>
     </div>
   );

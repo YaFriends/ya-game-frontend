@@ -183,5 +183,6 @@ export const TRANSLATION: Record<string, Record<string, string>> = {
     noComments: 'К сожалению, пока еще нет комментариев, но ты можешь быть первым!',
     addComment: 'Оставить комментарий',
     reply: 'Ответить',
+    back: 'Назад',
   },
 };
