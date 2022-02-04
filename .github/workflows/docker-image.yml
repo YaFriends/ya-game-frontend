@@ -30,7 +30,8 @@ jobs:
               RUNONSERVER
           shell: bash
 
-
+# kek
+#            kek
 #               echo ${{ secrets.ENV }} > .env && ls
 
            #        - uses: actions/setup-node@v2
