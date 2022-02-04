@@ -4,15 +4,16 @@ import { renderToStaticMarkup } from 'react-dom/server';
 import { Provider } from 'react-redux';
 import { StaticRouterContext } from 'react-router';
 import { StaticRouter } from 'react-router-dom';
-
 import 'whatwg-fetch';
 
 import App from './App';
+import { NONCE } from './server';
 import { preparedState } from './store';
 import { renderObject } from './utils/renderObject';
 
 export default (req: Request, res: Response) => {
   const location = req.url;
+  const nonce = res.get(NONCE);
   const context: StaticRouterContext = {};
   const store = preparedState({});
   const jsx = (
@@ -28,10 +29,10 @@ export default (req: Request, res: Response) => {
     return;
   }
 
-  res.status(context.statusCode || 200).send(getHtml(jsx, store));
+  res.status(context.statusCode || 200).send(getHtml(jsx, store, nonce));
 };
 
-function getHtml(reactHtml: JSX.Element, store?: ReturnType<typeof preparedState>) {
+function getHtml(reactHtml: JSX.Element, store?: ReturnType<typeof preparedState>, nonce?: string) {
   const html = renderToStaticMarkup(
     <html lang="ru">
       <head>
@@ -48,8 +49,9 @@ function getHtml(reactHtml: JSX.Element, store?: ReturnType<typeof preparedState
       </head>
       <body>
         <div id="mount">{reactHtml}</div>
-        <script src="/main.js"></script>
+        <script nonce={nonce} src="/main.js"></script>
         <script
+          nonce={nonce}
           dangerouslySetInnerHTML={{
             __html: `window.__PRELOADED_STATE__ = ${renderObject(store?.getState())}`,
           }}
