@@ -58,11 +58,4 @@ export default class PostComment extends Model<
 
   @BelongsTo(() => Post)
   post: Post;
-
-  get children() {
-    return PostComment.findAll({
-      where: { parentId: this.getDataValue('id') },
-      include: ['children'],
-    });
-  }
 }
