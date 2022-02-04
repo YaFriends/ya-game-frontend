@@ -101,6 +101,7 @@ export const TRANSLATION: Record<string, Record<string, string>> = {
     popupSend: 'Создать',
     popupTitleInput: 'Название поста',
     popupDescriptionInput: 'Описание поста',
+    back: 'В меню',
   },
   Game: {
     Wins: 'Побед',

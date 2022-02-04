@@ -16,8 +16,14 @@
   &__head {
     @apply flex items-center justify-between mb-5;
 
-    .ui-button {
-      @apply w-auto mx-0 px-5;
+  }
+
+  &__head-actions {
+    @apply flex ml-2;
+
+    .ui-button,
+    .ui-link {
+      @apply w-auto mx-0 mr-2 px-5 last:mr-0;
     }
   }
 }

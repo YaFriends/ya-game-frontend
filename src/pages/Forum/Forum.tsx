@@ -18,6 +18,7 @@ import { Form } from '../../components/ui/Form/Form';
 import { Textarea } from '../../components/ui/Textarea/Textarea';
 
 import './Forum.scss';
+import { MainLink } from '../../components/ui/Link/Link';
 
 export const Forum: FC = () => {
   const { currentUser } = useAuth();
@@ -79,7 +80,14 @@ export const Forum: FC = () => {
     <section className="main forum">
       <div className="forum__head">
         <Title text={TRANSLATION.Forum.label} />
-        <Button type="button" text={TRANSLATION.Forum.createPost} click={showPostCreationPopup} />
+        <div className="forum__head-actions">
+          <MainLink
+            href="/forum"
+            text={TRANSLATION.Forum.back}
+            extendClass="ui-link--button w-auto !mx-0 mb-4"
+          />
+          <Button type="button" text={TRANSLATION.Forum.createPost} click={showPostCreationPopup} />
+        </div>
       </div>
       <div className="forum__content">{postsInfo}</div>
       <Popup
