@@ -1,6 +1,8 @@
+import crypto from 'crypto';
 import path from 'path';
 
-import express, { RequestHandler } from 'express';
+import express, { RequestHandler, NextFunction, Request, Response } from 'express';
+import helmet from 'helmet';
 import webpack from 'webpack';
 import devMiddleware from 'webpack-dev-middleware';
 import hotMiddleware from 'webpack-hot-middleware';
@@ -12,6 +14,7 @@ import 'babel-polyfill';
 import serverRenderMiddleware from './server-render-middleware';
 
 const app = express();
+export const NONCE = 'nonce';
 
 function getWebpackMiddlewares(config: typeof clientConfig): RequestHandler[] {
   const compiler = webpack(config);
@@ -25,6 +28,28 @@ function getWebpackMiddlewares(config: typeof clientConfig): RequestHandler[] {
     hotMiddleware(compiler, { path: `/__webpack_hmr` }),
   ];
 }
+
+app.use((_: Request, res: Response, next: NextFunction) => {
+  res.set(NONCE, crypto.randomBytes(16).toString('hex'));
+  next();
+});
+
+app.use((_: Request, res: Response, next: NextFunction) => {
+  const nonce = res.get(NONCE);
+  helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: ["'self'", '*.ya-praktikum.tech'],
+      imgSrc: ["'self'", 'ya-praktikum.tech'],
+      scriptSrc: ["'self'", `'nonce-${nonce}'`],
+      connectSrc: ["'self'", 'ya-praktikum.tech'],
+      workerSrc: ["'self'"],
+    },
+  });
+  next();
+});
+
+app.use(helmet.xssFilter());
+
 app.use(express.static(path.join(__dirname, '../dist')));
 
 app.get('/mockServiceWorker.js', (req, res) => {
