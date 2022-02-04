@@ -27,7 +27,7 @@ jobs:
             ssh -T -i ${{ github.workspace }}/../private.key ${{ secrets.YA_CLOUD_HOST }} \
               << RUNONSERVER
                 ls
-              RUNONSERVER
+               RUNONSERVER
           shell: bash
 
 # kek
