@@ -5,7 +5,6 @@ on:
     branches: [ master ]
   pull_request:
     branches: [ master ]
-  workflow_dispatch:
 
 jobs:
   build:
@@ -21,11 +20,18 @@ jobs:
           env:
             SSH_PRIVATE_KEY: ${{secrets.SSH_PRIVATE_KEY}}
             SSH_KNOWN_HOSTS: ${{secrets.SSH_KNOWN_HOSTS}}
-        - name: connect to SSH on Yandex Cloud
+        - name: git pull
           run: |
             ssh -T -i ${{ github.workspace }}/../private.key ${{ secrets.YA_CLOUD_HOST }} \
              << RUNONSERVER
-             ls && node -v && npm -v && yarn -v && git --version && docker -v && docker-compose -v && cd ya-game-frontend && git pull
+             cd ya-game-frontend && git pull
+            RUNONSERVER
+          shell: bash
+        - name: refresh docker build
+          run: |
+            ssh -T -i ${{ github.workspace }}/../private.key ${{ secrets.YA_CLOUD_HOST }} \
+             << RUNONSERVER
+             cd ya-game-frontend && sudo yarn docker:build
             RUNONSERVER
           shell: bash
 
