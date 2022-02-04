@@ -25,7 +25,7 @@ jobs:
           run: |
             ssh -T -i ${{ github.workspace }}/../private.key ${{ secrets.YA_CLOUD_HOST }} \
              << RUNONSERVER
-             ls && git pull
+             ls && node -v && npm -v && yarn -v && git --version && docker -v && docker-compose -v
             RUNONSERVER
           shell: bash
 
