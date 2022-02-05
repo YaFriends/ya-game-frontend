@@ -66,6 +66,7 @@ services:
         restart: always
         image: nginx
         volumes:
+            - ./docker/nginx/certs:/etc/nginx/certs
             - ./docker/nginx/core:/etc/nginx/conf.d
             - ./docker/nginx/logs/:/var/log/nginx/
         depends_on:
