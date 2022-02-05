@@ -67,7 +67,7 @@ export const ForumPost: FC = () => {
     <div className="forum-post">
       <div className="forum-post__block">
         <MainLink
-          href="/forum"
+          href="/"
           text={TRANSLATION.Post.back}
           extendClass="ui-link--button w-auto !mx-0 mb-4"
         />
