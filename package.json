@@ -7,10 +7,10 @@
     "clean": "rimraf dist",
     "start:webpack": "webpack --mode=development --watch",
     "start:server": "nodemon index.js --watch dist/server.js",
-    "start": "NODE_ENV=development PORT=8000 npm-run-all --print-label --parallel start:webpack start:server",
-    "docker:start": "docker-compose down && docker-compose build && docker-compose up -d --force-recreate",
+    "start": "NODE_ENV=development npm-run-all --print-label --parallel start:webpack start:server",
+    "docker:start": "docker-compose down && docker compose build && docker compose up -d --force-recreate",
     "build": "NODE_ENV=production && yarn clean && webpack --mode production",
-    "docker:build": "docker-compose down && docker-compose build --build-arg DOCKER_ENV=production && docker-compose up -d --force-recreate",
+    "docker:build": "docker-compose down && docker compose build --build-arg DOCKER_ENV=production && docker compose up -d",
     "server": "node index.js",
     "test": "jest"
   },
