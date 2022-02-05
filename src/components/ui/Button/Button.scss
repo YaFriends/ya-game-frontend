@@ -25,7 +25,7 @@
 
     &:before,
     &:after {
-      @apply absolute h-[15px] w-[2px] top-0 right-[6px] bg-black;
+      @apply absolute h-[15px] w-[2px] top-0 right-[6px] bg-black dark:bg-white;
       content: '';
     }
 

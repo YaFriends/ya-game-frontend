@@ -10,7 +10,7 @@
   }
 
   &__wrapper {
-    @apply relative w-full max-w-screen-sm bg-white rounded-2xl;
+    @apply relative w-full max-w-screen-sm bg-white dark:bg-black rounded-2xl;
   }
 
   &__header {
@@ -19,5 +19,13 @@
 
   &__footer {
     @apply flex justify-between items-center p-4;
+  }
+}
+
+.dark {
+  .ui-popup {
+    &__wrapper {
+      box-shadow: 0 5px 15px rgba(255, 255, 255, .14);
+    }
   }
 }
