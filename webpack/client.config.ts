@@ -5,6 +5,7 @@ import CopyPlugin from 'copy-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import { TsconfigPathsPlugin } from 'tsconfig-paths-webpack-plugin';
 import { Configuration, Entry, WebpackPluginInstance as Plugin } from 'webpack';
+import { InjectManifest } from 'workbox-webpack-plugin';
 
 import { IS_DEV, DIST_DIR, SRC_DIR } from './env';
 
@@ -56,6 +57,12 @@ const config: Configuration = {
     !IS_DEV && new CompressionPlugin(),
     new CopyPlugin({
       patterns: [{ from: 'static', to: 'static' }],
+    }),
+    new InjectManifest({
+      swSrc: `/public/cacheServiceWorker.js`,
+      swDest: 'cacheServiceWorker.js',
+      include: [/\.html$/, /\.js$/, /\.css$/, /\.woff2$/, /\.jpg$/, /\.png$/],
+      maximumFileSizeToCacheInBytes: 100 * 1024 * 1024,
     }),
   ].filter(Boolean) as Plugin[],
   devtool: 'source-map',
