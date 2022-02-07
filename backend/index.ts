@@ -1,7 +1,2 @@
-import { dbConnect } from './db/connect';
-import { listen } from './server/listen';
-
-(async () => {
-  await dbConnect();
-  listen();
-})();
+export { dbConnect } from './db/connect';
+export { connect } from './server/listen';
