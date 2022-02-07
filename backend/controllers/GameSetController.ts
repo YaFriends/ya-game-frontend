@@ -4,7 +4,6 @@ import { nanoid } from 'nanoid';
 import GameSet from '../models/GameSet';
 import User from '../models/User';
 
-
 export const GameSetController = {
   getById(req: Request, res: Response) {
     const { id } = req.params;
