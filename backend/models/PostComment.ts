@@ -13,12 +13,12 @@ import User from './User';
 import { Optional } from 'sequelize';
 import Post from './Post';
 
-interface PostCommentAttributes {
+export interface PostCommentAttributes {
   id: number;
   content: string;
-  user_id: number;
-  parent_id?: number;
-  post: Post;
+  userId: number;
+  parentId?: number;
+  postId: number;
 }
 
 export interface PostCommentCreationAttributes extends Optional<PostCommentAttributes, 'id'> {}
@@ -49,9 +49,10 @@ export default class PostComment extends Model<
   parentId: number;
 
   @BelongsTo(() => PostComment)
-  parent: Post;
+  parent: PostComment;
 
   @ForeignKey(() => Post)
+  @AllowNull(false)
   @Column
   postId: number;
 

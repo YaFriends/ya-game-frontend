@@ -16,4 +16,11 @@ export const PostCommentController = {
       res.status(200).send(result);
     });
   },
+  getByPostId(req: Request, res: Response) {
+    return PostComment.findAll({
+      where: { postId: req.params.id },
+    }).then(result => {
+      res.status(200).send(result);
+    });
+  },
 };

@@ -12,15 +12,17 @@ import {
 import User from './User';
 import { Optional } from 'sequelize';
 import PostComment from './PostComment';
+import Like from './Like';
 
 interface PostAttributes {
   id: number;
-  title: number;
+  title: string;
   description: string;
   created_by: number;
 }
 
 export interface PostCreationAttributes extends Optional<PostAttributes, 'id'> {}
+export type PostCreationFN = (postAttributes: PostCreationAttributes) => void;
 
 @Table({
   timestamps: true,
@@ -45,4 +47,7 @@ export default class Post extends Model<PostAttributes, PostCreationAttributes> 
 
   @HasMany(() => PostComment)
   comments: PostComment[];
+
+  @HasMany(() => Like)
+  likes: Like[];
 }

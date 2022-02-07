@@ -1,7 +1,29 @@
 .forum {
-  @apply flex-grow mx-auto flex items-center justify-center flex-col;
+  @apply flex-grow;
 
   &__link {
     @apply w-full flex items-center justify-center mt-4 flex-col;
+  }
+
+  &__content {
+    @apply flex flex-wrap -m-2;
+  }
+
+  &__content-item {
+    @apply m-2 w-[calc(50%-20px)] xl:w-[calc(33.3334%-20px)];
+  }
+
+  &__head {
+    @apply flex items-center justify-between mb-5;
+
+  }
+
+  &__head-actions {
+    @apply flex ml-2;
+
+    .ui-button,
+    .ui-link {
+      @apply w-auto mx-0 mr-2 px-5 last:mr-0;
+    }
   }
 }
