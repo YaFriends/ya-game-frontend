@@ -41,6 +41,10 @@ PGADMIN_LISTEN_PORT=# port для pgAdmin;
 
 BACKEND_PORT=# port для backend
 ```
+
+## Настройка nginx
+Добавить в /etc/hosts (на винде тоже в hosts) строчку
+`127.0.0.1 <server address>`
     
 ## Команды для запуска
 - Dev Сборка ```yarn start```
