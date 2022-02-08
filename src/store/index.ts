@@ -9,6 +9,7 @@ import { UserAPI } from '../services/UserAPI';
 
 import authSlice from './slices/authSlice';
 import themeSlice from './slices/themeSlice';
+import { ForumAPI } from '../services/ForumAPI';
 
 export const preparedState = (initialStore?: PreloadedState<any>) =>
   configureStore({
@@ -18,6 +19,7 @@ export const preparedState = (initialStore?: PreloadedState<any>) =>
       [LeaderboardAPI.reducerPath]: LeaderboardAPI.reducer,
       [OAuthAPI.reducerPath]: OAuthAPI.reducer,
       [UserAPI.reducerPath]: UserAPI.reducer,
+      [ForumAPI.reducerPath]: ForumAPI.reducer,
       auth: authSlice,
       theme: themeSlice,
     },
@@ -29,6 +31,7 @@ export const preparedState = (initialStore?: PreloadedState<any>) =>
         LeaderboardAPI.middleware,
         OAuthAPI.middleware,
         UserAPI.middleware,
+        ForumAPI.middleware,
       ]),
   });
 

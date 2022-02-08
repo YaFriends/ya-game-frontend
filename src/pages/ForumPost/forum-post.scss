@@ -1,0 +1,33 @@
+.forum-post {
+  &__block {
+    @apply pb-5 mb-5 border-b border-grey dark:border-white last:mb-0 last:pb-0 last:border-0;
+  }
+
+  &__block-line {
+    @apply flex flex-wrap mb-3 last:mb-0;
+
+    &--between {
+      @apply justify-between;
+    }
+  }
+
+  &__add-comment {
+    @apply mb-4 last:mb-0;
+  }
+
+  &__info {
+    @apply ml-4 flex;
+  }
+
+  &__info-item {
+    @apply mr-2 last:mr-0 text-black dark:text-white flex items-center;
+
+    span {
+      @apply ml-1 leading-none;
+    }
+
+    &--cickable {
+      @apply cursor-pointer;
+    }
+  }
+}

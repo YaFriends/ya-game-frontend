@@ -3,5 +3,5 @@ FROM node:14.17.6
 WORKDIR /var/www/backend
 
 COPY . .
-
+RUN yarn install
 CMD ./scripts/start.sh

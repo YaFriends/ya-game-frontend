@@ -23,7 +23,7 @@ services:
         volumes:
             - ./docker/pgadmin/shared:/var/lib/pgadmin
         ports:
-            - "5050:80"
+            - "5050:5050"
         restart: unless-stopped
         depends_on:
             - psql
@@ -51,11 +51,28 @@ services:
             dockerfile: ./docker/backend/Dockerfile
         env_file:
             ./.env
+        ports:
+            - "3000:3000"
         volumes:
             - ./backend:/var/www/backend
         depends_on:
             - frontend
             - psql
+        networks:
+            - postgres
+
+    nginx:
+        container_name: nginx_friends
+        restart: always
+        image: nginx
+        volumes:
+            - ./docker/nginx/certs:/etc/nginx/certs
+            - ./docker/nginx/core:/etc/nginx/conf.d
+            - ./docker/nginx/logs/:/var/log/nginx/
+        depends_on:
+            - psql
+        ports:
+            - "80:80"
         networks:
             - postgres
 

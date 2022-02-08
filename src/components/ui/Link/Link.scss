@@ -2,15 +2,18 @@
   @apply text-black dark:text-white;
 
   &--button {
-    @apply w-full inline-block px-5 py-1 rounded-12px no-underline text-center text-white bg-blue !important;
+    @apply w-full inline-block px-5 py-1 rounded-12px text-center text-white bg-blue;
+    @apply no-underline !important;
   }
 
   &--button-success {
-    @apply w-full inline-block px-5 py-1 rounded-12px no-underline text-center text-white bg-green !important;
+    @apply w-full inline-block px-5 py-1 rounded-12px text-center text-white bg-green;
+    @apply no-underline !important;
   }
 
   &--warning {
-    @apply w-full inline-block px-5 py-1 rounded-12px no-underline text-center text-red bg-transparent border border-red !important;
+    @apply w-full inline-block px-5 py-1 rounded-12px text-center text-red bg-transparent border border-red;
+    @apply no-underline !important;
   }
 
   &:hover,

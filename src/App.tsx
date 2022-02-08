@@ -23,6 +23,7 @@ import { useOAuthYandexMutation } from './services/OAuthAPI';
 import { authActions } from './store/slices/authSlice';
 import { currentTheme, themeActions } from './store/slices/themeSlice';
 import { isServer } from './utils/isServer';
+import { ForumPost } from './pages/ForumPost/ForumPost';
 
 const App: FC<Record<string, never>> = () => {
   const [attemptOAuthYandex] = useOAuthYandexMutation();
@@ -69,6 +70,7 @@ const App: FC<Record<string, never>> = () => {
         <Route path="/register" exact component={Register} />
         <PrivateRoute path="/" exact component={Dashboard} />
         <PrivateRoute path="/forum" exact component={Forum} />
+        <PrivateRoute path="/forum/:id" exact component={ForumPost} />
         <PrivateRoute path="/game/create" component={GameCreation} />
         <PrivateRoute path="/game/lobby" exact component={GameLobby} />
         <PrivateRoute path="/game/:id" component={GameSet} />

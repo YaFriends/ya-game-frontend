@@ -1,6 +1,5 @@
 import React, { FC, ChangeEvent, useEffect } from 'react';
 
-import { DEFAULT_PROFILE_IMAGE_PATH } from '../../components/constants';
 import { useAppDispatch } from '../../hooks/redux';
 import { TRANSLATION } from '../../lang/ru/translation';
 import { useUpdateAvatarMutation } from '../../services/UserAPI';
@@ -39,15 +38,7 @@ export const UserThumbnail: FC<AvatarWithLoginProps> = ({ avatar, login }) => {
   return (
     <label className="user-thumbnail" htmlFor="image-uploader">
       <div className="user-thumbnail__avatar">
-        <img
-          className="user-thumbnail__image"
-          src={
-            avatar
-              ? `https://ya-praktikum.tech/api/v2/resources${avatar}`
-              : DEFAULT_PROFILE_IMAGE_PATH
-          }
-          alt={login}
-        />
+        <img className="user-thumbnail__image" src={avatar} alt={login} />
         <span className="user-thumbnail__text">{TRANSLATION.Profile.userThumbnailHoverText}</span>
       </div>
       <input

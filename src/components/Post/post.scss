@@ -1,0 +1,41 @@
+.post {
+  @apply relative pl-2 pr-5 py-3 shadow-lg rounded-2;
+
+  .ui-button {
+    @apply w-auto px-3 z-10;
+  }
+
+  .ui-title {
+    @apply text-left;
+  }
+
+  &__description {
+    @apply mb-4;
+  }
+
+  &__actions {
+    @apply flex justify-end;
+
+    .ui-button {
+      @apply mr-2 ml-0 last:mr-0;
+    }
+  }
+
+  &__likes {
+    @apply absolute z-10 top-2 right-2 text-black dark:text-white flex items-center cursor-pointer;
+
+    span {
+      @apply mr-1 leading-none;
+    }
+  }
+
+  &__link {
+    @apply absolute inset-0;
+  }
+}
+
+.dark {
+  .post {
+    box-shadow: 0 10px 15px -3px rgba(255, 255, 255, 0.2), 0 4px 6px -2px rgba(255, 255, 255, 0.14);
+  }
+}

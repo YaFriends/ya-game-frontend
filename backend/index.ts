@@ -1,7 +1,7 @@
-import { dbConnect } from './init';
+import { dbConnect } from './db/connect';
+import { listen } from './server/listen';
 
-(() => {
-  dbConnect().then(() => {
-    console.info('Connected');
-  });
+(async () => {
+  await dbConnect();
+  listen();
 })();
