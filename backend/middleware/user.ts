@@ -1,22 +1,23 @@
+import axios from 'axios';
 import { NextFunction, Request, Response } from 'express';
-const axios = require('axios');
 
-const middleware = async (req: Request, res: Response, next: NextFunction) => {
-  try {
-    const res = await axios.get('https://ya-praktikum.tech/api/v2/auth/user', {
-      withCredentials: true,
-      headers: {
-        Cookie: req.headers.cookie || '',
-      },
-    });
-    console.log(res);
-    res.user = res.data;
+import { http } from '../controllers/AuthController';
+import { EXTERNAL_API_URL } from '../../src/config';
 
-    return next();
-  } catch (error) {
-    console.log(error);
-    return res.status(401).send();
+export default async (req: Request, res: Response, next: NextFunction) => {
+  // @ts-ignore
+  req.user = undefined;
+
+  if (req.headers.cookie || true) {
+    try {
+      const response = await http.get(EXTERNAL_API_URL + '/auth/user');
+      // @ts-ignore
+      req.user = response.data;
+    } catch (e) {
+      if (!axios.isAxiosError(e)) {
+        return res.status(500).send({ reason: 'Ошибка сервера' });
+      }
+    }
   }
+  next();
 };
-
-export default middleware;

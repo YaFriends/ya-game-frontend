@@ -2,12 +2,11 @@ import { Express } from 'express';
 
 import { PostController } from '../controllers/PostController';
 import { PostCommentController } from '../controllers/PostCommentController';
-
-import userMiddleware from '../middleware/user';
+import authMiddleware from '../middleware/auth';
 
 export const registerRoutes = (app: Express) => {
   app.post('/api/posts', [PostController.create]);
-  app.get('/api/posts', [userMiddleware, PostController.getAll]);
+  app.get('/api/posts', [authMiddleware, PostController.getAll]);
   app.get('/api/posts/:id/comments', [PostCommentController.getByPostId]);
   app.get('/api/posts/:id', [PostController.getById]);
   app.delete('/api/posts/:id', [PostController.deleteById]);

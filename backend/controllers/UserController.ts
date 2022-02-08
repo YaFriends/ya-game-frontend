@@ -3,10 +3,6 @@ import { Request, Response } from 'express';
 import User from '../models/User';
 
 export const UserController = {
-  signUp() {},
-  signIn() {},
-  logout() {},
-  getUser() {},
   create(req: Request, res: Response) {
     return User.create(req.body).then(result => {
       res.status(201).send(result);
