@@ -1,10 +1,8 @@
 import { Request, Response } from 'express';
 
-import { makeRandomString } from '../utils/makeRandomString';
+import { nanoid } from 'nanoid';
 import GameSet from '../models/GameSet';
 import User from '../models/User';
-
-const LINK_LENGTH = 10;
 
 export const GameSetController = {
   getById(req: Request, res: Response) {
@@ -21,7 +19,7 @@ export const GameSetController = {
   },
   async create(req: Request, res: Response) {
     const { totalGames } = req.body;
-    let link = makeRandomString(LINK_LENGTH);
+    let link = nanoid();
 
     while (true) {
       const possibleExistedLink = await GameSet.findOne({ where: { link } });
@@ -32,7 +30,7 @@ export const GameSetController = {
         });
       }
 
-      link = makeRandomString(LINK_LENGTH);
+      link = nanoid();
     }
   },
 

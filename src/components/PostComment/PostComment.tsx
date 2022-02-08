@@ -6,6 +6,7 @@ import { Button } from '../ui/Button/Button';
 import { TRANSLATION } from '../../lang/ru/translation';
 
 import './post-comment.scss';
+import { Text } from '../ui/Text/Text';
 
 type PostCommentProps = {
   comment: PostCommentType;
@@ -36,9 +37,9 @@ export const PostComment: FC<PostCommentProps> = props => {
           <div className="post-comment__author-avatar">
             <img src={DEFAULT_PROFILE_IMAGE_PATH} alt="test" />
           </div>
-          <p className="post-comment__author-name">TEST_NAME</p>
+          <Text text="TEST_NAME" extendClass="post-comment__author-name" />
         </div>
-        <div className="post-comment__content">{comment.content}</div>
+        <Text text={comment.content} extendClass="post-comment__content" />
       </div>
       {!isCommentOpen && (
         <div className="post-comment__actions">

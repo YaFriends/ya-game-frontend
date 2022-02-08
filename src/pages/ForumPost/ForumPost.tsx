@@ -16,9 +16,9 @@ import { Icon } from '../../components/Icon/Icon';
 import { Like } from '../../components/Icon/svgs/Like';
 import { Comment } from '../../components/Icon/svgs/Comment';
 import { PostAddComment } from '../../components/PostAddComment/PostAddComment';
+import { MainLink } from '../../components/ui/Link/Link';
 
 import './forum-post.scss';
-import { MainLink } from '../../components/ui/Link/Link';
 
 type PageParams = {
   id: string;
@@ -67,7 +67,7 @@ export const ForumPost: FC = () => {
     <div className="forum-post">
       <div className="forum-post__block">
         <MainLink
-          href="/forum"
+          href="/"
           text={TRANSLATION.Post.back}
           extendClass="ui-link--button w-auto !mx-0 mb-4"
         />
