@@ -4,6 +4,6 @@
 
 import { isServer } from '../isServer';
 
-it('isServer works correctly on the client environment', () => {
+test('isServer works correctly on the client environment', () => {
   expect(isServer).toBe(false);
 });

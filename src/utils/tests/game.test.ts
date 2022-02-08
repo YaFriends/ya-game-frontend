@@ -25,7 +25,7 @@ describe('getRivals', () => {
     avatar: '',
   };
 
-  it('should return a string of opponents', () => {
+  test('should return a string of opponents', () => {
     const rivals: Rivals = [firstUser, secondUser];
 
     const receivedValue = getRivals(rivals);
