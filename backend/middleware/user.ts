@@ -6,7 +6,7 @@ import { http } from '../controllers/AuthController';
 export default async (req: Request, res: Response, next: NextFunction) => {
   const { cookie } = req.headers;
   // @ts-ignore
-  req.user = undefined;
+  delete req.user;
 
   if (cookie === undefined) {
     return res.status(401).send();

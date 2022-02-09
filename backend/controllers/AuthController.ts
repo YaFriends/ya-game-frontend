@@ -16,9 +16,9 @@ export const AuthController = {
       res.setHeader('set-cookie', headers['set-cookie']!.map(parseCookie));
       res.sendStatus(200);
     } catch (e: unknown) {
-      const { response: er } = e as AxiosError;
-      if (er !== undefined) {
-        res.sendStatus(er.status);
+      const { response: error } = e as AxiosError;
+      if (error !== undefined) {
+        res.sendStatus(error.status);
       } else {
         res.sendStatus(500);
       }
@@ -30,9 +30,9 @@ export const AuthController = {
       const { data } = await http.post('/auth/signup', req.body);
       return res.status(201).send(data);
     } catch (e: unknown) {
-      const { response: er } = e as AxiosError;
-      if (er !== undefined) {
-        return res.sendStatus(er.status);
+      const { response: error } = e as AxiosError;
+      if (error !== undefined) {
+        return res.sendStatus(error.status);
       }
 
       return res.sendStatus(500);
@@ -48,9 +48,9 @@ export const AuthController = {
       res.setHeader('set-cookie', headers['set-cookie']!.map(parseCookie));
       return res.sendStatus(200);
     } catch (e: unknown) {
-      const { response: er } = e as AxiosError;
-      if (er !== undefined) {
-        res.sendStatus(er.status);
+      const { response: error } = e as AxiosError;
+      if (error !== undefined) {
+        res.sendStatus(error.status);
       } else {
         res.sendStatus(500);
       }
@@ -67,9 +67,9 @@ export const AuthController = {
 
       return res.status(200).send(data);
     } catch (e: unknown) {
-      const { response: er } = e as AxiosError;
-      if (er !== undefined) {
-        return res.status(er.status).send();
+      const { response: error } = e as AxiosError;
+      if (error !== undefined) {
+        return res.status(error.status).send();
       } else {
         return res.status(500).send();
       }
