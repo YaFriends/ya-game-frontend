@@ -1,9 +1,9 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-import { INTERNAL_API_URL } from '../config';
-import { Like, Post, PostComment } from '../@types/ForumTypes';
 import { PostCreationAttributes } from '../../backend/models/Post';
 import { PostCommentCreationAttributes } from '../../backend/models/PostComment';
+import { Like, Post, PostComment } from '../@types/ForumTypes';
+import { INTERNAL_API_URL } from '../config';
 
 const servicePoint = '/posts';
 
