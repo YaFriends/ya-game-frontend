@@ -36,7 +36,7 @@ export const queryHooks = async (hook: any, successResponse: boolean, dummy?: an
   expect(nextResponse.isSuccess).toBe(successResponse);
 };
 
-export const mutationHooks = async (hook: any, successResponse: boolean, dummy: any) => {
+export const mutationHooks = async (hook: any, successResponse: boolean, dummy?: any) => {
   if (successResponse) {
     fetchMock.mockResponse(JSON.stringify(dummy));
   } else {

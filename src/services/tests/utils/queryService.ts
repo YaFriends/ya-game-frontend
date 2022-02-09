@@ -4,19 +4,24 @@ import { EXTERNAL_API_URL } from '../../../config';
 
 import { setupApiStore } from './setupApiStore';
 
-export const queryCorrectRequest = (api: any, endpoint: any, method: string, url: string) => {
+export const queryCorrectRequest = (
+  api: any,
+  endpoint: any,
+  expectMethod: string,
+  expectUrl: string,
+) => {
   const storeRef = setupApiStore(api);
   fetchMock.mockResponse(JSON.stringify({}));
   return storeRef.store.dispatch<any>(endpoint()).then(() => {
     expect(fetchMock).toBeCalledTimes(1);
-    const { method: mockMethod, url: mockUrl } = fetchMock.mock.calls[0][0] as Request;
+    const { method, url } = fetchMock.mock.calls[0][0] as Request;
 
-    expect(mockMethod).toBe(method);
-    expect(mockUrl).toBe(`${EXTERNAL_API_URL}${url}`);
+    expect(method).toBe(expectMethod);
+    expect(url).toBe(`${EXTERNAL_API_URL}${expectUrl}`);
   });
 };
 
-export const querySuccessResponse = async (api: any, endpoint: any, dummy: any) => {
+export const querySuccessResponse = async (api: any, endpoint: any, dummy?: any) => {
   const storeRef = setupApiStore(api);
   fetchMock.mockResponse(JSON.stringify(dummy));
 
@@ -50,9 +55,9 @@ export const queryUnsuccessfulResponse = (api: any, endpoint: any) => {
 export const mutationCorrectRequest = (
   api: any,
   endpoint: any,
-  dummy: any,
   expectMethod: string,
-  expectUrl: string
+  expectUrl: string,
+  dummy?: any
 ) => {
   const storeRef = setupApiStore(api);
 
@@ -74,8 +79,8 @@ export const mutationCorrectRequest = (
 export const mutationSuccessfulResponse = (
   api: any,
   endpoint: any,
-  dummy: any,
-  responseData: any
+  responseData: any,
+  dummy?: any
 ) => {
   const storeRef = setupApiStore(api);
   fetchMock.mockResponse(JSON.stringify(responseData));
@@ -85,7 +90,7 @@ export const mutationSuccessfulResponse = (
   });
 };
 
-export const mutationUnsuccessfulResponse = (api: any, endpoint: any, dummy: any) => {
+export const mutationUnsuccessfulResponse = (api: any, endpoint: any, dummy?: any) => {
   const storeRef = setupApiStore(api);
   fetchMock.mockReject(new Error('Internal Server Error'));
 
