@@ -9,6 +9,7 @@ import hotMiddleware from 'webpack-hot-middleware';
 
 import clientConfig from '../webpack/client.config';
 import { IS_DEV } from '../webpack/env';
+import { connect, dbConnect } from '../backend/index';
 
 import 'babel-polyfill';
 import serverRenderMiddleware from './server-render-middleware';
@@ -56,6 +57,7 @@ app.get('/mockServiceWorker.js', (req, res) => {
   res.sendFile(path.resolve(__dirname, '/mockServiceWorker.js'));
 });
 
+connect(app);
 app.get('/*', getWebpackMiddlewares(clientConfig), serverRenderMiddleware);
-
+dbConnect().then(() => {});
 export { app };

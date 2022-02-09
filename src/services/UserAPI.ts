@@ -8,12 +8,10 @@ import {
 } from '../@types/UserTypes';
 import { EXTERNAL_API_URL } from '../config';
 
-const servicePoint = '/user';
-
 export const UserAPI = createApi({
   reducerPath: 'userApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: EXTERNAL_API_URL + servicePoint,
+    baseUrl: EXTERNAL_API_URL + '/auth',
   }),
   endpoints: build => ({
     updateProfile: build.mutation<UserData, UserUpdateProfileProps>({
