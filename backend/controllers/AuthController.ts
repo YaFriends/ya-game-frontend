@@ -89,7 +89,6 @@ export const AuthController = {
       if (error !== undefined) {
         return res.status(error.status).send();
       } else {
-        console.log(e);
         return res.status(500).send();
       }
     }
