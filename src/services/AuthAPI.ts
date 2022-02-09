@@ -49,7 +49,7 @@ export const AuthAPI = createApi({
     updateUser: build.mutation<UserData, Partial<UserData> & { id: number }>({
       query: body => ({
         url: `/user/${body.id}`,
-        method: 'GET',
+        method: 'PATCH',
         credentials: 'include',
         body,
       }),
@@ -64,4 +64,5 @@ export const {
   useLogoutMutation,
   useFetchUserQuery,
   useLazyFetchUserQuery,
+  useUpdateUserMutation,
 } = AuthAPI;

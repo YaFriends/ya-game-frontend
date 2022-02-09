@@ -8,5 +8,5 @@ export const registerRoutes = (app: Express) => {
   app.post('/api/auth/signin', [AuthController.signIn]);
   app.post('/api/auth/logout', [AuthController.logout]);
   app.get('/api/auth/user', [AuthController.getUser]);
-  app.patch('/api/user/:id', [userMiddleware, UserController.updateById]);
+  app.patch('/api/auth/user/:id', [userMiddleware, UserController.updateById]);
 };

@@ -1,7 +1,6 @@
 import { Request, Response } from 'express';
 
 import User from '../models/User';
-import { RequestWithUser } from '../middleware/user';
 
 export const UserController = {
   create(req: Request, res: Response) {
@@ -9,7 +8,7 @@ export const UserController = {
       res.status(201).send(result);
     });
   },
-  async updateById(req: RequestWithUser, res: Response) {
+  async updateById(req: Request, res: Response) {
     const user = await UserController.getByExternalId(req);
     if (user) {
       return user.update(req.body).then(({ theme }) => {

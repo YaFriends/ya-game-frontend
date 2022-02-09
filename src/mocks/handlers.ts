@@ -20,6 +20,7 @@ const setupGameSet = (totalGames: number): GameSet => ({
       email: 'string',
       phone: 'string',
       avatar: '',
+      theme: '',
     },
     {
       login: 'Player 2',
@@ -30,6 +31,7 @@ const setupGameSet = (totalGames: number): GameSet => ({
       email: 'string',
       phone: 'string',
       avatar: '',
+      theme: '',
     },
   ],
 });

@@ -11,7 +11,6 @@ export type RequestWithUser = Request & {
 
 export default async (req: Request, res: Response, next: NextFunction) => {
   const { cookie } = req.headers;
-  // @ts-ignore
   delete req.user;
 
   if (cookie === undefined) {
@@ -29,7 +28,6 @@ export default async (req: Request, res: Response, next: NextFunction) => {
         theme: 'light',
       },
     });
-    // @ts-ignore
     req.user = { ...data, theme };
   } catch (e) {
     if (!axios.isAxiosError(e)) {

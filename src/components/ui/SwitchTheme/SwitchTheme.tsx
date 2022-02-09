@@ -3,34 +3,47 @@ import React, { FC, MouseEvent, useMemo, useState, useCallback } from 'react';
 import './SwitchTheme.scss';
 import { useAppDispatch } from '../../../hooks/redux';
 import { currentTheme, themeActions } from '../../../store/slices/themeSlice';
+import { useAuth } from '../../../hooks/use-auth';
+import { useUpdateUserMutation } from '../../../services/AuthAPI';
 
 const darkTheme = 'dark';
 const lightTheme = 'light';
 
 export const SwitchTheme: FC = () => {
+  const { currentUser } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
   const [currentTheme, setCurrentTheme] = useState(darkTheme);
   const dispatch = useAppDispatch();
+  const [updateUser] = useUpdateUserMutation();
 
-  const handleToggleThemesList = () => {
+  const handleToggleThemesList = useCallback(() => {
     if (typeof window !== 'undefined') {
-      setCurrentTheme((localStorage.getItem('theme') as currentTheme) || darkTheme);
+      setCurrentTheme(
+        currentUser?.theme || (localStorage.getItem('theme') as currentTheme) || darkTheme
+      );
     }
 
     setIsOpen(!isOpen);
-  };
+  }, [currentUser]);
 
-  const handleToggleTheme = (e: MouseEvent) => {
-    const target = e.target as HTMLElement;
-    const changedTheme: currentTheme = (target.dataset.theme as currentTheme) || darkTheme;
+  const handleToggleTheme = useCallback(
+    async (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      const changedTheme: currentTheme = (target.dataset.theme as currentTheme) || darkTheme;
 
-    setCurrentTheme(changedTheme);
-    dispatch(themeActions.setCurrentTheme(changedTheme as currentTheme));
+      setCurrentTheme(changedTheme);
+      dispatch(themeActions.setCurrentTheme(changedTheme as currentTheme));
 
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('theme', changedTheme);
-    }
-  };
+      if (currentUser) {
+        await updateUser({ id: currentUser.id, theme: changedTheme });
+      }
+
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('theme', changedTheme);
+      }
+    },
+    [currentUser]
+  );
 
   const classesMemoSwitchControl = useMemo(() => {
     if (isOpen) {
