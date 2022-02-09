@@ -45,17 +45,20 @@ export const handlers = [
 
     return res(ctx.json(body), ctx.status(200));
   }),
-  rest.post<{ totalGames: number }>('/session/create', (req, res, ctx) => {
+  rest.post<{ totalGames: number }>(`${INTERNAL_API_URL}/session/create`, (req, res, ctx) => {
     const { totalGames } = req.body;
 
     currentGameSet = setupGameSet(totalGames);
     return res(ctx.json(currentGameSet), ctx.status(200));
   }),
-  rest.get('/session/:id', (req, res, ctx) => {
+  rest.get(`${INTERNAL_API_URL}/session/:id`, (req, res, ctx) => {
     return res(ctx.json(currentGameSet), ctx.status(200));
   }),
-  rest.patch<Partial<GameSet> & Pick<GameSet, 'id'>>('/session/:id', (req, res, ctx) => {
-    currentGameSet = { ...currentGameSet, ...req.body };
-    return res(ctx.json(currentGameSet), ctx.status(200));
-  }),
+  rest.patch<Partial<GameSet> & Pick<GameSet, 'id'>>(
+    `${INTERNAL_API_URL}/session/:id`,
+    (req, res, ctx) => {
+      currentGameSet = { ...currentGameSet, ...req.body };
+      return res(ctx.json(currentGameSet), ctx.status(200));
+    }
+  ),
 ];
