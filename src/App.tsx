@@ -36,10 +36,11 @@ const App: FC<Record<string, never>> = () => {
     useEffect(() => {
       dispatch(
         themeActions.setCurrentTheme(
-          ((localStorage.getItem('theme') as currentTheme) || 'dark') as currentTheme
+          responseFetchUser?.theme ||
+            (((localStorage.getItem('theme') as currentTheme) || 'dark') as currentTheme)
         )
       );
-    }, []);
+    }, [responseFetchUser]);
   }
   const documentLocation = isServer ? {} : document.location.href;
 

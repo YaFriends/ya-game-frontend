@@ -7,6 +7,7 @@ export interface UserData {
   email: string;
   phone: string;
   avatar: string;
+  theme: currentTheme;
   status?: unknown;
 }
 
