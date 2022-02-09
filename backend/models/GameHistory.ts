@@ -24,6 +24,7 @@ export interface GameHistoryCreationAttributes extends Optional<GameHistoryAttri
 @Table({
   timestamps: false,
   tableName: 'game_set_history',
+  modelName: 'GameHistory',
 })
 export default class GameSetHistory extends Model<
   GameHistoryAttributes,

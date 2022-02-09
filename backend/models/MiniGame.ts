@@ -10,6 +10,7 @@ interface LikeAttributes {
 @Table({
   timestamps: true,
   tableName: 'mini_games',
+  modelName: 'MiniGame',
 })
 export default class MiniGame extends Model<LikeAttributes> {
   @AutoIncrement

@@ -6,8 +6,6 @@
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/@ampproject/remapping/-/remapping-2.1.0.tgz#72becdf17ee44b2d1ac5651fb12f1952c336fe23"
   integrity sha512-d5RysTlJ7hmw5Tw4UxgxcY3lkMe92n8sXCcuLPAyIAHK6j8DefDwtGnVVDgOnv+RnEosulDJ9NPKQL27bDId0g==
-  dependencies:
-    "@jridgewell/trace-mapping" "^0.3.0"
 
 "@apideck/better-ajv-errors@^0.3.1":
   version "0.3.2"
@@ -2047,7 +2045,7 @@
     anymatch "^3.0.0"
     source-map "^0.6.0"
 
-"@types/workbox-webpack-plugin@^5.1.8":
+"@types/workbox-webpack-plugin@5.1.8":
   version "5.1.8"
   resolved "https://registry.yarnpkg.com/@types/workbox-webpack-plugin/-/workbox-webpack-plugin-5.1.8.tgz#8c014df34877b6fab0c7d4aa85698445e1e0f64b"
   integrity sha512-1RKsHinzZMDmMNS0OouyMQPEfL2oJr4oXPTGI3YwEuCOsIKDSce+l3KW1qY5IufXs3W2g/ZFlWD2X9SkmaSiZA==

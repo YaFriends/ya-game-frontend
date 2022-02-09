@@ -22,6 +22,7 @@ export interface UserCreationAttributes extends Optional<UserAttributes, 'id'> {
 @Table({
   timestamps: true,
   tableName: 'users',
+  modelName: 'User',
 })
 export default class User extends Model<UserAttributes, UserCreationAttributes> {
   @AutoIncrement
