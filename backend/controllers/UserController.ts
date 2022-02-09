@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 
 import User from '../models/User';
+import { RequestWithUser } from '../middleware/user';
 
 export const UserController = {
   create(req: Request, res: Response) {
@@ -8,19 +9,16 @@ export const UserController = {
       res.status(201).send(result);
     });
   },
-  updateById(req: Request, res: Response) {
-    return User.update(req.body, { where: { id: req.body.id } }).then(result => {
-      res.status(204).send(result);
-    });
+  async updateById(req: RequestWithUser, res: Response) {
+    const user = await UserController.getByExternalId(req);
+    if (user) {
+      return user.update(req.body).then(({ theme }) => {
+        res.status(204).send({ ...req.user, theme });
+      });
+    }
+    return res.status(404).send();
   },
-  getById(req: Request, res: Response) {
-    return User.findOne({ where: { id: req.body.id } }).then(result => {
-      res.status(200).send(result);
-    });
-  },
-  getByExternalId(req: Request, res: Response) {
-    return User.findOne({ where: { external_id: req.body.id } }).then(result => {
-      res.status(200).send(result);
-    });
+  getByExternalId(req: Request): Promise<User | null> {
+    return User.findOne({ where: { external_id: req.body.id } });
   },
 };

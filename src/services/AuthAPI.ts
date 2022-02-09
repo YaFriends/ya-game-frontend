@@ -46,6 +46,15 @@ export const AuthAPI = createApi({
       }),
       providesTags: ['User'],
     }),
+    updateUser: build.mutation<UserData, Partial<UserData> & { id: number }>({
+      query: body => ({
+        url: `/user/${body.id}`,
+        method: 'GET',
+        credentials: 'include',
+        body,
+      }),
+      invalidatesTags: ['User'],
+    }),
   }),
 });
 
