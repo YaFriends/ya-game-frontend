@@ -1,8 +1,8 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 import { LoginData, SignUpData } from '../@types/AuthTypes';
-import { INTERNAL_API_URL } from '../config';
 import { UserData } from '../@types/UserTypes';
+import { INTERNAL_API_URL } from '../config';
 
 const servicePoint = '/auth';
 

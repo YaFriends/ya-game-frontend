@@ -1,5 +1,6 @@
-import { UserData } from './UserTypes';
 import { SubclassOfMiniGame } from '../core/constants';
+
+import { UserData } from './UserTypes';
 
 export type MiniGameConfig = MiniGameInfo & {
   canvasId: string;
