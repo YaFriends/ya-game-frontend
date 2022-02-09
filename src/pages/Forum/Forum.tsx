@@ -82,7 +82,7 @@ export const Forum: FC = () => {
         <Title text={TRANSLATION.Forum.label} />
         <div className="forum__head-actions">
           <MainLink
-            href="/forum"
+            href="/"
             text={TRANSLATION.Forum.back}
             extendClass="ui-link--button w-auto !mx-0 mb-4"
           />
