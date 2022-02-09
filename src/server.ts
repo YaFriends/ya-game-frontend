@@ -13,6 +13,15 @@ import { connect, dbConnect } from '../backend/index';
 
 import 'babel-polyfill';
 import serverRenderMiddleware from './server-render-middleware';
+import { UserData } from './@types/UserTypes';
+
+declare global {
+  namespace Express {
+    interface Request {
+      user?: UserData;
+    }
+  }
+}
 
 const app = express();
 export const NONCE = 'nonce';

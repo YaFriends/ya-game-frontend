@@ -47,6 +47,7 @@ export class BombermansMiniGame extends MiniGame {
           email: 'string',
           phone: 'string',
           avatar: '',
+          theme: '',
         },
       });
     }

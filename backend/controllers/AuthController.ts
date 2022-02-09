@@ -1,7 +1,7 @@
 import axios, { AxiosError } from 'axios';
 import { Request, Response } from 'express';
 import { EXTERNAL_API_URL } from '../../src/config';
-import { parseCookie } from '../utils/parseCookie';
+import User from '../models/User';
 
 axios.defaults.withCredentials = true;
 export const http = axios.create({
@@ -13,7 +13,7 @@ export const AuthController = {
   signIn: async (req: Request, res: Response) => {
     try {
       const { headers } = await http.post('/auth/signin', req.body);
-      res.setHeader('set-cookie', headers['set-cookie']!.map(parseCookie));
+      res.setHeader('set-cookie', headers['set-cookie']!);
       res.sendStatus(200);
     } catch (e: unknown) {
       const { response: error } = e as AxiosError;
@@ -28,7 +28,15 @@ export const AuthController = {
   signUp: async (req: Request, res: Response) => {
     try {
       const { data } = await http.post('/auth/signup', req.body);
-      return res.status(201).send(data);
+      const { external_id, avatar: avatar_path, display_name } = data;
+      const { theme } = await User.create({
+        external_id,
+        avatar_path,
+        display_name,
+        theme: 'light',
+      });
+
+      return res.status(201).send({ ...data, theme });
     } catch (e: unknown) {
       const { response: error } = e as AxiosError;
       if (error !== undefined) {
@@ -45,7 +53,7 @@ export const AuthController = {
         headers: { cookie: req.headers.cookie! },
       });
 
-      res.setHeader('set-cookie', headers['set-cookie']!.map(parseCookie));
+      res.setHeader('set-cookie', headers['set-cookie']!);
       return res.sendStatus(200);
     } catch (e: unknown) {
       const { response: error } = e as AxiosError;
@@ -64,8 +72,17 @@ export const AuthController = {
     }
     try {
       const { data } = await http.get('/auth/user', { headers: { Cookie: cookie } });
-
-      return res.status(200).send(data);
+      const { external_id, avatar: avatar_path, display_name } = data;
+      const [{ theme }] = await User.findOrCreate({
+        where: { external_id: data.id },
+        defaults: {
+          external_id,
+          avatar_path,
+          display_name,
+          theme: 'light',
+        },
+      });
+      return res.status(200).send({ ...data, theme });
     } catch (e: unknown) {
       const { response: error } = e as AxiosError;
       if (error !== undefined) {
