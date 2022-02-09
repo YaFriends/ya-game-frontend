@@ -10,7 +10,7 @@ import {
 
 import { Optional } from 'sequelize';
 
-export type UserTheme = 'light' | 'dark';
+export type UserTheme = 'dark' | 'light';
 
 interface UserAttributes {
   id: number;

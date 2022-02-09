@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from './hooks/redux';
 import { Dashboard } from './pages/Dashboard/Dashboard';
 import { Error404 } from './pages/Error404/Error404';
 import { Forum } from './pages/Forum/Forum';
+import { ForumPost } from './pages/ForumPost/ForumPost';
 import { GameCreation } from './pages/GameCreation/GameCreation';
 import { GameLobby } from './pages/GameLobby';
 import { GameSet } from './pages/GameSet/GameSet';
@@ -23,7 +24,6 @@ import { useOAuthYandexMutation } from './services/OAuthAPI';
 import { authActions } from './store/slices/authSlice';
 import { currentTheme, themeActions } from './store/slices/themeSlice';
 import { isServer } from './utils/isServer';
-import { ForumPost } from './pages/ForumPost/ForumPost';
 
 const App: FC<Record<string, never>> = () => {
   const [attemptOAuthYandex] = useOAuthYandexMutation();
