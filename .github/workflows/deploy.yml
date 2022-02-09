@@ -31,6 +31,6 @@ jobs:
         run: |
           ssh -T -i ${{ github.workspace }}/../private.key ${{ secrets.YA_CLOUD_HOST }} \
            << RUNONSERVER
-           cd ${{secrets.NAME_REPOSITORY}} && sudo yarn docker:build
+           cd ${{secrets.NAME_REPOSITORY}} && sudo yarn && sudo yarn docker:build
           RUNONSERVER
         shell: bash

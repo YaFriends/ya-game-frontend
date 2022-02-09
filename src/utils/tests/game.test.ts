@@ -12,6 +12,7 @@ describe('getRivals', () => {
     email: 'string',
     phone: 'string',
     avatar: '',
+    theme: 'dark',
   };
 
   const secondUser: UserData = {
@@ -23,6 +24,7 @@ describe('getRivals', () => {
     email: 'string',
     phone: 'string',
     avatar: '',
+    theme: 'dark',
   };
 
   test('should return a string of opponents', () => {

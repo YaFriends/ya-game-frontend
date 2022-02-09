@@ -1,3 +1,5 @@
+import { currentTheme } from '../store/slices/themeSlice';
+
 export interface UserData {
   id: number;
   first_name: string;
