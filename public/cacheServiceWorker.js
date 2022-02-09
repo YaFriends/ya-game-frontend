@@ -3,15 +3,15 @@ import { precacheAndRoute } from 'workbox-precaching';
 
 precacheAndRoute(self.__WB_MANIFEST);
 
-self.addEventListener('fetch', event => {
+self.addEventListener('fetch', (event) => {
   event.respondWith(
     caches.match(event.request)
-      .then(res => {
+      .then((res) => {
         const fetchRequest = event.request.clone();
 
-        return new Promise(resolve => {
+        return new Promise((resolve) => {
           fetch(fetchRequest)
-            .then(response => {
+            .then((response) => {
               if (!response || !response.status.toString().startsWith('2') || response.type !== 'basic') {
                 return resolve(response);
               }
@@ -19,21 +19,19 @@ self.addEventListener('fetch', event => {
               const responseToCache = response.clone();
 
               caches.open(cacheNames.precache)
-                .then(cache => {
+                .then((cache) => {
                   cache.put(event.request, responseToCache);
                 });
 
               return resolve(response);
             })
-            .catch(err => {
+            .catch((err) => {
               if (res) {
                 return resolve(res);
               }
-
               throw err;
             });
         });
-      })
-      .catch(err => { console.log(err) }),
+      }).catch(err=>{console.log(err)}),
   );
 });
