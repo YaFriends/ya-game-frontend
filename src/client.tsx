@@ -21,20 +21,20 @@ declare global {
 
 const store = preparedState(window.__PRELOADED_STATE__);
 
-function startServiceWorker() {
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker
-        .register('/cacheServiceWorker.js', { scope: 'cachesw' })
-        .then(registration => {
-          console.info('ServiceWorker registration successful with  scope: ', registration.scope);
-        })
-        .catch((error: string) => {
-          console.error('ServiceWorker registration failed: ', error);
-        });
-    });
-  }
-}
+// function startServiceWorker() {
+//   if ('serviceWorker' in navigator) {
+//     window.addEventListener('load', () => {
+//       navigator.serviceWorker
+//         .register('/cacheServiceWorker.js', { scope: 'cachesw' })
+//         .then(registration => {
+//           console.info('ServiceWorker registration successful with  scope: ', registration.scope);
+//         })
+//         .catch((error: string) => {
+//           console.error('ServiceWorker registration failed: ', error);
+//         });
+//     });
+//   }
+// }
 
 function prepare(): StartReturnType | Promise<void> {
   return worker.start({
@@ -43,8 +43,6 @@ function prepare(): StartReturnType | Promise<void> {
 }
 
 prepare().then(() => {
-  startServiceWorker();
-
   ReactDOM.hydrate(
     <ErrorBoundary
       fallbackRender={props => {
