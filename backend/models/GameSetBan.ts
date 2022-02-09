@@ -3,7 +3,10 @@ import { Column, ForeignKey, Model, Table } from 'sequelize-typescript';
 import MiniGame from './MiniGame';
 import GameSet from './GameSet';
 
-@Table
+@Table({
+  tableName: 'game_set_ban',
+  modelName: 'GameSetBan',
+})
 export default class GameSetBan extends Model {
   @ForeignKey(() => GameSet)
   @Column

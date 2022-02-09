@@ -23,6 +23,7 @@ export interface LikeCreationAttributes extends Optional<LikeAttributes, 'id'> {
 @Table({
   timestamps: true,
   tableName: 'likes',
+  modelName: 'Like',
 })
 export default class Like extends Model<LikeAttributes, LikeCreationAttributes> {
   @AutoIncrement

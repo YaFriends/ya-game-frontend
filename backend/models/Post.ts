@@ -27,6 +27,7 @@ export type PostCreationFN = (postAttributes: PostCreationAttributes) => void;
 @Table({
   timestamps: true,
   tableName: 'posts',
+  modelName: 'Post',
 })
 export default class Post extends Model<PostAttributes, PostCreationAttributes> {
   @AutoIncrement
