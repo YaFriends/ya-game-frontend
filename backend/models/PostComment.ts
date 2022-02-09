@@ -26,6 +26,7 @@ export interface PostCommentCreationAttributes extends Optional<PostCommentAttri
 @Table({
   timestamps: true,
   tableName: 'post_comments',
+  modelName: 'PostComment',
 })
 export default class PostComment extends Model<
   PostCommentAttributes,
@@ -58,11 +59,4 @@ export default class PostComment extends Model<
 
   @BelongsTo(() => Post)
   post: Post;
-
-  get children() {
-    return PostComment.findAll({
-      where: { parentId: this.getDataValue('id') },
-      include: ['children'],
-    });
-  }
 }

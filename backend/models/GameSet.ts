@@ -28,6 +28,7 @@ export interface GameSetCreationAttributes extends Optional<GameSetAttributes, '
 @Table({
   timestamps: true,
   tableName: 'game_sets',
+  modelName: 'GameSet',
 })
 export default class GameSet extends Model<GameSetAttributes, GameSetCreationAttributes> {
   @AutoIncrement

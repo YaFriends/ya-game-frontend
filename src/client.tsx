@@ -15,7 +15,7 @@ function startServiceWorker() {
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
       navigator.serviceWorker
-        .register('/cacheServiceWorker.js', { scope: 'cache-service-worker' })
+        .register('/cacheServiceWorker.js')
         .then(registration => {
           console.info('ServiceWorker registration successful with  scope: ', registration.scope);
         })

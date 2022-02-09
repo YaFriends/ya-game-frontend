@@ -1,22 +1,37 @@
-// Реализован базовый пример из теории
-// Если будет время:
-// TODO: Разобраться и попробовать закешировать данные, чтобы можно было обратиться к ним из offline
+import { cacheNames } from 'workbox-core';
+import { precacheAndRoute } from 'workbox-precaching';
 
-// const CACHE_NAME = 'my-site-cache-v1';
-// const URLS = [
-//   '/',
-//   '/public',
-//   '/static',
-// ];
+precacheAndRoute(self.__WB_MANIFEST);
 
-self.addEventListener('install', () => {
-  console.info('install');
-});
+self.addEventListener('fetch', (event) => {
+  event.respondWith(
+    caches.match(event.request)
+      .then((res) => {
+        const fetchRequest = event.request.clone();
 
-self.addEventListener('fetch', () => {
-  console.info('fetch');
-});
+        return new Promise((resolve) => {
+          fetch(fetchRequest)
+            .then((response) => {
+              if (!response || !response.status.toString().startsWith('2') || response.type !== 'basic') {
+                return resolve(response);
+              }
 
-self.addEventListener('activate', () => {
-  console.info('activate');
+              const responseToCache = response.clone();
+
+              caches.open(cacheNames.precache)
+                .then((cache) => {
+                  cache.put(event.request, responseToCache);
+                });
+
+              return resolve(response);
+            })
+            .catch((err) => {
+              if (res) {
+                return resolve(res);
+              }
+              throw err;
+            });
+        });
+      }).catch(err=>{console.log(err)}),
+  );
 });
