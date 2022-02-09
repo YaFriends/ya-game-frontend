@@ -1,7 +1,6 @@
 import axios, { AxiosError } from 'axios';
 import { Request, Response } from 'express';
 import { EXTERNAL_API_URL } from '../../src/config';
-import { parseCookie } from '../utils/parseCookie';
 import User from '../models/User';
 
 axios.defaults.withCredentials = true;
@@ -14,7 +13,7 @@ export const AuthController = {
   signIn: async (req: Request, res: Response) => {
     try {
       const { headers } = await http.post('/auth/signin', req.body);
-      res.setHeader('set-cookie', headers['set-cookie']!.map(parseCookie));
+      res.setHeader('set-cookie', headers['set-cookie']!);
       res.sendStatus(200);
     } catch (e: unknown) {
       const { response: error } = e as AxiosError;
@@ -54,7 +53,7 @@ export const AuthController = {
         headers: { cookie: req.headers.cookie! },
       });
 
-      res.setHeader('set-cookie', headers['set-cookie']!.map(parseCookie));
+      res.setHeader('set-cookie', headers['set-cookie']!);
       return res.sendStatus(200);
     } catch (e: unknown) {
       const { response: error } = e as AxiosError;
