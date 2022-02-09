@@ -10,11 +10,14 @@ import {
 
 import { Optional } from 'sequelize';
 
+export type UserTheme = 'light' | 'dark';
+
 interface UserAttributes {
   id: number;
   external_id: number;
   avatar_path: string;
   display_name: string;
+  theme: UserTheme;
 }
 
 export interface UserCreationAttributes extends Optional<UserAttributes, 'id'> {}
@@ -39,4 +42,7 @@ export default class User extends Model<UserAttributes, UserCreationAttributes> 
 
   @Column(DataType.STRING)
   display_name: string;
+
+  @Column(DataType.STRING)
+  theme: string;
 }
