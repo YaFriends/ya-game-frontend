@@ -1,0 +1,19 @@
+.post-comment {
+  @apply mb-6 last:mb-0;
+
+  &__body {
+    @apply flex w-full mb-3;
+  }
+
+  &__author {
+    @apply mr-3
+  }
+
+  &__children {
+    @apply mt-4 ml-6;
+
+    .post-comment__body {
+      @apply pl-2 border-l border-l-grey
+    }
+  }
+}

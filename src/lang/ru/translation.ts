@@ -95,6 +95,13 @@ export const TRANSLATION: Record<string, Record<string, string>> = {
   Forum: {
     label: 'Форум',
     subtitle: 'Скоро тут будет форум :)',
+    createPost: 'Создать пост',
+    noPosts: 'К сожалению, постов пока нет, но вы можете создать новый',
+    popupTitle: 'Создать новый пост',
+    popupSend: 'Создать',
+    popupTitleInput: 'Название поста',
+    popupDescriptionInput: 'Описание поста',
+    back: 'В меню',
   },
   Game: {
     Wins: 'Побед',
@@ -175,5 +182,15 @@ export const TRANSLATION: Record<string, Record<string, string>> = {
   GameSetPick: {
     title: 'Pick/Ban игр',
     ban: 'BANNED',
+  },
+  Post: {
+    like: 'Лайкнуть',
+    unlike: 'Убрать лайк',
+    delete: 'Удалить пост',
+    comments: 'Комментарии',
+    noComments: 'К сожалению, пока еще нет комментариев, но ты можешь быть первым!',
+    addComment: 'Оставить комментарий',
+    reply: 'Ответить',
+    back: 'Назад',
   },
 };

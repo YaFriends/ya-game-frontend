@@ -1,0 +1,7 @@
+.ui-textarea {
+  @apply bg-black placeholder-opacity-40 border-white text-white focus:border-blue resize-none;
+
+  &--error {
+    @apply bg-red border-red;
+  }
+}

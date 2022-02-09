@@ -1,5 +1,6 @@
 import fetchMock from 'jest-fetch-mock';
 
+import { EXTERNAL_API_URL } from '../../config';
 import { UserAPI } from '../UserAPI';
 
 import { userDummy } from './utils/mock';
@@ -12,7 +13,7 @@ import {
 fetchMock.enableMocks();
 
 describe('UpdateProfile', () => {
-  const url = '/user/profile';
+  const url = `${EXTERNAL_API_URL}/user/profile`;
   const endpoint = UserAPI.endpoints.updateProfile.initiate;
   const dummy = userDummy.profileResponse;
   const responseDummy = userDummy.profileRequest;
@@ -35,7 +36,7 @@ describe('UpdateProfile', () => {
 });
 
 describe('UpdatePassword', () => {
-  const url = '/user/password';
+  const url = `${EXTERNAL_API_URL}/user/password`;
   const endpoint = UserAPI.endpoints.updatePassword.initiate;
   const dummy = userDummy.password;
 
@@ -53,7 +54,7 @@ describe('UpdatePassword', () => {
 });
 
 describe('UpdateAvatar', () => {
-  const url = '/user/profile/avatar';
+  const url = `${EXTERNAL_API_URL}/user/profile/avatar`;
   const endpoint = UserAPI.endpoints.updateAvatar.initiate;
   const dummy = userDummy.profileRequest;
 

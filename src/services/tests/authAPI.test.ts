@@ -15,7 +15,7 @@ import {
 fetchMock.enableMocks();
 
 describe('FetchUser', () => {
-  const url = '/auth/user';
+  const url = '/api/auth/user';
   const endpoint = AuthAPI.endpoints.fetchUser.initiate;
   const dummy = authDummy.user;
 
@@ -37,7 +37,7 @@ describe('FetchUser', () => {
 });
 
 describe('SignUp', () => {
-  const url = '/auth/signup';
+  const url = '/api/auth/signup';
   const endpoint = AuthAPI.endpoints.signUp.initiate;
   const dummy = authDummy.signUp;
 
@@ -59,7 +59,7 @@ describe('SignUp', () => {
 });
 
 describe('SignIn', () => {
-  const url = '/auth/signin';
+  const url = '/api/auth/signin';
   const endpoint = AuthAPI.endpoints.login.initiate;
   const dummy = authDummy.login;
 
@@ -81,7 +81,7 @@ describe('SignIn', () => {
 });
 
 describe('Logout', () => {
-  const url = '/auth/logout';
+  const url = '/api/auth/logout';
   const endpoint = AuthAPI.endpoints.logout.initiate;
 
   beforeEach((): void => {
@@ -100,5 +100,3 @@ describe('Logout', () => {
     mutationUnsuccessfulResponse(AuthAPI, endpoint);
   });
 });
-
-

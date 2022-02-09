@@ -1,14 +1,12 @@
 import fetchMock from 'jest-fetch-mock';
 
-import { EXTERNAL_API_URL } from '../../../config';
-
 import { setupApiStore } from './setupApiStore';
 
 export const queryCorrectRequest = (
   api: any,
   endpoint: any,
   expectMethod: string,
-  expectUrl: string,
+  expectUrl: string
 ) => {
   const storeRef = setupApiStore(api);
   fetchMock.mockResponse(JSON.stringify({}));
@@ -17,7 +15,7 @@ export const queryCorrectRequest = (
     const { method, url } = fetchMock.mock.calls[0][0] as Request;
 
     expect(method).toBe(expectMethod);
-    expect(url).toBe(`${EXTERNAL_API_URL}${expectUrl}`);
+    expect(url).toBe(`${expectUrl}`);
   });
 };
 
@@ -72,7 +70,7 @@ export const mutationCorrectRequest = (
     });
 
     expect(method).toBe(expectMethod);
-    expect(url).toBe(`${EXTERNAL_API_URL}${expectUrl}`);
+    expect(url).toBe(`${expectUrl}`);
   });
 };
 
