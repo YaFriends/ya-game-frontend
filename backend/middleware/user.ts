@@ -25,7 +25,7 @@ export default async (req: Request, res: Response, next: NextFunction) => {
         external_id: data.id,
         avatar_path: data.avatar,
         display_name: data.display_name,
-        theme: 'light',
+        theme: 'dark',
       },
     });
     req.user = { ...data, theme };

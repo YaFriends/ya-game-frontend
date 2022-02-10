@@ -33,7 +33,7 @@ export const AuthController = {
         external_id,
         avatar_path,
         display_name,
-        theme: 'light',
+        theme: 'dark',
       });
 
       return res.status(201).send({ ...data, theme });
@@ -79,7 +79,7 @@ export const AuthController = {
           external_id,
           avatar_path,
           display_name,
-          theme: 'light',
+          theme: 'dark',
         },
       });
       return res.status(200).send({ ...data, theme });

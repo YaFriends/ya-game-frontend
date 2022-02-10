@@ -7,7 +7,7 @@ on:
     branches: [ master ]
 
 jobs:
-  pullingRepository:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - name: create SSH key
@@ -27,23 +27,10 @@ jobs:
            cd ${{secrets.NAME_REPOSITORY}} && git pull
           RUNONSERVER
         shell: bash
-  refreshDockerBuild:
-    runs-on: ubuntu-latest
-    steps:
-      - name: create SSH key
-        run: |
-          mkdir -p ~/.ssh/
-          echo "$SSH_PRIVATE_KEY" > ../private.key
-          sudo chmod 600 ../private.key
-          echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
-        shell: bash
-        env:
-          SSH_PRIVATE_KEY: ${{secrets.SSH_PRIVATE_KEY}}
-          SSH_KNOWN_HOSTS: ${{secrets.SSH_KNOWN_HOSTS}}
       - name: refresh docker build
         run: |
           ssh -T -i ${{ github.workspace }}/../private.key ${{ secrets.YA_CLOUD_HOST }} \
            << RUNONSERVER
-           cd ${{secrets.NAME_REPOSITORY}} && sudo yarn docker:build
+           cd ${{secrets.NAME_REPOSITORY}} && sudo yarn && sudo yarn docker:build
           RUNONSERVER
         shell: bash

@@ -8,6 +8,7 @@ import { getUserFullName } from '../../utils/user';
 import { MiniGamePreview } from '../MiniGamePreview/MiniGamePreview';
 import { MainLink } from '../ui/Link/Link';
 import { Subtitle } from '../ui/Subtitle/Subtitle';
+import { Text } from '../ui/Text/Text';
 import { Title } from '../ui/Title/Title';
 
 import './game-set-end.scss';
@@ -31,7 +32,7 @@ export const GameSetEnd = memo(function GameSetEnd({ winner, miniGames }: GameSe
         text={isCurrentUserWinner ? TRANSLATION.GameSetEnd.you : TRANSLATION.GameSetEnd.notYou}
       />
       <Subtitle extendClass="mb-2" text={TRANSLATION.GameSetEnd.winner} />
-      <p className="game-set-end__winner">{getUserFullName(winner, true)}</p>
+      <Text extendClass="game-set-end__winner" text={getUserFullName(winner, true)} />
       <Subtitle extendClass="mb-2" text={TRANSLATION.GameSetEnd.played} />
       <div className="game-set-end__mini-games">{miniGamePreviews}</div>
       <div className="game-set-end__links">

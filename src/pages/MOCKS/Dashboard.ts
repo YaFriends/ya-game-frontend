@@ -22,7 +22,7 @@ export const DUMMY_GAME_LIST: GameSetHistory[] = [
         email: 'string',
         phone: 'string',
         avatar: '',
-        theme: '',
+        theme: 'dark',
       },
       {
         login: 'Player 2',
@@ -33,7 +33,7 @@ export const DUMMY_GAME_LIST: GameSetHistory[] = [
         email: 'string',
         phone: 'string',
         avatar: '',
-        theme: '',
+        theme: 'dark',
       },
     ],
     result: {
@@ -62,7 +62,7 @@ export const DUMMY_GAME_LIST: GameSetHistory[] = [
         email: 'string',
         phone: 'string',
         avatar: '',
-        theme: '',
+        theme: 'dark',
       },
       {
         login: 'Player 3',
@@ -73,7 +73,7 @@ export const DUMMY_GAME_LIST: GameSetHistory[] = [
         email: 'string',
         phone: 'string',
         avatar: '',
-        theme: '',
+        theme: 'dark',
       },
     ],
     result: {
@@ -104,7 +104,7 @@ export const DUMMY_GAME_LIST: GameSetHistory[] = [
         email: 'string',
         phone: 'string',
         avatar: '',
-        theme: '',
+        theme: 'dark',
       },
       {
         login: 'Player 6',
@@ -115,7 +115,7 @@ export const DUMMY_GAME_LIST: GameSetHistory[] = [
         email: 'string',
         phone: 'string',
         avatar: '',
-        theme: '',
+        theme: 'dark',
       },
     ],
     result: {
@@ -140,7 +140,7 @@ export const DUMMY_GAME_LIST: GameSetHistory[] = [
         email: 'string',
         phone: 'string',
         avatar: '',
-        theme: '',
+        theme: 'dark',
       },
       {
         login: 'Player 2',
@@ -151,7 +151,7 @@ export const DUMMY_GAME_LIST: GameSetHistory[] = [
         email: 'string',
         phone: 'string',
         avatar: '',
-        theme: '',
+        theme: 'dark',
       },
     ],
     result: {

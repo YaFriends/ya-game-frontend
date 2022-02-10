@@ -11,6 +11,7 @@ describe('getUserFullName', () => {
     email: 'string',
     phone: 'string',
     avatar: '',
+    theme: 'dark',
   };
   test('should return name, surname and display name', () => {
     const receivedFullName = getUserFullName(user, true);

@@ -40,7 +40,7 @@ export class FieldBattleMiniGame extends MiniGame {
           email: 'string',
           phone: 'string',
           avatar: '',
-          theme: '',
+          theme: 'dark',
         },
       });
     }

@@ -1,9 +1,12 @@
 import React, { FC, ChangeEvent, useEffect } from 'react';
 
+import { DEFAULT_PROFILE_IMAGE_PATH } from '../../components/constants';
+import { Text } from '../../components/ui/Text/Text';
 import { useAppDispatch } from '../../hooks/redux';
 import { TRANSLATION } from '../../lang/ru/translation';
 import { useUpdateAvatarMutation } from '../../services/UserAPI';
 import { authActions } from '../../store/slices/authSlice';
+
 import './Profile.scss';
 
 interface AvatarWithLoginProps {
@@ -38,7 +41,15 @@ export const UserThumbnail: FC<AvatarWithLoginProps> = ({ avatar, login }) => {
   return (
     <label className="user-thumbnail" htmlFor="image-uploader">
       <div className="user-thumbnail__avatar">
-        <img className="user-thumbnail__image" src={avatar} alt={login} />
+        <img
+          className="user-thumbnail__image"
+          src={
+            avatar
+              ? `https://ya-praktikum.tech/api/v2/resources${avatar}`
+              : DEFAULT_PROFILE_IMAGE_PATH
+          }
+          alt={login}
+        />
         <span className="user-thumbnail__text">{TRANSLATION.Profile.userThumbnailHoverText}</span>
       </div>
       <input
@@ -48,7 +59,7 @@ export const UserThumbnail: FC<AvatarWithLoginProps> = ({ avatar, login }) => {
         accept="image/jpeg, image/png"
         onChange={handleSetImage}
       />
-      <span className="user-thumbnail__login">{login}</span>
+      <Text extendClass="user-thumbnail__login" text={login} />
     </label>
   );
 };

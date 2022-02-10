@@ -19,6 +19,7 @@ export default class GameSetCoordinator {
   canvasId: string;
   finishCb: GameSetFinishFn | null;
   results: GameSetFinishStat;
+  changeNameFn: (n: string) => void;
 
   constructor(miniGames: MiniGameProps[], players: Rivals) {
     this.miniGames = miniGames;
@@ -31,7 +32,8 @@ export default class GameSetCoordinator {
     this.results = Object.fromEntries(players.map(({ id }) => [id, 0]));
   }
 
-  init(): Promise<GameSetFinishResponse> {
+  init(changeNameFn: (n: string) => void): Promise<GameSetFinishResponse> {
+    this.changeNameFn = changeNameFn;
     return new Promise<GameSetFinishResponse>(async res => {
       this.finishCb = res;
       await this.loadAndStartCurrentGame();
@@ -61,6 +63,7 @@ export default class GameSetCoordinator {
 
   setCurrentGame(): void {
     this.currentMiniGame = this.miniGames[this.currentMiniGameIndex];
+    this.changeNameFn?.(this.currentMiniGame.name);
   }
 
   prepareResult(): GameSetFinishResponse {
