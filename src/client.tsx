@@ -12,6 +12,7 @@ import { worker } from './mocks/browser';
 import { preparedState } from './store';
 
 import './index.scss';
+import { isDev } from './config';
 
 declare global {
   interface Window {
@@ -41,9 +42,9 @@ function prepare(): StartReturnType | Promise<void> {
     onUnhandledRequest: 'bypass',
   });
 }
-
-startServiceWorker();
-
+if (!isDev) {
+  startServiceWorker();
+}
 prepare().then(() => {
   ReactDOM.hydrate(
     <ErrorBoundary

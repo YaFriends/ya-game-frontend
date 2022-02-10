@@ -18,9 +18,12 @@ const canvasId = 'canvas';
 
 export const MiniGame: FC<GameSetProps> = ({ GameSetCoordinator, gameSet }) => {
   const [winner, setWinner] = useState<UserData | null>(null);
+  const [currentMiniGameName, setCurrentMiniGameName] = useState(
+    GameSetCoordinator.currentMiniGame.name
+  );
 
   useEffect(() => {
-    GameSetCoordinator.init().then(({ winner }) => {
+    GameSetCoordinator.init(setCurrentMiniGameName).then(({ winner }) => {
       setWinner(winner);
     });
   }, [gameSet]);
@@ -33,7 +36,7 @@ export const MiniGame: FC<GameSetProps> = ({ GameSetCoordinator, gameSet }) => {
     <div className="mini-game">
       <GameSetHead rival={gameSet.players[1]} miniGames={gameSet.miniGames} />
       <div className="mini-game__body">
-        <Title extendClass="mb-6" text={GameSetCoordinator.currentMiniGame.name} />
+        <Title extendClass="mb-6" text={currentMiniGameName} />
         <div className="mini-game__canvas">
           <canvas className="mini-game__canvas-inner" id={canvasId} width={500} height={500} />
         </div>
