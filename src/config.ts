@@ -4,4 +4,4 @@ export const INTERNAL_API_URL = isDev ? '/api' : 'https://tarifa-yafriends-9.ya-
 
 export const REDIRECT_URI_FOR_OAUTH = isDev
   ? 'http://localhost:8000'
-  : 'http://tarifa-yafriends-9.ya-praktikum.tech';
+  : 'https://tarifa-yafriends-9.ya-praktikum.tech';
